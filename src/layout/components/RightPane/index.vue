@@ -1,0 +1,95 @@
+<script setup lang="ts">
+import { defineProps, ref } from 'vue'
+import { useStore } from '@/store'
+import { noticeList } from './data'
+import Profile from '../Profile/index.vue'
+import SettingPane from '../setting/index.vue'
+import ScreenFull from '@/components/ScreenFull/index.vue'
+import { SettingActionTypes } from '@/store/modules/setting/action-types'
+
+const store = useStore()
+const activeName = ref('first')
+
+const showSetting = () => {
+  store.dispatch(SettingActionTypes.ACTION_TOGGLE_SETTING, true)
+}
+</script>
+
+<template>
+  <div class="right-pane flexcenter">
+    <div class="item">
+      <el-dropdown trigger="click">
+        <el-badge :value="12" class="badge">
+          <remind
+            class="remind"
+            title="remind"
+            theme="outline"
+            size="16"
+            :strokeWidth="4"
+            :fill="color"
+          />
+        </el-badge>
+        <template #dropdown>
+          <div class="message-box">
+            <el-tabs v-model="activeName" stretch>
+              <el-tab-pane label="系统消息5" name="first">
+                <Cell :list="noticeList" />
+              </el-tab-pane>
+              <el-tab-pane label="订单消息" name="second">暂无消息</el-tab-pane>
+            </el-tabs>
+          </div>
+        </template>
+      </el-dropdown>
+    </div>
+
+    <div class="item">
+      <ScreenFull icon="full-screen-one" />
+    </div>
+
+    <div class="item">
+      <refresh
+        class="refresh"
+        title="refresh"
+        theme="outline"
+        :strokeWidth="4"
+        size="16"
+        :fill="color"
+      />
+    </div>
+
+    <div class="item">
+      <setting
+        class="setting"
+        title="setting"
+        theme="outline"
+        size="16"
+        :strokeWidth="4"
+        :fill="color"
+        @click="showSetting"
+      />
+    </div>
+
+    <div class="item">
+      <Profile />
+    </div>
+    <SettingPane :visible="visibleSetting" />
+  </div>
+</template>
+
+<style lang="scss">
+.right-pane {
+  .item {
+    margin-right: 15px;
+  }
+}
+.message-box {
+  width: 300px;
+  padding: 5px 15px;
+  .el-tabs__content {
+    margin-bottom: 10px;
+  }
+  :deep(.el-tabs__active-bar) {
+    width: 80px !important;
+  }
+}
+</style>
