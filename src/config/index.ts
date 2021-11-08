@@ -1,6 +1,6 @@
 export const LoginClientState = {
   grantType: 'password',
-  clientId: 'erp',
+  clientId: 'RESCENTER',
   clientSecret: '123456',
 }
 

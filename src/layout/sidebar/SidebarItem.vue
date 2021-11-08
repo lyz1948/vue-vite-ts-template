@@ -43,7 +43,6 @@ const getOneChild = computed(() => {
     }
   }
   const cur = { ...props.item, path: '' }
-  console.log('cur:', cur)
   return cur
 })
 
@@ -109,23 +108,26 @@ const resolvePath = (routePath: string) => {
 </template>
 
 <style lang="scss">
-.is-collapse {
+.is-horizonal{
   .el-menu {
-    &.is-active {
-      border-right: none;
+    .el-menu-item {
+      &.is-active {
+        // border-right: none;
+        // border-bottom: 3px solid $base-color-primary-light1 !important;
+      }
     }
   }
 }
 </style>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .el-menu {
   .el-menu-item {
     .i-icon {
       margin-right: 5px;
     }
     &.is-active {
-      border-right: 3px solid $base-color-primary-light1 !important;
+      // border-right: 3px solid $base-color-primary-light1;
       background: $base-color-primary-light9 !important;
     }
   }

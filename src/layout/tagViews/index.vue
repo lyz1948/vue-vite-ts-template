@@ -4,6 +4,7 @@ import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { TagsActionTypes } from '@/store/modules/tagViews/action-types'
 import { TagView } from '@/store/modules/tagViews/state'
+import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
 const store = useStore()
 const router = useRouter()
@@ -17,27 +18,27 @@ const state = reactive({
 
 const commandList = [
   {
-    command: 'refreshRoute',
+    command: SettingActionTypes.ACTION_MENU_REFRESH,
     text: '刷新',
     icon: 'refresh',
   },
   {
-    command: 'closeOtherstabs',
+    command: TagsActionTypes.ACTION_DEL_OTHER_VIEW,
     text: '关闭其他',
     icon: 'close',
   },
   {
-    command: 'closeLefttabs',
+    command: TagsActionTypes.ACTION_DEL_LEFT_VIEWS,
     text: '关闭左侧',
     icon: 'to-left',
   },
   {
-    command: 'closeRighttabs',
+    command: TagsActionTypes.ACTION_DEL_RIGHT_VIEWS,
     text: '关闭右侧',
     icon: 'to-right',
   },
   {
-    command: 'closeAlltabs',
+    command: TagsActionTypes.ACTION_DEL_ALL_VIEWS,
     text: '关闭所有',
     icon: 'minus',
   },
@@ -109,8 +110,21 @@ const handleTab = tab => {
   })
 }
 
-const handleCommand = (command) => {
-  console.log('command:', command)
+const handleCommand = async (command) => {
+  const view = await activeTagRoute()
+  store.dispatch(command, view)
+}
+
+const activeTagRoute = async () => {
+  const { fullPath, path } = currentRoute
+
+  const view = visitedViews.value.find(it => it.path === fullPath)
+
+  if (view?.path !== path) {
+    router.push(path)
+  }
+
+  return view
 }
 
 const handleShow = () => {}

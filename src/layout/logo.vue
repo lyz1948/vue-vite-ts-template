@@ -22,6 +22,7 @@ const toggle = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: $base-logo-width;
   height: $base-logo-height;
 }
 </style>
