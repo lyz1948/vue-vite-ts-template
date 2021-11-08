@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { TagsActionTypes } from '@/store/modules/tagViews/action-types'
@@ -9,8 +9,11 @@ const store = useStore()
 const router = useRouter()
 const currentRoute = useRoute()
 
-const activeName = ref('first')
+// let activeName = ref('')
 const visible = ref(false)
+const state = reactive({
+  activeName: '',
+})
 
 const commandList = [
   {
@@ -79,6 +82,7 @@ const addTabs = () => {
   if (currentRoute.name) {
     store.dispatch(TagsActionTypes.ACTION_ADD_VIEW, currentRoute)
   }
+  return false
 }
 
 const initTabs = () => {
@@ -90,24 +94,56 @@ const initTabs = () => {
   }
 }
 
-const handleCommand = () => {}
+const handleTab = tab => {
+  const index = tab.index
+  const route = visitedViews.value.find((it, idx) => {
+    if (tab.index == idx) return it
+  })
+
+  if (currentRoute.path === route.path) return false
+
+  router.push({
+    path: route.path,
+    query: route.query,
+    fullPath: route.fullPath,
+  })
+}
+
+const handleCommand = (command) => {
+  console.log('command:', command)
+}
+
 const handleShow = () => {}
 const handleHide = () => {}
 
 watch(
   () => currentRoute.name,
   () => {
-    initTabs()
-    addTabs()
+    if(currentRoute.name.toLowerCase() != 'login') {
+      initTabs()
+      addTabs()
+        console.log('currentRoute.path:', currentRoute.path)
+      const findRoute = visitedViews.value.find((it, idx) => {
+        if (it.path == currentRoute.path) return it
+      })
+
+      state.activeName = findRoute.fullPath
+    }
   },
   { immediate: true }
 )
+
 </script>
 
 <template>
   <div id="tabs-bar-container" class="tabs-bar-container">
     <div class="tags-view-wrapper">
-      <el-tabs v-model="activeName" type="card" class="tabs-content">
+      <el-tabs
+        v-model="state.activeName"
+        type="card"
+        class="tabs-content"
+        @tab-click="handleTab"
+      >
         <el-tab-pane
           v-for="tag in visitedViews"
           :name="tag.path"
@@ -195,8 +231,8 @@ watch(
   align-items: center;
   justify-content: space-between;
   height: $base-tabs-bar-height;
-  padding-right: $base-padding;
   padding-left: $base-padding;
+  padding-right: $base-padding;
   user-select: none;
   background: $base-color-white;
   border-top: 1px solid #f6f6f6;

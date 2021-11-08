@@ -27,13 +27,14 @@ const handleScreenFull = () => {
 
 <template>
   <div class="screen-full" @click="handleScreenFull">
-    <component
-      title="fullscreen"
-      theme="outline"
-      size="16"
-      :strokeWidth="4"
-      :is="icon"
-      :fill="color"
-    />
+    <el-link>
+      <component
+        title="fullscreen"
+        theme="outline"
+        size="16"
+        :strokeWidth="4"
+        :is="icon"
+      />
+    </el-link>
   </div>
 </template>

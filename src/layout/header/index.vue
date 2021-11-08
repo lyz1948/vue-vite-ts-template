@@ -1,14 +1,30 @@
 <script setup lang="ts">
+import { computed } from 'vue-demi'
 import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
+import { state } from '@/store/modules/app/state'
+import { setting } from '@/config/setting'
+import { useStore } from '@/store'
+import { AppActionTypes } from '@/store/modules/app/action-types'
+
+const store = useStore()
+
+const isHorizonal = computed(() => {
+  return store.state.setting.menuMode === 'horizontal'
+})
+
+const toggleSidebar = () => {
+  store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, true)
+}
+
 </script>
 
 <template>
-  <div class="header-container">
+  <div v-if="!isHorizonal" class="header-container">
     <div class="left flexcenter">
-      <div class="menu-icon">
-        <Icon name="menu-fold" :size="20" />
-      </div>
+      <el-link class="menu-icon" @click="toggleSidebar">
+        <menu-fold class="icon" size="16" />
+      </el-link>
       <Boardcrumb />
     </div>
 
@@ -21,10 +37,10 @@ import RightPane from '../components/RightPane/index.vue'
   display: flex;
   justify-content: space-between;
   border-bottom: $base-border-width-mini solid #fafbff;
-  height: $base-main-mobile-no-tag-top;
+  height: $base-head-menu-height;
+  padding: 0 $base-padding;
 
   .left {
-    padding: 0 20px;
     .menu-icon {
       margin-right: 20px;
     }

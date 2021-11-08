@@ -17,6 +17,18 @@ export interface IActions {
     { commit }: AugmentedActionContext,
     status: boolean
   ): void
+  [SettingActionTypes.ACTION_FIX_HEADER](
+    { commit }: AugmentedActionContext,
+    status: boolean
+  ): void
+  [SettingActionTypes.ACTION_FIX_TAGVIEW](
+    { commit }: AugmentedActionContext,
+    status: boolean
+  ): void
+  [SettingActionTypes.ACTION_MENU_MODE](
+    { commit }: AugmentedActionContext,
+    mode: string
+  ): void
 }
 
 export const actions: ActionTree<ISettingState, IRootState> & IActions = {
@@ -25,5 +37,23 @@ export const actions: ActionTree<ISettingState, IRootState> & IActions = {
     status: boolean
   ) {
     commit(SettingMutationTypes.TOGGLE_SETTING, status)
+  },
+  [SettingActionTypes.ACTION_FIX_HEADER](
+    { commit }: AugmentedActionContext,
+    status: boolean
+  ) {
+    commit(SettingMutationTypes.FIX_HEADER, status)
+  },
+  [SettingActionTypes.ACTION_FIX_TAGVIEW](
+    { commit }: AugmentedActionContext,
+    status: boolean
+  ) {
+    commit(SettingMutationTypes.FIX_TAGVIEW, status)
+  },
+  [SettingActionTypes.ACTION_MENU_MODE](
+    { commit }: AugmentedActionContext,
+    mode: string
+  ) {
+    commit(SettingMutationTypes.MENU_MODE, mode)
   },
 }

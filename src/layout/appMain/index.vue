@@ -12,13 +12,14 @@ const key = () => {
 
 <template>
   <section class="app-main">
-    <router-view v-slot="{ Component }">
+    <router-view />
+    <!-- <router-view v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
           <component :is="Component" :key="key" />
         </keep-alive>
       </transition>
-    </router-view>
+    </router-view> -->
   </section>
 </template>
 

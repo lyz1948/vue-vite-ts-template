@@ -3,7 +3,7 @@ import { defineProps, ref } from 'vue'
 import { useStore } from '@/store'
 import { noticeList } from './data'
 import Profile from '../Profile/index.vue'
-import SettingPane from '../setting/index.vue'
+import SettingPane from '@/layout/setting/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
@@ -20,14 +20,16 @@ const showSetting = () => {
     <div class="item">
       <el-dropdown trigger="click">
         <el-badge :value="12" class="badge">
-          <remind
-            class="remind"
-            title="remind"
-            theme="outline"
-            size="16"
-            :strokeWidth="4"
-            :fill="color"
-          />
+          <el-link>
+            <remind
+              class="remind"
+              title="remind"
+              theme="outline"
+              size="16"
+              :strokeWidth="4"
+              :fill="color"
+            />
+          </el-link>
         </el-badge>
         <template #dropdown>
           <div class="message-box">
@@ -47,26 +49,30 @@ const showSetting = () => {
     </div>
 
     <div class="item">
-      <refresh
-        class="refresh"
-        title="refresh"
-        theme="outline"
-        :strokeWidth="4"
-        size="16"
-        :fill="color"
-      />
+      <el-link>
+        <refresh
+          class="refresh"
+          title="refresh"
+          theme="outline"
+          size="16"
+          :strokeWidth="4"
+          :fill="color"
+        />
+      </el-link>
     </div>
 
     <div class="item">
-      <setting
-        class="setting"
-        title="setting"
-        theme="outline"
-        size="16"
-        :strokeWidth="4"
-        :fill="color"
-        @click="showSetting"
-      />
+      <el-link>
+        <setting
+          class="setting"
+          title="setting"
+          theme="outline"
+          size="16"
+          :strokeWidth="4"
+          :fill="color"
+          @click="showSetting"
+        />
+      </el-link>
     </div>
 
     <div class="item">
@@ -80,6 +86,7 @@ const showSetting = () => {
 .right-pane {
   .item {
     margin-right: 15px;
+    cursor: pointer;
   }
 }
 .message-box {

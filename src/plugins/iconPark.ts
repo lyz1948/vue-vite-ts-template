@@ -17,6 +17,7 @@ import {
   Home,
   Dashboard,
   Mail,
+  AllApplication,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 // el-icon
@@ -38,6 +39,7 @@ export const components = [
   Home,
   Dashboard,
   Mail,
+  AllApplication,
 ]
 
 import SvgIcon from '@/components/SvgIcon/index.vue'

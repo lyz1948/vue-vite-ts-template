@@ -2,7 +2,6 @@
 import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { compile } from 'path-to-regexp'
-// import router from '@/router'
 
 const currentRoute = useRoute()
 const router = useRouter()

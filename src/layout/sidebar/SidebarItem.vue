@@ -43,6 +43,7 @@ const getOneChild = computed(() => {
     }
   }
   const cur = { ...props.item, path: '' }
+  console.log('cur:', cur)
   return cur
 })
 
@@ -71,13 +72,16 @@ const resolvePath = (routePath: string) => {
     >
       <el-menu-item :index="resolvePath(getOneChild.path)">
         <component
-          class="mr5"
           v-if="getOneChild.meta.icon"
           theme="outline"
           strokeWidth="3"
           :is="getOneChild.meta.icon"
         />
-        <span v-if="getOneChild.meta.title">{{ getOneChild.meta.title }}</span>
+        <template #title>
+          <span v-if="getOneChild.meta.title">{{
+            getOneChild.meta.title
+          }}</span>
+        </template>
       </el-menu-item>
     </SidebarItemLink>
   </template>
@@ -85,7 +89,6 @@ const resolvePath = (routePath: string) => {
   <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
       <component
-        class="mr5"
         v-if="item.meta.icon"
         theme="outline"
         strokeWidth="3"
@@ -105,9 +108,22 @@ const resolvePath = (routePath: string) => {
   </el-sub-menu>
 </template>
 
+<style lang="scss">
+.is-collapse {
+  .el-menu {
+    &.is-active {
+      border-right: none;
+    }
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .el-menu {
   .el-menu-item {
+    .i-icon {
+      margin-right: 5px;
+    }
     &.is-active {
       border-right: 3px solid $base-color-primary-light1 !important;
       background: $base-color-primary-light9 !important;

@@ -22,6 +22,6 @@ const toggle = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: $base-main-mobile-no-tag-top;
+  height: $base-logo-height;
 }
 </style>

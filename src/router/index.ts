@@ -40,7 +40,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     redirect: '/dashboard',
     children: [
       {
-        path: 'dashboard',
+        path: '/dashboard',
         component: () =>
           import(
             /* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'

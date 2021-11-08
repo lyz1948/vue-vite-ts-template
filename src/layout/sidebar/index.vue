@@ -11,12 +11,21 @@ const routes = computed(() => {
   return store.state.permission.routes
 })
 
+const getMenuMode = computed(() => {
+  return store.state.setting.menuMode
+})
+
 const sidebar = computed(() => {
   return store.state.app.sidebar
 })
 
 const isCollapse = computed(() => {
   return sidebar.value.open
+})
+
+const defaultActive = computed(() => {
+  const { fullPath } = router
+  return fullPath || '/dashboard'
 })
 
 const activeMenu = computed(() => {
@@ -31,13 +40,13 @@ const activeMenu = computed(() => {
 </script>
 
 <template>
-  <div class="sidebar-container">
+  <div :class="['sidebar-container', { 'is-collapse': isCollapse }]">
     <el-menu
       class="sidebar-menu"
-      mode="vertical"
-      :unique-opened="false"
-      :collapse="!isCollapse"
-      :default-active="activeMenu"
+      :mode="getMenuMode"
+      :collapse="isCollapse"
+      :default-active="defaultActive"
+      :collapse-transition="true"
     >
       <template v-for="route in routes">
         <template v-if="!route.meta || !route.meta.hidden">
@@ -52,11 +61,26 @@ const activeMenu = computed(() => {
   </div>
 </template>
 
+<style lang="scss" scope>
+.is-horizonal {
+  .sidebar-menu {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
+}
+</style>
+
 <style lang="scss">
 .sidebar-container {
+  display: flex;
+  flex: 1;
+  width: $base-menu-width;
+  &.is-collapse {
+    width: $base-unfold-width;
+  }
   .sidebar-menu {
     border: none;
-    width: 200px;
+    width: 100%;
   }
 }
 </style>
