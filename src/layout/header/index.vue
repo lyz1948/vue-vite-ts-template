@@ -32,7 +32,7 @@ const toggleSidebar = () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -41,6 +41,8 @@ const toggleSidebar = () => {
   padding: 0 $base-padding;
 
   .left {
+    display: flex;
+    align-items: center;
     .menu-icon {
       margin-right: 20px;
     }

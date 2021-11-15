@@ -7,6 +7,13 @@ import SettingPane from '@/layout/setting/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
+defineProps({
+  color: {
+    type: String,
+    default: '#666'
+  }
+})
+
 const store = useStore()
 const activeName = ref('first')
 

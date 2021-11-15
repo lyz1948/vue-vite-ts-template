@@ -13,5 +13,5 @@ const modeVal = computed(() => {
 </script>
 
 <template>
-  <Select :options="modeOptList" :value="modeVal" />
+  <SelectBase :list="modeOptList" v-model:value="modeVal" />
 </template>

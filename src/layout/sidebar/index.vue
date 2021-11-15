@@ -74,7 +74,6 @@ const activeMenu = computed(() => {
 .sidebar-container {
   display: flex;
   flex: 1;
-  width: $base-menu-width;
   &.is-collapse {
     width: $base-unfold-width;
   }

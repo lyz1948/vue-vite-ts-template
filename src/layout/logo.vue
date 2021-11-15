@@ -14,6 +14,7 @@ const toggle = () => {
 <template>
   <div class="logo" @click="toggle">
     <el-image class="logo-image" :src="logPng" fit="contain"></el-image>
+    <span class="logo-text">VUE ADMIN</span>
   </div>
 </template>
 
@@ -24,5 +25,13 @@ const toggle = () => {
   justify-content: center;
   width: $base-logo-width;
   height: $base-logo-height;
+
+  &-image {
+    width: 50px;
+    height: 50px;
+  }
+  &-text {
+    font-size: 20px;
+  }
 }
 </style>

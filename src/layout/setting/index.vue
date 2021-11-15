@@ -51,7 +51,7 @@ const changeMenuMode = (val) => {
 
 <template>
     <el-drawer
-      v-model="settingStatus"
+      :value="settingStatus"
       class="setting"
       title="System Setting"
       size="500px"

@@ -19,6 +19,6 @@ export const state: IAppState = {
     open: false,
     withoutAnimation: true,
   },
-  language: 'en',
+  language: 'zh',
   size: 'medium',
 }

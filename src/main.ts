@@ -5,6 +5,7 @@ import router from './router'
 import { store } from './store'
 import baseComponent from './components'
 import iconPark from './plugins/iconPark'
+import i18n from './plugins/i18n'
 import * as directives from './directives'
 
 import './permission'
@@ -22,4 +23,5 @@ app
   .use(router)
   .use(baseComponent)
   .use(iconPark)
+  .use(i18n)
   .mount('#app')

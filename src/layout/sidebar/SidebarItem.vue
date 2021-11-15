@@ -112,8 +112,8 @@ const resolvePath = (routePath: string) => {
   .el-menu {
     .el-menu-item {
       &.is-active {
-        // border-right: none;
-        // border-bottom: 3px solid $base-color-primary-light1 !important;
+        border-right: none;
+        border-bottom: 3px solid $base-color-primary-light1 !important;
       }
     }
   }
@@ -127,7 +127,7 @@ const resolvePath = (routePath: string) => {
       margin-right: 5px;
     }
     &.is-active {
-      // border-right: 3px solid $base-color-primary-light1;
+      border-right: 3px solid $base-color-primary-light1;
       background: $base-color-primary-light9 !important;
     }
   }

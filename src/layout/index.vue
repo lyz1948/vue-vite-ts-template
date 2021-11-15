@@ -42,6 +42,8 @@ const isOpen = computed(() => {
 
 <style lang="scss">
 .layout {
+  display: flex;
+
   &.is-horizonal {
     flex-direction: column;
     .layout-body {
@@ -56,10 +58,13 @@ const isOpen = computed(() => {
 
     .sidebar-container {
       width: $base-unfold-width !important;
+      display: flex;
     }
     .layout-sidebar {
       display: flex;
       justify-content: center;
+      min-height: auto;
+      border-right: none;
       border-bottom: 1px solid #f6f6f6;
 
       &-wrapper {
@@ -71,8 +76,15 @@ const isOpen = computed(() => {
       }
     }
   }
+
+  .layout-sidebar {
+    min-height: 100vh;
+    border-right: 1px solid #e1e2e7;
+  }
+
   .layout-body {
     background-color: #fff;
+    flex: 1;
 
     .layout-main {
       padding: 20px;
