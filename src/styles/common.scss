@@ -46,34 +46,6 @@
   }
 }
 
-.icon-hover {
-  cursor: pointer;
-  &:hover {
-    background-color: $base-hover-color;
-  }
-}
-
-.i-icon:focus-visible {
-  border: none !important;
-  outline: none !important;
-}
-
-.clearfix {
-  @include clearfix;
-}
-
-.flexcenter {
-  @include flexcenter;
-}
-
-.flex {
-  display: flex;
-}
-
-.mr5 {
-  margin-right: 5px;
-}
-
 html {
   height: 100%;
   body {
@@ -118,4 +90,33 @@ div:focus {
 
 label {
   font-weight: 700;
+}
+
+
+.icon-hover {
+  cursor: pointer;
+  &:hover {
+    background-color: $base-hover-color;
+  }
+}
+
+.i-icon:focus-visible {
+  border: none !important;
+  outline: none !important;
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+.flexcenter {
+  @include flexcenter;
+}
+
+.flex {
+  display: flex;
+}
+
+.mr5 {
+  margin-right: 5px;
 }

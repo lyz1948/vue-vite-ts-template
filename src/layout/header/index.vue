@@ -21,7 +21,7 @@ const toggleSidebar = () => {
 
 <template>
   <div v-if="!isHorizonal" class="header-container">
-    <div class="left flexcenter">
+    <div class="left">
       <el-link class="menu-icon" @click="toggleSidebar">
         <menu-fold class="icon" size="16" />
       </el-link>

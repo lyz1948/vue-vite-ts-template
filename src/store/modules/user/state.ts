@@ -19,7 +19,7 @@ export const state: IUserState = {
   username: '',
   avatar: '',
   introduce: '',
-  roles: [],
+  roles: ['admin'],
   email: '',
   userinfo: { id: '' },
 }

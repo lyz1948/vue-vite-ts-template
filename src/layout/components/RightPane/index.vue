@@ -16,7 +16,7 @@ const showSetting = () => {
 </script>
 
 <template>
-  <div class="right-pane flexcenter">
+  <div class="right-pane">
     <div class="item">
       <el-dropdown trigger="click">
         <el-badge :value="12" class="badge">
@@ -84,6 +84,8 @@ const showSetting = () => {
 
 <style lang="scss">
 .right-pane {
+  display: flex;
+  line-height: $base-head-menu-height;
   .item {
     margin-right: 15px;
     cursor: pointer;

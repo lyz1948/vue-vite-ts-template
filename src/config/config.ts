@@ -1,6 +1,9 @@
-/**
- * @description 主题配置 menuBgColor: 菜单背景色 primary: 主题色
- */
+export const config = {
+  base: './',
+  host: '0.0.0.0',
+  port: 5000,
+}
+
 const themeOptions = {
   theme1: { menuBgColor: '#ffffff', primary: '#7e9cff' },
   theme2: { menuBgColor: '#293246', primary: '#7e9cff' },

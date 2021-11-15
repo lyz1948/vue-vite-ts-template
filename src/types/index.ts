@@ -10,9 +10,6 @@ export interface ILogin {
 export interface ILoginClient {
   username: string
   password: string
-  grantType: string
-  clientId: string
-  clientSecret: string
 }
 
 // 网络请求响应格式，T 是具体的接口返回类型数据

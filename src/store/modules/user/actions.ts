@@ -4,7 +4,6 @@ import { Mutations } from './mutations'
 import { IUserState, state } from './state'
 import { IRootState, useStore } from '@/store'
 import { ILogin } from '@/types'
-import { LoginClientState } from '@/config'
 import { setToken } from '@/utils/cookies'
 import { UserMutationTypes } from './mutation-types'
 import { removeToken } from '@/utils/cookies'
@@ -43,15 +42,11 @@ export const actions: ActionTree<IUserState, IRootState> & IActions = {
     userinfo: ILogin
   ) {
     const { username, password } = userinfo
-    const { clientId, clientSecret, grantType } = LoginClientState
     username.trim()
 
     await loginRequest({
       username,
       password,
-      clientId,
-      clientSecret,
-      grantType,
     })
       .then((data: any) => {
         // 设置cookie

@@ -6,7 +6,7 @@ const circleUrl = ref(
 </script>
 
 <template>
-  <div class="profile flexcenter">
+  <div class="profile">
     <el-avatar :size="30" :src="circleUrl"></el-avatar>
     <el-dropdown>
       <el-link type="primary" class="name">
@@ -27,6 +27,8 @@ const circleUrl = ref(
 
 <style lang="scss" scoped>
 .profile {
+  height: $base-head-menu-height;
+  line-height: $base-head-menu-height;
   .name {
     margin-left: 5px;
   }

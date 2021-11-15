@@ -10,15 +10,7 @@ const getBanner = async () => {
 
 // 用户登录
 export const loginRequest = async (params: ILoginClient) => {
-  const { username, password, grantType, clientId, clientSecret } = params
-  const newParams = {
-    username,
-    password,
-    grant_type: grantType,
-    client_id: clientId,
-    client_secret: clientSecret,
-  }
-  return await request.post<string>(httpUrl.login, qs.stringify(newParams))
+  return await request.post<string>(httpUrl.login, qs.stringify(params))
 }
 
 export const userInfoRequest = async (userId: number | string) => {

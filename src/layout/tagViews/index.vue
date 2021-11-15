@@ -238,6 +238,7 @@ watch(
 </style>
 <style lang="scss" scoped>
 .tabs-bar-container {
+  width: 100%;
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -249,7 +250,6 @@ watch(
   padding-right: $base-padding;
   user-select: none;
   background: $base-color-white;
-  border-top: 1px solid #f6f6f6;
   &.horizontal {
     padding: 0 40px;
   }

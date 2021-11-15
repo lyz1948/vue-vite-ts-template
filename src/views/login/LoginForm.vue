@@ -12,8 +12,8 @@ const validateForm = ref(null)
 
 const state = reactive({
   ruleForm: {
-    username: 'XY-C',
-    password: '123456',
+    username: 'admin',
+    password: 'admin',
   },
   loading: false,
   checkedPwd: false,
@@ -30,7 +30,7 @@ const userLogin = (loginState: ILogin) => {
 
 const handleLogin = async () => {
   const form = unref(validateForm)
-  // if (!form) return
+  if (!form) return
   await form.validate(valid => {
     if (valid) {
       state.valid = true
@@ -41,7 +41,6 @@ const handleLogin = async () => {
             state.redirect === '/404' || state.redirect === '/401'
               ? '/'
               : state.redirect
-          console.log(routerPath)
           router.push(routerPath).catch(() => {})
           state.loading = false
         })
