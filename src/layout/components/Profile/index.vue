@@ -27,6 +27,8 @@ const circleUrl = ref(
 
 <style lang="scss" scoped>
 .profile {
+  display: flex;
+  align-items: center;
   height: $base-head-menu-height;
   line-height: $base-head-menu-height;
   .name {

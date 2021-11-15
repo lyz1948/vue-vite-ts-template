@@ -120,3 +120,14 @@ label {
 .mr5 {
   margin-right: 5px;
 }
+
+.table-base {
+  .table-base-header-handler {
+    .el-form-item {
+      margin-bottom: 0;
+    }
+  }
+  .input-base {
+    @include inputfield;
+  }
+}

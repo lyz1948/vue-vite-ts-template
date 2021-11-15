@@ -5,8 +5,15 @@
     clear: both;
   }
 }
+
 @mixin flexcenter {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin inputfield {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
