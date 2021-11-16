@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineProps, ref, unref, defineExpose } from 'vue'
+import { ref, unref, defineExpose } from 'vue'
 const props = defineProps({
   form: {
     type: Object,
@@ -33,7 +33,12 @@ defineExpose({
 </script>
 
 <template>
-  <el-form ref="validateForm" :model="props.form" :rules="props.rules" class="form-wrapper">
+  <el-form
+    ref="validateForm"
+    :model="props.form"
+    :rules="props.rules"
+    class="form-wrapper"
+  >
     <slot />
   </el-form>
 </template>

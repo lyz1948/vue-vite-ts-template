@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 import screenfull from 'screenfull'
 import { ElMessage } from 'element-plus'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'

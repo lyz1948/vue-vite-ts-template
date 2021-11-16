@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue-demi'
+import { computed } from 'vue'
 import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
 import { state } from '@/store/modules/app/state'
@@ -16,7 +16,6 @@ const isHorizonal = computed(() => {
 const toggleSidebar = () => {
   store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, true)
 }
-
 </script>
 
 <template>

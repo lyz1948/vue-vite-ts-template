@@ -11,8 +11,7 @@ const router = useRouter()
 const dialogRef = ref(null)
 const searchVal = ref('')
 const state = reactive({
-  tableData: [
-  ],
+  tableData: [],
   total: 0,
 })
 const searchParam = reactive({
@@ -23,8 +22,7 @@ const searchParam = reactive({
   grandsonDepartment: '', // 二级部门
 })
 
-const fetchData = (params: object = {}) => {
-}
+const fetchData = (params: object = {}) => {}
 
 const deleteRow = (id: number) => {
   console.log(id)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useStore } from '@/store'
-import { computed } from 'vue-demi'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const store = useStore()
@@ -13,7 +13,6 @@ const key = () => {
 const visibleRoute = computed(() => {
   return store.state.setting.routerView
 })
-
 </script>
 
 <template>

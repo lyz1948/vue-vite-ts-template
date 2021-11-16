@@ -7,7 +7,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import BtnLinkBase from '@/components/base/BtnLinkBase.vue'
-import { defineProps, computed } from 'vue'
+import { computed } from 'vue'
 import { IPermission } from '@/types/auth'
 
 const emit = defineEmits(['on:click'])
@@ -48,10 +48,7 @@ const handleClick = () => {
   <span class="btn-link-box">
     <el-popconfirm v-if="isDelete" :title="delTip" @confirm="handleClick">
       <template #reference>
-        <BtnLinkBase
-          v-permission="auth"
-          :name="getAuthLabel"
-        />
+        <BtnLinkBase v-permission="auth" :name="getAuthLabel" />
       </template>
     </el-popconfirm>
     <BtnLinkBase

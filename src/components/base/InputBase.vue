@@ -1,4 +1,3 @@
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
@@ -7,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup="{ attrs }" lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 
 const emit = defineEmits(['update:value'])
 const props = defineProps({
@@ -25,10 +24,9 @@ const props = defineProps({
   },
 })
 
-const changeInput = ($event) => {
+const changeInput = $event => {
   emit('update:value', $event)
 }
-
 </script>
 
 <template>
@@ -40,4 +38,3 @@ const changeInput = ($event) => {
     />
   </div>
 </template>
-

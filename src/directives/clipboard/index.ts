@@ -17,8 +17,12 @@ export const clipboard: Directive = {
       errorCallback = binding.value
     } else {
       clipboardInstance = new Clipboard(el, {
-        text() { return binding.value },
-        action() { return binding.arg === 'cut' ? 'cut' : 'copy' }
+        text() {
+          return binding.value
+        },
+        action() {
+          return binding.arg === 'cut' ? 'cut' : 'copy'
+        },
       })
       clipboardInstance.on('success', e => {
         const callback = successCallback
@@ -38,8 +42,12 @@ export const clipboard: Directive = {
       errorCallback = binding.value
     } else {
       clipboardInstance = new Clipboard(el, {
-        text() { return binding.value },
-        action() { return binding.arg === 'cut' ? 'cut' : 'copy' }
+        text() {
+          return binding.value
+        },
+        action() {
+          return binding.arg === 'cut' ? 'cut' : 'copy'
+        },
       })
     }
   },
@@ -55,5 +63,5 @@ export const clipboard: Directive = {
       }
       clipboardInstance = null
     }
-  }
+  },
 }

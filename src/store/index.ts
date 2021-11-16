@@ -11,7 +11,11 @@ import {
   PermissionStore,
   IPermissionState,
 } from '@/store/modules/permission'
-import { store as setting, SettingStore, ISettingState } from '@/store/modules/setting'
+import {
+  store as setting,
+  SettingStore,
+  ISettingState,
+} from '@/store/modules/setting'
 
 const debug = process.env.NODE_ENV !== 'production'
 const plugins = debug ? [createLogger()] : []

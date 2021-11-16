@@ -10,5 +10,5 @@ export default {
     { value: 'op', label: '计调' },
     { value: 'financial', label: '财务' },
     { value: 'generalManager', label: '管理员' },
-  ]
+  ],
 }

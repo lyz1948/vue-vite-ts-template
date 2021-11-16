@@ -14,10 +14,8 @@ defineProps({
 })
 </script>
 
-
 <template>
-  <el-form-item >
+  <el-form-item>
     <slot />
   </el-form-item>
 </template>
-

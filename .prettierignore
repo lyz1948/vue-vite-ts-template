@@ -8,4 +8,4 @@
 
 /public/*
 
-.eslintrc.js
+#.eslintrc.js

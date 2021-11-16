@@ -50,7 +50,7 @@ const isOpen = computed(() => {
       &-wrapper {
         padding: 0 100px;
       }
-      
+
       .layout-main {
         padding: 20px 100px;
       }

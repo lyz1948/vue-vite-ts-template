@@ -29,9 +29,9 @@ export interface IActions {
     { commit }: AugmentedActionContext,
     mode: string
   ): void
-  [SettingActionTypes.ACTION_MENU_REFRESH](
-    { commit }: AugmentedActionContext,
-  ): void
+  [SettingActionTypes.ACTION_MENU_REFRESH]({
+    commit,
+  }: AugmentedActionContext): void
 }
 
 export const actions: ActionTree<ISettingState, IRootState> & IActions = {
@@ -59,9 +59,7 @@ export const actions: ActionTree<ISettingState, IRootState> & IActions = {
   ) {
     commit(SettingMutationTypes.MENU_MODE, mode)
   },
-  [SettingActionTypes.ACTION_MENU_REFRESH](
-    { commit }: AugmentedActionContext,
-  ) {
+  [SettingActionTypes.ACTION_MENU_REFRESH]({ commit }: AugmentedActionContext) {
     commit(SettingMutationTypes.MENU_REFRESH, false)
     setTimeout(() => {
       commit(SettingMutationTypes.MENU_REFRESH, true)

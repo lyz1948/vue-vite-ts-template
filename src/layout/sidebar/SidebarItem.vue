@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed, onMounted, PropType } from 'vue'
+import { computed, onMounted, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
@@ -108,7 +108,7 @@ const resolvePath = (routePath: string) => {
 </template>
 
 <style lang="scss">
-.is-horizonal{
+.is-horizonal {
   .el-menu {
     .el-menu-item {
       &.is-active {

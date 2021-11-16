@@ -9,7 +9,7 @@ export const permission: Directive = {
 
     if (hasPermission < 0) {
       el.parentNode && el.parentNode.removeChild(el)
-    } 
+    }
     // else {
     //   throw new Error("无操作权限！")
     // }
@@ -25,5 +25,5 @@ export const permission: Directive = {
     // } else {
     //   throw new Error('need roles! Like v-permission="[\'admin\',\'editor\']"')
     // }
-  }
+  },
 }

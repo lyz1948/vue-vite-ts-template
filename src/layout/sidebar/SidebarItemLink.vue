@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import { isExternal } from '@/utils/validate'
 import { useRouter } from 'vue-router'
 

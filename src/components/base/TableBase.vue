@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineProps, computed, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { PageDefault } from '@/config'
 
 const emit = defineEmits(['update:page'])
@@ -80,7 +80,6 @@ const handleSizeChange = (pageSize: number) => {
 const handleCurrentChange = (pageNum: number) => {
   emit('update:page', { ...props.page, pageNum })
 }
-
 </script>
 
 <template>

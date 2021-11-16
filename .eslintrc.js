@@ -7,21 +7,17 @@ module.exports = {
     process: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-essential',
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    'plugin:vue/vue3-strongly-recommended',
+    '@vue/standard',
+    '@vue/typescript/recommended'
   ],
-  plugins: ['babel', 'prettier', "@typescript-eslint"],
+  plugins: ['babel', 'prettier'],
   parserOptions: {
-    parser: 'babel-eslint',
+    ecmaVersion: 2020
   },
-  parser: "@typescript-eslint/parser",
 
   rules: {
     'no-console': 'off',
-    'indent': [ 'error', 2 ],
-  }
+    indent: ['error', 2],
+  },
 }

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 
 defineProps({
   value: {
@@ -9,9 +8,8 @@ defineProps({
   options: {
     type: Array,
     required: true,
-  }
+  },
 })
-
 </script>
 
 <template>

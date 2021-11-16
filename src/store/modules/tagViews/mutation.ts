@@ -33,7 +33,9 @@ export const mutations: MutationTree<ITagViewsState> & Mutations = {
   },
 
   [TagsMutationTypes.DEL_VISITED_VIEW](state: ITagViewsState, view: TagView) {
-    const fIndex = state.visitedViews.findIndex((it: TagView) => it.path == view.path)
+    const fIndex = state.visitedViews.findIndex(
+      (it: TagView) => it.path == view.path
+    )
     state.visitedViews.splice(fIndex, 1)
   },
 
@@ -41,7 +43,7 @@ export const mutations: MutationTree<ITagViewsState> & Mutations = {
     const viewList = state.visitedViews
     const index = viewList.indexOf(view)
 
-    state.visitedViews = viewList.filter((it) => {
+    state.visitedViews = viewList.filter(it => {
       return it.meta?.affix || index <= viewList.indexOf(it)
     })
 
@@ -52,7 +54,7 @@ export const mutations: MutationTree<ITagViewsState> & Mutations = {
     const viewList = state.visitedViews
     const index = viewList.indexOf(view)
 
-    state.visitedViews = viewList.filter((it) => {
+    state.visitedViews = viewList.filter(it => {
       return it.meta?.affix || index >= viewList.indexOf(it)
     })
     state.cacheViews.slice(index, -1)
@@ -77,7 +79,9 @@ export const mutations: MutationTree<ITagViewsState> & Mutations = {
     state: ITagViewsState,
     view: TagView
   ) {
-    state.cacheViews = state.cacheViews.filter((v: any) => v !== view.name?.toString() )
+    state.cacheViews = state.cacheViews.filter(
+      (v: any) => v !== view.name?.toString()
+    )
   },
 
   [TagsMutationTypes.DEL_ALL_VISITED_VIEWS](state: ITagViewsState) {
@@ -93,7 +97,9 @@ export const mutations: MutationTree<ITagViewsState> & Mutations = {
     state: ITagViewsState,
     view: TagView
   ) {
-    const fIndex = state.visitedViews.findIndex((it: TagView) => it.path === view.path)
+    const fIndex = state.visitedViews.findIndex(
+      (it: TagView) => it.path === view.path
+    )
     state.visitedViews.splice(fIndex, 1, view)
   },
 }

@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineProps, ref, computed } from 'vue'
+import { ref, computed } from 'vue'
 
 const emit = defineEmits(['update:visible', 'update:confirm'])
 const props = defineProps({
@@ -58,7 +58,9 @@ const handleConfirm = () => {
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="handleClose">{{ props.btnCancelText }}</el-button>
-        <el-button type="primary" @click="handleConfirm">{{ props.btnConfirmText }}</el-button>
+        <el-button type="primary" @click="handleConfirm">{{
+          props.btnConfirmText
+        }}</el-button>
       </span>
     </template>
   </el-dialog>

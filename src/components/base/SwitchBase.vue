@@ -6,7 +6,6 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-
 const emit = defineEmits(['update:value'])
 const props = defineProps({
   value: {
@@ -19,13 +18,13 @@ const props = defineProps({
   },
 })
 
-const changeValue = (event) => {
+const changeValue = event => {
   emit('update:value', event)
 }
 </script>
 
 <template>
   <div class="switch-base">
-    <el-switch :model-value="value" @change="changeValue"/>
+    <el-switch :model-value="value" @change="changeValue" />
   </div>
 </template>

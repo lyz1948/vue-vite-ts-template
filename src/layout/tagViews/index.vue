@@ -110,7 +110,7 @@ const handleTab = tab => {
   })
 }
 
-const handleCommand = async (command) => {
+const handleCommand = async command => {
   const view = await activeTagRoute()
   store.dispatch(command, view)
 }
@@ -133,10 +133,10 @@ const handleHide = () => {}
 watch(
   () => currentRoute.name,
   () => {
-    if(currentRoute.name.toLowerCase() != 'login') {
+    if (currentRoute.name.toLowerCase() != 'login') {
       initTabs()
       addTabs()
-        console.log('currentRoute.path:', currentRoute.path)
+      console.log('currentRoute.path:', currentRoute.path)
       const findRoute = visitedViews.value.find((it, idx) => {
         if (it.path == currentRoute.path) return it
       })
@@ -146,7 +146,6 @@ watch(
   },
   { immediate: true }
 )
-
 </script>
 
 <template>

@@ -20,8 +20,7 @@ const handleClick = val => {
       <Logo class="logo" />
     </el-header>
     <div class="login-box">
-      <div class="login-side hidden-sm-and-down">
-      </div>
+      <div class="login-side hidden-sm-and-down"></div>
       <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
           <el-tabs v-model="activeName" @tab-click="handleClick">

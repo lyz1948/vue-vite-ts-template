@@ -6,7 +6,14 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineProps, computed, watch, ref, reactive, toRefs, watchEffect } from 'vue'
+import {
+  computed,
+  watch,
+  ref,
+  reactive,
+  toRefs,
+  watchEffect,
+} from 'vue'
 import SELECTOR from '@/config/selector'
 
 const emit = defineEmits(['on:select'])
@@ -58,11 +65,12 @@ const lazyLoad = () => {
   state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type]
 }
 
-watch(() => state.tempData, 
+watch(
+  () => state.tempData,
   (list, oldList) => {
-  state.data = list
-})
-
+    state.data = list
+  }
+)
 </script>
 
 <template>

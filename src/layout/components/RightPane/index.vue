@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 import { useStore } from '@/store'
 import { noticeList } from './data'
 import Profile from '../Profile/index.vue'
@@ -10,8 +10,8 @@ import { SettingActionTypes } from '@/store/modules/setting/action-types'
 defineProps({
   color: {
     type: String,
-    default: '#666'
-  }
+    default: '#666',
+  },
 })
 
 const store = useStore()

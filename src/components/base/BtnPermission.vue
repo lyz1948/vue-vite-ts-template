@@ -7,7 +7,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import BtnBase from '@/components/base/BtnBase.vue'
-import { defineProps, computed } from 'vue'
+import { computed } from 'vue'
 import { IPermission } from '@/types/auth'
 
 const props = defineProps({

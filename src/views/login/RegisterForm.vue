@@ -4,9 +4,8 @@ import { reactive, ref } from 'vue'
 const checkedPasswd = ref(false)
 const form = ref({
   name: '',
-  password: ''
+  password: '',
 })
-
 </script>
 
 <template>
