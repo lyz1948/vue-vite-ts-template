@@ -5,19 +5,15 @@ module.exports = {
   },
   globals: {
     process: true,
+    defineProps: true,
+    defineEmits: true,
+    defineExpose: true,
   },
-  extends: [
-    'plugin:vue/vue3-strongly-recommended',
-    '@vue/standard',
-    '@vue/typescript/recommended'
-  ],
-  plugins: ['babel', 'prettier'],
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', '@vue/standard', '@vue/prettier'],
   parserOptions: {
-    ecmaVersion: 2020
+    parser: 'babel-eslint',
   },
-
   rules: {
-    'no-console': 'off',
-    indent: ['error', 2],
+    'comma-dangle': 'always',
   },
 }

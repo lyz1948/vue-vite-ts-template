@@ -1,27 +1,26 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'InputBase',
-})
+import { defineComponent, computed } from 'vue'
 </script>
 
 <script setup="{ attrs }" lang="ts">
-import { computed } from 'vue'
+export default defineComponent({
+  name: 'InputBase'
+})
 
 const emit = defineEmits(['update:value'])
 const props = defineProps({
   vertical: {
     type: Boolean,
-    default: false,
+    default: false
   },
   value: {
     type: String,
-    default: '',
+    default: ''
   },
   tip: {
     type: String,
-    default: '',
-  },
+    default: ''
+  }
 })
 
 const changeInput = $event => {
@@ -30,7 +29,10 @@ const changeInput = $event => {
 </script>
 
 <template>
-  <div class="input-base" :class="{ vertical: vertical }">
+  <div
+    class="input-base"
+    :class="{ vertical: vertical }"
+  >
     <el-input
       :model-value="value"
       :placeholder="'请输入' + tip ? tip : label"

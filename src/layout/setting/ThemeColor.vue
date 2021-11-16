@@ -6,7 +6,7 @@ import { themeColorOpts } from './data'
 const state = reactive({
   color: '',
   customerColor: '',
-  curIndex: 0,
+  curIndex: 0
 })
 
 const colorOptList = ref(themeColorOpts)
@@ -30,7 +30,10 @@ const chooseColor = val => {
       :class="index === state.curIndex ? 'is-active' : ''"
       @click="selectColor(item, index)"
     />
-    <el-color-picker v-model="state.customerColor" @change="chooseColor" />
+    <el-color-picker
+      v-model="state.customerColor"
+      @change="chooseColor"
+    />
   </div>
 </template>
 

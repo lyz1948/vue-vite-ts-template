@@ -1,32 +1,18 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, watch, reactive, ref } from 'vue'
-import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
+import { onBeforeMount, reactive, ref } from 'vue'
 import { RoleColumn } from '@/config/table'
 import FormDialog from './FormDialog.vue'
 
 const TABLE_TITLE = '添加员工'
-const store = useStore()
-const router = useRouter()
+
 const dialogRef = ref(null)
 const searchVal = ref('')
 const state = reactive({
   tableData: [],
   total: 0,
 })
-const searchParam = reactive({
-  realName: '',
-  userName: '',
-  department: '', // 部门
-  subDepartment: '', // 子部门
-  grandsonDepartment: '', // 二级部门
-})
 
-const fetchData = (params: object = {}) => {}
-
-const deleteRow = (id: number) => {
-  console.log(id)
-}
+const fetchData = () => {}
 
 const handlePage = page => {
   console.log('pageNum, pageSize:', page)
@@ -44,12 +30,8 @@ const handleUpdate = (row: any) => {
   dialogRef.value.edit(row)
 }
 
-const handleAuth = (row: any) => {
-  console.log('row.id:', row.id)
-}
-
 const handleDelete = (row: any) => {
-  const { id } = row
+  console.log('row', row)
 }
 
 onBeforeMount(() => {

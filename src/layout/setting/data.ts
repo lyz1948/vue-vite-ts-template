@@ -1,12 +1,12 @@
 export const modeOpts = [
   {
     value: 'vertical',
-    label: 'Vertical',
+    label: 'Vertical'
   },
   {
     value: 'horizontal',
-    label: 'Horizontal',
-  },
+    label: 'Horizontal'
+  }
 ]
 
 export const themeColorOpts = [
@@ -15,5 +15,5 @@ export const themeColorOpts = [
   '#fb748b',
   '#6273d9',
   '#409EFF',
-  '#f5222d',
+  '#f5222d'
 ]

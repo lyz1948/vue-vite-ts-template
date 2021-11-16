@@ -1,36 +1,35 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'TagBase',
-})
+import { defineComponent, computed, onMounted } from 'vue'
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+export default defineComponent({
+  name: 'TagBase'
+})
 
 const props = defineProps({
   name: {
     type: [String, Boolean],
-    default: '',
+    default: ''
   },
   type: {
     type: String,
-    default: 'enable',
-  },
+    default: 'enable'
+  }
 })
 
 const TagStatus = {
   enable: {
     1: '启用',
-    0: '关闭',
-  },
+    0: '关闭'
+  }
 }
 
 const TagTypes = {
   enable: {
     1: 'success',
-    0: 'info',
-  },
+    0: 'info'
+  }
 }
 
 const getTagValue = computed(() => {
@@ -46,6 +45,8 @@ const getTagType = computed(() => {
 
 <template>
   <div class="tag-base">
-    <el-tag :type="getTagType">{{ getTagValue }} </el-tag>
+    <el-tag :type="getTagType">
+      {{ getTagValue }}
+    </el-tag>
   </div>
 </template>

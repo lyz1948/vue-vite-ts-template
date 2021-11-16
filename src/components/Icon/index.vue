@@ -4,12 +4,12 @@
       v-if="name.indexOf('el-icon') !== -1"
       :class="name"
       :style="{ color, 'font-size': size + 'px' }"
-    ></i>
+    />
     <component
       v-if="type === 'icon-park'"
       :theme="theme"
       :size="size"
-      :strokeWidth="strokeWidth"
+      :stroke-width="strokeWidth"
       :is="name"
       :fill="color"
       class="icon"
@@ -27,32 +27,32 @@
 defineProps({
   type: {
     type: String,
-    default: 'icon-park',
+    default: 'icon-park'
   },
   size: {
     type: String,
-    default: '14',
+    default: '14'
   },
   color: {
     type: String,
-    default: '#333',
+    default: '#333'
   },
   theme: {
     type: String,
-    default: 'outline',
+    default: 'outline'
   },
   strokeWidth: {
     type: Number,
-    default: 3,
+    default: 3
   },
   name: {
     type: String,
-    default: '',
+    default: ''
   },
   className: {
     type: String,
-    default: 'icon',
-  },
+    default: 'icon'
+  }
 })
 </script>
 <style lang="scss" scoped>

@@ -6,7 +6,6 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import BtnLinkBase from '@/components/base/BtnLinkBase.vue'
 import { computed } from 'vue'
 import { IPermission } from '@/types/auth'
 

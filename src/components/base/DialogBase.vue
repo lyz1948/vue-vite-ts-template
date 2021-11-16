@@ -1,39 +1,38 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'DialogBase',
-})
+import { defineComponent, computed } from 'vue'
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+export default defineComponent({
+  name: 'DialogBase'
+})
 
 const emit = defineEmits(['update:visible', 'update:confirm'])
 const props = defineProps({
   visible: {
     type: Boolean,
-    default: false,
+    default: false
   },
   title: {
     type: String,
-    default: '新增',
+    default: '新增'
   },
   width: {
     type: String,
-    default: '860px',
+    default: '860px'
   },
   hasFoot: {
     type: Boolean,
-    default: true,
+    default: true
   },
   btnCancelText: {
     type: String,
-    default: '取消',
+    default: '取消'
   },
   btnConfirmText: {
     type: String,
-    default: '确定',
-  },
+    default: '确定'
+  }
 })
 
 const handleClose = () => {
@@ -58,7 +57,10 @@ const handleConfirm = () => {
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="handleClose">{{ props.btnCancelText }}</el-button>
-        <el-button type="primary" @click="handleConfirm">{{
+        <el-button
+          type="primary"
+          @click="handleConfirm"
+        >{{
           props.btnConfirmText
         }}</el-button>
       </span>

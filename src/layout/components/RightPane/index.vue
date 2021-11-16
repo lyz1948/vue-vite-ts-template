@@ -10,8 +10,8 @@ import { SettingActionTypes } from '@/store/modules/setting/action-types'
 defineProps({
   color: {
     type: String,
-    default: '#666',
-  },
+    default: '#666'
+  }
 })
 
 const store = useStore()
@@ -26,25 +26,39 @@ const showSetting = () => {
   <div class="right-pane">
     <div class="item">
       <el-dropdown trigger="click">
-        <el-badge :value="12" class="badge">
+        <el-badge
+          :value="12"
+          class="badge"
+        >
           <el-link>
             <remind
               class="remind"
               title="remind"
               theme="outline"
               size="16"
-              :strokeWidth="4"
+              :stroke-width="4"
               :fill="color"
             />
           </el-link>
         </el-badge>
         <template #dropdown>
           <div class="message-box">
-            <el-tabs v-model="activeName" stretch>
-              <el-tab-pane label="系统消息5" name="first">
+            <el-tabs
+              v-model="activeName"
+              stretch
+            >
+              <el-tab-pane
+                label="系统消息5"
+                name="first"
+              >
                 <Cell :list="noticeList" />
               </el-tab-pane>
-              <el-tab-pane label="订单消息" name="second">暂无消息</el-tab-pane>
+              <el-tab-pane
+                label="订单消息"
+                name="second"
+              >
+                暂无消息
+              </el-tab-pane>
             </el-tabs>
           </div>
         </template>
@@ -62,7 +76,7 @@ const showSetting = () => {
           title="refresh"
           theme="outline"
           size="16"
-          :strokeWidth="4"
+          :stroke-width="4"
           :fill="color"
         />
       </el-link>
@@ -75,7 +89,7 @@ const showSetting = () => {
           title="setting"
           theme="outline"
           size="16"
-          :strokeWidth="4"
+          :stroke-width="4"
           :fill="color"
           @click="showSetting"
         />

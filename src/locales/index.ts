@@ -11,12 +11,12 @@ import zhLocale from './lang/zh-cn'
 const messages = {
   en: {
     ...enLocale,
-    ...elementEnLocale,
+    ...elementEnLocale
   },
   'zh-cn': {
     ...zhLocale,
-    ...elementZhLocale,
-  },
+    ...elementZhLocale
+  }
 }
 
 export const getLocale = () => {
@@ -37,7 +37,7 @@ export const getLocale = () => {
 
 const i18n = createI18n({
   locale: getLocale(),
-  messages: messages,
+  messages: messages
 })
 
 export default i18n

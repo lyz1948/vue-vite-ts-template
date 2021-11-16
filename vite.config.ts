@@ -10,7 +10,7 @@ const { host, port } = config
 export default defineConfig({
   server: {
     host,
-    port
+    port,
   },
   plugins: [
     vue(),

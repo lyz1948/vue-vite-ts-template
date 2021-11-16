@@ -9,7 +9,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
-    "lint": "eslint --ext \"src/**/*.{ts,js,vue,json}\"",
+    "lint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
     "lint-fix": "eslint --fix --ext \"src/**/*.{ts,js,vue,json}\"",
     "format": "prettier --write \"src/**/*.{vue,ts,tsx,css,less,scss,html,json}\" "
   },
@@ -38,17 +38,29 @@
   "devDependencies": {
     "@types/node": "^16.7.1",
     "@types/qs": "^6.9.7",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "@vitejs/plugin-legacy": "^1.5.3",
     "@vitejs/plugin-vue": "^1.9.2",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.2.11",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-standard": "^5.1.2",
+    "@vue/test-utils": "^2.0.0-0",
     "autoprefixer": "^10.3.1",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
+    "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0-0",
@@ -69,5 +81,11 @@
     "vite-plugin-element-plus": "^0.0.12",
     "vite-plugin-mock": "^2.9.4",
     "vite-plugin-style-import": "^1.2.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }

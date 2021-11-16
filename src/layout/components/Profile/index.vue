@@ -7,16 +7,28 @@ const circleUrl = ref(
 
 <template>
   <div class="profile">
-    <el-avatar :size="30" :src="circleUrl"></el-avatar>
+    <el-avatar
+      :size="30"
+      :src="circleUrl"
+    />
     <el-dropdown>
-      <el-link type="primary" class="name">
+      <el-link
+        type="primary"
+        class="name"
+      >
         <span class="mr5">张三</span>
-        <down class="icon-hover down" size="16" />
+        <down
+          class="icon-hover down"
+          size="16"
+        />
       </el-link>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>
-            <logout class="icon-hover logout mr5" title="logout" />
+            <logout
+              class="icon-hover logout mr5"
+              title="logout"
+            />
             退出
           </el-dropdown-item>
         </el-dropdown-menu>

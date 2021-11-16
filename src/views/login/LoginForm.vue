@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref, watch, unref } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
-import { login } from '@/api/user'
+import { router, useRouter } from 'vue-router'
 import { ILogin } from '@/types'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 
@@ -31,16 +30,14 @@ const userLogin = (loginState: ILogin) => {
 const handleLogin = async () => {
   const form = unref(validateForm)
   if (!form) return
-  await form.validate(valid => {
+  await form.validate((valid) => {
     if (valid) {
       state.valid = true
       state.loading = true
       userLogin(state.ruleForm)
         .then(() => {
           const routerPath =
-            state.redirect === '/404' || state.redirect === '/401'
-              ? '/'
-              : state.redirect
+            state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
           router.push(routerPath).catch(() => {})
           state.loading = false
         })
@@ -61,12 +58,7 @@ watch(
 </script>
 
 <template>
-  <el-form
-    :model="state.ruleForm"
-    :rules="rules"
-    ref="validateForm"
-    class="login-ruleForm"
-  >
+  <el-form :model="state.ruleForm" :rules="state.rules" ref="validateForm" class="login-ruleForm">
     <el-form-item prop="username">
       <el-input placeholder="用户名" v-model="state.ruleForm.username">
         <template #prefix>

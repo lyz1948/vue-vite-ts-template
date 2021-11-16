@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useStore } from '@/store'
-import { ref, reactive, defineExpose, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import Tips from '@/utils/useMessage'
 
-const store = useStore()
 const visibleDialog = ref(false)
 const title = '新增角色'
 
@@ -33,10 +31,8 @@ const show = () => {
 }
 
 const edit = row => {
-  const role = getAuditRole(row.singleGroupAuditRole)
-
   show()
-  state.form = { ...row, auditRole: role.label }
+  state.form = { ...row }
 }
 
 const handleConfirm = async () => {
@@ -49,7 +45,9 @@ const handleConfirm = async () => {
   saveOrUpdate(state.form)
 }
 
-const saveOrUpdate = params => {}
+const saveOrUpdate = (params) => {
+  console.log('params', params)
+}
 
 defineExpose({
   show,

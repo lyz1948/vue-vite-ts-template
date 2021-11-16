@@ -2,9 +2,9 @@
 import { useStore } from '@/store/index'
 import { AppActionTypes } from '@/store/modules/app/action-types'
 import { computed } from 'vue'
-const store = useStore()
 
 import logPng from '@/assets/logo.png'
+const store = useStore()
 
 const toggle = () => {
   store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, false)
@@ -12,8 +12,15 @@ const toggle = () => {
 </script>
 
 <template>
-  <div class="logo" @click="toggle">
-    <el-image class="logo-image" :src="logPng" fit="contain"></el-image>
+  <div
+    class="logo"
+    @click="toggle"
+  >
+    <el-image
+      class="logo-image"
+      :src="logPng"
+      fit="contain"
+    />
     <span class="logo-text">VUE ADMIN</span>
   </div>
 </template>

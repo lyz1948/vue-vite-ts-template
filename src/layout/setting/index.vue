@@ -8,14 +8,14 @@ import ThemeColor from './ThemeColor.vue'
 defineProps({
   direction: {
     type: String,
-    default: 'rtl',
-  },
+    default: 'rtl'
+  }
 })
 
 const store = useStore()
 const state = reactive({
   fixHeadVal: '',
-  fixTagVal: '',
+  fixTagVal: ''
 })
 
 const getFixHeadVal = computed(() => {
@@ -67,15 +67,23 @@ const changeMenuMode = val => {
     </div>
     <div class="setting-item">
       <span class="label">Fix Header</span>
-      <el-switch v-model="getFixHeadVal" @change="changFixHead" />
+      <el-switch
+        v-model="getFixHeadVal"
+        @change="changFixHead"
+      />
     </div>
     <div class="setting-item">
       <span class="label">Fix TagView</span>
-      <el-switch v-model="getFixTagVal" @change="changeTagView" />
+      <el-switch
+        v-model="getFixTagVal"
+        @change="changeTagView"
+      />
     </div>
 
     <div class="setting-foot">
-      <el-button @click="handleClose">Close</el-button>
+      <el-button @click="handleClose">
+        Close
+      </el-button>
     </div>
   </el-drawer>
 </template>

@@ -3,31 +3,40 @@
 defineProps({
   list: {
     type: Array,
-    required: true,
+    required: true
   },
   name: {
     type: String,
-    default: 'title',
-  },
+    default: 'title'
+  }
 })
 </script>
 
 <template>
   <div class="cell-container">
-    <div v-for="(item, index) in list" :key="index" class="cell-item">
+    <div
+      v-for="(item, index) in list"
+      :key="index"
+      class="cell-item"
+    >
       <div class="cell-item-meta-avatar">
-        <div v-if="item.icon" class="icon-box">
+        <div
+          v-if="item.icon"
+          class="icon-box"
+        >
           <component
             class="icon"
             theme="outline"
             size="16"
-            :strokeWidth="3"
+            :stroke-width="3"
             :is="item.icon"
           />
         </div>
       </div>
       <div class="cell-item-meta-content">
-        <div class="title">{{ item[name] }}</div>
+        <div class="title">
+          {{ item[name] }}
+        </div>
         <div class="desc">
           <div class="time">
             {{ item.time }}

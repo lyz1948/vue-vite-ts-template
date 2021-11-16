@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'FormItemBase',
+  name: 'FormItemBase'
 })
 </script>
 
@@ -9,8 +9,8 @@ export default defineComponent({
 defineProps({
   isRequire: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 </script>
 

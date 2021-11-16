@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { ref, unref, defineExpose } from 'vue'
+import { ref, unref } from 'vue'
 const props = defineProps({
   form: {
     type: Object,
