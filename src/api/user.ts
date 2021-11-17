@@ -14,7 +14,7 @@ export const loginRequest = async (params: ILoginClient) => {
 }
 
 export const userInfoRequest = async (userId: number | string) => {
-  return await request.post<string>(httpUrl.user, qs.stringify(userId))
+  return await request.post<string>(httpUrl.userinfo, qs.stringify(userId))
 }
 
 const handleError = (err: unknown) => {

@@ -1,12 +1,11 @@
-// ./src/plugins/axios/axiosConfigs.ts
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-// import store from '@/store'
 import { ElMessage } from 'element-plus'
-
+import { App } from '@/config'
+const { baseURL } = App
 // 创建axios的实例
 const service = axios.create({
   // `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL
-  baseURL: 'http://8.134.64.188:8080',
+  baseURL,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
   },
@@ -21,7 +20,7 @@ const service = axios.create({
 
   // `transformResponse` 在传递给 then/catch 前，允许修改响应数据
   transformResponse: [
-    data => {
+    (data) => {
       if (typeof data === 'string' && data.startsWith('{')) {
         data = JSON.parse(data)
       }

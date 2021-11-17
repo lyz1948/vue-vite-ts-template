@@ -6,7 +6,15 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { ref, unref } from 'vue'
+import { ref } from 'vue'
+import { ElForm } from 'element-plus'
+
+type ELEForm = InstanceType<typeof ElForm>
+
+export interface MyFormExpose {
+  validate: ELEForm['validate']
+}
+
 const props = defineProps({
   form: {
     type: Object,
@@ -19,26 +27,16 @@ const props = defineProps({
   },
 })
 
-const validateForm = ref(null)
-
-const handleValidate = async (): boolean => {
-  const form = unref(validateForm)
-  if (!form) return false
-  return await form.validate()
-}
+const validateForm = ref<ELEForm>()
+const validate = (callback: Function) => validateForm?.value?.validate(callback)
 
 defineExpose({
-  handleValidate,
+  validate,
 })
 </script>
 
 <template>
-  <el-form
-    ref="validateForm"
-    :model="props.form"
-    :rules="props.rules"
-    class="form-wrapper"
-  >
+  <el-form ref="validateForm" :model="props.form" :rules="props.rules" class="form-wrapper">
     <slot />
   </el-form>
 </template>

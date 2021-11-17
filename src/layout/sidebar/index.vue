@@ -44,17 +44,14 @@ const activeMenu = computed(() => {
     <el-menu
       class="sidebar-menu"
       :mode="getMenuMode"
+      :active="activeMenu"
       :collapse="isCollapse"
       :default-active="defaultActive"
       :collapse-transition="true"
     >
       <template v-for="route in routes">
         <template v-if="!route.meta || !route.meta.hidden">
-          <SidebarItem
-            :item="route"
-            :key="route.path"
-            :base-path="route.path"
-          />
+          <SidebarItem :item="route" :key="route.path" :base-path="route.path" />
         </template>
       </template>
     </el-menu>
@@ -74,6 +71,9 @@ const activeMenu = computed(() => {
 .sidebar-container {
   display: flex;
   flex: 1;
+  .el-menu--horizontal {
+    border-bottom: none !important;
+  }
   &.is-collapse {
     width: $base-unfold-width;
   }

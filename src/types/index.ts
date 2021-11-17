@@ -27,15 +27,19 @@ export interface IApi {
 }
 
 export interface IGet {
-  <T>(url: string, config?: AxiosRequestConfig):
-    | Promise<T>
-    | Promise<CustomSuccessData<T>>
+  <T>(url: string, config?: AxiosRequestConfig): Promise<T> | Promise<CustomSuccessData<T>>
 }
 
 export interface IPost {
-  <T>(
-    url: string,
-    params?: string | object,
-    config?: AxiosRequestConfig
-  ): Promise<CustomSuccessData<T>>
+  <T>(url: string, params?: string | object, config?: AxiosRequestConfig): Promise<
+    CustomSuccessData<T>
+  >
 }
+
+export interface ISelectItem {
+  label: string
+  value: string
+  [keys: string]: any
+}
+
+export type SelectProps = 'yesNo' | 'auditRole'

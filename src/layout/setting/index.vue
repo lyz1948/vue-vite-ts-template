@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
+import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import SelectMode from './SelectMode.vue'
 import ThemeColor from './ThemeColor.vue'
+import { ISelectItem } from '@/types'
 
 defineProps({
   direction: {
     type: String,
-    default: 'rtl'
-  }
+    default: 'rtl',
+  },
 })
 
 const store = useStore()
 const state = reactive({
   fixHeadVal: '',
-  fixTagVal: ''
+  fixTagVal: '',
 })
+const visible = ref(false)
 
 const getFixHeadVal = computed(() => {
   return store.state.setting.fixHead
@@ -34,23 +36,30 @@ const handleClose = () => {
   store.dispatch(SettingActionTypes.ACTION_TOGGLE_SETTING, false)
 }
 
-const changFixHead = val => {
+const changFixHead = (val: boolean) => {
   store.dispatch(SettingActionTypes.ACTION_FIX_HEADER, val)
 }
 
-const changeTagView = val => {
+const changeTagView = (val: boolean) => {
   store.dispatch(SettingActionTypes.ACTION_FIX_TAGVIEW, val)
 }
 
-const changeMenuMode = val => {
-  console.log('val:', val)
-  store.dispatch(SettingActionTypes.ACTION_MENU_MODE, val)
+const changeMenuMode = (item: ISelectItem) => {
+  store.dispatch(SettingActionTypes.ACTION_MENU_MODE, item.value)
 }
+
+watch(
+  () => settingStatus.value,
+  (val) => {
+    visible.value = val
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
   <el-drawer
-    :value="settingStatus"
+    v-model="visible"
     class="setting"
     title="System Setting"
     size="500px"
@@ -59,7 +68,7 @@ const changeMenuMode = val => {
   >
     <div class="setting-item">
       <span class="label">Menu Mode</span>
-      <SelectMode @change="changeMenuMode" />
+      <SelectMode @on:select="changeMenuMode" />
     </div>
     <div class="setting-item">
       <span class="label">Site Theme</span>
@@ -67,23 +76,15 @@ const changeMenuMode = val => {
     </div>
     <div class="setting-item">
       <span class="label">Fix Header</span>
-      <el-switch
-        v-model="getFixHeadVal"
-        @change="changFixHead"
-      />
+      <el-switch v-model="getFixHeadVal" @change="changFixHead" />
     </div>
     <div class="setting-item">
       <span class="label">Fix TagView</span>
-      <el-switch
-        v-model="getFixTagVal"
-        @change="changeTagView"
-      />
+      <el-switch v-model="getFixTagVal" @change="changeTagView" />
     </div>
 
     <div class="setting-foot">
-      <el-button @click="handleClose">
-        Close
-      </el-button>
+      <el-button @click="handleClose"> Close </el-button>
     </div>
   </el-drawer>
 </template>

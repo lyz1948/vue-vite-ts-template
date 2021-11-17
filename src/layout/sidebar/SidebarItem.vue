@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, PropType } from 'vue'
+import { computed, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
-import Icon from '@/components/Icon/index.vue'
 
 const props = defineProps({
   item: {
-    type: Object as PropType<RouteRecordRaw>,
+    type: Object as PropType<RouteRecordRaw> | any,
     required: true,
   },
   basePath: {
@@ -18,7 +17,7 @@ const props = defineProps({
 
 const getChildrenLen = computed(() => {
   if (props.item.children) {
-    const showingChildren = props.item.children.filter(item => {
+    const showingChildren = props.item.children.filter((item: RouteRecordRaw) => {
       if (item.meta && item.meta.hidden) {
         return false
       } else {
@@ -65,10 +64,7 @@ const resolvePath = (routePath: string) => {
 
 <template>
   <template v-if="getOneChild && !getOneChild.children">
-    <SidebarItemLink
-      v-if="getOneChild.meta"
-      :to="resolvePath(getOneChild.path)"
-    >
+    <SidebarItemLink v-if="getOneChild.meta" :to="resolvePath(getOneChild.path)">
       <el-menu-item :index="resolvePath(getOneChild.path)">
         <component
           v-if="getOneChild.meta.icon"
@@ -77,9 +73,7 @@ const resolvePath = (routePath: string) => {
           :is="getOneChild.meta.icon"
         />
         <template #title>
-          <span v-if="getOneChild.meta.title">{{
-            getOneChild.meta.title
-          }}</span>
+          <span v-if="getOneChild.meta.title">{{ getOneChild.meta.title }}</span>
         </template>
       </el-menu-item>
     </SidebarItemLink>
@@ -87,12 +81,7 @@ const resolvePath = (routePath: string) => {
 
   <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
-      <component
-        v-if="item.meta.icon"
-        theme="outline"
-        strokeWidth="3"
-        :is="item.meta.icon"
-      />
+      <component v-if="item.meta.icon" theme="outline" strokeWidth="3" :is="item.meta.icon" />
       <span v-if="item.meta">{{ item.meta.title }}</span>
     </template>
     <template v-if="item.children">

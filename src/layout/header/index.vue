@@ -2,8 +2,6 @@
 import { computed } from 'vue'
 import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
-import { state } from '@/store/modules/app/state'
-import { setting } from '@/config/setting'
 import { useStore } from '@/store'
 import { AppActionTypes } from '@/store/modules/app/action-types'
 
@@ -19,19 +17,10 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div
-    v-if="!isHorizonal"
-    class="header-container"
-  >
+  <div v-if="!isHorizonal" class="header-container">
     <div class="left">
-      <el-link
-        class="menu-icon"
-        @click="toggleSidebar"
-      >
-        <menu-fold
-          class="icon"
-          size="16"
-        />
+      <el-link class="menu-icon" @click="toggleSidebar">
+        <menu-fold class="icon" size="16" />
       </el-link>
       <Boardcrumb />
     </div>

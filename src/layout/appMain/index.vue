@@ -18,19 +18,10 @@ const visibleRoute = computed(() => {
 <template>
   <section class="app-main">
     <!-- <router-view /> -->
-    <router-view
-      v-if="visibleRoute"
-      v-slot="{ Component }"
-    >
-      <transition
-        name="fade-transform"
-        mode="out-in"
-      >
+    <router-view v-if="visibleRoute" v-slot="{ Component }">
+      <transition name="fade-transform" mode="out-in">
         <keep-alive>
-          <component
-            :is="Component"
-            :key="key"
-          />
+          <component :is="Component" :key="key" />
         </keep-alive>
       </transition>
     </router-view>
@@ -40,6 +31,7 @@ const visibleRoute = computed(() => {
 <style lang="scss" scoped>
 .app-main {
   padding: 20px;
+  border-radius: 6px;
   background-color: #fff;
 }
 </style>

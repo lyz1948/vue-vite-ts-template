@@ -59,6 +59,10 @@ const isOpen = computed(() => {
     .sidebar-container {
       width: $base-unfold-width !important;
       display: flex;
+
+      .el-menu--horizontal {
+        border-bottom: none !important;
+      }
     }
     .layout-sidebar {
       display: flex;
@@ -88,7 +92,9 @@ const isOpen = computed(() => {
 
     .layout-main {
       padding: 20px;
+      min-height: calc(100vh - $base-head-menu-height - $base-tabs-bar-height);
       background-color: $base-content-bg-color;
+      box-sizing: border-box;
     }
   }
 }

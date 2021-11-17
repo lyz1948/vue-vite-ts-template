@@ -1,36 +1,32 @@
 <script setup lang="ts">
+import { PropType } from 'vue-demi'
+
+interface IItemProps {
+  icon: string
+  name: string
+  title: string
+  time: Date
+  [keys: string]: any
+}
 
 defineProps({
   list: {
-    type: Array,
-    required: true
+    type: Array as PropType<Array<IItemProps>>,
+    required: true,
   },
   name: {
     type: String,
-    default: 'title'
-  }
+    default: 'title',
+  },
 })
 </script>
 
 <template>
   <div class="cell-container">
-    <div
-      v-for="(item, index) in list"
-      :key="index"
-      class="cell-item"
-    >
+    <div v-for="(item, index) in list" :key="index" class="cell-item">
       <div class="cell-item-meta-avatar">
-        <div
-          v-if="item.icon"
-          class="icon-box"
-        >
-          <component
-            class="icon"
-            theme="outline"
-            size="16"
-            :stroke-width="3"
-            :is="item.icon"
-          />
+        <div v-if="item.icon" class="icon-box">
+          <component class="icon" theme="outline" size="16" :stroke-width="3" :is="item.icon" />
         </div>
       </div>
       <div class="cell-item-meta-content">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from '@/store'
 import { noticeList } from './data'
 import Profile from '../Profile/index.vue'
@@ -10,8 +10,8 @@ import { SettingActionTypes } from '@/store/modules/setting/action-types'
 defineProps({
   color: {
     type: String,
-    default: '#666'
-  }
+    default: '#666',
+  },
 })
 
 const store = useStore()
@@ -26,10 +26,7 @@ const showSetting = () => {
   <div class="right-pane">
     <div class="item">
       <el-dropdown trigger="click">
-        <el-badge
-          :value="12"
-          class="badge"
-        >
+        <el-badge :value="12" class="badge">
           <el-link>
             <remind
               class="remind"
@@ -43,22 +40,11 @@ const showSetting = () => {
         </el-badge>
         <template #dropdown>
           <div class="message-box">
-            <el-tabs
-              v-model="activeName"
-              stretch
-            >
-              <el-tab-pane
-                label="系统消息5"
-                name="first"
-              >
+            <el-tabs v-model="activeName" stretch>
+              <el-tab-pane label="系统消息5" name="first">
                 <Cell :list="noticeList" />
               </el-tab-pane>
-              <el-tab-pane
-                label="订单消息"
-                name="second"
-              >
-                暂无消息
-              </el-tab-pane>
+              <el-tab-pane label="订单消息" name="second"> 暂无消息 </el-tab-pane>
             </el-tabs>
           </div>
         </template>
@@ -99,7 +85,7 @@ const showSetting = () => {
     <div class="item">
       <Profile />
     </div>
-    <SettingPane :visible="visibleSetting" />
+    <SettingPane />
   </div>
 </template>
 

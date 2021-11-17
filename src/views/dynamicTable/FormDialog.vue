@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import Tips from '@/utils/useMessage'
+import type { MyFormExpose } from '@/components/base/FormBase.vue'
+import FormBase from '@/components/base/FormBase.vue'
+import { ISelectItem } from '@/types'
 
 const visibleDialog = ref(false)
 const title = '新增角色'
 
-const formRef = ref(null)
+const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
 const state = reactive({
   form: {
     name: '',
@@ -22,7 +25,7 @@ const state = reactive({
   },
 })
 
-const changeRole = (val: string) => {
+const changeRole = (val: ISelectItem) => {
   state.form.singleGroupAuditRole = val.value
 }
 
@@ -30,24 +33,22 @@ const show = () => {
   visibleDialog.value = true
 }
 
-const edit = row => {
+const edit = (row: any) => {
   show()
   state.form = { ...row }
 }
 
 const handleConfirm = async () => {
-  const valid = await formRef.value.handleValidate()
+  const valid = await formRef.value?.validate()
 
   if (!valid) {
     Tips.error()
     return
   }
-  saveOrUpdate(state.form)
+  saveOrUpdate()
 }
 
-const saveOrUpdate = (params) => {
-  console.log('params', params)
-}
+const saveOrUpdate = () => {}
 
 defineExpose({
   show,
@@ -62,12 +63,7 @@ defineExpose({
     @update:visible="visibleDialog = $event"
     @update:confirm="handleConfirm"
   >
-    <FormBase
-      ref="formRef"
-      :form="state.form"
-      :rules="state.rules"
-      label-width="160px"
-    >
+    <FormBase ref="formRef" :form="state.form" :rules="state.rules" label-width="160px">
       <FormItemBase prop="name" label="角色名称">
         <InputBase v-model:value="state.form.name" />
       </FormItemBase>
@@ -81,11 +77,7 @@ defineExpose({
       </FormItemBase>
 
       <FormItemBase label="备注">
-        <InputBase
-          v-model:value="state.form.remarks"
-          :rows="4"
-          type="textarea"
-        />
+        <InputBase v-model:value="state.form.remarks" :rows="4" type="textarea" />
       </FormItemBase>
 
       <FormItemBase label="启用状态">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter, RouteLocationMatched } from 'vue-router'
 import { compile } from 'path-to-regexp'
 
 const currentRoute = useRoute()
@@ -13,24 +13,17 @@ const isDashboard = (route: RouteLocationMatched) => {
   if (!name) {
     return false
   }
-  return (
-    name.toString().trim().toLocaleLowerCase() ===
-    'Dashboard'.toLocaleLowerCase()
-  )
+  return name.toString().trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
 }
 
 const getBreadcrumb = () => {
-  let matched = currentRoute.matched.filter(
-    item => item.meta && item.meta.title
-  )
+  let matched = currentRoute.matched.filter((item) => item.meta && item.meta.title)
 
   const frist = matched[0]
   if (!isDashboard(frist)) {
-    matched = [
-      { path: '/dashboard', meta: { title: 'dashboard' } } as any,
-    ].concat(matched)
+    matched = [{ path: '/dashboard', meta: { title: 'dashboard' } } as any].concat(matched)
   }
-  breadcrumbs = matched.filter(item => {
+  breadcrumbs = matched.filter((item) => {
     return item.meta && item.meta.title && item.meta.breadcrumb !== false
   })
 }
@@ -42,12 +35,12 @@ const pathCompile = (path: string) => {
 const handleLink = (item: any) => {
   const { redirect, path } = item
   if (redirect) {
-    router.push(redirect).catch(err => {
+    router.push(redirect).catch((err) => {
       console.error(err)
     })
   }
 
-  router.push(pathCompile(path)).catch(err => {
+  router.push(pathCompile(path) as any).catch((err) => {
     console.error(err)
   })
 }
@@ -58,7 +51,7 @@ const getBreadcrumbs = computed(() => {
 
 watch(
   () => currentRoute.path,
-  path => {
+  (path) => {
     if (path.startsWith('/redirect/')) {
       return
     }
@@ -74,16 +67,8 @@ onBeforeMount(() => {
 <template>
   <div class="bread-crumb-wrap">
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item
-        v-for="(item, index) in getBreadcrumbs"
-        :key="item.path"
-      >
-        <span
-          v-if="
-            item.redirect === 'noredirect' ||
-            index === getBreadcrumbs.length - 1
-          "
-        >
+      <el-breadcrumb-item v-for="(item, index) in getBreadcrumbs" :key="item.path">
+        <span v-if="item.redirect === 'noredirect' || index === getBreadcrumbs.length - 1">
           {{ item.meta.title }}
         </span>
         <a v-else @click.prevent="handleLink(item)">

@@ -6,5 +6,9 @@ export const PageDefault = {
   pageSize: 20,
   pageSizes: [10, 20, 30, 50, 100, 200, 500, 1000],
   pageLayout: 'total, sizes, prev, pager, next',
-  bgShow: true
+  bgShow: true,
+}
+
+export const App = {
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:6000/api' : '/api',
 }

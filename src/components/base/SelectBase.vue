@@ -6,8 +6,10 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed, watch, ref, reactive } from 'vue'
-import SELECTOR from '@/config/selector'
+import { watch, ref, reactive } from 'vue'
+import { SELECTOR } from '@/config/selector'
+import { ISelectItem } from '@/types'
+import type { SelectProps } from '@/types'
 
 const emit = defineEmits(['on:select'])
 const props = defineProps({
@@ -39,24 +41,24 @@ const props = defineProps({
 
 let isFirst = ref(true)
 const state = reactive({
-  tempData: [],
+  tempData: ref<Array<ISelectItem>>([]),
   data: [],
 })
 
-const handleChange = (val) => {
-  const item = state.data.find((it) => it.value === val)
+const handleChange = (val: string) => {
+  const item = state.data.find((it: ISelectItem) => it.value === val)
   emit('on:select', item)
 }
 
 const lazyLoad = () => {
   if (!isFirst.value) return
-  isFirst = false
-  state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type]
+  isFirst.value = false
+  state.tempData = props.list.length > 0 ? props.list : (SELECTOR[props.type as SelectProps] as any)
 }
 
 watch(
   () => state.tempData,
-  (list, oldList) => {
+  (list: any) => {
     state.data = list
   }
 )

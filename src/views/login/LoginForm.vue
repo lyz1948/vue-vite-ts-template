@@ -1,42 +1,44 @@
 <script setup lang="ts">
-import { reactive, ref, watch, unref } from 'vue'
+import { reactive, ref, watch, unref, onMounted } from 'vue'
 import { useStore } from '@/store'
-import { router, useRouter } from 'vue-router'
+import { RouteRecordRaw, useRouter } from 'vue-router'
 import { ILogin } from '@/types'
 import { UserActionTypes } from '@/store/modules/user/action-types'
+import { ElForm } from 'element-plus'
 
 const store = useStore()
-const currentRoute = useRouter()
-const validateForm = ref(null)
+const router = useRouter()
+const validateForm = ref<InstanceType<typeof ElForm>>()
 
 const state = reactive({
   ruleForm: {
     username: 'admin',
     password: 'admin',
   },
+  valid: false,
   loading: false,
   checkedPwd: false,
-  redirect: undefined,
+  redirect: ref(''),
   rules: {
     username: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
     password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
   },
 })
 
-const userLogin = (loginState: ILogin) => {
-  return store.dispatch(UserActionTypes.ACTION_LOGIN, loginState)
+const userLogin = async (loginState: ILogin) => {
+  return await store.dispatch(UserActionTypes.ACTION_LOGIN, loginState)
 }
 
 const handleLogin = async () => {
   const form = unref(validateForm)
   if (!form) return
-  await form.validate((valid) => {
+  await form.validate((valid: boolean) => {
     if (valid) {
       state.valid = true
       state.loading = true
       userLogin(state.ruleForm)
         .then(() => {
-          const routerPath =
+          const routerPath: RouteRecordRaw | any =
             state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
           router.push(routerPath).catch(() => {})
           state.loading = false
@@ -49,10 +51,9 @@ const handleLogin = async () => {
 }
 
 watch(
-  () => currentRoute.name,
-  ({ _value }) => {
-    const route = _value
-    state.redirect = (route.query && route.query.redirect) || '/'
+  () => router.currentRoute.value,
+  (route) => {
+    state.redirect = ((route.query && route.query.redirect) || '/') as string
   }
 )
 </script>
