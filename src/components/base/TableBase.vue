@@ -10,7 +10,6 @@ import { computed, ref } from 'vue'
 import { PageDefault } from '@/config'
 
 const emit = defineEmits(['update:page'])
-
 const props = defineProps({
   data: {
     type: Array,

@@ -1,4 +1,4 @@
-<script setup="context, { emits }" lang="ts">
+<script setup lang="ts">
 import {
   defineComponent,
   reactive,
@@ -19,8 +19,7 @@ const tagSpacing = 4
 const state = reactive({
   handleScroll: (e: WheelEvent) => {
     const eventDelta = (e as any).wheelDelta || -e.deltaY * 40
-    scrollWrapper.value.scrollLeft =
-      scrollWrapper.value.scrollLeft + eventDelta / 4
+    scrollWrapper.value.scrollLeft = scrollWrapper.value.scrollLeft + eventDelta / 4
   },
   moveToCurrentTag: (currentTag: HTMLElement) => {
     const container = (scrollContainerRef.value as any).$el as HTMLElement
@@ -36,22 +35,17 @@ const state = reactive({
     if (fristTag === currentTag) {
       scrollWrapper.value.scrollLeft = 0
     } else if (lastTag === currentTag) {
-      scrollWrapper.value.scrollLeft =
-        scrollWrapper.value.scrollWidth - containerWidth
+      scrollWrapper.value.scrollLeft = scrollWrapper.value.scrollWidth - containerWidth
     } else {
       // find preTag and nextTag
-      const currentIndex = tagList.findIndex(item => item === currentTag)
+      const currentIndex = tagList.findIndex((item) => item === currentTag)
       const prevTag = tagList[currentIndex - 1]
       const nextTag = tagList[currentIndex + 1]
       // the tag's offsetLeft after of nextTag
-      const afterNextTagOffsetLeft =
-        nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagSpacing
+      const afterNextTagOffsetLeft = nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagSpacing
       // the tag's offsetLeft before of prevTag
       const beforePrevTagOffsetLeft = prevTag.$el.offsetLeft - tagSpacing
-      if (
-        afterNextTagOffsetLeft >
-        scrollWrapper.value.scrollLeft + containerWidth
-      ) {
+      if (afterNextTagOffsetLeft > scrollWrapper.value.scrollLeft + containerWidth) {
         scrollWrapper.value.scrollLeft = afterNextTagOffsetLeft - containerWidth
       } else if (beforePrevTagOffsetLeft < scrollWrapper.value.scrollLeft) {
         scrollWrapper.value.scrollLeft = beforePrevTagOffsetLeft

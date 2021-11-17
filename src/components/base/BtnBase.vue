@@ -1,60 +1,60 @@
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'BtnBase',
+})
 </script>
 
 <script setup lang="ts">
-export default defineComponent({
-  name: 'BtnBase'
-})
-
+import { computed } from 'vue'
 const defaultState = {
   search: {
     icon: 'el-icon-search',
     text: '搜索',
-    type: 'primary'
+    type: 'primary',
   },
   create: {
     icon: 'el-icon-plus',
     text: '新增',
-    type: 'primary'
+    type: 'primary',
   },
   save: {
     icon: 'el-icon-check',
     text: '保存',
-    type: 'success'
+    type: 'success',
   },
   close: {
     icon: 'el-icon-close',
     text: '关闭',
-    type: 'danger'
+    type: 'danger',
   },
   delete: {
     icon: 'el-icon-delete',
     text: '删除',
     type: 'danger',
-    plain: true
+    plain: true,
   },
   reset: {
     icon: 'el-icon-refresh-left',
     text: '重置',
-    type: 'primary'
+    type: 'primary',
   },
   export: {
     icon: 'el-icon-takeaway-box',
     text: '导出',
-    type: 'success'
-  }
+    type: 'success',
+  },
 }
 
 const props = defineProps({
   name: {
     type: String,
-    default: ''
+    default: '',
   },
   type: {
     type: String,
-    default: 'search'
-  }
+    default: 'search',
+  },
 })
 
 const getName = computed(() => {
@@ -75,11 +75,7 @@ const getIcon = computed(() => {
 </script>
 
 <template>
-  <el-button
-    :type="getType"
-    :icon="getIcon"
-    :plain="getPlain"
-  >
+  <el-button :type="getType" :icon="getIcon" :plain="getPlain">
     {{ getName }}
   </el-button>
 </template>

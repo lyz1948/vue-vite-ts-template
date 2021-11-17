@@ -1,55 +1,50 @@
 <script lang="ts">
-import {
-  defineComponent,
-  computed,
-  watch,
-  ref,
-  reactive,
-} from 'vue'
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'SelectBase',
+})
 </script>
 
 <script setup lang="ts">
+import { computed, watch, ref, reactive } from 'vue'
 import SELECTOR from '@/config/selector'
-export default defineComponent({
-  name: 'SelectBase'
-})
 
 const emit = defineEmits(['on:select'])
 const props = defineProps({
   list: {
     type: Array,
-    default: () => []
+    default: () => [],
   },
   type: {
     type: String,
-    default: 'yesNo'
+    default: 'yesNo',
   },
   vertical: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isRequire: {
     type: Boolean,
-    default: false
+    default: false,
   },
   value: {
     type: String,
-    default: ''
+    default: '',
   },
   tip: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 
 let isFirst = ref(true)
 const state = reactive({
   tempData: [],
-  data: []
+  data: [],
 })
 
-const handleChange = val => {
-  const item = state.data.find(it => it.value === val)
+const handleChange = (val) => {
+  const item = state.data.find((it) => it.value === val)
   emit('on:select', item)
 }
 
@@ -68,16 +63,8 @@ watch(
 </script>
 
 <template>
-  <div
-    class="select-base"
-    :class="{ vertical: vertical }"
-  >
-    <el-select
-      :model-value="value"
-      :placeholder="tip"
-      @focus="lazyLoad"
-      @change="handleChange"
-    >
+  <div class="select-base" :class="{ vertical: vertical }">
+    <el-select :model-value="value" :placeholder="tip" @focus="lazyLoad" @change="handleChange">
       <el-option
         v-for="(item, index) in state.tempData"
         :key="item.value + '' + index"
