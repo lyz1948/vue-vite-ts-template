@@ -20,7 +20,7 @@ const sidebar = computed(() => {
 })
 
 const isCollapse = computed(() => {
-  return sidebar.value.open
+  return !sidebar.value.open
 })
 
 const defaultActive = computed(() => {
@@ -40,7 +40,7 @@ const activeMenu = computed(() => {
 </script>
 
 <template>
-  <div :class="['sidebar-container', { 'is-collapse': isCollapse }]">
+  <div class="sidebar-container">
     <el-menu
       class="sidebar-menu"
       :mode="getMenuMode"
@@ -68,14 +68,20 @@ const activeMenu = computed(() => {
 </style>
 
 <style lang="scss">
+.is-collapse {
+  .sidebar-container {
+    width: $base-unfold-width;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
 .sidebar-container {
   display: flex;
   flex: 1;
+
   .el-menu--horizontal {
     border-bottom: none !important;
-  }
-  &.is-collapse {
-    width: $base-unfold-width;
   }
   .sidebar-menu {
     border: none;

@@ -16,7 +16,7 @@ export interface IAppState {
 export const state: IAppState = {
   device: DeviceType.Desktop,
   sidebar: {
-    open: false,
+    open: true,
     withoutAnimation: true,
   },
   language: 'zh',

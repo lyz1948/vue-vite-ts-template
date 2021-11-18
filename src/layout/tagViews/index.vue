@@ -1,22 +1,26 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { TagsActionTypes } from '@/store/modules/tagViews/action-types'
-import { TagView } from '@/store/modules/tagViews/state'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
+import { IRouter, ITagView } from '@/types'
 
 const store = useStore()
 const router = useRouter()
 const currentRoute = useRoute()
 
-// let activeName = ref('')
 const visible = ref(false)
 const state = reactive({
   activeName: '',
 })
 
-const commandList = [
+interface ICommand {
+  command: string
+  text: string
+  icon: string
+}
+const commandList: Array<ICommand> = [
   {
     command: SettingActionTypes.ACTION_MENU_REFRESH,
     text: '刷新',
@@ -44,11 +48,11 @@ const commandList = [
   },
 ]
 
-const isActive = (route: TagView) => {
+const isActive = (route: IRouter) => {
   return route.path === currentRoute.path
 }
 
-const isAffix = (tag: TagView) => {
+const isAffix = (tag: ITagView) => {
   return tag.meta && tag.meta.affix
 }
 
@@ -58,9 +62,9 @@ const visitedViews = computed(() => {
 
 const routes = computed(() => store.state.permission.routes)
 
-const filterAffixTags = (routes: RouteRecordRaw[]) => {
-  let tags: TagView[] = []
-  routes.forEach(route => {
+const filterAffixTags = (routes: RouteRecordRaw[] | IRouter[]) => {
+  let tags: ITagView[] = []
+  routes.forEach((route) => {
     if (route.meta && route.meta.affix) {
       tags.push({
         fullPath: route.path,
@@ -70,7 +74,7 @@ const filterAffixTags = (routes: RouteRecordRaw[]) => {
       })
     }
     if (route.children) {
-      const childTags = filterAffixTags(route.children, route.path)
+      const childTags = filterAffixTags(route.children)
       if (childTags.length >= 1) {
         tags = tags.concat(childTags)
       }
@@ -95,11 +99,11 @@ const initTabs = () => {
   }
 }
 
-const handleTab = tab => {
+const handleTab = (tab: any) => {
   const index = tab.index
   const route = visitedViews.value.find((it, idx) => {
-    if (tab.index == idx) return it
-  })
+    if (index == idx) return it
+  }) as any
 
   if (currentRoute.path === route.path) return false
 
@@ -110,15 +114,15 @@ const handleTab = tab => {
   })
 }
 
-const handleCommand = async command => {
+const handleCommand = async (command: ICommand) => {
   const view = await activeTagRoute()
-  store.dispatch(command, view)
+  store.dispatch(command, view as any)
 }
 
 const activeTagRoute = async () => {
   const { fullPath, path } = currentRoute
 
-  const view = visitedViews.value.find(it => it.path === fullPath)
+  const view = visitedViews.value.find((it) => it.path === fullPath)
 
   if (view?.path !== path) {
     router.push(path)
@@ -132,14 +136,14 @@ const handleHide = () => {}
 
 watch(
   () => currentRoute.name,
-  () => {
-    if (currentRoute.name.toLowerCase() != 'login') {
+  (val) => {
+    if (val?.toLowerCase() != 'login') {
       initTabs()
       addTabs()
-      console.log('currentRoute.path:', currentRoute.path)
+
       const findRoute = visitedViews.value.find((it, idx) => {
         if (it.path == currentRoute.path) return it
-      })
+      }) as any
 
       state.activeName = findRoute.fullPath
     }
@@ -151,17 +155,8 @@ watch(
 <template>
   <div id="tabs-bar-container" class="tabs-bar-container">
     <div class="tags-view-wrapper">
-      <el-tabs
-        v-model="state.activeName"
-        type="card"
-        class="tabs-content"
-        @tab-click="handleTab"
-      >
-        <el-tab-pane
-          v-for="tag in visitedViews"
-          :name="tag.path"
-          class="tags-view-item"
-        >
+      <el-tabs v-model="state.activeName" type="card" class="tabs-content" @tab-click="handleTab">
+        <el-tab-pane v-for="tag in visitedViews" :name="tag.path" class="tags-view-item">
           <template #label>
             <div class="item">
               <component
@@ -197,13 +192,7 @@ watch(
         :key="index"
         @click="handleCommand(item.command)"
       >
-        <component
-          class="icon"
-          theme="filled"
-          size="14"
-          :strokeWidth="3"
-          :is="item.icon"
-        />
+        <component class="icon" theme="filled" size="14" :strokeWidth="3" :is="item.icon" />
         <span class="command-label">{{ item.text }}</span>
       </div>
     </el-popover>
@@ -237,7 +226,6 @@ watch(
 </style>
 <style lang="scss" scoped>
 .tabs-bar-container {
-  width: 100%;
   position: relative;
   box-sizing: border-box;
   display: flex;

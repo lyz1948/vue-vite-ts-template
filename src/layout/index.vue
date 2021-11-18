@@ -15,15 +15,15 @@ const isHorizonal = computed(() => {
 })
 
 const isOpen = computed(() => {
-  return !store.state.app.sidebar.open
+  return store.state.app.sidebar.open
 })
 </script>
 
 <template>
   <div :class="['layout', { 'is-horizonal': isHorizonal }]">
-    <div class="layout-sidebar">
+    <div class="layout-sidebar" :class="{ 'is-collapse': !isOpen }">
       <div class="layout-sidebar-wrapper">
-        <VLogo v-if="isOpen" />
+        <VLogo />
         <VSidebar />
         <RightPane v-if="isHorizonal" />
       </div>
@@ -57,7 +57,6 @@ const isOpen = computed(() => {
     }
 
     .sidebar-container {
-      width: $base-unfold-width !important;
       display: flex;
 
       .el-menu--horizontal {
@@ -83,7 +82,13 @@ const isOpen = computed(() => {
 
   .layout-sidebar {
     min-height: 100vh;
+    width: $base-menu-width;
+    flex: 0 0 $base-menu-width;
     border-right: 1px solid #e1e2e7;
+    &.is-collapse {
+      width: $base-unfold-width;
+      flex: 0 0 $base-unfold-width;
+    }
   }
 
   .layout-body {

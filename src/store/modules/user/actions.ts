@@ -19,28 +19,19 @@ type AugmentedActionContext = {
   ): ReturnType<Mutations[K]>
 } & Omit<ActionContext<IUserState, IRootState>, 'commit'>
 
-export interface IActions {
-  [UserActionTypes.ACTION_LOGIN](
-    { commit }: AugmentedActionContext,
-    userinfo: ILogin
-  ): void
-  [UserActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext): void
-  [UserActionTypes.ACTION_GET_USER_INFO]({
-    commit,
-  }: AugmentedActionContext): void
-  [UserActionTypes.ACTION_CHANGE_ROLES](
-    { commit }: AugmentedActionContext,
-    role: string
-  ): void
+type NoAugmentedActionContext = {
+  commit<K extends keyof Mutations>(key: K): ReturnType<Mutations[K]>
+} & Omit<ActionContext<IUserState, IRootState>, 'commit'>
+
+export interface IUserActions {
+  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin): void
+  [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_LOGIN_OUT]({ commit }: AugmentedActionContext): void
 }
 
-export const actions: ActionTree<IUserState, IRootState> & IActions = {
+export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
   /** 登录 */
-  async [UserActionTypes.ACTION_LOGIN](
-    { commit }: AugmentedActionContext,
-    userinfo: ILogin
-  ) {
+  async [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin) {
     const { username, password } = userinfo
     username.trim()
 
@@ -49,36 +40,22 @@ export const actions: ActionTree<IUserState, IRootState> & IActions = {
       password,
     })
       .then((data: any) => {
-        // 设置cookie
-        setToken(data.access_token)
-        commit(UserMutationTypes.SET_TOKEN, data.access_token)
+        console.log('data:', data)
+        setToken(data.accessToken)
+        commit(UserMutationTypes.SET_TOKEN, data.accessToken)
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
       })
   },
 
-  /** 重置token */
-  [UserActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext) {
-    // 清理cookie
-    removeToken()
-    commit(UserMutationTypes.SET_TOKEN, '')
-  },
-
-  async [UserActionTypes.ACTION_GET_USER_INFO]({
-    commit,
-  }: AugmentedActionContext) {
+  async [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext) {
     const store = useStore()
     const userId = store.state.user.userinfo?.id
     await userInfoRequest(userId)
       .then((data: any) => {
-        console.log('data:', data)
         commit(UserMutationTypes.SET_ROLES, ['admin'])
         commit(UserMutationTypes.SET_USER_INFO, data)
-        commit(UserMutationTypes.SET_USER_NAME, data.username)
-        commit(UserMutationTypes.SET_AVATAR, data.avatar)
-        commit(UserMutationTypes.SET_EMAIL, data.email)
-        commit(UserMutationTypes.SET_INTRODUCE, data.introduce)
         return data
       })
       .catch(() => {
@@ -86,26 +63,10 @@ export const actions: ActionTree<IUserState, IRootState> & IActions = {
       })
   },
 
-  async [UserActionTypes.ACTION_CHANGE_ROLES](
-    { commit }: AugmentedActionContext,
-    role: string
-  ) {
-    const token = role + '-token'
-    const store = useStore()
-    commit(UserMutationTypes.SET_TOKEN, token)
-    setToken(token)
-    await store.dispatch(UserActionTypes.ACTION_GET_USER_INFO, undefined)
-    store.dispatch(PermissionActionTypes.ACTION_SET_ROUTES, state.roles)
-    store.state.permission.dynamicRoutes.forEach((item: RouteRecordRaw) => {
-      router.addRoute(item)
-    })
-  },
-
-  [UserActionTypes.ACTION_LOGIN_OUT]({ commit }: AugmentedActionContext) {
-    console.log(commit)
+  [UserActionTypes.ACTION_LOGIN_OUT]({ commit }) {
     removeToken()
-    commit(UserMutationTypes.SET_TOKEN, '')
-    commit(UserMutationTypes.SET_ROLES, [])
+    // commit(UserMutationTypes.SET_TOKEN, '')
+    // commit(UserMutationTypes.SET_ROLES, [])
     resetRouter()
   },
 }

@@ -36,6 +36,28 @@ export interface IPost {
   >
 }
 
+export interface IMeta {
+  icon: string
+  title: string
+  name?: string
+  hidden?: boolean
+  affix?: boolean
+}
+export interface IRouter {
+  path: string
+  fullPath: string
+  redirect?: string
+  name?: string
+  meta?: IMeta
+  component: any
+  children: IRouter[]
+}
+
+export interface ITagView {
+  meta: IMeta
+  path: string
+}
+
 export interface ISelectItem {
   label: string
   value: string

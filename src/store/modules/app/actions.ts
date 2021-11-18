@@ -5,7 +5,6 @@ import { Mutations } from './mutations'
 import { AppMutationTypes } from './mutation-types'
 import { AppActionTypes } from './action-types'
 
-// 参数校验
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
     key: K,
@@ -20,7 +19,6 @@ export interface IActions {
   ): void
 }
 
-// 提交action
 export const actions: ActionTree<IAppState, IRootState> & IActions = {
   [AppActionTypes.ACTION_TOGGLE_SIDEBAR](
     { commit },

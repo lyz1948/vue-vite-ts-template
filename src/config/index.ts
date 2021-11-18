@@ -10,5 +10,5 @@ export const PageDefault = {
 }
 
 export const App = {
-  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:6000/api' : '/api',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/api',
 }

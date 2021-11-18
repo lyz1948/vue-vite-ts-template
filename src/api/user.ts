@@ -10,7 +10,7 @@ const getBanner = async () => {
 
 // 用户登录
 export const loginRequest = async (params: ILoginClient) => {
-  return await request.post<string>(httpUrl.login, qs.stringify(params))
+  return await request.post<string>(httpUrl.login, params)
 }
 
 export const userInfoRequest = async (userId: number | string) => {

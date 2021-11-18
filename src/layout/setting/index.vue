@@ -45,6 +45,7 @@ const changeTagView = (val: boolean) => {
 }
 
 const changeMenuMode = (item: ISelectItem) => {
+  console.log('item.value:', item.value)
   store.dispatch(SettingActionTypes.ACTION_MENU_MODE, item.value)
 }
 
@@ -81,10 +82,6 @@ watch(
     <div class="setting-item">
       <span class="label">Fix TagView</span>
       <el-switch v-model="getFixTagVal" @change="changeTagView" />
-    </div>
-
-    <div class="setting-foot">
-      <el-button @click="handleClose"> Close </el-button>
     </div>
   </el-drawer>
 </template>

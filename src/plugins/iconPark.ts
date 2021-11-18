@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-// iconpark
 import {
   User,
   Lock,
@@ -20,8 +19,7 @@ import {
   AllApplication,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
-// el-icon
-// 所需的组件
+
 export const components = [
   User,
   Lock,
@@ -43,10 +41,9 @@ export const components = [
 ]
 
 import SvgIcon from '@/components/SvgIcon/index.vue'
-// 注册
 export default (app: ReturnType<typeof createApp>) => {
   app.component('svg-icon', SvgIcon)
-  components.forEach(component => {
+  components.forEach((component) => {
     if (~component.name.indexOf('icon-')) {
       app.component(component.name.replace('icon-', ''), component)
     }
