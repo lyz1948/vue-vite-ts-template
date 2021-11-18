@@ -55,6 +55,7 @@ const handleCommand = (command: Command) => {
   line-height: $base-head-menu-height;
   .name {
     margin-left: 5px;
+    text-align: right;
   }
 }
 </style>

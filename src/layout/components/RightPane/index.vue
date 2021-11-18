@@ -94,7 +94,7 @@ const showSetting = () => {
   display: flex;
   line-height: $base-head-menu-height;
   .item {
-    margin-right: 15px;
+    margin-left: 15px;
     cursor: pointer;
   }
 }

@@ -183,7 +183,7 @@ watch(
     >
       <template #reference>
         <span class="more" :class="{ active: visible }" style="cursor: pointer">
-          <all-application theme="filled" size="18" :strokeWidth="3" />
+          <icon-all-application theme="filled" size="18" :strokeWidth="3" />
         </span>
       </template>
       <div

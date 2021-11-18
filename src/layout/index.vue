@@ -20,8 +20,8 @@ const isOpen = computed(() => {
 </script>
 
 <template>
-  <div :class="['layout', { 'is-horizonal': isHorizonal }]">
-    <div class="layout-sidebar" :class="{ 'is-collapse': !isOpen }">
+  <div :class="['layout', { 'is-horizonal': isHorizonal, 'is-collapse': !isOpen }]">
+    <div class="layout-sidebar">
       <div class="layout-sidebar-wrapper">
         <VLogo />
         <VSidebar />
@@ -44,11 +44,27 @@ const isOpen = computed(() => {
 .layout {
   display: flex;
 
+  // 左右布局侧栏收起
+  &.is-collapse {
+    .layout-sidebar {
+      width: $base-unfold-width;
+    }
+    .layout-body {
+      width: calc(100vw - $base-unfold-width);
+    }
+  }
+
+  // 上下布局
   &.is-horizonal {
     flex-direction: column;
     .layout-body {
+      width: 100%;
       &-wrapper {
         padding: 0 100px;
+
+        .tabs-bar-container {
+          padding: 0;
+        }
       }
 
       .layout-main {
@@ -56,16 +72,10 @@ const isOpen = computed(() => {
       }
     }
 
-    .sidebar-container {
-      display: flex;
-
-      .el-menu--horizontal {
-        border-bottom: none !important;
-      }
-    }
     .layout-sidebar {
       display: flex;
       justify-content: center;
+      width: 100%;
       min-height: auto;
       border-right: none;
       border-bottom: 1px solid #f6f6f6;
@@ -76,6 +86,15 @@ const isOpen = computed(() => {
         width: 100%;
         min-height: auto;
         border-right: none;
+
+        .sidebar-container {
+          display: flex;
+          padding: 0 20px;
+
+          .el-menu--horizontal {
+            border-bottom: none !important;
+          }
+        }
       }
     }
   }
@@ -83,23 +102,19 @@ const isOpen = computed(() => {
   .layout-sidebar {
     min-height: 100vh;
     width: $base-menu-width;
-    flex: 0 0 $base-menu-width;
     border-right: 1px solid #e1e2e7;
-    &.is-collapse {
-      width: $base-unfold-width;
-      flex: 0 0 $base-unfold-width;
-    }
+    // .layout-sidebar-wrapper {
+    //   min-height: 100vh;
+    // }
   }
 
   .layout-body {
-    background-color: #fff;
-    flex: 1;
+    width: calc(100vw - $base-menu-width);
 
     .layout-main {
       padding: 20px;
       min-height: calc(100vh - $base-head-menu-height - $base-tabs-bar-height);
       background-color: $base-content-bg-color;
-      box-sizing: border-box;
     }
   }
 }
