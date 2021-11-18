@@ -17,6 +17,10 @@ import {
   Dashboard,
   Mail,
   AllApplication,
+  Close,
+  Minus,
+  ToLeft,
+  ToRight,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 
@@ -38,6 +42,11 @@ export const components = [
   Dashboard,
   Mail,
   AllApplication,
+  Close,
+  Refresh,
+  ToLeft,
+  ToRight,
+  Minus,
 ]
 
 import SvgIcon from '@/components/SvgIcon/index.vue'

@@ -24,27 +24,27 @@ const commandList: Array<ICommand> = [
   {
     command: SettingActionTypes.ACTION_MENU_REFRESH,
     text: '刷新',
-    icon: 'refresh',
+    icon: 'icon-refresh',
   },
   {
     command: TagsActionTypes.ACTION_DEL_OTHER_VIEW,
     text: '关闭其他',
-    icon: 'close',
+    icon: 'icon-close',
   },
   {
     command: TagsActionTypes.ACTION_DEL_LEFT_VIEWS,
     text: '关闭左侧',
-    icon: 'to-left',
+    icon: 'icon-to-left',
   },
   {
     command: TagsActionTypes.ACTION_DEL_RIGHT_VIEWS,
     text: '关闭右侧',
-    icon: 'to-right',
+    icon: 'icon-to-right',
   },
   {
     command: TagsActionTypes.ACTION_DEL_ALL_VIEWS,
     text: '关闭所有',
-    icon: 'minus',
+    icon: 'icon-minus',
   },
 ]
 

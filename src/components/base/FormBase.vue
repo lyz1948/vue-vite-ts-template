@@ -18,7 +18,7 @@ export interface MyFormExpose {
 const props = defineProps({
   form: {
     type: Object,
-    required: true,
+    default: () => [],
   },
 
   rules: {

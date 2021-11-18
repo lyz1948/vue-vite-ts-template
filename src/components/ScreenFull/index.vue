@@ -6,12 +6,12 @@ import { ElMessage } from 'element-plus'
 defineProps({
   icon: {
     type: String,
-    default: 'full-screen-one'
+    default: 'icon-full-screen-one',
   },
   color: {
     type: String,
-    default: '#666'
-  }
+    default: '#666',
+  },
 })
 
 const handleScreenFull = () => {
@@ -25,18 +25,9 @@ const handleScreenFull = () => {
 </script>
 
 <template>
-  <div
-    class="screen-full"
-    @click="handleScreenFull"
-  >
+  <div class="screen-full" @click="handleScreenFull">
     <el-link>
-      <component
-        title="fullscreen"
-        theme="outline"
-        size="16"
-        :stroke-width="4"
-        :is="icon"
-      />
+      <component title="fullscreen" theme="outline" size="16" :stroke-width="4" :is="icon" />
     </el-link>
   </div>
 </template>

@@ -14,11 +14,11 @@ const state = reactive({
 
 const fetchData = () => {}
 
-const handlePage = page => {
+const handlePage = (page) => {
   console.log('pageNum, pageSize:', page)
 }
 
-const changeVal = val => {
+const changeVal = (val) => {
   searchVal.value = val
 }
 
@@ -55,18 +55,10 @@ onBeforeMount(() => {
       <template #headerHandler>
         <FormBase :inline="true">
           <FormItemBase label="姓名">
-            <InputBase
-              :value="searchVal"
-              tip="搜索：角色名称"
-              @change="changeVal"
-            />
+            <InputBase :value="searchVal" tip="搜索：角色名称" @change="changeVal" />
           </FormItemBase>
           <FormItemBase label="账号">
-            <InputBase
-              :value="searchVal"
-              tip="搜索：账号"
-              @change="changeVal"
-            />
+            <InputBase :value="searchVal" tip="搜索：账号" @change="changeVal" />
           </FormItemBase>
         </FormBase>
         <BtnBase type="search" />

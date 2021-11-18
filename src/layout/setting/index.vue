@@ -59,31 +59,32 @@ watch(
 </script>
 
 <template>
-  <el-drawer
-    v-model="visible"
-    class="setting"
-    title="System Setting"
-    size="500px"
-    :direction="direction"
-    :before-close="handleClose"
-  >
-    <div class="setting-item">
-      <span class="label">Menu Mode</span>
-      <SelectMode @on:select="changeMenuMode" />
-    </div>
-    <div class="setting-item">
-      <span class="label">Site Theme</span>
-      <ThemeColor />
-    </div>
-    <div class="setting-item">
-      <span class="label">Fix Header</span>
-      <el-switch v-model="getFixHeadVal" @change="changFixHead" />
-    </div>
-    <div class="setting-item">
-      <span class="label">Fix TagView</span>
-      <el-switch v-model="getFixTagVal" @change="changeTagView" />
-    </div>
-  </el-drawer>
+  <div class="setting">
+    <el-drawer
+      v-model="visible"
+      title="System Setting"
+      size="500px"
+      :direction="direction"
+      :before-close="handleClose"
+    >
+      <div class="setting-item">
+        <span class="label">Menu Mode</span>
+        <SelectMode @on:select="changeMenuMode" />
+      </div>
+      <div class="setting-item">
+        <span class="label">Site Theme</span>
+        <ThemeColor />
+      </div>
+      <div class="setting-item">
+        <span class="label">Fix Header</span>
+        <el-switch v-model="getFixHeadVal" @change="changFixHead" />
+      </div>
+      <div class="setting-item">
+        <span class="label">Fix TagView</span>
+        <el-switch v-model="getFixTagVal" @change="changeTagView" />
+      </div>
+    </el-drawer>
+  </div>
 </template>
 
 <style lang="scss" scoped>

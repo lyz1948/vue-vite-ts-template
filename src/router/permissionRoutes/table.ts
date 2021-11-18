@@ -1,11 +1,12 @@
 import { RouteRecordRaw } from 'vue-router'
+import { markRaw } from 'vue'
 import Layout from '@/layout/index.vue'
 
 const tableRouter: RouteRecordRaw[] = [
   {
     path: '/table',
     name: 'Table',
-    component: Layout,
+    component: markRaw(Layout),
     redirect: '/table/complex-table',
     meta: {
       title: 'table',

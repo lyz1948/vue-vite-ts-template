@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
+import { markRaw } from 'vue'
 
 // 常规路由
 const constantRouteFiles = import.meta.globEager('./constantRoutes/*.ts')
@@ -22,7 +23,7 @@ export const permissionRoutes: Array<RouteRecordRaw> = [...asyncModules]
 export const constantRoutes: Array<RouteRecordRaw> = [
   {
     path: '/redirect',
-    component: Layout,
+    component: markRaw(Layout),
     meta: { hidden: true },
     children: [
       {
@@ -33,7 +34,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
-    component: Layout,
+    component: markRaw(Layout),
     redirect: '/dashboard',
     children: [
       {

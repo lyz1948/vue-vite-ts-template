@@ -21,14 +21,6 @@ const props = defineProps({
     type: String,
     default: 'yesNo',
   },
-  vertical: {
-    type: Boolean,
-    default: false,
-  },
-  isRequire: {
-    type: Boolean,
-    default: false,
-  },
   value: {
     type: String,
     default: '',
@@ -53,7 +45,7 @@ const handleChange = (val: string) => {
 const lazyLoad = () => {
   if (!isFirst.value) return
   isFirst.value = false
-  state.tempData = props.list.length > 0 ? props.list : (SELECTOR[props.type as SelectProps] as any)
+  state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type as SelectProps]
 }
 
 watch(

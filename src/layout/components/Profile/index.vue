@@ -33,7 +33,7 @@ const handleCommand = (command: Command) => {
     <el-dropdown @command="handleCommand">
       <el-link type="primary" class="name">
         <span class="mr5">张三</span>
-        <down class="icon-hover down" size="16" />
+        <icon-down class="icon-hover down" size="16" />
       </el-link>
       <template #dropdown>
         <el-dropdown-menu>
@@ -55,7 +55,6 @@ const handleCommand = (command: Command) => {
   line-height: $base-head-menu-height;
   .name {
     margin-left: 5px;
-    text-align: right;
   }
 }
 </style>

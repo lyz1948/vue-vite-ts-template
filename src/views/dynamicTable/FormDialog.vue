@@ -2,22 +2,22 @@
 import { ref, reactive } from 'vue'
 import Tips from '@/utils/useMessage'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
-import FormBase from '@/components/base/FormBase.vue'
 import { ISelectItem } from '@/types'
 
 const visibleDialog = ref(false)
 const title = '新增角色'
 
 const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
+const formState = () => ({
+  name: '',
+  remarks: '',
+  auditRole: '', // 角色名字
+  singleGroupAuditRole: '', //  角色id
+  showCustomerInfo: true,
+  isEnable: true,
+})
 const state = reactive({
-  form: {
-    name: '',
-    remarks: '',
-    auditRole: '', // 角色名字
-    singleGroupAuditRole: '', //  角色id
-    showCustomerInfo: true,
-    isEnable: true,
-  },
+  form: formState(),
   loading: false,
   rules: {
     name: [{ required: true, message: '名字不能为空', trigger: 'blur' }],
@@ -31,6 +31,11 @@ const changeRole = (val: ISelectItem) => {
 
 const show = () => {
   visibleDialog.value = true
+}
+
+const hide = () => {
+  visibleDialog.value = false
+  state.form = formState()
 }
 
 const edit = (row: any) => {

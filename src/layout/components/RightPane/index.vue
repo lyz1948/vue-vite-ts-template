@@ -52,7 +52,7 @@ const showSetting = () => {
     </div>
 
     <div class="item">
-      <ScreenFull icon="full-screen-one" />
+      <ScreenFull />
     </div>
 
     <div class="item">
