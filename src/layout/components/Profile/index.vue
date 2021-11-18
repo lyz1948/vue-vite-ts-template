@@ -38,7 +38,7 @@ const handleCommand = (command: Command) => {
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="outLogin">
-            <logout class="icon-hover logout mr5" title="logout" />
+            <icon-logout class="icon-hover logout mr5" title="logout" />
             退出
           </el-dropdown-item>
         </el-dropdown-menu>

@@ -44,8 +44,6 @@ import SvgIcon from '@/components/SvgIcon/index.vue'
 export default (app: ReturnType<typeof createApp>) => {
   app.component('svg-icon', SvgIcon)
   components.forEach((component) => {
-    if (~component.name.indexOf('icon-')) {
-      app.component(component.name.replace('icon-', ''), component)
-    }
+    app.component(component.name, component)
   })
 }

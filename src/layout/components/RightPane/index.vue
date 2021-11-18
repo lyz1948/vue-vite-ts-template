@@ -28,7 +28,7 @@ const showSetting = () => {
       <el-dropdown trigger="click">
         <el-badge :value="12" class="badge">
           <el-link>
-            <remind
+            <icon-remind
               class="remind"
               title="remind"
               theme="outline"
@@ -57,7 +57,7 @@ const showSetting = () => {
 
     <div class="item">
       <el-link>
-        <refresh
+        <icon-refresh
           class="refresh"
           title="refresh"
           theme="outline"
@@ -70,7 +70,7 @@ const showSetting = () => {
 
     <div class="item">
       <el-link>
-        <setting
+        <icon-setting
           class="setting"
           title="setting"
           theme="outline"

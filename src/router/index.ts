@@ -27,10 +27,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () =>
-          import(
-            /* webpackChunkName: "redirect" */ '@/views/redirect/index.vue'
-          ),
+        component: () => import(/* webpackChunkName: "redirect" */ '@/views/redirect/index.vue'),
       },
     ],
   },
@@ -41,14 +38,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/dashboard',
-        component: () =>
-          import(
-            /* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'
-          ),
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
         name: 'Dashboard',
         meta: {
           title: 'dashboard',
-          icon: 'home',
+          icon: 'icon-home',
           affix: true,
         },
       },
