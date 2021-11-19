@@ -136,8 +136,9 @@ const handleHide = () => {}
 
 watch(
   () => currentRoute.name,
-  (val) => {
-    if (val?.toLowerCase() != 'login') {
+  () => {
+    console.log('currentRoute.name:', currentRoute.name)
+    if (currentRoute.name != 'Login') {
       initTabs()
       addTabs()
 

@@ -43,7 +43,6 @@ export const components = [
   Mail,
   AllApplication,
   Close,
-  Refresh,
   ToLeft,
   ToRight,
   Minus,

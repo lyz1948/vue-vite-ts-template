@@ -25,32 +25,35 @@ const state = reactive({
   },
 })
 
-const userLogin = async (loginState: ILogin) => {
-  return await store.dispatch(UserActionTypes.ACTION_LOGIN, loginState)
+const userLogin = (loginState: ILogin) => {
+  state.valid = true
+  state.loading = true
+  store
+    .dispatch(UserActionTypes.ACTION_LOGIN, loginState)
+    .then(() => {
+      const routerPath: RouteRecordRaw | any =
+        state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
+      console.log('routerPath:', routerPath)
+      router.push(routerPath).catch(() => {})
+      state.loading = false
+    })
+    .catch(() => {
+      state.loading = false
+    })
 }
 
-const handleLogin = () => {
+const handleLogin = async () => {
   const isValid = validateForm.value?.validate()
 
   if (isValid) {
-    state.valid = true
-    state.loading = true
-    userLogin(state.ruleForm)
-      .then(() => {
-        const routerPath: RouteRecordRaw | any =
-          state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
-        router.push(routerPath).catch(() => {})
-        state.loading = false
-      })
-      .catch(() => {
-        state.loading = false
-      })
+    await userLogin(state.ruleForm)
   }
 }
 
 watch(
   () => router.currentRoute.value,
   (route) => {
+    console.log('route:', route)
     state.redirect = ((route.query && route.query.redirect) || '/') as string
   }
 )
@@ -61,7 +64,7 @@ watch(
     <FormItemBase prop="username">
       <el-input placeholder="用户名" v-model="state.ruleForm.username">
         <template #prefix>
-          <user theme="outline" size="16" fill="#999" />
+          <icon-user theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
     </FormItemBase>
@@ -73,7 +76,7 @@ watch(
         v-model="state.ruleForm.password"
       >
         <template #prefix>
-          <lock theme="outline" size="16" fill="#999" />
+          <icon-lock theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
     </FormItemBase>

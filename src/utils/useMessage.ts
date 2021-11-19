@@ -36,7 +36,7 @@ const confirm = (
       cancelButtonText: 'Cancel',
       type: 'warning',
     })
-      .then(() => resolve)
+      .then(resolve)
       .catch(() => {
         console.log('cancel')
         reject()

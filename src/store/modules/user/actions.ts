@@ -30,23 +30,18 @@ export interface IUserActions {
 }
 
 export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
-  /** 登录 */
-  async [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin) {
+  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin) {
     const { username, password } = userinfo
     username.trim()
 
-    await loginRequest({
+    loginRequest({
       username,
       password,
+    }).then((data) => {
+      setToken(data.accessToken)
+      commit(UserMutationTypes.SET_TOKEN, data.accessToken)
+      return data
     })
-      .then((data: any) => {
-        console.log('data:', data)
-        setToken(data.accessToken)
-        commit(UserMutationTypes.SET_TOKEN, data.accessToken)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
   },
 
   async [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext) {
@@ -65,8 +60,8 @@ export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
 
   [UserActionTypes.ACTION_LOGIN_OUT]({ commit }) {
     removeToken()
-    // commit(UserMutationTypes.SET_TOKEN, '')
-    // commit(UserMutationTypes.SET_ROLES, [])
+    commit(UserMutationTypes.SET_TOKEN, '')
+    commit(UserMutationTypes.SET_ROLES, [])
     resetRouter()
   },
 }

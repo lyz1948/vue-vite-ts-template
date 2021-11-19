@@ -27,15 +27,15 @@ const isOpen = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  // width: $base-logo-width;
   height: $base-logo-height;
 
   &-image {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
   }
   &-text {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 </style>

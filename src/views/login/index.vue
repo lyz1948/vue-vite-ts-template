@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-
+import VLogo from '@/layout/logo.vue'
 import LoginForm from './LoginForm.vue'
 
 const activeName = ref('first')
@@ -8,7 +8,7 @@ const isMobile = computed(() => {
   return false
 })
 
-const handleClick = val => {
+const handleClick = (val) => {
   console.log(val)
 }
 </script>
@@ -16,23 +16,14 @@ const handleClick = val => {
 <template>
   <div class="login-container">
     <el-header class="header">
-      <Logo class="logo" />
+      <VLogo class="logo" />
     </el-header>
     <div class="login-box">
       <div class="login-side hidden-sm-and-down" />
-      <div
-        class="login-form"
-        :class="{ 'is-mobile': isMobile }"
-      >
+      <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
-          <el-tabs
-            v-model="activeName"
-            @tab-click="handleClick"
-          >
-            <el-tab-pane
-              label="登录"
-              name="first"
-            >
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="登录" name="first">
               <LoginForm />
             </el-tab-pane>
             <!-- <el-tab-pane label="注册" name="second">
@@ -67,6 +58,7 @@ $white: #fff;
     display: flex;
     width: 100%;
     height: 100vh;
+    padding-top: 100px;
     overflow: hidden;
     background-color: $dark-bg-color;
     .login-side {
@@ -106,7 +98,7 @@ $white: #fff;
       align-items: center;
       justify-content: center;
       width: 50vw;
-      height: 80vh;
+      height: 60vh;
       .form-warp {
         width: 400px;
         padding: 1rem 3rem 0 3rem;

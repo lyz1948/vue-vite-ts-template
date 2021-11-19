@@ -14,8 +14,8 @@ const store = useStore()
 const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
 
 const outLogin = () => {
-  Tip.confirm().then(() => {
-    store.dispatch(UserActionTypes.ACTION_LOGIN_OUT, undefined)
+  Tip.confirm().then(async () => {
+    await store.dispatch(UserActionTypes.ACTION_LOGIN_OUT, undefined)
     router.push('/login')
   })
 }

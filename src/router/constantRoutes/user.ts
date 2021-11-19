@@ -5,7 +5,7 @@ const userRoutes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
-    name: 'login',
+    name: 'Login',
     meta: {
       title: '登录',
       hidden: true,
