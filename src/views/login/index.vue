@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from '@/store'
 import VLogo from '@/layout/logo.vue'
 import LoginForm from './LoginForm.vue'
 
+const store = useStore()
+const router = useRouter()
 const activeName = ref('first')
 const isMobile = computed(() => {
   return false
@@ -11,6 +15,22 @@ const isMobile = computed(() => {
 const handleClick = (val) => {
   console.log(val)
 }
+
+watch(
+  () => router.currentRoute.value,
+  (route) => {
+    const redirect = ((route.query && route.query.redirect) || '/') as string
+    console.log('redirect:', redirect)
+    nextTick().then(() => {
+      setTimeout(() => {
+        if (store.state.user.token) {
+          router.push(redirect)
+        }
+      }, 500)
+    })
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

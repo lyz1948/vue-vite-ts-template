@@ -26,6 +26,7 @@ type NoAugmentedActionContext = {
 export interface IUserActions {
   [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin): void
   [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext): void
+  [UserActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_LOGIN_OUT]({ commit }: AugmentedActionContext): void
 }
 
@@ -56,6 +57,10 @@ export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
       .catch(() => {
         throw Error('获取用户信息失败，请重新登录！')
       })
+  },
+
+  [UserActionTypes.ACTION_RESET_TOKEN]({ commit }) {
+    removeToken()
   },
 
   [UserActionTypes.ACTION_LOGIN_OUT]({ commit }) {

@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref, watch, unref, onMounted } from 'vue'
 import { useStore } from '@/store'
-import { RouteRecordRaw, useRouter } from 'vue-router'
+import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import { ILogin } from '@/types'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { ElForm } from 'element-plus'
 
 const store = useStore()
 const router = useRouter()
+const currentRouter = useRoute()
 const validateForm = ref<InstanceType<typeof ElForm>>()
 
 const state = reactive({
@@ -33,8 +34,8 @@ const userLogin = (loginState: ILogin) => {
     .then(() => {
       const routerPath: RouteRecordRaw | any =
         state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
-      console.log('routerPath:', routerPath)
-      router.push(routerPath).catch(() => {})
+
+      router.push({ path: routerPath }).catch(() => {})
       state.loading = false
     })
     .catch(() => {
@@ -53,9 +54,9 @@ const handleLogin = async () => {
 watch(
   () => router.currentRoute.value,
   (route) => {
-    console.log('route:', route)
     state.redirect = ((route.query && route.query.redirect) || '/') as string
-  }
+  },
+  { immediate: true }
 )
 </script>
 
