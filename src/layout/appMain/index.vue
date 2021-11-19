@@ -17,11 +17,10 @@ const visibleRoute = computed(() => {
 
 <template>
   <section class="app-main">
-    <!-- <router-view /> -->
     <router-view v-if="visibleRoute" v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
-          <component :is="Component" :key="key" />
+          <component :is="Component" />
         </keep-alive>
       </transition>
     </router-view>

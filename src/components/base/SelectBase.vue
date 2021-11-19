@@ -57,14 +57,12 @@ watch(
 </script>
 
 <template>
-  <div class="select-base" :class="{ vertical: vertical }">
-    <el-select :model-value="value" :placeholder="tip" @focus="lazyLoad" @change="handleChange">
-      <el-option
-        v-for="(item, index) in state.tempData"
-        :key="item.value + '' + index"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-  </div>
+  <el-select :model-value="value" :placeholder="tip" @focus="lazyLoad" @change="handleChange">
+    <el-option
+      v-for="(item, index) in state.tempData"
+      :key="item.value + '' + index"
+      :label="item.label"
+      :value="item.value"
+    />
+  </el-select>
 </template>

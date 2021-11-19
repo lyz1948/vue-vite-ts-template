@@ -45,7 +45,6 @@ const changeTagView = (val: boolean) => {
 }
 
 const changeMenuMode = (item: ISelectItem) => {
-  console.log('item.value:', item.value)
   store.dispatch(SettingActionTypes.ACTION_MENU_MODE, item.value)
 }
 
@@ -69,7 +68,7 @@ watch(
     >
       <div class="setting-item">
         <span class="label">Menu Mode</span>
-        <SelectMode @on:select="changeMenuMode" />
+        <SelectMode />
       </div>
       <div class="setting-item">
         <span class="label">Site Theme</span>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import Select from '@/components/Select/index.vue'
 import { reactive, ref } from 'vue'
-import { themeColorOpts } from './data'
+import { themeColorOpts } from '@/config/setting'
 
 const state = reactive({
   color: '',
   customerColor: '',
-  curIndex: 0
+  curIndex: 0,
 })
 
 const colorOptList = ref(themeColorOpts)
@@ -16,7 +16,7 @@ const selectColor = (val, index) => {
   state.curIndex = index
 }
 
-const chooseColor = val => {
+const chooseColor = (val) => {
   state.customerColor = val
 }
 </script>
@@ -30,10 +30,7 @@ const chooseColor = val => {
       :class="index === state.curIndex ? 'is-active' : ''"
       @click="selectColor(item, index)"
     />
-    <el-color-picker
-      v-model="state.customerColor"
-      @change="chooseColor"
-    />
+    <el-color-picker v-model="state.customerColor" @change="chooseColor" />
   </div>
 </template>
 

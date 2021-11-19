@@ -1,8 +1,15 @@
-export const config = {
-  base: './',
-  host: '0.0.0.0',
-  port: 5000
-}
+export const modeOpts = [
+  {
+    value: 'vertical',
+    label: 'Vertical',
+  },
+  {
+    value: 'horizontal',
+    label: 'Horizontal',
+  },
+]
+
+export const themeColorOpts = ['#43a9be', '#f85f47', '#fb748b', '#6273d9', '#409EFF', '#f5222d']
 
 const themeOptions = {
   theme1: { menuBgColor: '#ffffff', primary: '#7e9cff' },
@@ -10,7 +17,7 @@ const themeOptions = {
   theme3: { menuBgColor: '#ffffff', primary: '#08a17e' },
   theme4: { menuBgColor: '#293246', primary: '#08a17e' },
   theme5: { menuBgColor: '#ffffff', primary: '#f45555' },
-  theme6: { menuBgColor: '#293246', primary: '#f45555' }
+  theme6: { menuBgColor: '#293246', primary: '#f45555' },
 }
 export const themeConfig = {
   // 模式 horizontal / vertical
@@ -36,5 +43,5 @@ export const themeConfig = {
   // 是否显示标签
   tag: true,
   // 是否展开菜单
-  collapse: false
+  collapse: false,
 }

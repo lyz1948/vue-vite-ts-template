@@ -20,6 +20,10 @@ const activeName = ref('first')
 const showSetting = () => {
   store.dispatch(SettingActionTypes.ACTION_TOGGLE_SETTING, true)
 }
+
+const handleRefresh = () => {
+  store.dispatch(SettingActionTypes.ACTION_MENU_REFRESH)
+}
 </script>
 
 <template>
@@ -64,6 +68,7 @@ const showSetting = () => {
           size="16"
           :stroke-width="4"
           :fill="color"
+          @click="handleRefresh"
         />
       </el-link>
     </div>

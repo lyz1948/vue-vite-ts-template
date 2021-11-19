@@ -1,3 +1,9 @@
+export const ServerConf = {
+  base: './',
+  host: '0.0.0.0',
+  port: 5000,
+}
+
 // 白名单
 export const RouteWhiteList = ['/login']
 

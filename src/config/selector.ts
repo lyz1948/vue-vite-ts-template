@@ -7,7 +7,7 @@ export const SELECTOR = {
   yesNo,
 
   auditRole: [
-    { value: 'op', label: '计调' },
+    { value: 'manage', label: '经理' },
     { value: 'financial', label: '财务' },
     { value: 'generalManager', label: '管理员' },
   ],

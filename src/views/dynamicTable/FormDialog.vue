@@ -73,12 +73,8 @@ defineExpose({
         <InputBase v-model:value="state.form.name" />
       </FormItemBase>
 
-      <FormItemBase prop="singleGroupAuditRole" label="单团审核角色">
-        <SelectBase
-          v-model:value="state.form.singleGroupAuditRole"
-          type="auditRole"
-          @on:select="changeRole"
-        />
+      <FormItemBase prop="auditRole" label="审核角色">
+        <SelectBase v-model:value="state.form.auditRole" type="auditRole" @on:select="changeRole" />
       </FormItemBase>
 
       <FormItemBase label="备注">
@@ -87,10 +83,6 @@ defineExpose({
 
       <FormItemBase label="启用状态">
         <SwitchBase v-model:value="state.form.isEnable" />
-      </FormItemBase>
-
-      <FormItemBase label="是否有权查看客户信息">
-        <SwitchBase v-model:value="state.form.showCustomerInfo" />
       </FormItemBase>
     </FormBase>
   </DialogBase>

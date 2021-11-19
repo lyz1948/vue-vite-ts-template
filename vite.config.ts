@@ -4,8 +4,8 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
-import { config } from './src/config/config'
-const { host, port } = config
+import { ServerConf } from './src/config'
+const { host, port } = ServerConf
 
 const isProd = process.env.NODE_ENV === 'production'
 // https://vitejs.dev/config/
