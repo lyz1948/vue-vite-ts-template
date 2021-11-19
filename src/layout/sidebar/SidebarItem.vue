@@ -103,6 +103,7 @@ const resolvePath = (routePath: string) => {
       &.is-active {
         border-right: none;
         border-bottom: 3px solid $base-color-primary-light1 !important;
+        background-color: transparent !important;
       }
     }
   }
