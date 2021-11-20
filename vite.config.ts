@@ -5,6 +5,9 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
 import { ServerConf } from './src/config'
+// 或者使用 unplugin-element-plus
+// import ElementPlus from 'unplugin-element-plus/vite'
+
 const { host, port } = ServerConf
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -46,4 +49,7 @@ export default defineConfig({
       },
     },
   },
+  // ElementPlus({
+  //   useSource: true,
+  // }),
 })

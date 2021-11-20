@@ -13,33 +13,14 @@ type AugmentedActionContext = {
 } & Omit<ActionContext<ISettingState, IRootState>, 'commit'>
 
 export interface IActions {
-  [SettingActionTypes.ACTION_TOGGLE_SETTING](
+  [SettingActionTypes.ACTION_UPDATE_SETTING](
     { commit }: AugmentedActionContext,
-    status: boolean
+    opts: { type: string; val: any }
   ): void
-  [SettingActionTypes.ACTION_FIX_HEADER]({ commit }: AugmentedActionContext, status: boolean): void
-  [SettingActionTypes.ACTION_FIX_TAGVIEW]({ commit }: AugmentedActionContext, status: boolean): void
-  [SettingActionTypes.ACTION_MENU_MODE]({ commit }: AugmentedActionContext, mode: string): void
-  [SettingActionTypes.ACTION_MENU_REFRESH]({ commit }: AugmentedActionContext): void
 }
 
 export const actions: ActionTree<ISettingState, IRootState> & IActions = {
-  [SettingActionTypes.ACTION_TOGGLE_SETTING]({ commit }, status: boolean) {
-    commit(SettingMutationTypes.TOGGLE_SETTING, status)
-  },
-  [SettingActionTypes.ACTION_FIX_HEADER]({ commit }, status: boolean) {
-    commit(SettingMutationTypes.FIX_HEADER, status)
-  },
-  [SettingActionTypes.ACTION_FIX_TAGVIEW]({ commit }, status: boolean) {
-    commit(SettingMutationTypes.FIX_TAGVIEW, status)
-  },
-  [SettingActionTypes.ACTION_MENU_MODE]({ commit }, mode: string) {
-    commit(SettingMutationTypes.MENU_MODE, mode)
-  },
-  [SettingActionTypes.ACTION_MENU_REFRESH]({ commit }) {
-    commit(SettingMutationTypes.MENU_REFRESH, false)
-    setTimeout(() => {
-      commit(SettingMutationTypes.MENU_REFRESH, true)
-    }, 20)
+  [SettingActionTypes.ACTION_UPDATE_SETTING]({ commit }, opts: { type: string; val: any }) {
+    commit(SettingMutationTypes.UPDATE_SETTING, opts)
   },
 }

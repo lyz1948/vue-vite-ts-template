@@ -18,11 +18,11 @@ const store = useStore()
 const activeName = ref('first')
 
 const showSetting = () => {
-  store.dispatch(SettingActionTypes.ACTION_TOGGLE_SETTING, true)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'setting', val: true })
 }
 
 const handleRefresh = () => {
-  store.dispatch(SettingActionTypes.ACTION_MENU_REFRESH)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'refresh', val: '' })
 }
 </script>
 

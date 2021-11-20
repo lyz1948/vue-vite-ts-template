@@ -5,13 +5,15 @@ export interface ISettingState {
   menuMode: string
   menuCollapse: boolean
   routerView: boolean
+  theme: string
 }
 
 export const state: ISettingState = {
-  visibleSetting: false,
-  fixHead: false,
-  fixTagView: false,
-  menuMode: 'horizontal', // vertical, horizontal
-  menuCollapse: false,
+  visibleSetting: false, // 设置面板
+  fixHead: false, // 固定header
+  fixTagView: false, // 固定tagview
+  menuMode: 'horizontal', // 菜单模式 vertical, horizontal
+  menuCollapse: false, // 当页面为左右布局时，菜单折叠状态
   routerView: true, // 是否显示路由
+  theme: '#43a9be', // 皮肤颜色
 }

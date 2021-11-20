@@ -2,9 +2,10 @@
 import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import SelectMode from './SelectMode.vue'
+// import SelectMode from './SelectMode.vue'
 import ThemeColor from './ThemeColor.vue'
 import { ISelectItem } from '@/types'
+import { modeOpts } from '@/config/setting'
 
 defineProps({
   direction: {
@@ -13,19 +14,24 @@ defineProps({
   },
 })
 
+const emit = defineEmits(['on:change'])
 const store = useStore()
+const modeOptList = ref(modeOpts)
+
 const state = reactive({
-  fixHeadVal: '',
-  fixTagVal: '',
+  fixHead: store.state.setting.fixHead,
+  fixTagView: store.state.setting.fixTagView,
+  visibleSetting: store.state.setting.visibleSetting,
 })
 const visible = ref(false)
+const modeVal = ref(store.state.setting.menuMode)
 
 const getFixHeadVal = computed(() => {
-  return store.state.setting.fixHead
+  return state.fixHead
 })
 
 const getFixTagVal = computed(() => {
-  return store.state.setting.fixTagView
+  return state.fixTagView
 })
 
 const settingStatus = computed(() => {
@@ -33,19 +39,23 @@ const settingStatus = computed(() => {
 })
 
 const handleClose = () => {
-  store.dispatch(SettingActionTypes.ACTION_TOGGLE_SETTING, false)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'setting', val: false })
 }
 
 const changFixHead = (val: boolean) => {
-  store.dispatch(SettingActionTypes.ACTION_FIX_HEADER, val)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'fixHead', val })
 }
 
 const changeTagView = (val: boolean) => {
-  store.dispatch(SettingActionTypes.ACTION_FIX_TAGVIEW, val)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'fixTagView', val })
 }
 
-const changeMenuMode = (item: ISelectItem) => {
-  store.dispatch(SettingActionTypes.ACTION_MENU_MODE, item.value)
+const changeMenuMode = ({ value }: ISelectItem) => {
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'menuMode', val: value })
+}
+
+const changeTheme = (val: string) => {
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'theme', val })
 }
 
 watch(
@@ -68,11 +78,12 @@ watch(
     >
       <div class="setting-item">
         <span class="label">Menu Mode</span>
-        <SelectMode />
+        <SelectBase :list="modeOptList" v-model:value="modeVal" @on:select="changeMenuMode" />
+        <!-- <SelectMode /> -->
       </div>
       <div class="setting-item">
         <span class="label">Site Theme</span>
-        <ThemeColor />
+        <ThemeColor @on:change="changeTheme" />
       </div>
       <div class="setting-item">
         <span class="label">Fix Header</span>
