@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'DialogBase',
 })
@@ -34,6 +34,8 @@ const props = defineProps({
   },
 })
 
+const visibleVal = ref(props.visible)
+
 const handleClose = () => {
   emit('update:visible', false)
 }
@@ -45,7 +47,7 @@ const handleConfirm = () => {
 </script>
 
 <template>
-  <el-dialog v-model="visible" :title="title" :width="width" :before-close="handleClose">
+  <el-dialog v-model="visibleVal" :title="title" :width="width" :before-close="handleClose">
     <slot />
 
     <template #footer>

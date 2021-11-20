@@ -1,12 +1,12 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  name: 'FormBase',
+})
 </script>
 
 <script setup lang="ts">
 import { ElForm } from 'element-plus'
-export default defineComponent({
-  name: 'FormBase',
-})
 
 type ELEForm = InstanceType<typeof ElForm>
 

@@ -1,12 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'TableBase',
+})
 </script>
 
 <script setup lang="ts">
 import { PageDefault } from '@/config'
-export default defineComponent({
-  name: 'TableBase',
-})
 
 const emit = defineEmits(['update:page'])
 const props = defineProps({

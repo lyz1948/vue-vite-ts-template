@@ -12,7 +12,7 @@ import { IPermission } from '@/types/auth'
 const emit = defineEmits(['on:click'])
 const props = defineProps({
   auth: {
-    type: String as IPermission,
+    type: String,
     default: 'edit',
   },
   delTip: {
@@ -50,12 +50,7 @@ const handleClick = () => {
         <BtnLinkBase v-permission="auth" :name="getAuthLabel" />
       </template>
     </el-popconfirm>
-    <BtnLinkBase
-      v-else
-      v-permission="auth"
-      :name="getAuthLabel"
-      @click="handleClick"
-    />
+    <BtnLinkBase v-else v-permission="auth" :name="getAuthLabel" @click="handleClick" />
   </span>
 </template>
 

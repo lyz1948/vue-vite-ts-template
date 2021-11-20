@@ -9,7 +9,6 @@ export default defineComponent({
 import { watch, ref, reactive } from 'vue'
 import { SELECTOR } from '@/config/selector'
 import { ISelectItem } from '@/types'
-import type { SelectProps } from '@/types'
 
 const emit = defineEmits(['on:select'])
 const props = defineProps({
@@ -45,7 +44,7 @@ const handleChange = (val: string) => {
 const lazyLoad = () => {
   if (!isFirst.value) return
   isFirst.value = false
-  state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type as SelectProps]
+  state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type]
 }
 
 watch(

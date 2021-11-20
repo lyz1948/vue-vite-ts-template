@@ -6,22 +6,15 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { IPermission } from '@/types/auth'
-
-const props = defineProps({
+defineProps({
   auth: {
-    type: String as IPermission,
+    type: String,
     default: 'create',
   },
   type: {
     type: String,
     default: 'create',
   },
-})
-
-const getAuthLabel = computed(() => {
-  return authMaps[props.auth]
 })
 </script>
 
