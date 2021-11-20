@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import SvgIcon from '@/components/SvgIcon/index.vue'
+
 import {
   User,
   Lock,
@@ -48,7 +50,6 @@ export const components = [
   Minus,
 ]
 
-import SvgIcon from '@/components/SvgIcon/index.vue'
 export default (app: ReturnType<typeof createApp>) => {
   app.component('svg-icon', SvgIcon)
   components.forEach((component) => {

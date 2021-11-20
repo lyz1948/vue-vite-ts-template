@@ -5,7 +5,6 @@ import { ISelectItem } from '@/types'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { modeOpts } from '@/config/setting'
 
-const emit = defineEmits(['on:change'])
 const store = useStore()
 const modeOptList = ref(modeOpts)
 const modeVal = ref(store.state.setting.menuMode)

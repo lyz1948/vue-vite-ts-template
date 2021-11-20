@@ -1,12 +1,11 @@
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'DialogBase',
 })
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 const emit = defineEmits(['update:visible', 'update:confirm'])
 const props = defineProps({
   visible: {

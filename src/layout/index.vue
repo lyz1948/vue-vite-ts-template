@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, markRaw, defineAsyncComponent } from 'vue'
+import { computed } from 'vue'
 import { useStore } from '@/store'
 import VLogo from './logo.vue'
 import VHeader from './header/index.vue'
@@ -7,13 +7,6 @@ import AppMain from './appMain/index.vue'
 import VSidebar from './sidebar/index.vue'
 import TagViews from './tagViews/index.vue'
 import RightPane from './components/RightPane/index.vue'
-
-// const VLogo = markRaw(defineAsyncComponent(() => import('./logo.vue')))
-// const VHeader = markRaw(defineAsyncComponent(() => import('./header/index.vue')))
-// const VSidebar = markRaw(defineAsyncComponent(() => import('./sidebar/index.vue')))
-// const TagViews = markRaw(defineAsyncComponent(() => import('./tagViews/index.vue')))
-// const AppMain = markRaw(defineAsyncComponent(() => import('./appMain/index.vue')))
-// const RightPane = markRaw(defineAsyncComponent(() => import('./components/RightPane/index.vue')))
 
 const store = useStore()
 

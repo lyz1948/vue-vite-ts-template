@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue'
 import Tips from '@/utils/useMessage'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
+import FormBase from '@/components/base/FormBase.vue'
 import { ISelectItem } from '@/types'
 
 const visibleDialog = ref(false)
@@ -53,7 +54,9 @@ const handleConfirm = async () => {
   saveOrUpdate()
 }
 
-const saveOrUpdate = () => {}
+const saveOrUpdate = () => {
+  hide()
+}
 
 defineExpose({
   show,

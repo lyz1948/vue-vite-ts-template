@@ -1,13 +1,12 @@
 <script lang="ts">
-import { defineComponent, nextTick, onBeforeMount, watch } from 'vue'
-export default defineComponent({
-  name: 'TableBase',
-})
+import { defineComponent } from 'vue'
 </script>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import { PageDefault } from '@/config'
+export default defineComponent({
+  name: 'TableBase',
+})
 
 const emit = defineEmits(['update:page'])
 const props = defineProps({

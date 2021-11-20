@@ -5,9 +5,6 @@ import Tip from '@/utils/useMessage'
 import { useStore } from '@/store/index'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 
-interface ICommand {
-  outLogin: () => void
-}
 type Command = 'outLogin'
 const router = useRouter()
 const store = useStore()
@@ -21,7 +18,7 @@ const outLogin = () => {
 }
 
 const handleCommand = (command: Command) => {
-  if (command == 'outLogin') {
+  if (command === 'outLogin') {
     outLogin()
   }
 }

@@ -1,12 +1,11 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'TagBase',
-})
+import { defineComponent, computed } from 'vue'
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+export default defineComponent({
+  name: 'TagBase',
+})
 const props = defineProps({
   name: {
     type: [String, Boolean],

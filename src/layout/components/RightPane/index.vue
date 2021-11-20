@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import { useStore } from '@/store'
 import { noticeList } from './data'
 import Profile from '../Profile/index.vue'

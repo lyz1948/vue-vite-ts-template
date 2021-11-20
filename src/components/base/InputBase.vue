@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'InputBase',
 })
@@ -7,7 +7,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 const emit = defineEmits(['update:value'])
-const props = defineProps({
+defineProps({
   vertical: {
     type: Boolean,
     default: false,

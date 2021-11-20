@@ -1,13 +1,12 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'FormBase',
-})
+import { defineComponent, ref } from 'vue'
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ElForm } from 'element-plus'
+export default defineComponent({
+  name: 'FormBase',
+})
 
 type ELEForm = InstanceType<typeof ElForm>
 
@@ -18,7 +17,7 @@ export interface MyFormExpose {
 const props = defineProps({
   form: {
     type: Object,
-    default: () => [],
+    default: () => {},
   },
 
   rules: {
