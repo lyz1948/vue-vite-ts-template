@@ -1,28 +1,15 @@
-// $base-color-primary: #7e9cff;
-// $--colors:
-// (
-//     'primary': (
-//         'base': $base-color-primary,
-//     ),
+$base-color-primary: #409eff;
+$--colors: 
+(
+    'primary': (
+        'base': $base-color-primary,
+    ),
+        
+);
 
-// );
-
-// @forward "element-plus/theme-chalk/src/common/var.scss" with (
-//   $colors: (
-//     "primary": (
-//       "base": green,
-//     ),
-//   ),
-// );
-$--color-primary: #7e9cff;
-// Icon font path, required
-$--font-path: '~element-plus/lib/theme-chalk/fonts';
-
-// Apply overrided variables in Element UI
-@import 'element-plus/theme-chalk/src/common/var.scss';
-
-// The :export directive is the magic sauce for webpack
-// https://mattferderer.com/use-sass-variables-in-typescript-and-javascript
-:export {
-  theme: $--color-primary;
-}
+@forward "element-plus/theme-chalk/src/common/var.scss" with
+  (
+    // do not use same name, it will override.
+    $colors: $--colors,
+    $button-padding-horizontal: ("default": 50px)
+  );

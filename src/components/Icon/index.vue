@@ -2,37 +2,37 @@
 defineProps({
   type: {
     type: String,
-    default: 'icon-park',
+    default: 'icon-park'
   },
   size: {
     type: String,
-    default: '14',
+    default: '14'
   },
   color: {
     type: String,
-    default: '#333',
+    default: '#333'
   },
   theme: {
     type: String,
-    default: 'outline',
+    default: 'outline'
   },
   strokeWidth: {
     type: Number,
-    default: 3,
+    default: 3
   },
   name: {
     type: String,
-    default: '',
+    default: ''
   },
   className: {
     type: String,
-    default: 'icon',
-  },
+    default: 'icon'
+  }
 })
 </script>
 
 <template>
-  <span class="icon-comp">
+  <div class="icon-comp">
     <i
       v-if="name.indexOf('el-icon') !== -1"
       :class="name"
@@ -50,7 +50,7 @@ defineProps({
     <el-icon v-if="type === 'el-icon'" :style="{ color, 'font-size': size + 'px' }">
       <component :is="name" />
     </el-icon>
-  </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>

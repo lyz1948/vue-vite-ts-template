@@ -15,15 +15,15 @@ const formState = () => ({
   auditRole: '', // 角色名字
   singleGroupAuditRole: '', //  角色id
   showCustomerInfo: true,
-  isEnable: true,
+  isEnable: true
 })
 const state = reactive({
   form: formState(),
   loading: false,
   rules: {
     name: [{ required: true, message: '名字不能为空', trigger: 'blur' }],
-    auditRole: [{ required: true, message: '角色不能为空', trigger: 'blur' }],
-  },
+    auditRole: [{ required: true, message: '角色不能为空', trigger: 'blur' }]
+  }
 })
 
 const changeRole = (val: ISelectItem) => {
@@ -44,6 +44,10 @@ const edit = (row: any) => {
   state.form = { ...row }
 }
 
+const saveOrUpdate = () => {
+  hide()
+}
+
 const handleConfirm = async () => {
   const valid = await formRef.value?.validate()
 
@@ -54,23 +58,14 @@ const handleConfirm = async () => {
   saveOrUpdate()
 }
 
-const saveOrUpdate = () => {
-  hide()
-}
-
 defineExpose({
   show,
-  edit,
+  edit
 })
 </script>
 
 <template>
-  <DialogBase
-    :title="title"
-    :visible="visibleDialog"
-    @update:visible="visibleDialog = $event"
-    @update:confirm="handleConfirm"
-  >
+  <DialogBase :title="title" :visible="visibleDialog" @update:visible="visibleDialog = $event" @update:confirm="handleConfirm">
     <FormBase ref="formRef" :form="state.form" :rules="state.rules" label-width="160px">
       <FormItemBase prop="name" label="角色名称">
         <InputBase v-model:value="state.form.name" />

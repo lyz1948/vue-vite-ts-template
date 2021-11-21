@@ -9,10 +9,8 @@ const dialogRef = ref(null)
 const searchVal = ref('')
 const state = reactive({
   tableData: [],
-  total: 0,
+  total: 0
 })
-
-const fetchData = () => {}
 
 const handlePage = (page) => {
   console.log('pageNum, pageSize:', page)
@@ -33,21 +31,12 @@ const handleUpdate = (row: any) => {
 const handleDelete = (row: any) => {
   console.log('row', row)
 }
-
-onBeforeMount(() => {
-  fetchData()
-})
 </script>
 
 <template>
   <div>
     <FormDialog ref="dialogRef" />
-    <TableBase
-      :data="state.tableData"
-      :columns="RoleColumn"
-      :totalCount="state.total"
-      @update:page="handlePage"
-    >
+    <TableBase :data="state.tableData" :columns="RoleColumn" :totalCount="state.total" @update:page="handlePage">
       <template #title>
         <h3>{{ TABLE_TITLE }}</h3>
       </template>

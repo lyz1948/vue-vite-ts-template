@@ -103,6 +103,8 @@ const isOpen = computed(() => {
     min-height: 100vh;
     width: $base-menu-width;
     border-right: 1px solid #e1e2e7;
+    &-wrapper {
+    }
   }
 
   .layout-body {

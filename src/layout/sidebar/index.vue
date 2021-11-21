@@ -15,6 +15,14 @@ const getMenuMode = computed(() => {
   return store.state.setting.menuMode
 })
 
+const theme = computed(() => {
+  return store.state.setting.theme
+})
+
+const menuTextActiveColor = computed(() => {
+  return theme.value
+})
+
 const sidebar = computed(() => {
   return store.state.app.sidebar
 })
@@ -40,21 +48,24 @@ const activeMenu = computed(() => {
 </script>
 
 <template>
-  <div class="sidebar-container">
-    <el-menu
-      class="sidebar-menu"
-      :mode="getMenuMode"
-      :active="activeMenu"
-      :collapse="isCollapse"
-      :default-active="defaultActive"
-      :collapse-transition="true"
-    >
-      <template v-for="route in routes">
-        <template v-if="!route.meta || !route.meta.hidden">
-          <SidebarItem :item="route" :key="route.path" :base-path="route.path" />
+  <div class="sidebar-menu-container">
+    <el-scrollbar>
+      <el-menu
+        class="sidebar-menu"
+        :mode="getMenuMode"
+        :active="activeMenu"
+        :collapse="isCollapse"
+        :default-active="defaultActive"
+        :active-text-color="menuTextActiveColor"
+        :collapse-transition="true"
+      >
+        <template v-for="route in routes">
+          <template v-if="!route.meta || !route.meta.hidden">
+            <SidebarItem :item="route" :key="route.path" :base-path="route.path" />
+          </template>
         </template>
-      </template>
-    </el-menu>
+      </el-menu>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -68,24 +79,23 @@ const activeMenu = computed(() => {
 </style>
 
 <style lang="scss">
+.sidebar-menu-container {
+  height: calc(100vh - $base-logo-height);
+  @include scrollbar();
+}
 .is-collapse {
-  .sidebar-container {
+  .sidebar-menu {
     width: $base-unfold-width;
   }
 }
 </style>
 
 <style lang="scss" scoped>
-.sidebar-container {
-  display: flex;
-  flex: 1;
-
+.sidebar-menu {
+  border: none;
+  width: 100%;
   .el-menu--horizontal {
     border-bottom: none !important;
-  }
-  .sidebar-menu {
-    border: none;
-    width: 100%;
   }
 }
 </style>

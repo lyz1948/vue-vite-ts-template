@@ -5,7 +5,7 @@ module.exports = {
       'component',
       {
         libraryName: 'element-plus',
-        styleLibraryName: '~theme'
+        styleLibraryName: 'theme-chalk'
       },
       'import',
       {

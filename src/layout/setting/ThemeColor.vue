@@ -15,7 +15,7 @@ const state = reactive({
   customerColor: '',
   curIndex: 0,
   chalk: '',
-  theme: store.state.setting.theme,
+  theme: store.state.setting.theme
 })
 
 const defaultTheme = computed(() => {
@@ -92,11 +92,13 @@ watch(
   async (value: string) => {
     if (value) {
       const oldValue = state.chalk ? state.theme : ORIGINAL_THEME
+      console.log('oldValue:', oldValue)
       const themeCluster = getThemeCluster(value.replace('#', ''))
       const originalCluster = getThemeCluster(oldValue.replace('#', ''))
       // const loadingInstance = loading(t('theme.loading'))
       if (!state.chalk) {
-        const url = `https://unpkg.com/element-plus@1.1.0-beta.10/theme-chalk/index.css`
+        // const url = `https://unpkg.com/element-plus@1.1.0-beta.10/theme-chalk/index.css`
+        const url = `https://cdn.jsdelivr.net/npm/element-plus/dist/index.css`
         await getCSSString(url, 'chalk')
       }
       const getHandler = (variable: string, id: string) => {
@@ -119,6 +121,7 @@ watch(
       let styles: HTMLElement[] = [].slice.call(document.querySelectorAll('style'))
       styles = styles.filter((style) => {
         const text = style.innerText
+        console.log('text:', text)
         return new RegExp(oldValue, 'i').test(text) && !/Chalk Variables/.test(text)
       })
       styles.forEach((style) => {
@@ -127,9 +130,12 @@ watch(
         style.innerText = updateStyle(innerText, originalCluster, themeCluster)
       })
 
-      emit('on:change', value)
+      // emit('on:change', value)
       // loadingInstance.close()
     }
+  },
+  {
+    immediate: true
   }
 )
 </script>

@@ -7,12 +7,12 @@ import SidebarItemLink from './SidebarItemLink.vue'
 const props = defineProps({
   item: {
     type: Object as PropType<RouteRecordRaw> | any,
-    required: true,
+    required: true
   },
   basePath: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 })
 
 const getChildrenLen = computed(() => {
@@ -68,9 +68,9 @@ const resolvePath = (routePath: string) => {
       <el-menu-item :index="resolvePath(getOneChild.path)">
         <component
           v-if="getOneChild.meta.icon"
+          :is="getOneChild.meta.icon"
           theme="outline"
           strokeWidth="3"
-          :is="getOneChild.meta.icon"
         />
         <template #title>
           <span v-if="getOneChild.meta.title">{{ getOneChild.meta.title }}</span>
@@ -81,7 +81,7 @@ const resolvePath = (routePath: string) => {
 
   <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
-      <component v-if="item.meta.icon" theme="outline" strokeWidth="3" :is="item.meta.icon" />
+      <component theme="outline" strokeWidth="3" :is="item.meta.icon" />
       <span v-if="item.meta">{{ item.meta.title }}</span>
     </template>
     <template v-if="item.children">
@@ -97,6 +97,13 @@ const resolvePath = (routePath: string) => {
 </template>
 
 <style lang="scss">
+.el-menu--collapse > .el-sub-menu > .el-sub-menu__title span {
+  &.i-icon {
+    height: 14px !important;
+    width: 14px !important;
+    visibility: visible !important;
+  }
+}
 .is-horizonal {
   .el-menu {
     .el-menu-item {
@@ -110,14 +117,14 @@ const resolvePath = (routePath: string) => {
 }
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .el-menu {
   .el-menu-item {
     .i-icon {
       margin-right: 5px;
     }
     &.is-active {
-      border-right: 3px solid $base-color-primary-light1;
+      border-right: 3px solid $base-color-primary;
       background: $base-color-primary-light9 !important;
     }
   }

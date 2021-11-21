@@ -15,6 +15,7 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
+  parser: 'vue-eslint-parser',
   rules: {
     'comma-dangle': 'off',
     'space-before-function-paren': 'off',

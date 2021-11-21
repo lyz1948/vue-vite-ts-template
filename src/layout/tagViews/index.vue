@@ -12,7 +12,7 @@ const currentRoute = useRoute()
 
 const visible = ref(false)
 const state = reactive({
-  activeName: '',
+  activeName: ''
 })
 
 interface ICommand {
@@ -24,28 +24,28 @@ const commandList: Array<ICommand> = [
   {
     command: SettingActionTypes.ACTION_MENU_REFRESH,
     text: '刷新',
-    icon: 'icon-refresh',
+    icon: 'icon-refresh'
   },
   {
     command: TagsActionTypes.ACTION_DEL_OTHER_VIEW,
     text: '关闭其他',
-    icon: 'icon-close',
+    icon: 'icon-close'
   },
   {
     command: TagsActionTypes.ACTION_DEL_LEFT_VIEWS,
     text: '关闭左侧',
-    icon: 'icon-to-left',
+    icon: 'icon-to-left'
   },
   {
     command: TagsActionTypes.ACTION_DEL_RIGHT_VIEWS,
     text: '关闭右侧',
-    icon: 'icon-to-right',
+    icon: 'icon-to-right'
   },
   {
     command: TagsActionTypes.ACTION_DEL_ALL_VIEWS,
     text: '关闭所有',
-    icon: 'icon-minus',
-  },
+    icon: 'icon-minus'
+  }
 ]
 
 const isActive = (route: IRouter) => {
@@ -70,7 +70,7 @@ const filterAffixTags = (routes: RouteRecordRaw[] | IRouter[]) => {
         fullPath: route.path,
         path: route.path,
         name: route.name,
-        meta: { ...route.meta },
+        meta: { ...route.meta }
       })
     }
     if (route.children) {
@@ -110,7 +110,7 @@ const handleTab = (tab: any) => {
   router.push({
     path: route.path,
     query: route.query,
-    fullPath: route.fullPath,
+    fullPath: route.fullPath
   })
 }
 
@@ -159,13 +159,7 @@ watch(
         <el-tab-pane v-for="tag in visitedViews" :name="tag.path" class="tags-view-item">
           <template #label>
             <div class="item">
-              <component
-                class="menu-icon"
-                v-if="tag.meta.icon"
-                theme="outline"
-                strokeWidth="3"
-                :is="tag.meta.icon"
-              />
+              <component class="menu-icon" v-if="tag.meta.icon" theme="outline" strokeWidth="3" :is="tag.meta.icon" />
               <span>
                 {{ tag.meta.title }}
               </span>
@@ -174,24 +168,13 @@ watch(
         </el-tab-pane>
       </el-tabs>
     </div>
-    <el-popover
-      placement="bottom"
-      width="auto"
-      trigger="hover"
-      @show="handleShow"
-      @hide="handleHide"
-    >
+    <el-popover placement="bottom" width="auto" trigger="hover" @show="handleShow" @hide="handleHide">
       <template #reference>
         <span class="more" :class="{ active: visible }" style="cursor: pointer">
           <icon-all-application theme="filled" size="18" :strokeWidth="3" />
         </span>
       </template>
-      <div
-        class="command-item"
-        v-for="(item, index) in commandList"
-        :key="index"
-        @click="handleCommand(item.command)"
-      >
+      <div class="command-item" v-for="(item, index) in commandList" :key="index" @click="handleCommand(item.command)">
         <component class="icon" theme="filled" size="14" :strokeWidth="3" :is="item.icon" />
         <span class="command-label">{{ item.text }}</span>
       </div>
@@ -199,7 +182,7 @@ watch(
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .tags-view-wrapper {
   flex: 1;
   .tags-view-item {
