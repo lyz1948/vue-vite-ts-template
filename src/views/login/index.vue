@@ -4,9 +4,12 @@ import { useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import VLogo from '@/layout/logo.vue'
 import LoginForm from './LoginForm.vue'
+import RegisterForm from './RegisterForm.vue'
+import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const router = useRouter()
+const { t } = useI18n()
 const activeName = ref('first')
 const isMobile = computed(() => {
   return false
@@ -20,7 +23,6 @@ watch(
   () => router.currentRoute.value,
   route => {
     const redirect = ((route.query && route.query.redirect) || '/') as string
-    console.log('redirect:', redirect)
     nextTick().then(() => {
       setTimeout(() => {
         if (store.state.user.token) {
@@ -43,12 +45,12 @@ watch(
       <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="登录" name="first">
+            <el-tab-pane :label="t('entry.title')" name="first">
               <LoginForm />
             </el-tab-pane>
-            <!-- <el-tab-pane label="注册" name="second">
+            <el-tab-pane :label="t('register.title')" name="second">
               <RegisterForm />
-            </el-tab-pane> -->
+            </el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -85,8 +87,8 @@ $white: #fff;
       position: relative;
       display: flex;
       flex-direction: column;
-      width: 60vw;
-      height: 80%;
+      width: 50vw;
+      height: 100%;
       background-image: url('@/assets/login-bg-dark.svg');
       background-repeat: no-repeat;
       background-position: 100%;
@@ -95,7 +97,7 @@ $white: #fff;
         height: 80vh;
         margin: auto;
         .img {
-          width: 480px;
+          width: 560px;
           margin-top: 10vh;
         }
         .title,
@@ -120,7 +122,7 @@ $white: #fff;
       width: 50vw;
       height: 60vh;
       .form-warp {
-        width: 400px;
+        width: 500px;
         padding: 1rem 3rem 0 3rem;
         margin: auto;
         background-color: $white;

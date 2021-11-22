@@ -32,7 +32,7 @@ export const getLocale = () => {
     }
   }
 
-  return 'zh'
+  return 'zh-cn'
 }
 
 const i18n = createI18n({

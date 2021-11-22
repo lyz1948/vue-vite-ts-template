@@ -14,26 +14,14 @@ const tableRouter: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: 'complex-table',
-        name: 'ComplexTable',
+        path: 'component',
+        name: 'TableComponent',
         component: () =>
           import(
             /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
           ),
         meta: {
-          title: 'complexTable',
-          icon: 'icon-remind',
-        },
-      },
-      {
-        path: 'dynamic-table2',
-        name: 'ComplexTable2',
-        component: () =>
-          import(
-            /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
-          ),
-        meta: {
-          title: 'complexTable2',
+          title: 'tableComponent',
           icon: 'icon-remind',
         },
       },

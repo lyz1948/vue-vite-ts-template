@@ -7,7 +7,8 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { PageDefault } from '@/config'
-
+// import { useI18n } from 'vue-i18n'
+// const { t } = useI18n()
 const emit = defineEmits(['update:page'])
 const props = defineProps({
   data: {
@@ -70,6 +71,7 @@ const props = defineProps({
     default: PageDefault.bgShow,
   },
 })
+
 
 const handleSizeChange = (pageSize: number) => {
   emit('update:page', { ...props.page, pageSize })

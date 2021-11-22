@@ -4,21 +4,15 @@
  */
 export default {
   route: {
-    home: 'Home',
     dashboard: 'Home',
-    icons: 'Icons',
-    components: 'Components',
-    eleComponents: 'Element Components',
-    charts: 'Charts',
-    barChart: 'Bar',
-    lineChart: 'Line',
-    mixedChart: 'Other',
     errorPages: 'Error Pages',
+    table: 'Table',
+    tableComponent: 'Table Component',
     page401: '401',
     page404: '404',
   },
   navbar: {
-    logOut: 'Log Out',
+    out: 'Log Out',
     dashboard: 'Dashboard',
     github: 'Github',
     theme: 'Change theme',
@@ -31,13 +25,13 @@ export default {
     profile: 'Profile',
   },
 
-  login: {
+  entry: {
     title: 'Login',
     rules: {
       username: 'Please enter a username',
       password: 'Please enter your password',
     },
-    loginBtn: 'Login',
+    btn: 'Login',
     desc: 'Out of the box in the background management system',
     tip: 'Click login for a quick experience',
     username: 'Username',
@@ -48,7 +42,7 @@ export default {
   },
   register: {
     title: 'Register',
-    registerBtn: 'Register',
+    btn: 'Register',
     username: 'UserName',
     smsCode: 'SMS verification code',
     smsbtn: 'Get Code',
@@ -61,14 +55,6 @@ export default {
     documentation: 'Theme documentation',
     tips: 'Tips: It is different from the theme-pick on the navbar is two different skinning methods, each with different application scenarios. Refer to the documentation for details.',
     loading: 'Theme change loading...',
-    options: {
-      theme1: 'Blue white',
-      theme2: 'Blue black',
-      theme3: 'Green white',
-      theme4: 'Green black',
-      theme5: 'Red white',
-      theme6: 'Red black',
-    },
   },
   tagsView: {
     refresh: 'Refresh',
@@ -79,13 +65,13 @@ export default {
   },
   settings: {
     title: 'Theme Settings',
-    layout: 'Layout',
+    layout: 'Menu Layout',
     theme: 'Theme',
-    menuBg: 'Menu Theme',
     logo: 'Logo',
     tag: 'Tag',
     breadcurmb: 'Breadcurmb',
-    fixed: 'fixed Header',
+    fixHead: 'Fixed Header',
+    fixTabView: 'Fixed Tab',
     fullscreen: 'Fuscreen',
     refresh: 'Refresh',
     notice: 'Notice',
@@ -96,21 +82,16 @@ export default {
     vertical: 'Vertical',
     horizontal: 'Horizontal',
   },
-  sayHi: {
-    early: 'Good early morning',
-    morning: 'Good morning',
-    noon: 'Good noon',
-    afternoon: 'Good afternoon',
-    evening: 'Good evening',
-  },
   notice: {
     msg: 'Welcome to ',
+    empty: 'No data!'
   },
   tabs: {
     notice: 'Notice',
     message: 'Message',
     email: 'EMail',
   },
+
   indexPage: {
     descTitle: 'Start your day!',
     resourceTitle: 'Vue3 related resources are recommended',
@@ -138,49 +119,6 @@ export default {
         'Please contact the administrator or click the button below to return to the home page',
     },
   },
-  echarts: {
-    demo: 'Demo',
-    line: {
-      title: 'Line',
-      demo1Title: 'Stacked area chart',
-      demo2Title: 'Smoothed Line Chart',
-      demo3Title: 'Stacked area chart',
-    },
-    bar: {
-      title: 'Bar',
-      demo1Title: 'Basic Bar',
-      demo2Title: 'The amount of evaporation and precipitation in an area',
-    },
-    other: {
-      title: 'Other Charts',
-      demo1Title: 'Basic Candlestick',
-      demo2Title: 'Basic Scatter Chart',
-      demo3Title: 'Doughnut Chart with Rounded Corner',
-      demo4Title: 'Basic Radar Chart',
-      demo5Title: 'Simple Gauge',
-      demo6Title: 'Funnel Chart',
-    },
-  },
-  iconPage: {
-    title: 'Icons',
-    demo: 'Demo',
-    props: 'Props',
-    table: {
-      label1: 'Params',
-      label2: 'Type',
-      label3: 'Options',
-      label4: 'Default',
-      label5: 'Descrition',
-    },
-  },
-  element: {
-    title: 'Element-Plus Demo',
-    btn: 'Button',
-    radio: 'Radio',
-    checkBox: 'CheckBox',
-    datePicker: 'DatePicker',
-    dateTimePicker: 'DataTimePicker',
-  },
   confirm: {
     title: 'Operating hints',
     msg: 'Are you sure you want to exit',
@@ -188,5 +126,8 @@ export default {
   btn: {
     confirm: 'Confirm',
     cancel: 'Cancel',
+    search: 'Search',
+    create: 'Create'
   },
+
 }

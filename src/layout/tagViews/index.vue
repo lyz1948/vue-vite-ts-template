@@ -5,11 +5,12 @@ import { useStore } from '@/store'
 import { TagsActionTypes } from '@/store/modules/tagViews/action-types'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { IRouter, ITagView } from '@/types'
+import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const router = useRouter()
 const currentRoute = useRoute()
-
+const { t } = useI18n()
 const visible = ref(false)
 const state = reactive({
   activeName: '',
@@ -20,30 +21,31 @@ interface ICommand {
   text: string
   icon: string
 }
+
 const commandList: Array<ICommand> = [
   {
     command: SettingActionTypes.ACTION_MENU_REFRESH,
-    text: '刷新',
+    text: 'refresh',
     icon: 'icon-refresh',
   },
   {
     command: TagsActionTypes.ACTION_DEL_OTHER_VIEW,
-    text: '关闭其他',
+    text: 'closeOthers',
     icon: 'icon-close',
   },
   {
     command: TagsActionTypes.ACTION_DEL_LEFT_VIEWS,
-    text: '关闭左侧',
+    text: 'closeLeft',
     icon: 'icon-to-left',
   },
   {
     command: TagsActionTypes.ACTION_DEL_RIGHT_VIEWS,
-    text: '关闭右侧',
+    text: 'closeRight',
     icon: 'icon-to-right',
   },
   {
     command: TagsActionTypes.ACTION_DEL_ALL_VIEWS,
-    text: '关闭所有',
+    text: 'closeAll',
     icon: 'icon-minus',
   },
 ]
@@ -181,7 +183,7 @@ watch(
                 stroke-width="3"
               />
               <span>
-                {{ tag.meta.title }}
+                {{ t('route.' + tag.meta.title) }}
               </span>
             </div>
           </template>
@@ -213,7 +215,7 @@ watch(
           size="14"
           :stroke-width="3"
         />
-        <span class="command-label">{{ item.text }}</span>
+        <span class="command-label">{{ t('tagsView.' + item.text) }}</span>
       </div>
     </el-popover>
   </div>

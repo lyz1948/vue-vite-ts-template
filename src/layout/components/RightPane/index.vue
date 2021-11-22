@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useStore } from '@/store'
-import { noticeList } from './data'
-import Profile from '../Profile/index.vue'
+import Profile from './components/Profile.vue'
+import Notice from './components/Notice.vue'
+import Translate from './components/Translate.vue'
+import Refresh from './components/Refresh.vue'
+import Setting from './components/Setting.vue'
+
 import SettingPane from '@/layout/setting/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
-import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
 defineProps({
   color: {
@@ -14,53 +15,13 @@ defineProps({
   },
 })
 
-const store = useStore()
-const activeName = ref('first')
 
-const showSetting = () => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
-    type: 'setting',
-    val: true,
-  })
-}
-
-const handleRefresh = () => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
-    type: 'refresh',
-    val: '',
-  })
-}
 </script>
 
 <template>
   <div class="right-pane">
     <div class="item">
-      <el-dropdown trigger="click">
-        <el-badge :value="12" class="badge">
-          <el-link>
-            <icon-remind
-              class="remind"
-              title="remind"
-              theme="outline"
-              size="16"
-              :stroke-width="4"
-              :fill="color"
-            />
-          </el-link>
-        </el-badge>
-        <template #dropdown>
-          <div class="message-box">
-            <el-tabs v-model="activeName" stretch>
-              <el-tab-pane label="系统消息5" name="first">
-                <Cell :list="noticeList" />
-              </el-tab-pane>
-              <el-tab-pane label="订单消息" name="second">
-                暂无消息
-              </el-tab-pane>
-            </el-tabs>
-          </div>
-        </template>
-      </el-dropdown>
+      <Notice :color="color" />
     </div>
 
     <div class="item">
@@ -68,31 +29,15 @@ const handleRefresh = () => {
     </div>
 
     <div class="item">
-      <el-link>
-        <icon-refresh
-          class="refresh"
-          title="refresh"
-          theme="outline"
-          size="16"
-          :stroke-width="4"
-          :fill="color"
-          @click="handleRefresh"
-        />
-      </el-link>
+      <Translate :color="color" />
     </div>
 
     <div class="item">
-      <el-link>
-        <icon-setting
-          class="setting"
-          title="setting"
-          theme="outline"
-          size="16"
-          :stroke-width="4"
-          :fill="color"
-          @click="showSetting"
-        />
-      </el-link>
+      <Setting :color="color" />
+    </div>
+
+    <div class="item">
+      <Refresh :color="color" />
     </div>
 
     <div class="item">

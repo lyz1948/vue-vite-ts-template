@@ -5,6 +5,7 @@ import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { ISelectItem } from '@/types'
 import { modeOpts } from '@/config/setting'
 import ThemeColor from './ThemeColor.vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps({
   direction: {
@@ -14,6 +15,7 @@ defineProps({
 })
 
 const store = useStore()
+const { t } = useI18n()
 const modeOptList = ref(modeOpts)
 
 const state = reactive({
@@ -84,30 +86,26 @@ watch(
   <div class="setting">
     <el-drawer
       v-model="visible"
-      title="System Setting"
+      :title="t('settings.title')"
       size="500px"
       :direction="direction"
       :before-close="handleClose"
     >
       <div class="setting-item">
-        <span class="label">Menu Mode</span>
-        <SelectBase
-          v-model:value="modeVal"
-          :list="modeOptList"
-          @on:select="changeMenuMode"
-        />
+        <span class="label">{{ t('settings.layout') }}</span>
+        <SelectBase v-model:value="modeVal" :list="modeOptList" @on:select="changeMenuMode" />
         <!-- <SelectMode /> -->
       </div>
       <div class="setting-item">
-        <span class="label">Site Theme</span>
+        <span class="label">{{ t('settings.theme') }}</span>
         <ThemeColor @on:change="changeTheme" />
       </div>
       <div class="setting-item">
-        <span class="label">Fix Header</span>
+        <span class="label">{{ t('settings.fixHead') }}</span>
         <el-switch v-model="getFixHeadVal" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">Fix TagView</span>
+        <span class="label">{{ t('settings.fixTabView') }}</span>
         <el-switch v-model="getFixTagVal" @change="changeTagView" />
       </div>
     </el-drawer>

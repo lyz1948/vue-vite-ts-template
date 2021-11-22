@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const form = ref({
   name: '',
   password: '',
@@ -11,7 +13,7 @@ const form = ref({
 <template>
   <el-form ref="form" :model="form" class="login-ruleForm">
     <el-form-item prop="name">
-      <el-input v-model="form.name" placeholder="用户名">
+      <el-input v-model="form.name" :placeholder="t('register.username')">
         <template #prefix>
           <user theme="outline" size="16" fill="#999" />
         </template>
@@ -19,34 +21,34 @@ const form = ref({
     </el-form-item>
     <el-form-item>
       <div class="form-code">
-        <el-input v-model="form.name" placeholder="验证码">
+        <el-input v-model="form.name" :placeholder="t('register.smsbtn')">
           <template #prefix>
-            <user theme="outline" size="16" fill="#999" />
+            <icon-user theme="outline" size="16" fill="#999" />
           </template>
         </el-input>
         <el-button class="code-btn">
-          发送
+          {{ t('register.smsCode') }}
         </el-button>
       </div>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input v-model="form.password" placeholder="密码" type="password">
+      <el-input v-model="form.password" :placeholder="t('register.password')" type="password">
         <template #prefix>
-          <lock theme="outline" size="16" fill="#999" />
+          <icon-lock theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input v-model="form.password" placeholder="确认密码" type="password">
+      <el-input v-model="form.password" :placeholder="t('register.confirmPwd')" type="password">
         <template #prefix>
-          <lock theme="outline" size="16" fill="#999" />
+          <icon-lock theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
     </el-form-item>
     <el-form-item>
       <div class="login-check">
         <el-checkbox v-model="form.checkedPwd">
-          确认密码
+          {{ t('register.checkText') }}
         </el-checkbox>
       </div>
     </el-form-item>
@@ -57,7 +59,7 @@ const form = ref({
         class="login-btn"
         round
       >
-        注册
+        {{ t('register.btn') }}
       </el-button>
     </el-form-item>
   </el-form>

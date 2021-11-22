@@ -5,7 +5,7 @@ import router from './router'
 import { store } from './store'
 import baseComponent from './components'
 import iconPark from './plugins/iconPark'
-import i18n from './plugins/i18n'
+import loadComponent from './plugins/i18n'
 import * as directives from './directives'
 import './permission'
 import 'normalize.css'
@@ -19,10 +19,11 @@ Object.keys(directives).forEach(key => {
   app.directive(key, (directives as { [key: string]: Directive })[key])
 })
 
+loadComponent(app)
+
 app
   .use(store)
   .use(router)
   .use(baseComponent)
   .use(iconPark)
-  .use(i18n)
   .mount('#app')

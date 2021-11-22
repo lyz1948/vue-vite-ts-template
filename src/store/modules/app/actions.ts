@@ -17,6 +17,10 @@ export interface IActions {
     { commit }: AugmentedActionContext,
     withoutAnimation: boolean
   ): void
+  [AppActionTypes.ACTION_SET_LANGUAGE](
+    { commit }: AugmentedActionContext,
+    lang: string
+  ): void
 }
 
 export const actions: ActionTree<IAppState, IRootState> & IActions = {
@@ -25,5 +29,11 @@ export const actions: ActionTree<IAppState, IRootState> & IActions = {
     withoutAnimation: boolean
   ) {
     commit(AppMutationTypes.TOGGLE_SIDEBAR, withoutAnimation)
+  },
+  [AppActionTypes.ACTION_SET_LANGUAGE](
+    { commit },
+    lang: string
+  ) {
+    commit(AppMutationTypes.SET_LANGUAGE, lang)
   },
 }

@@ -4,10 +4,12 @@ import { useRouter } from 'vue-router'
 import { useStore } from '@/store/index'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import useElement from '@/utils/useElement'
+import { useI18n } from 'vue-i18n'
 
 type Command = 'outLogin'
 const router = useRouter()
 const store = useStore()
+const { t } = useI18n()
 const circleUrl = ref(
   'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
 )
@@ -39,7 +41,7 @@ const handleCommand = (command: Command) => {
         <el-dropdown-menu>
           <el-dropdown-item command="outLogin">
             <icon-logout class="icon-hover logout mr5" title="logout" />
-            退出
+            {{ t('navbar.out') }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

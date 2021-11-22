@@ -5,9 +5,11 @@ import { RouteRecordRaw, useRouter } from 'vue-router'
 import { ILogin } from '@/types'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { ElForm } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const router = useRouter()
+const { t } = useI18n()
 const validateForm = ref<InstanceType<typeof ElForm>>()
 
 const state = reactive({
@@ -68,7 +70,7 @@ watch(
     class="login-ruleForm"
   >
     <FormItemBase prop="username">
-      <el-input v-model="state.ruleForm.username" placeholder="用户名">
+      <el-input v-model="state.ruleForm.username" :placeholder="t('entry.username')">
         <template #prefix>
           <icon-user theme="outline" size="16" fill="#999" />
         </template>
@@ -77,7 +79,7 @@ watch(
     <FormItemBase prop="password">
       <el-input
         v-model="state.ruleForm.password"
-        placeholder="密码"
+        :placeholder="t('entry.password')"
         type="password"
         @keyup.enter="handleLogin"
       >
@@ -89,10 +91,10 @@ watch(
     <FormItemBase>
       <div class="login-check">
         <el-checkbox v-model="state.checkedPwd">
-          记住密码
+          {{ t('entry.rememberPwd') }}
         </el-checkbox>
         <el-button type="text">
-          忘记密码
+          {{ t('entry.forgotPwd') }}
         </el-button>
       </div>
     </FormItemBase>
@@ -105,19 +107,17 @@ watch(
         round
         @click="handleLogin"
       >
-        登录
+        {{ t('entry.btn') }}
       </el-button>
     </FormItemBase>
-    <!-- <el-divider>第三方登录</el-divider>
+    <el-divider>{{ t('entry.thirdparty') }}</el-divider>
     <FormItemBase>
       <div class="login-methods">
-        <wechat theme="outline" size="24" fill="#333" />
-        <alipay theme="outline" size="24" fill="#333" />
-        <github theme="outline" size="24" fill="#333" />
-        <twitter theme="outline" size="24" fill="#333" />
-        <google theme="outline" size="24" fill="#333" />
+        <icon-wechat theme="outline" size="24" fill="#333" />
+        <icon-alipay theme="outline" size="24" fill="#333" />
+        <icon-github theme="outline" size="24" fill="#333" />
       </div>
-    </FormItemBase> -->
+    </FormItemBase>
   </FormBase>
 </template>
 

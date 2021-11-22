@@ -23,6 +23,7 @@ import {
   Minus,
   ToLeft,
   ToRight,
+  Translate,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 
@@ -48,6 +49,10 @@ export const components = [
   ToLeft,
   ToRight,
   Minus,
+  Wechat,
+  Alipay,
+  Github,
+  Translate
 ]
 
 export default (app: ReturnType<typeof createApp>) => {

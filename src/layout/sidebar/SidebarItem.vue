@@ -3,6 +3,7 @@ import { computed, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
   item: {
@@ -15,17 +16,17 @@ const props = defineProps({
   },
 })
 
+const { t } = useI18n()
+
 const getChildrenLen = computed(() => {
   if (props.item.children) {
-    const showingChildren = props.item.children.filter(
-      (item: RouteRecordRaw) => {
-        if (item.meta && item.meta.hidden) {
-          return false
-        } else {
-          return true
-        }
+    const showingChildren = props.item.children.filter((item: RouteRecordRaw) => {
+      if (item.meta && item.meta.hidden) {
+        return false
+      } else {
+        return true
       }
-    )
+    })
     return showingChildren.length
   }
   return 0
@@ -66,10 +67,7 @@ const resolvePath = (routePath: string) => {
 
 <template>
   <template v-if="getOneChild && !getOneChild.children">
-    <SidebarItemLink
-      v-if="getOneChild.meta"
-      :to="resolvePath(getOneChild.path)"
-    >
+    <SidebarItemLink v-if="getOneChild.meta" :to="resolvePath(getOneChild.path)">
       <el-menu-item :index="resolvePath(getOneChild.path)">
         <component
           :is="getOneChild.meta.icon"
@@ -78,9 +76,7 @@ const resolvePath = (routePath: string) => {
           stroke-width="3"
         />
         <template #title>
-          <span v-if="getOneChild.meta.title">{{
-            getOneChild.meta.title
-          }}</span>
+          <span v-if="getOneChild.meta.title">{{ t('route.' + getOneChild.meta.title) }}</span>
         </template>
       </el-menu-item>
     </SidebarItemLink>
@@ -89,7 +85,7 @@ const resolvePath = (routePath: string) => {
   <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
       <component :is="item.meta.icon" theme="outline" stroke-width="3" />
-      <span v-if="item.meta">{{ item.meta.title }}</span>
+      <span v-if="item.meta">{{ t('route.' + item.meta.title) }}</span>
     </template>
     <template v-if="item.children">
       <sidebar-item

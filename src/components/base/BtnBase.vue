@@ -7,15 +7,17 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 const defaultState = {
   search: {
     icon: 'el-icon-search',
-    text: '搜索',
+    text: 'search',
     type: 'primary',
   },
   create: {
     icon: 'el-icon-plus',
-    text: '新增',
+    text: 'create',
     type: 'primary',
   },
   save: {
@@ -56,6 +58,7 @@ const props = defineProps({
     default: 'search',
   },
 })
+const { t } = useI18n()
 
 const getName = computed(() => {
   return props.name || defaultState[props.type].text
@@ -76,6 +79,6 @@ const getIcon = computed(() => {
 
 <template>
   <el-button :type="getType" :icon="getIcon" :plain="getPlain">
-    {{ getName }}
+    {{ t('btn.' + getName) }}
   </el-button>
 </template>
