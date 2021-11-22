@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Tip from '@/utils/useMessage'
 import { useStore } from '@/store/index'
 import { UserActionTypes } from '@/store/modules/user/action-types'
+import useElement from '@/utils/useElement'
 
 type Command = 'outLogin'
 const router = useRouter()
 const store = useStore()
 const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
+const { confirm } = useElement()
 
 const outLogin = () => {
-  Tip.confirm().then(async () => {
+  confirm().then(async () => {
     await store.dispatch(UserActionTypes.ACTION_LOGIN_OUT, undefined)
     router.push('/login')
   })

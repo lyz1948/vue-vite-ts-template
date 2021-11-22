@@ -3,6 +3,7 @@ import { reactive, ref, computed, watch, getCurrentInstance } from 'vue'
 import { themeColorOpts, themeConfig } from '@/config/setting'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
+import useElement from '@/utils/useElement'
 // const version = require('element-plus/package.json').version // element-ui version from node_modules
 
 const colorOptList = ref(themeColorOpts)
@@ -10,6 +11,7 @@ const ORIGINAL_THEME = themeConfig.theme
 const emit = defineEmits(['on:change'])
 const store = useStore()
 const ctx = getCurrentInstance() as any
+const { loading } = useElement()
 
 const state = reactive({
   customerColor: '',
@@ -92,10 +94,9 @@ watch(
   async (value: string) => {
     if (value) {
       const oldValue = state.chalk ? state.theme : ORIGINAL_THEME
-      console.log('oldValue:', oldValue)
       const themeCluster = getThemeCluster(value.replace('#', ''))
       const originalCluster = getThemeCluster(oldValue.replace('#', ''))
-      // const loadingInstance = loading(t('theme.loading'))
+      const loadingInstance = loading('theme.loading')
       if (!state.chalk) {
         const url = `https://unpkg.com/element-plus@1.1.0-beta.10/theme-chalk/index.css`
         // const url = `https://cdn.jsdelivr.net/npm/element-plus/dist/index.css`
@@ -126,15 +127,14 @@ watch(
           !/Chalk Variables/.test(text)
         )
       })
-      console.log('styles:', styles)
       styles.forEach((style) => {
         const { innerText } = style
         if (typeof innerText !== 'string') return
         style.innerText = updateStyle(innerText, originalCluster, themeCluster)
       })
 
-      // emit('on:change', value)
-      // loadingInstance.close()
+      emit('on:change', value)
+      loadingInstance.close()
     }
   },
   {

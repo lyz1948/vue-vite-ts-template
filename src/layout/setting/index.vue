@@ -2,7 +2,6 @@
 import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-// import SelectMode from './SelectMode.vue'
 import ThemeColor from './ThemeColor.vue'
 import { ISelectItem } from '@/types'
 import { modeOpts } from '@/config/setting'
@@ -10,18 +9,17 @@ import { modeOpts } from '@/config/setting'
 defineProps({
   direction: {
     type: String,
-    default: 'rtl',
-  },
+    default: 'rtl'
+  }
 })
 
-const emit = defineEmits(['on:change'])
 const store = useStore()
 const modeOptList = ref(modeOpts)
 
 const state = reactive({
   fixHead: store.state.setting.fixHead,
   fixTagView: store.state.setting.fixTagView,
-  visibleSetting: store.state.setting.visibleSetting,
+  visibleSetting: store.state.setting.visibleSetting
 })
 const visible = ref(false)
 const modeVal = ref(store.state.setting.menuMode)

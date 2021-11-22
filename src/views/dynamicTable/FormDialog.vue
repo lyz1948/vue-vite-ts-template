@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import Tips from '@/utils/useMessage'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
 import FormBase from '@/components/base/FormBase.vue'
 import { ISelectItem } from '@/types'
+import useElement from '@/utils/useElement'
 
 const visibleDialog = ref(false)
 const title = '新增角色'
-
+const { error } = useElement()
 const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
 const formState = () => ({
   name: '',
@@ -52,7 +52,7 @@ const handleConfirm = async () => {
   const valid = await formRef.value?.validate()
 
   if (!valid) {
-    Tips.error()
+    error()
     return
   }
   saveOrUpdate()
@@ -65,7 +65,12 @@ defineExpose({
 </script>
 
 <template>
-  <DialogBase :title="title" :visible="visibleDialog" @update:visible="visibleDialog = $event" @update:confirm="handleConfirm">
+  <DialogBase
+    :title="title"
+    :visible="visibleDialog"
+    @update:visible="visibleDialog = $event"
+    @update:confirm="handleConfirm"
+  >
     <FormBase ref="formRef" :form="state.form" :rules="state.rules" label-width="160px">
       <FormItemBase prop="name" label="角色名称">
         <InputBase v-model:value="state.form.name" />
