@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { RoleColumn } from '@/config/table'
 import FormDialog from './FormDialog.vue'
 

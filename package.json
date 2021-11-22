@@ -77,7 +77,7 @@
     "vite-plugin-style-import": "^1.2.1"
   },
   "lint-staged": {
-    "src/**/*.{js,vue}": [
+    "src/**/*.{ts,vue}": [
       "eslint --fix",
       "git add"
     ]
