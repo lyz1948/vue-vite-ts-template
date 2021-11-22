@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "private": false,
   "scripts": {
-    "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
@@ -80,8 +77,8 @@
     "vite-plugin-style-import": "^1.2.1"
   },
   "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
       "git add"
     ]
   }
