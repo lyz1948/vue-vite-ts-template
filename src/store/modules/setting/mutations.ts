@@ -3,11 +3,17 @@ import { ISettingState } from './state'
 import { SettingMutationTypes } from './mutation-types'
 
 export type Mutations<S = ISettingState> = {
-  [SettingMutationTypes.UPDATE_SETTING](state: S, opts: { type: string; val: any }): void
+  [SettingMutationTypes.UPDATE_SETTING](
+    state: S,
+    opts: { type: string; val: any }
+  ): void
 }
 
 export const mutations: MutationTree<ISettingState> & Mutations = {
-  [SettingMutationTypes.UPDATE_SETTING](state: ISettingState, opts: { type: string; val: any }) {
+  [SettingMutationTypes.UPDATE_SETTING](
+    state: ISettingState,
+    opts: { type: string; val: any }
+  ) {
     const { type, val } = opts
     if (type == 'theme') {
       state.theme = val

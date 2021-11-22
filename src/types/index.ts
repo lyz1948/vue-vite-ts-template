@@ -1,4 +1,4 @@
-import { AxiosResponse, AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig } from 'axios'
 
 /**用户登录 */
 export interface ILogin {
@@ -27,13 +27,17 @@ export interface IApi {
 }
 
 export interface IGet {
-  <T>(url: string, config?: AxiosRequestConfig): Promise<T> | Promise<CustomSuccessData<T>>
+  <T>(url: string, config?: AxiosRequestConfig):
+    | Promise<T>
+    | Promise<CustomSuccessData<T>>
 }
 
 export interface IPost {
-  <T>(url: string, params?: string | object, config?: AxiosRequestConfig): Promise<
-    CustomSuccessData<T>
-  >
+  <T>(
+    url: string,
+    params?: string | object,
+    config?: AxiosRequestConfig
+  ): Promise<CustomSuccessData<T>>
 }
 
 export interface IMeta {

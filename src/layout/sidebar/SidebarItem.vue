@@ -7,23 +7,25 @@ import SidebarItemLink from './SidebarItemLink.vue'
 const props = defineProps({
   item: {
     type: Object as PropType<RouteRecordRaw> | any,
-    required: true
+    required: true,
   },
   basePath: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const getChildrenLen = computed(() => {
   if (props.item.children) {
-    const showingChildren = props.item.children.filter((item: RouteRecordRaw) => {
-      if (item.meta && item.meta.hidden) {
-        return false
-      } else {
-        return true
+    const showingChildren = props.item.children.filter(
+      (item: RouteRecordRaw) => {
+        if (item.meta && item.meta.hidden) {
+          return false
+        } else {
+          return true
+        }
       }
-    })
+    )
     return showingChildren.length
   }
   return 0
@@ -64,16 +66,21 @@ const resolvePath = (routePath: string) => {
 
 <template>
   <template v-if="getOneChild && !getOneChild.children">
-    <SidebarItemLink v-if="getOneChild.meta" :to="resolvePath(getOneChild.path)">
+    <SidebarItemLink
+      v-if="getOneChild.meta"
+      :to="resolvePath(getOneChild.path)"
+    >
       <el-menu-item :index="resolvePath(getOneChild.path)">
         <component
-          v-if="getOneChild.meta.icon"
           :is="getOneChild.meta.icon"
+          v-if="getOneChild.meta.icon"
           theme="outline"
-          strokeWidth="3"
+          stroke-width="3"
         />
         <template #title>
-          <span v-if="getOneChild.meta.title">{{ getOneChild.meta.title }}</span>
+          <span v-if="getOneChild.meta.title">{{
+            getOneChild.meta.title
+          }}</span>
         </template>
       </el-menu-item>
     </SidebarItemLink>
@@ -81,7 +88,7 @@ const resolvePath = (routePath: string) => {
 
   <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
-      <component theme="outline" strokeWidth="3" :is="item.meta.icon" />
+      <component :is="item.meta.icon" theme="outline" stroke-width="3" />
       <span v-if="item.meta">{{ item.meta.title }}</span>
     </template>
     <template v-if="item.children">

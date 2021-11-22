@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType } from 'vue-demi'
+import { PropType } from 'vue'
 
 interface IItemProps {
   icon: string
@@ -26,7 +26,13 @@ defineProps({
     <div v-for="(item, index) in list" :key="index" class="cell-item">
       <div class="cell-item-meta-avatar">
         <div v-if="item.icon" class="icon-box">
-          <component class="icon" theme="outline" size="16" :stroke-width="3" :is="item.icon" />
+          <component
+            :is="item.icon"
+            class="icon"
+            theme="outline"
+            size="16"
+            :stroke-width="3"
+          />
         </div>
       </div>
       <div class="cell-item-meta-content">

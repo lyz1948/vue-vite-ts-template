@@ -18,7 +18,7 @@ defineProps({
   },
 })
 
-const changeValue = (event) => {
+const changeValue = event => {
   emit('update:value', event)
 }
 </script>

@@ -22,7 +22,7 @@ defineProps({
   },
 })
 
-const changeInput = ($event) => {
+const changeInput = $event => {
   emit('update:value', $event)
 }
 </script>

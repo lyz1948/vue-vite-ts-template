@@ -12,7 +12,12 @@ defineProps({
 </script>
 
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+  <el-select :model-value="value" placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    />
   </el-select>
 </template>

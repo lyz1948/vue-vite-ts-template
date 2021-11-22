@@ -17,7 +17,7 @@ export interface MyFormExpose {
 const props = defineProps({
   form: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
 
   rules: {
@@ -35,7 +35,12 @@ defineExpose({
 </script>
 
 <template>
-  <el-form ref="validateForm" :model="props.form" :rules="props.rules" class="form-wrapper">
+  <el-form
+    ref="validateForm"
+    :model="props.form"
+    :rules="props.rules"
+    class="form-wrapper"
+  >
     <slot />
   </el-form>
 </template>

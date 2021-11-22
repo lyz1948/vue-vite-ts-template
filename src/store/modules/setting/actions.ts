@@ -20,7 +20,10 @@ export interface IActions {
 }
 
 export const actions: ActionTree<ISettingState, IRootState> & IActions = {
-  [SettingActionTypes.ACTION_UPDATE_SETTING]({ commit }, opts: { type: string; val: any }) {
+  [SettingActionTypes.ACTION_UPDATE_SETTING](
+    { commit },
+    opts: { type: string; val: any }
+  ) {
     commit(SettingMutationTypes.UPDATE_SETTING, opts)
   },
 }

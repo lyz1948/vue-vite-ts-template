@@ -12,13 +12,13 @@ const isMobile = computed(() => {
   return false
 })
 
-const handleClick = (val) => {
+const handleClick = val => {
   console.log(val)
 }
 
 watch(
   () => router.currentRoute.value,
-  (route) => {
+  route => {
     const redirect = ((route.query && route.query.redirect) || '/') as string
     console.log('redirect:', redirect)
     nextTick().then(() => {

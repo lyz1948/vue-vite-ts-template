@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { reactive, ref, watch, unref, onMounted } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { useStore } from '@/store'
-import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+import { RouteRecordRaw, useRouter } from 'vue-router'
 import { ILogin } from '@/types'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { ElForm } from 'element-plus'
 
 const store = useStore()
 const router = useRouter()
-const currentRouter = useRoute()
 const validateForm = ref<InstanceType<typeof ElForm>>()
 
 const state = reactive({
@@ -32,10 +31,11 @@ const userLogin = (loginState: ILogin) => {
   store
     .dispatch(UserActionTypes.ACTION_LOGIN, loginState)
     .then(() => {
-      const routerPath: RouteRecordRaw | any =
-        state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
+      const routerPath: RouteRecordRaw | any = state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
 
-      router.push({ path: routerPath }).catch(() => {})
+      router.push({ path: routerPath }).catch(err => {
+        console.error(err)
+      })
       state.loading = false
     })
     .catch(() => {
@@ -53,7 +53,7 @@ const handleLogin = async () => {
 
 watch(
   () => router.currentRoute.value,
-  (route) => {
+  route => {
     state.redirect = ((route.query && route.query.redirect) || '/') as string
   },
   { immediate: true }
@@ -61,9 +61,14 @@ watch(
 </script>
 
 <template>
-  <FormBase :model="state.ruleForm" :rules="state.rules" ref="validateForm" class="login-ruleForm">
+  <FormBase
+    ref="validateForm"
+    :model="state.ruleForm"
+    :rules="state.rules"
+    class="login-ruleForm"
+  >
     <FormItemBase prop="username">
-      <el-input placeholder="用户名" v-model="state.ruleForm.username">
+      <el-input v-model="state.ruleForm.username" placeholder="用户名">
         <template #prefix>
           <icon-user theme="outline" size="16" fill="#999" />
         </template>
@@ -71,10 +76,10 @@ watch(
     </FormItemBase>
     <FormItemBase prop="password">
       <el-input
-        @keyup.enter="handleLogin"
+        v-model="state.ruleForm.password"
         placeholder="密码"
         type="password"
-        v-model="state.ruleForm.password"
+        @keyup.enter="handleLogin"
       >
         <template #prefix>
           <icon-lock theme="outline" size="16" fill="#999" />
@@ -83,8 +88,12 @@ watch(
     </FormItemBase>
     <FormItemBase>
       <div class="login-check">
-        <el-checkbox v-model="state.checkedPwd">记住密码</el-checkbox>
-        <el-button type="text">忘记密码</el-button>
+        <el-checkbox v-model="state.checkedPwd">
+          记住密码
+        </el-checkbox>
+        <el-button type="text">
+          忘记密码
+        </el-button>
       </div>
     </FormItemBase>
     <FormItemBase>
@@ -95,8 +104,9 @@ watch(
         class="login-btn"
         round
         @click="handleLogin"
-        >登录</el-button
       >
+        登录
+      </el-button>
     </FormItemBase>
     <!-- <el-divider>第三方登录</el-divider>
     <FormItemBase>

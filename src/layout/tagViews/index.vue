@@ -12,7 +12,7 @@ const currentRoute = useRoute()
 
 const visible = ref(false)
 const state = reactive({
-  activeName: ''
+  activeName: '',
 })
 
 interface ICommand {
@@ -24,37 +24,37 @@ const commandList: Array<ICommand> = [
   {
     command: SettingActionTypes.ACTION_MENU_REFRESH,
     text: '刷新',
-    icon: 'icon-refresh'
+    icon: 'icon-refresh',
   },
   {
     command: TagsActionTypes.ACTION_DEL_OTHER_VIEW,
     text: '关闭其他',
-    icon: 'icon-close'
+    icon: 'icon-close',
   },
   {
     command: TagsActionTypes.ACTION_DEL_LEFT_VIEWS,
     text: '关闭左侧',
-    icon: 'icon-to-left'
+    icon: 'icon-to-left',
   },
   {
     command: TagsActionTypes.ACTION_DEL_RIGHT_VIEWS,
     text: '关闭右侧',
-    icon: 'icon-to-right'
+    icon: 'icon-to-right',
   },
   {
     command: TagsActionTypes.ACTION_DEL_ALL_VIEWS,
     text: '关闭所有',
-    icon: 'icon-minus'
-  }
+    icon: 'icon-minus',
+  },
 ]
 
-const isActive = (route: IRouter) => {
-  return route.path === currentRoute.path
-}
+// const isActive = (route: IRouter) => {
+//   return route.path === currentRoute.path
+// }
 
-const isAffix = (tag: ITagView) => {
-  return tag.meta && tag.meta.affix
-}
+// const isAffix = (tag: ITagView) => {
+//   return tag.meta && tag.meta.affix
+// }
 
 const visitedViews = computed(() => {
   return store.state.tagViews.visitedViews
@@ -64,13 +64,13 @@ const routes = computed(() => store.state.permission.routes)
 
 const filterAffixTags = (routes: RouteRecordRaw[] | IRouter[]) => {
   let tags: ITagView[] = []
-  routes.forEach((route) => {
+  routes.forEach(route => {
     if (route.meta && route.meta.affix) {
       tags.push({
         fullPath: route.path,
         path: route.path,
         name: route.name,
-        meta: { ...route.meta }
+        meta: { ...route.meta },
       })
     }
     if (route.children) {
@@ -110,19 +110,14 @@ const handleTab = (tab: any) => {
   router.push({
     path: route.path,
     query: route.query,
-    fullPath: route.fullPath
+    fullPath: route.fullPath,
   })
-}
-
-const handleCommand = async (command: ICommand) => {
-  const view = await activeTagRoute()
-  store.dispatch(command, view as any)
 }
 
 const activeTagRoute = async () => {
   const { fullPath, path } = currentRoute
 
-  const view = visitedViews.value.find((it) => it.path === fullPath)
+  const view = visitedViews.value.find(it => it.path === fullPath)
 
   if (view?.path !== path) {
     router.push(path)
@@ -131,8 +126,17 @@ const activeTagRoute = async () => {
   return view
 }
 
-const handleShow = () => {}
-const handleHide = () => {}
+const handleCommand = async (command: ICommand) => {
+  const view = await activeTagRoute()
+  store.dispatch(command, view as any)
+}
+
+const handleShow = () => {
+  console.log('show')
+}
+const handleHide = () => {
+  console.log('hide')
+}
 
 watch(
   () => currentRoute.name,
@@ -141,7 +145,7 @@ watch(
       initTabs()
       addTabs()
 
-      const findRoute = visitedViews.value.find((it, idx) => {
+      const findRoute = visitedViews.value.find(it => {
         if (it.path == currentRoute.path) return it
       }) as any
 
@@ -155,11 +159,27 @@ watch(
 <template>
   <div id="tabs-bar-container" class="tabs-bar-container">
     <div class="tags-view-wrapper">
-      <el-tabs v-model="state.activeName" type="card" class="tabs-content" @tab-click="handleTab">
-        <el-tab-pane v-for="tag in visitedViews" :name="tag.path" class="tags-view-item">
+      <el-tabs
+        v-model="state.activeName"
+        type="card"
+        class="tabs-content"
+        @tab-click="handleTab"
+      >
+        <el-tab-pane
+          v-for="tag in visitedViews"
+          :key="tag.path"
+          :name="tag.path"
+          class="tags-view-item"
+        >
           <template #label>
             <div class="item">
-              <component class="menu-icon" v-if="tag.meta.icon" theme="outline" strokeWidth="3" :is="tag.meta.icon" />
+              <component
+                :is="tag.meta.icon"
+                v-if="tag.meta.icon"
+                class="menu-icon"
+                theme="outline"
+                stroke-width="3"
+              />
               <span>
                 {{ tag.meta.title }}
               </span>
@@ -168,14 +188,31 @@ watch(
         </el-tab-pane>
       </el-tabs>
     </div>
-    <el-popover placement="bottom" width="auto" trigger="hover" @show="handleShow" @hide="handleHide">
+    <el-popover
+      placement="bottom"
+      width="auto"
+      trigger="hover"
+      @show="handleShow"
+      @hide="handleHide"
+    >
       <template #reference>
         <span class="more" :class="{ active: visible }" style="cursor: pointer">
-          <icon-all-application theme="filled" size="18" :strokeWidth="3" />
+          <icon-all-application theme="filled" size="18" :stroke-width="3" />
         </span>
       </template>
-      <div class="command-item" v-for="(item, index) in commandList" :key="index" @click="handleCommand(item.command)">
-        <component class="icon" theme="filled" size="14" :strokeWidth="3" :is="item.icon" />
+      <div
+        v-for="(item, index) in commandList"
+        :key="index"
+        class="command-item"
+        @click="handleCommand(item.command)"
+      >
+        <component
+          :is="item.icon"
+          class="icon"
+          theme="filled"
+          size="14"
+          :stroke-width="3"
+        />
         <span class="command-label">{{ item.text }}</span>
       </div>
     </el-popover>

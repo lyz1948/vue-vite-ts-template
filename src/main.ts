@@ -15,8 +15,14 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 
 // 自定义指令
-Object.keys(directives).forEach((key) => {
+Object.keys(directives).forEach(key => {
   app.directive(key, (directives as { [key: string]: Directive })[key])
 })
 
-app.use(store).use(router).use(baseComponent).use(iconPark).use(i18n).mount('#app')
+app
+  .use(store)
+  .use(router)
+  .use(baseComponent)
+  .use(iconPark)
+  .use(i18n)
+  .mount('#app')

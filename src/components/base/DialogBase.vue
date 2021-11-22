@@ -47,13 +47,20 @@ const handleConfirm = () => {
 </script>
 
 <template>
-  <el-dialog v-model="visibleVal" :title="title" :width="width" :before-close="handleClose">
+  <el-dialog
+    v-model="visibleVal"
+    :title="title"
+    :width="width"
+    :before-close="handleClose"
+  >
     <slot />
 
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="handleClose">{{ props.btnCancelText }}</el-button>
-        <el-button type="primary" @click="handleConfirm">{{ props.btnConfirmText }}</el-button>
+        <el-button type="primary" @click="handleConfirm">{{
+          props.btnConfirmText
+        }}</el-button>
       </span>
     </template>
   </el-dialog>

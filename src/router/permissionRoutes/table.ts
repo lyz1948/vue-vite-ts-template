@@ -10,29 +10,35 @@ const tableRouter: RouteRecordRaw[] = [
     redirect: '/table/complex-table',
     meta: {
       title: 'table',
-      icon: 'icon-remind'
+      icon: 'icon-remind',
     },
     children: [
       {
         path: 'complex-table',
         name: 'ComplexTable',
-        component: () => import(/* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
+          ),
         meta: {
           title: 'complexTable',
-          icon: 'icon-remind'
-        }
+          icon: 'icon-remind',
+        },
       },
       {
         path: 'dynamic-table2',
         name: 'ComplexTable2',
-        component: () => import(/* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
+          ),
         meta: {
           title: 'complexTable2',
-          icon: 'icon-remind'
-        }
-      }
-    ]
-  }
+          icon: 'icon-remind',
+        },
+      },
+    ],
+  },
 ]
 
 export default tableRouter

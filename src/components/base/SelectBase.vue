@@ -30,7 +30,7 @@ const props = defineProps({
   },
 })
 
-let isFirst = ref(true)
+const isFirst = ref(true)
 const state = reactive({
   tempData: ref<Array<ISelectItem>>([]),
   data: [],
@@ -56,7 +56,12 @@ watch(
 </script>
 
 <template>
-  <el-select :model-value="value" :placeholder="tip" @focus="lazyLoad" @change="handleChange">
+  <el-select
+    :model-value="value"
+    :placeholder="tip"
+    @focus="lazyLoad"
+    @change="handleChange"
+  >
     <el-option
       v-for="(item, index) in state.tempData"
       :key="item.value + '' + index"

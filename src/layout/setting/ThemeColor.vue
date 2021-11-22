@@ -10,14 +10,14 @@ const colorOptList = ref(themeColorOpts)
 const ORIGINAL_THEME = themeConfig.theme
 const emit = defineEmits(['on:change'])
 const store = useStore()
-const ctx = getCurrentInstance() as any
+const ctx = getCurrentInstance()
 const { loading } = useElement()
 
 const state = reactive({
   customerColor: '',
   curIndex: 0,
   chalk: '',
-  theme: store.state.setting.theme
+  theme: store.state.setting.theme,
 })
 
 const defaultTheme = computed(() => {
@@ -59,11 +59,11 @@ const getThemeCluster = (theme: string) => {
 }
 
 const getCSSString = (url: string, variable: string) => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const xhr = new XMLHttpRequest()
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        ;(ctx as any)[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '')
+        ctx[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '')
         resolve()
       }
     }
@@ -72,7 +72,11 @@ const getCSSString = (url: string, variable: string) => {
   })
 }
 
-const updateStyle = (style: string, oldCluster: string[], newCluster: string[]) => {
+const updateStyle = (
+  style: string,
+  oldCluster: string[],
+  newCluster: string[]
+) => {
   let newStyle = style
   oldCluster.forEach((color, index) => {
     newStyle = newStyle.replace(new RegExp(color, 'ig'), newCluster[index])
@@ -82,7 +86,10 @@ const updateStyle = (style: string, oldCluster: string[], newCluster: string[]) 
 
 const selectColor = (val, index) => {
   state.curIndex = index
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'theme', val })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'theme',
+    val,
+  })
 }
 
 watch(defaultTheme, (value: string) => {
@@ -104,8 +111,14 @@ watch(
       }
       const getHandler = (variable: string, id: string) => {
         return () => {
-          const originalCluster = getThemeCluster(ORIGINAL_THEME.replace('#', ''))
-          const newStyle = updateStyle((ctx as any)[variable], originalCluster, themeCluster)
+          const originalCluster = getThemeCluster(
+            ORIGINAL_THEME.replace('#', '')
+          )
+          const newStyle = updateStyle(
+            ctx[variable],
+            originalCluster,
+            themeCluster
+          )
           let styleTag = document.getElementById(id)
           if (!styleTag) {
             styleTag = document.createElement('style')
@@ -119,15 +132,17 @@ watch(
       const chalkHandler = getHandler('chalk', 'chalk-style')
       chalkHandler()
 
-      let styles: HTMLElement[] = [].slice.call(document.querySelectorAll('style'))
-      styles = styles.filter((style) => {
+      let styles: HTMLElement[] = [].slice.call(
+        document.querySelectorAll('style')
+      )
+      styles = styles.filter(style => {
         const text = style.innerText
         return (
           new RegExp(/--el-color-primary:#/ + oldValue, 'i').test(text) &&
           !/Chalk Variables/.test(text)
         )
       })
-      styles.forEach((style) => {
+      styles.forEach(style => {
         const { innerText } = style
         if (typeof innerText !== 'string') return
         style.innerText = updateStyle(innerText, originalCluster, themeCluster)
@@ -138,7 +153,7 @@ watch(
     }
   },
   {
-    immediate: true
+    immediate: true,
   }
 )
 </script>

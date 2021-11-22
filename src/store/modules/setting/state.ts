@@ -15,5 +15,5 @@ export const state: ISettingState = {
   menuMode: 'vertical', // 菜单模式 vertical, horizontal
   menuCollapse: false, // 当页面为左右布局时，菜单折叠状态
   routerView: true, // 是否显示路由
-  theme: '#409eff' // 皮肤颜色
+  theme: '#409eff', // 皮肤颜色
 }

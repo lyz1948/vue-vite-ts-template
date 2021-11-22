@@ -13,5 +13,6 @@ export const mutations: MutationTree<IAppState> & Mutations = {
   ) {
     state.sidebar.open = !state.sidebar.open
     // 设置cookie
+    state.sidebar.withoutAnimation = withoutAnimation
   },
 }

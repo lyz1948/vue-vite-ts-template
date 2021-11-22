@@ -10,7 +10,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "lint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\"",
-    "lint-fix": "eslint --fix --ext \"src/**/*.{ts,js,vue,json}\"",
+    "lint-fix": "eslint \"src/**/*.{ts,js,vue,json}\" --fix ",
     "format": "prettier --write \"src/**/*.{vue,ts,tsx,css,less,scss,html,json}\" "
   },
   "dependencies": {

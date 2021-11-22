@@ -12,7 +12,18 @@ export enum codeStatus {
   NOT_SUPPORT = 'HTTP版本不受支持(505)',
 }
 
-type CodeKey = 400 | 401 | 403 | 404 | 408 | 500 | 501 | 502 | 503 | 504 | 505
+export type CodeKey =
+  | 400
+  | 401
+  | 403
+  | 404
+  | 408
+  | 500
+  | 501
+  | 502
+  | 503
+  | 504
+  | 505
 
 const codeKeys = {
   400: '请求错误(400)',

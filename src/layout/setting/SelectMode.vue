@@ -14,17 +14,24 @@ const menuMode = computed(() => {
 })
 
 const changeMenuMode = (item: ISelectItem) => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'menuMode', val: item.value })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'menuMode',
+    val: item.value,
+  })
 }
 
 watch(
   () => menuMode.value,
-  (val) => {
+  val => {
     modeVal.value = val
   }
 )
 </script>
 
 <template>
-  <SelectBase :list="modeOptList" v-model:value="modeVal" @on:select="changeMenuMode" />
+  <SelectBase
+    v-model:value="modeVal"
+    :list="modeOptList"
+    @on:select="changeMenuMode"
+  />
 </template>

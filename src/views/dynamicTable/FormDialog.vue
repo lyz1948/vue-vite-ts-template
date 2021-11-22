@@ -15,15 +15,15 @@ const formState = () => ({
   auditRole: '', // 角色名字
   singleGroupAuditRole: '', //  角色id
   showCustomerInfo: true,
-  isEnable: true
+  isEnable: true,
 })
 const state = reactive({
   form: formState(),
   loading: false,
   rules: {
     name: [{ required: true, message: '名字不能为空', trigger: 'blur' }],
-    auditRole: [{ required: true, message: '角色不能为空', trigger: 'blur' }]
-  }
+    auditRole: [{ required: true, message: '角色不能为空', trigger: 'blur' }],
+  },
 })
 
 const changeRole = (val: ISelectItem) => {
@@ -60,7 +60,7 @@ const handleConfirm = async () => {
 
 defineExpose({
   show,
-  edit
+  edit,
 })
 </script>
 
@@ -71,17 +71,30 @@ defineExpose({
     @update:visible="visibleDialog = $event"
     @update:confirm="handleConfirm"
   >
-    <FormBase ref="formRef" :form="state.form" :rules="state.rules" label-width="160px">
+    <FormBase
+      ref="formRef"
+      :form="state.form"
+      :rules="state.rules"
+      label-width="160px"
+    >
       <FormItemBase prop="name" label="角色名称">
         <InputBase v-model:value="state.form.name" />
       </FormItemBase>
 
       <FormItemBase prop="auditRole" label="审核角色">
-        <SelectBase v-model:value="state.form.auditRole" type="auditRole" @on:select="changeRole" />
+        <SelectBase
+          v-model:value="state.form.auditRole"
+          type="auditRole"
+          @on:select="changeRole"
+        />
       </FormItemBase>
 
       <FormItemBase label="备注">
-        <InputBase v-model:value="state.form.remarks" :rows="4" type="textarea" />
+        <InputBase
+          v-model:value="state.form.remarks"
+          :rows="4"
+          type="textarea"
+        />
       </FormItemBase>
 
       <FormItemBase label="启用状态">

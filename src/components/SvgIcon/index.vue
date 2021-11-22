@@ -3,16 +3,16 @@ import { computed } from 'vue'
 const props = defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   color: {
     type: String,
-    default: ''
+    default: '',
   },
   size: {
     type: String,
-    default: '14px'
-  }
+    default: '14px',
+  },
 })
 
 const iconName = computed(() => `#icon-${props.name}`)

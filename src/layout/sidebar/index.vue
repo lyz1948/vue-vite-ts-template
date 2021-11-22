@@ -61,7 +61,11 @@ const activeMenu = computed(() => {
       >
         <template v-for="route in routes">
           <template v-if="!route.meta || !route.meta.hidden">
-            <SidebarItem :item="route" :key="route.path" :base-path="route.path" />
+            <SidebarItem
+              :key="route.path"
+              :item="route"
+              :base-path="route.path"
+            />
           </template>
         </template>
       </el-menu>

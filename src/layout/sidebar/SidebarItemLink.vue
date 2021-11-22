@@ -5,8 +5,8 @@ import { useRouter } from 'vue-router'
 const props = defineProps({
   to: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const router = useRouter()
@@ -20,16 +20,10 @@ const push = () => {
 </script>
 
 <template>
-  <a
-    v-if="isExternal(to)"
-    :href="to"
-  >
+  <a v-if="isExternal(to)" :href="to">
     <slot />
   </a>
-  <div
-    v-else
-    @click.prevent="push"
-  >
+  <div v-else @click.prevent="push">
     <slot />
   </div>
 </template>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import screenfull from 'screenfull'
-import { ElMessage } from 'element-plus'
+import useElement from '@/utils/useElement'
 
 defineProps({
   icon: {
@@ -14,9 +13,10 @@ defineProps({
   },
 })
 
+const { warning } = useElement()
 const handleScreenFull = () => {
   if (!screenfull.isEnabled) {
-    ElMessage.warning('糟糕，无法全屏！')
+    warning('糟糕，无法全屏！')
     return false
   } else {
     screenfull.toggle()
@@ -27,7 +27,13 @@ const handleScreenFull = () => {
 <template>
   <div class="screen-full" @click="handleScreenFull">
     <el-link>
-      <component title="fullscreen" theme="outline" size="16" :stroke-width="4" :is="icon" />
+      <component
+        :is="icon"
+        title="fullscreen"
+        theme="outline"
+        size="16"
+        :stroke-width="4"
+      />
     </el-link>
   </div>
 </template>

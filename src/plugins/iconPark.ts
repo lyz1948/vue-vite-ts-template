@@ -51,8 +51,8 @@ export const components = [
 ]
 
 export default (app: ReturnType<typeof createApp>) => {
-  app.component('svg-icon', SvgIcon)
-  components.forEach((component) => {
+  app.component('SvgIcon', SvgIcon)
+  components.forEach(component => {
     app.component(component.name, component)
   })
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, watch } from 'vue'
+import { computed, onBeforeMount, watch } from 'vue'
 import { useRoute, useRouter, RouteLocationMatched } from 'vue-router'
 import { compile } from 'path-to-regexp'
 
@@ -17,13 +17,13 @@ const isDashboard = (route: RouteLocationMatched) => {
 }
 
 const getBreadcrumb = () => {
-  let matched = currentRoute.matched.filter((item) => item.meta && item.meta.title)
+  let matched = currentRoute.matched.filter(item => item.meta && item.meta.title)
 
   const frist = matched[0]
   if (!isDashboard(frist)) {
     matched = [{ path: '/dashboard', meta: { title: 'dashboard' } } as any].concat(matched)
   }
-  breadcrumbs = matched.filter((item) => {
+  breadcrumbs = matched.filter(item => {
     return item.meta && item.meta.title && item.meta.breadcrumb !== false
   })
 }
@@ -35,12 +35,12 @@ const pathCompile = (path: string) => {
 const handleLink = (item: any) => {
   const { redirect, path } = item
   if (redirect) {
-    router.push(redirect).catch((err) => {
+    router.push(redirect).catch(err => {
       console.error(err)
     })
   }
 
-  router.push(pathCompile(path) as any).catch((err) => {
+  router.push(pathCompile(path) as any).catch(err => {
     console.error(err)
   })
 }
@@ -51,7 +51,7 @@ const getBreadcrumbs = computed(() => {
 
 watch(
   () => currentRoute.path,
-  (path) => {
+  path => {
     if (path.startsWith('/redirect/')) {
       return
     }

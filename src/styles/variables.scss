@@ -103,7 +103,8 @@ $base-margin-20: 20px;
 $base-margin-20: 25px;
 
 //默认动画
-$base-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s, background 0s, color 0s, font-size 0s;
+$base-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s,
+  background 0s, color 0s, font-size 0s;
 //默认动画长
 $base-transition-time: 0.3s;
 $base-transition-time-4: 0.4s;

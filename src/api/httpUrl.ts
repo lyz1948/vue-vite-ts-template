@@ -1,5 +1,3 @@
-import { IApi } from '@/types'
-
 const httpApi = {
   // 测试接口
   banner: '/home/banner', // banner

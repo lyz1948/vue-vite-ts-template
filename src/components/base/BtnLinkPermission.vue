@@ -50,7 +50,12 @@ const handleClick = () => {
         <BtnLinkBase v-permission="auth" :name="getAuthLabel" />
       </template>
     </el-popconfirm>
-    <BtnLinkBase v-else v-permission="auth" :name="getAuthLabel" @click="handleClick" />
+    <BtnLinkBase
+      v-else
+      v-permission="auth"
+      :name="getAuthLabel"
+      @click="handleClick"
+    />
   </span>
 </template>
 

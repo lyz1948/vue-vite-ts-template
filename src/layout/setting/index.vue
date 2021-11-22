@@ -2,15 +2,15 @@
 import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import ThemeColor from './ThemeColor.vue'
 import { ISelectItem } from '@/types'
 import { modeOpts } from '@/config/setting'
+import ThemeColor from './ThemeColor.vue'
 
 defineProps({
   direction: {
     type: String,
-    default: 'rtl'
-  }
+    default: 'rtl',
+  },
 })
 
 const store = useStore()
@@ -19,7 +19,7 @@ const modeOptList = ref(modeOpts)
 const state = reactive({
   fixHead: store.state.setting.fixHead,
   fixTagView: store.state.setting.fixTagView,
-  visibleSetting: store.state.setting.visibleSetting
+  visibleSetting: store.state.setting.visibleSetting,
 })
 const visible = ref(false)
 const modeVal = ref(store.state.setting.menuMode)
@@ -37,28 +37,43 @@ const settingStatus = computed(() => {
 })
 
 const handleClose = () => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'setting', val: false })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'setting',
+    val: false,
+  })
 }
 
 const changFixHead = (val: boolean) => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'fixHead', val })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'fixHead',
+    val,
+  })
 }
 
 const changeTagView = (val: boolean) => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'fixTagView', val })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'fixTagView',
+    val,
+  })
 }
 
 const changeMenuMode = ({ value }: ISelectItem) => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'menuMode', val: value })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'menuMode',
+    val: value,
+  })
 }
 
 const changeTheme = (val: string) => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'theme', val })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'theme',
+    val,
+  })
 }
 
 watch(
   () => settingStatus.value,
-  (val) => {
+  val => {
     visible.value = val
   },
   { immediate: true }
@@ -76,7 +91,11 @@ watch(
     >
       <div class="setting-item">
         <span class="label">Menu Mode</span>
-        <SelectBase :list="modeOptList" v-model:value="modeVal" @on:select="changeMenuMode" />
+        <SelectBase
+          v-model:value="modeVal"
+          :list="modeOptList"
+          @on:select="changeMenuMode"
+        />
         <!-- <SelectMode /> -->
       </div>
       <div class="setting-item">

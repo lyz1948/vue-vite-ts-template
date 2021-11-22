@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { RoleColumn } from '@/config/table'
 import FormDialog from './FormDialog.vue'
 
@@ -9,14 +9,14 @@ const dialogRef = ref(null)
 const searchVal = ref('')
 const state = reactive({
   tableData: [],
-  total: 0
+  total: 0,
 })
 
-const handlePage = (page) => {
+const handlePage = page => {
   console.log('pageNum, pageSize:', page)
 }
 
-const changeVal = (val) => {
+const changeVal = val => {
   searchVal.value = val
 }
 
@@ -36,7 +36,12 @@ const handleDelete = (row: any) => {
 <template>
   <div>
     <FormDialog ref="dialogRef" />
-    <TableBase :data="state.tableData" :columns="RoleColumn" :totalCount="state.total" @update:page="handlePage">
+    <TableBase
+      :data="state.tableData"
+      :columns="RoleColumn"
+      :total-count="state.total"
+      @update:page="handlePage"
+    >
       <template #title>
         <h3>{{ TABLE_TITLE }}</h3>
       </template>
@@ -44,10 +49,18 @@ const handleDelete = (row: any) => {
       <template #headerHandler>
         <FormBase :inline="true">
           <FormItemBase label="姓名">
-            <InputBase :value="searchVal" tip="搜索：角色名称" @change="changeVal" />
+            <InputBase
+              :value="searchVal"
+              tip="搜索：角色名称"
+              @change="changeVal"
+            />
           </FormItemBase>
           <FormItemBase label="账号">
-            <InputBase :value="searchVal" tip="搜索：账号" @change="changeVal" />
+            <InputBase
+              :value="searchVal"
+              tip="搜索：账号"
+              @change="changeVal"
+            />
           </FormItemBase>
         </FormBase>
         <BtnBase type="search" />

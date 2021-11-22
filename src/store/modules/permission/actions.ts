@@ -17,7 +17,7 @@ type AugmentedActionContext = {
 // 校验权限
 const hasPermission = (route: RouteRecordRaw, roles: string[]) => {
   if (route.meta && route.meta.roles) {
-    return roles.some(role => {
+    return roles.some(() => {
       if (route.meta?.roles !== undefined) {
         return true
         // return route.meta?.roles.includs(role)
@@ -52,7 +52,7 @@ export interface IActions {
 
 export const actions: ActionTree<IPermissionState, IRootState> & IActions = {
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {
-    let asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
+    const asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
     console.log('asyncRoutes')
 
     commit(PermissionMutationTypes.SET_ROUTER, asyncRoutes)

@@ -20,7 +20,9 @@ const isOpen = computed(() => {
 </script>
 
 <template>
-  <div :class="['layout', { 'is-horizonal': isHorizonal, 'is-collapse': !isOpen }]">
+  <div
+    :class="['layout', { 'is-horizonal': isHorizonal, 'is-collapse': !isOpen }]"
+  >
     <div class="layout-sidebar">
       <div class="layout-sidebar-wrapper">
         <VLogo />

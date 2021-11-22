@@ -18,11 +18,17 @@ const store = useStore()
 const activeName = ref('first')
 
 const showSetting = () => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'setting', val: true })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'setting',
+    val: true,
+  })
 }
 
 const handleRefresh = () => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, { type: 'refresh', val: '' })
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'refresh',
+    val: '',
+  })
 }
 </script>
 
@@ -48,7 +54,9 @@ const handleRefresh = () => {
               <el-tab-pane label="系统消息5" name="first">
                 <Cell :list="noticeList" />
               </el-tab-pane>
-              <el-tab-pane label="订单消息" name="second"> 暂无消息 </el-tab-pane>
+              <el-tab-pane label="订单消息" name="second">
+                暂无消息
+              </el-tab-pane>
             </el-tabs>
           </div>
         </template>
