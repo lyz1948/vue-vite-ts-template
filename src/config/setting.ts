@@ -1,12 +1,12 @@
 export const modeOpts = [
   {
     value: 'vertical',
-    label: 'Vertical',
+    label: 'Vertical'
   },
   {
     value: 'horizontal',
-    label: 'Horizontal',
-  },
+    label: 'Horizontal'
+  }
 ]
 
 export const themeColorOpts = ['#43a9be', '#f85f47', '#fb748b', '#6273d9', '#409EFF', '#f5222d']
@@ -17,7 +17,7 @@ const themeOptions = {
   theme3: { menuBgColor: '#ffffff', primary: '#08a17e' },
   theme4: { menuBgColor: '#293246', primary: '#08a17e' },
   theme5: { menuBgColor: '#ffffff', primary: '#f45555' },
-  theme6: { menuBgColor: '#293246', primary: '#f45555' },
+  theme6: { menuBgColor: '#293246', primary: '#f45555' }
 }
 export const themeConfig = {
   // 模式 horizontal / vertical
@@ -25,7 +25,7 @@ export const themeConfig = {
   // 主题 默认配置theme1
   // 注意⚠️ ：修改默认主题时，记得同步修改 element-variables.scss
   // 文件中的 $base-color-primary 默认值，否则不生效！！！
-  theme: '#43a9be',
+  theme: '#409EFF',
   // 主题配置
   themeOptions,
   // 是否固定头部
@@ -43,5 +43,5 @@ export const themeConfig = {
   // 是否显示标签
   tag: true,
   // 是否展开菜单
-  collapse: false,
+  collapse: false
 }

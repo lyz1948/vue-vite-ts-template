@@ -10,7 +10,7 @@ import * as directives from './directives'
 import './permission'
 import 'normalize.css'
 import 'element-plus/dist/index.css'
-// import 'element-plus/theme-chalk/display.css'
+// import './styles/element-variables.scss'
 
 const app = createApp(App)
 
