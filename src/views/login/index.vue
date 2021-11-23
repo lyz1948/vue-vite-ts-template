@@ -88,16 +88,16 @@ $white: #fff;
       display: flex;
       flex-direction: column;
       width: 50vw;
-      height: 100%;
+      height: 80%;
       background-image: url('@/assets/login-bg-dark.svg');
       background-repeat: no-repeat;
       background-position: 100%;
       background-size: auto 100%;
       &-wrap {
-        height: 80vh;
+        height: 60vh;
         margin: auto;
         .img {
-          width: 560px;
+          width: 460px;
           margin-top: 10vh;
         }
         .title,
