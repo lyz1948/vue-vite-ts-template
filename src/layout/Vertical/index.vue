@@ -5,17 +5,33 @@ import VLogo from '../logo.vue'
 import VHeader from '../header/index.vue'
 import AppMain from '../appMain/index.vue'
 import VSidebar from '../sidebar/index.vue'
-import TagViews from '../tagViews/index.vue'
+import TabViews from '../tabViews/index.vue'
 
 const store = useStore()
 
 const isOpen = computed(() => {
   return store.state.app.sidebar.open
 })
+
+const isFixHeader = computed(() => {
+  return store.state.setting.fixHead
+})
+
+const isShowTab = computed(() => {
+  return store.state.setting.visibleTab
+})
+
+const getStyle = computed(() => {
+  if (isFixHeader.value) {
+    return isShowTab.value ? `margin-top: 120px` : `margin-top: 60px`
+  }
+  console.log('da')
+  return 'margin-top: 0'
+})
 </script>
 
 <template>
-  <div :class="['layout is-vertical', { 'is-collapse': !isOpen }]">
+  <div :class="['layout is-vertical', { 'is-collapse': !isOpen, 'is-fix-header': isFixHeader }]">
     <div class="layout-sidebar">
       <el-scrollbar>
         <VLogo />
@@ -24,9 +40,11 @@ const isOpen = computed(() => {
     </div>
     <div class="layout-body">
       <el-scrollbar>
-        <VHeader />
-        <TagViews />
-        <div class="layout-main">
+        <div class="layout-top-bar">
+          <VHeader />
+          <TabViews v-if="isShowTab" />
+        </div>
+        <div class="layout-main" :style="getStyle">
           <AppMain />
         </div>
         <el-scrollbar />
@@ -38,8 +56,20 @@ const isOpen = computed(() => {
 <style lang="scss">
 .layout {
   display: flex;
+
   &.is-vertical {
     height: 100vh;
+
+    &.is-fix-header {
+      .layout-top-bar {
+        position: fixed;
+        top: 0;
+        left: $base-menu-width;
+        right: 0;
+        z-index: $base-z-index-default;
+        background-color: #fff;
+      }
+    }
     .layout-sidebar {
       width: $base-menu-width;
       border-right: 1px solid #e1e2e7;
