@@ -71,7 +71,7 @@ export default {
     tag: 'Tag',
     breadcurmb: 'Breadcurmb',
     fixHead: 'Fixed Header',
-    fixTabView: 'Fixed Tab',
+    visibleTab: 'Visible Tab',
     fullscreen: 'Fuscreen',
     refresh: 'Refresh',
     notice: 'Notice',

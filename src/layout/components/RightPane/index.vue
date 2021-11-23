@@ -14,8 +14,6 @@ defineProps({
     default: '#666',
   },
 })
-
-
 </script>
 
 <template>

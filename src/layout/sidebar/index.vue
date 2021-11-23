@@ -48,29 +48,25 @@ const activeMenu = computed(() => {
 </script>
 
 <template>
-  <div class="sidebar-menu-container">
-    <el-scrollbar>
-      <el-menu
-        class="sidebar-menu"
-        :mode="getMenuMode"
-        :active="activeMenu"
-        :collapse="isCollapse"
-        :default-active="defaultActive"
-        :active-text-color="menuTextActiveColor"
-        :collapse-transition="true"
-      >
-        <template v-for="route in routes">
-          <template v-if="!route.meta || !route.meta.hidden">
-            <SidebarItem
-              :key="route.path"
-              :item="route"
-              :base-path="route.path"
-            />
-          </template>
-        </template>
-      </el-menu>
-    </el-scrollbar>
-  </div>
+  <el-menu
+    class="sidebar-menu"
+    :mode="getMenuMode"
+    :active="activeMenu"
+    :collapse="isCollapse"
+    :default-active="defaultActive"
+    :active-text-color="menuTextActiveColor"
+    :collapse-transition="true"
+  >
+    <template v-for="route in routes">
+      <template v-if="!route.meta || !route.meta.hidden">
+        <SidebarItem
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
+      </template>
+    </template>
+  </el-menu>
 </template>
 
 <style lang="scss" scope>
@@ -83,10 +79,6 @@ const activeMenu = computed(() => {
 </style>
 
 <style lang="scss">
-.sidebar-menu-container {
-  height: calc(100vh - $base-logo-height);
-  @include scrollbar();
-}
 .is-collapse {
   .sidebar-menu {
     width: $base-unfold-width;

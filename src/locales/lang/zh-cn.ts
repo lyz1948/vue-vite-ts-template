@@ -62,7 +62,7 @@ export default {
     tag: '标签',
     breadcurmb: '面包导航',
     fixHead: '固定头部',
-    fixTabView: '固定标签页',
+    visibleTab: '显示标签页',
     fullscreen: '全屏',
     refresh: '刷新',
     notice: '通知',

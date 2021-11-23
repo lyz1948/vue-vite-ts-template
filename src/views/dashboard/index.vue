@@ -1,7 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>Dashboard</h1>
+  <div class="home">
+    <h1>Dashboard</h1>
+  </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.home {
+  height: 2000px;
+}
+</style>

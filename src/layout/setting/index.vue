@@ -20,22 +20,22 @@ const modeOptList = ref(modeOpts)
 
 const state = reactive({
   fixHead: store.state.setting.fixHead,
-  fixTagView: store.state.setting.fixTagView,
-  visibleSetting: store.state.setting.visibleSetting,
+  visibleTab: store.state.setting.visibleTab,
+  setting: store.state.setting.setting,
 })
 const visible = ref(false)
 const modeVal = ref(store.state.setting.menuMode)
 
-const getFixHeadVal = computed(() => {
+const fixHeadVal = computed(() => {
   return state.fixHead
 })
 
-const getFixTagVal = computed(() => {
-  return state.fixTagView
+const visibleTabVal = computed(() => {
+  return state.visibleTab
 })
 
 const settingStatus = computed(() => {
-  return store.state.setting.visibleSetting
+  return store.state.setting.setting
 })
 
 const handleClose = () => {
@@ -54,7 +54,7 @@ const changFixHead = (val: boolean) => {
 
 const changeTagView = (val: boolean) => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
-    type: 'fixTagView',
+    type: 'visibleTab',
     val,
   })
 }
@@ -94,7 +94,6 @@ watch(
       <div class="setting-item">
         <span class="label">{{ t('settings.layout') }}</span>
         <SelectBase v-model:value="modeVal" :list="modeOptList" @on:select="changeMenuMode" />
-        <!-- <SelectMode /> -->
       </div>
       <div class="setting-item">
         <span class="label">{{ t('settings.theme') }}</span>
@@ -102,11 +101,11 @@ watch(
       </div>
       <div class="setting-item">
         <span class="label">{{ t('settings.fixHead') }}</span>
-        <el-switch v-model="getFixHeadVal" @change="changFixHead" />
+        <el-switch v-model="state.fixHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.fixTabView') }}</span>
-        <el-switch v-model="getFixTagVal" @change="changeTagView" />
+        <span class="label">{{ t('settings.visibleTab') }}</span>
+        <el-switch v-model="state.visibleTab" @change="changeTagView" />
       </div>
     </el-drawer>
   </div>

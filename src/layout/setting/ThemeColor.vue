@@ -152,9 +152,9 @@ watch(
       loadingInstance.close()
     }
   },
-  {
-    immediate: true,
-  }
+  // {
+  //   immediate: true,
+  // }
 )
 </script>
 

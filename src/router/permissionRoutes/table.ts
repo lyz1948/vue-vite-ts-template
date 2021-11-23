@@ -25,6 +25,42 @@ const tableRouter: RouteRecordRaw[] = [
           icon: 'icon-remind',
         },
       },
+      {
+        path: 'component2',
+        name: 'TableComponent2',
+        component: () =>
+          import(
+            /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
+          ),
+        meta: {
+          title: 'tableComponent',
+          icon: 'icon-remind',
+        },
+      },
+      {
+        path: 'component3',
+        name: 'TableComponent2',
+        component: () =>
+          import(
+            /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
+          ),
+        meta: {
+          title: 'tableComponent',
+          icon: 'icon-remind',
+        },
+      },
+      {
+        path: 'component4',
+        name: 'TableComponent2',
+        component: () =>
+          import(
+            /* webpackChunkName: "dynamicTable" */ '@/views/dynamicTable/index.vue'
+          ),
+        meta: {
+          title: 'tableComponent',
+          icon: 'icon-remind',
+        },
+      },
     ],
   },
 ]

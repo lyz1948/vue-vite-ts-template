@@ -108,11 +108,14 @@ const resolvePath = (routePath: string) => {
   }
 }
 .is-horizonal {
+  .el-menu.el-menu--horizontal {
+    border-bottom: none !important;
+    padding: 0 20px;
+  }
   .el-menu {
     .el-menu-item {
       &.is-active {
         border-right: none;
-        border-bottom: 3px solid $base-color-primary-light1 !important;
         background-color: transparent !important;
       }
     }
@@ -121,15 +124,5 @@ const resolvePath = (routePath: string) => {
 </style>
 
 <style lang="scss" scoped>
-.el-menu {
-  .el-menu-item {
-    .i-icon {
-      margin-right: 5px;
-    }
-    &.is-active {
-      border-right: 3px solid $base-color-primary;
-      background: $base-color-primary-light9 !important;
-    }
-  }
-}
+
 </style>

@@ -28,13 +28,14 @@ const themeOptions = {
 }
 export const themeConfig = {
   // 模式 horizontal / vertical
-  mode: 'vertical',
+  menuMode: 'horizontal',
   // 主题 默认配置theme1
   // 注意⚠️ ：修改默认主题时，记得同步修改 element-variables.scss
   // 文件中的 $base-color-primary 默认值，否则不生效！！！
   theme: '#409EFF',
   // 主题配置
   themeOptions,
+  setting: false,
   // 是否固定头部
   fixedHead: true,
   // 是否显示全屏
@@ -44,11 +45,11 @@ export const themeConfig = {
   // 是否显示通知
   notice: true,
   // 是否显示面包导航
-  isBreadcrumb: true,
+  visibleBreadcrumb: true,
   // 是否显示logo
-  isLogo: true,
+  visibleLogo: true,
   // 是否显示标签
-  tag: true,
+  visibleTab: true,
   // 是否展开菜单
   collapse: false,
 }
