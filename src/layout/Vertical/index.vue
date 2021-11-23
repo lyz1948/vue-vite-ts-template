@@ -21,11 +21,14 @@ const isShowTab = computed(() => {
   return store.state.setting.visibleTab
 })
 
+const isShowLogo = computed(() => {
+  return store.state.setting.visibleLogo
+})
+
 const getStyle = computed(() => {
   if (isFixHeader.value) {
     return isShowTab.value ? `margin-top: 120px` : `margin-top: 60px`
   }
-  console.log('da')
   return 'margin-top: 0'
 })
 </script>
@@ -34,7 +37,7 @@ const getStyle = computed(() => {
   <div :class="['layout is-vertical', { 'is-collapse': !isOpen, 'is-fix-header': isFixHeader }]">
     <div class="layout-sidebar">
       <el-scrollbar>
-        <VLogo />
+        <VLogo v-if="isShowLogo" />
         <VSidebar />
       </el-scrollbar>
     </div>

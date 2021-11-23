@@ -84,7 +84,12 @@ const resolvePath = (routePath: string) => {
 
   <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
-      <component :is="item.meta.icon" theme="outline" stroke-width="3" />
+      <component
+        :is="item.meta.icon"
+        v-if="item.meta"
+        theme="outline"
+        stroke-width="3"
+      />
       <span v-if="item.meta">{{ t('route.' + item.meta.title) }}</span>
     </template>
     <template v-if="item.children">
