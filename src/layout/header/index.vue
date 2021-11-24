@@ -33,7 +33,7 @@ const toggleSidebar = () => {
 .header-container {
   display: flex;
   justify-content: space-between;
-  border-bottom: $base-border-width-mini solid #fafbff;
+  border-bottom: $base-border-width-mini solid #eaebf3;
   height: $base-head-menu-height;
   padding: 0 $base-padding;
 

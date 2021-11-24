@@ -24,6 +24,7 @@ import {
   ToLeft,
   ToRight,
   Translate,
+  Table,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 
@@ -52,7 +53,8 @@ export const components = [
   Wechat,
   Alipay,
   Github,
-  Translate
+  Translate,
+  Table,
 ]
 
 export default (app: ReturnType<typeof createApp>) => {

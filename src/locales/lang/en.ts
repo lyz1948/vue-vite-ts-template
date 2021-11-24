@@ -52,8 +52,6 @@ export default {
   },
   theme: {
     change: 'Change Theme',
-    documentation: 'Theme documentation',
-    tips: 'Tips: It is different from the theme-pick on the navbar is two different skinning methods, each with different application scenarios. Refer to the documentation for details.',
     loading: 'Theme change loading...',
   },
   tagsView: {
@@ -105,6 +103,10 @@ export default {
     envTitle: 'Production environments depend on information',
     chartTitle: 'Smoothed Line Chart',
   },
+  componentPage: {
+    title: 'Component',
+    table: 'Table',
+  },
   errorPages: {
     title: 'Sorry!',
     btn: 'Back Home',
@@ -127,7 +129,8 @@ export default {
     confirm: 'Confirm',
     cancel: 'Cancel',
     search: 'Search',
-    create: 'Create'
+    create: 'Create',
+    back: 'Back Home'
   },
 
 }

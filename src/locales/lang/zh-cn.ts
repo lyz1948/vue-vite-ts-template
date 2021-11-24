@@ -96,6 +96,12 @@ export default {
     envTitle: '生产环境依赖信息',
     chartTitle: '基础平滑折线图',
   },
+
+  componentPage: {
+    title: '组件',
+    table: '表格'
+  },
+
   errorPages: {
     title: '抱歉!',
     btn: '返回首页',

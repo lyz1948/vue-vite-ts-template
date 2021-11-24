@@ -7,6 +7,7 @@ const userRoutes: Array<RouteRecordRaw> = [
     name: 'Login',
     meta: {
       title: '登录',
+      icon: 'icon-remind',
       hidden: true,
     },
   },
@@ -16,6 +17,7 @@ const userRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/views/errorPage/401.vue'),
     meta: {
       title: '401',
+      icon: 'icon-remind',
       hidden: true,
     },
   },
@@ -25,6 +27,7 @@ const userRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/views/errorPage/404.vue'),
     meta: {
       title: '404',
+      icon: 'icon-remind',
       hidden: true,
     },
   },
