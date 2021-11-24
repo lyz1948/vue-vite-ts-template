@@ -25,6 +25,9 @@ import {
   ToRight,
   Translate,
   Table,
+  Bug,
+  Shield,
+  FolderBlock,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 
@@ -55,6 +58,9 @@ export const components = [
   Github,
   Translate,
   Table,
+  Bug,
+  Shield,
+  FolderBlock,
 ]
 
 export default (app: ReturnType<typeof createApp>) => {

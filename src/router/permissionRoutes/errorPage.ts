@@ -10,7 +10,7 @@ const tableRouter: RouteRecordRaw[] = [
     redirect: '/error/401',
     meta: {
       title: 'errorPages',
-      icon: 'icon-remind',
+      icon: 'icon-folder-block',
     },
     children: [
       {
@@ -22,7 +22,7 @@ const tableRouter: RouteRecordRaw[] = [
           ),
         meta: {
           title: 'page401',
-          icon: 'icon-remind',
+          icon: 'icon-shield',
         },
       },
       {
@@ -34,7 +34,7 @@ const tableRouter: RouteRecordRaw[] = [
           ),
         meta: {
           title: 'page404',
-          icon: 'icon-remind',
+          icon: 'icon-bug',
         },
       },
     ],

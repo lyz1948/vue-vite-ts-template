@@ -73,6 +73,13 @@ const changeTheme = (val: string) => {
   })
 }
 
+const visibleLogo = (val: string) => {
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'visibleLogo',
+    val,
+  })
+}
+
 watch(
   () => settingStatus.value,
   val => {
@@ -100,11 +107,15 @@ watch(
         <ThemeColor @on:change="changeTheme" />
       </div>
       <div class="setting-item">
+        <span class="label">{{ t('settings.logo') }}</span>
+        <el-switch v-model="state.visibleLogo" @change="visibleLogo" />
+      </div>
+      <div class="setting-item">
         <span class="label">{{ t('settings.fixHead') }}</span>
         <el-switch v-model="state.fixHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.visibleTab') }}</span>
+        <span class="label">{{ t('settings.tab') }}</span>
         <el-switch v-model="state.visibleTab" @change="changeTagView" />
       </div>
     </el-drawer>

@@ -66,7 +66,7 @@ export default {
     layout: 'Menu Layout',
     theme: 'Theme',
     logo: 'Logo',
-    tag: 'Tag',
+    tab: 'Tab View',
     breadcurmb: 'Breadcurmb',
     fixHead: 'Fixed Header',
     visibleTab: 'Visible Tab',

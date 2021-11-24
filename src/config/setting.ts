@@ -47,7 +47,7 @@ export const themeConfig = {
   // 是否显示面包导航
   visibleBreadcrumb: true,
   // 是否显示logo
-  visibleLogo: false,
+  visibleLogo: true,
   // 是否显示标签
   visibleTab: true,
   // 是否展开菜单

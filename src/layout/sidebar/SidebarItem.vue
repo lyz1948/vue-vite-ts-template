@@ -105,13 +105,20 @@ const resolvePath = (routePath: string) => {
 </template>
 
 <style lang="scss">
+.el-sub-menu.is-active .el-sub-menu__title {
+  .i-icon {
+    margin-right: 5px !important;
+  }
+}
 .el-menu--collapse > .el-sub-menu > .el-sub-menu__title span {
   &.i-icon {
     height: 14px !important;
     width: 14px !important;
+    margin-right: 5px !important;
     visibility: visible !important;
   }
 }
+
 .is-horizonal {
   .el-menu.el-menu--horizontal {
     border-bottom: none !important;
@@ -126,8 +133,4 @@ const resolvePath = (routePath: string) => {
     }
   }
 }
-</style>
-
-<style lang="scss" scoped>
-
 </style>
