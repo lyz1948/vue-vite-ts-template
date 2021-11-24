@@ -1,6 +1,6 @@
-import { themeConfig } from '@/config/setting'
+import { settingConfig } from '@/config/setting'
 
-const { menuMode, theme, collapse, fixedHead, visibleTab, visibleLogo, visibleBreadcrumb } = themeConfig
+const { menuMode, theme, collapse, fixedHead, visibleTab, visibleLogo, visibleBreadcrumb } = settingConfig
 export interface ISettingState {
   setting: boolean
   fixHead: boolean

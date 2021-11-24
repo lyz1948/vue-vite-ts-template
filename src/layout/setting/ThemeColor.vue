@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { reactive, ref, computed, watch, getCurrentInstance } from 'vue'
-import { themeColorOpts, themeConfig } from '@/config/setting'
+import { themeColorOpts, settingConfig } from '@/config/setting'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import useElement from '@/utils/useElement'
 // const version = require('element-plus/package.json').version // element-ui version from node_modules
 
 const colorOptList = ref(themeColorOpts)
-const ORIGINAL_THEME = themeConfig.theme
+const ORIGINAL_THEME = settingConfig.theme
 const emit = defineEmits(['on:change'])
 const store = useStore()
 const ctx = getCurrentInstance()

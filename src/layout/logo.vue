@@ -2,6 +2,7 @@
 import { useStore } from '@/store/index'
 import { AppActionTypes } from '@/store/modules/app/action-types'
 import { computed } from 'vue'
+import { settingConfig } from '@/config/setting'
 
 import logPng from '@/assets/logo.png'
 const store = useStore()
@@ -18,7 +19,7 @@ const isOpen = computed(() => {
 <template>
   <div class="logo" @click="toggle">
     <el-image class="logo-image" :src="logPng" fit="contain" />
-    <span v-if="isOpen" class="logo-text">VUE ADMIN</span>
+    <span v-if="isOpen" class="logo-text">{{ settingConfig.title }}</span>
   </div>
 </template>
 

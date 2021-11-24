@@ -7,6 +7,7 @@ import { RouteLocationNormalized } from 'vue-router'
 import { RouteWhiteList } from './config/index'
 import { PermissionActionTypes } from './store/modules/permission/action-types'
 import { UserActionTypes } from './store/modules/user/action-types'
+import { settingConfig } from '@/config/setting'
 let isFirst = true
 
 router.beforeEach(
@@ -49,6 +50,7 @@ router.beforeEach(
         }
       }
     }
+    document.title = to.meta.title + '-' + settingConfig.title
   }
 )
 

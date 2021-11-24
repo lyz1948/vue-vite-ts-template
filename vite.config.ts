@@ -1,13 +1,10 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
-// import VitePluginElementPlus from 'vite-plugin-element-plus'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
 import { ServerConf } from './src/config'
-// 或者使用 unplugin-element-plus
-// import ElementPlus from 'unplugin-element-plus/vite'
 
 const { host, port } = ServerConf
 

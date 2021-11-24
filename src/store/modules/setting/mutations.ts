@@ -1,9 +1,9 @@
 import { MutationTree } from 'vuex'
 import { ISettingState } from './state'
 import { SettingMutationTypes } from './mutation-types'
-import { themeConfig } from '@/config/setting'
+import { settingConfig } from '@/config/setting'
 
-type themeKeys = typeof themeConfig
+type themeKeys = typeof settingConfig
 export type Mutations<S = ISettingState> = {
   [SettingMutationTypes.UPDATE_SETTING](
     state: S,
