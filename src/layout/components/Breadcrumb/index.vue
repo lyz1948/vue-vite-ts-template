@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { useRoute, useRouter, RouteLocationMatched } from 'vue-router'
 import { compile } from 'path-to-regexp'
 
 const currentRoute = useRoute()
 const router = useRouter()
 
-let breadcrumbs: Array<RouteLocationMatched> = []
+const state = reactive({
+  breadcrumbs: [] as Array<RouteLocationMatched>,
+})
 
 const isDashboard = (route: RouteLocationMatched) => {
   const name = route && route.name
@@ -23,13 +25,15 @@ const getBreadcrumb = () => {
   if (!isDashboard(frist)) {
     matched = [{ path: '/dashboard', meta: { title: 'dashboard' } } as any].concat(matched)
   }
-  breadcrumbs = matched.filter(item => {
+  state.breadcrumbs = matched.filter(item => {
     return item.meta && item.meta.title && item.meta.breadcrumb !== false
   })
 }
 
 const pathCompile = (path: string) => {
-  return compile(path)
+  const { params } = currentRoute
+  const toPath = compile(path)
+  return toPath(params)
 }
 
 const handleLink = (item: any) => {
@@ -46,22 +50,20 @@ const handleLink = (item: any) => {
 }
 
 const getBreadcrumbs = computed(() => {
-  return breadcrumbs
+  return state.breadcrumbs
 })
 
 watch(
   () => currentRoute.path,
   path => {
+    console.log('path:', path)
     if (path.startsWith('/redirect/')) {
       return
     }
     getBreadcrumb()
-  }
+  },
+  { immediate: true }
 )
-
-onBeforeMount(() => {
-  getBreadcrumb()
-})
 </script>
 
 <template>
