@@ -7,9 +7,10 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { PageDefault } from '@/config'
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
+import useElement from '@/utils/useElement'
+
 const emit = defineEmits(['update:page'])
+const { loading } = useElement()
 const props = defineProps({
   data: {
     type: Array,
@@ -72,12 +73,16 @@ const props = defineProps({
   },
 })
 
-
 const handleSizeChange = (pageSize: number) => {
   emit('update:page', { ...props.page, pageSize })
 }
 
 const handleCurrentChange = (pageNum: number) => {
+  // 模拟数据请求
+  const loadInstance = loading()
+  setTimeout(() => {
+    loadInstance.close()
+  }, 2000)
   emit('update:page', { ...props.page, pageNum })
 }
 </script>

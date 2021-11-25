@@ -8,10 +8,12 @@ export interface IUserState {
   token: string
   roles: string[]
   userinfo: IUserinfo
+  userList: Array<any>
 }
 
 export const state: IUserState = {
   token: getToken() || '',
   roles: ['admin'],
   userinfo: {},
+  userList: []
 }

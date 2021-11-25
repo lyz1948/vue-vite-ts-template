@@ -1,19 +1,38 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, onBeforeMount, reactive, ref, watch } from 'vue';
 import { RoleColumn } from '@/config/table'
+import { useStore } from '@/store'
+import { UserActionTypes } from '@/store/modules/user/action-types'
+import { PageDefault } from '@/config'
 import FormDialog from './FormDialog.vue'
 
 const TABLE_TITLE = '添加员工'
-
+const store = useStore()
 const dialogRef = ref(null)
 const searchVal = ref('')
+
 const state = reactive({
   tableData: [],
   total: 0,
+  pageNum: PageDefault.pageNum,
+  pageSize: PageDefault.pageSize,
 })
 
-const handlePage = page => {
-  console.log('pageNum, pageSize:', page)
+const tableData = computed(() => {
+  return store.state.user.userList
+})
+
+const getPageList = computed(() => {
+  return state.tableData.slice((state.pageNum - 1) * state.pageSize, state.pageNum * state.pageSize)
+})
+
+const fetchData = () => {
+  store.dispatch(UserActionTypes.ACTION_USER_LIST)
+}
+
+const handlePage = ({ pageNum, pageSize }) => {
+  state.pageNum = pageNum
+  state.pageSize = pageSize
 }
 
 const changeVal = val => {
@@ -29,15 +48,25 @@ const handleUpdate = (row: any) => {
 }
 
 const handleDelete = (row: any) => {
-  console.log('row', row)
+  store.dispatch(UserActionTypes.ACTION_USER_DELETE, row.id)
 }
+
+onBeforeMount(() => {
+  fetchData()
+})
+
+watch(() => tableData.value, (data) => {
+  if (!data || !data.length) return
+  state.tableData = data
+  state.total = data.length
+})
 </script>
 
 <template>
   <div>
     <FormDialog ref="dialogRef" />
     <TableBase
-      :data="state.tableData"
+      :data="getPageList"
       :columns="RoleColumn"
       :total-count="state.total"
       @update:page="handlePage"
@@ -55,13 +84,6 @@ const handleDelete = (row: any) => {
               @change="changeVal"
             />
           </FormItemBase>
-          <FormItemBase label="账号">
-            <InputBase
-              :value="searchVal"
-              tip="搜索：账号"
-              @change="changeVal"
-            />
-          </FormItemBase>
         </FormBase>
         <BtnBase type="search" />
         <BtnPermission @click="handleCreate" />
@@ -69,6 +91,12 @@ const handleDelete = (row: any) => {
 
       <template #isEnable="scope">
         <TagBase :name="scope.row.isEnable" />
+      </template>
+
+      <template #role="scope">
+        <el-tag type="primary">
+          {{ scope.row.role === 'admin' ? '管理员' : '游客' }}
+        </el-tag>
       </template>
 
       <template #action="scope">

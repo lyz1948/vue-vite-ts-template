@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ActionContext, ActionTree } from 'vuex'
 import { UserActionTypes } from './action-types'
 import { Mutations } from './mutations'
@@ -7,14 +8,11 @@ import { ILogin } from '@/types'
 import { setToken } from '@/utils/cookies'
 import { UserMutationTypes } from './mutation-types'
 import { removeToken } from '@/utils/cookies'
-import { loginRequest, userInfoRequest } from '@/api/user'
-import { resetRouter } from '../../../router/index'
+import { loginRequest, userInfoRequest, userListRequest } from '@/api/user'
+import { resetRouter } from '@/router/index'
 
 type AugmentedActionContext = {
-  commit<K extends keyof Mutations>(
-    key: K,
-    payload: Parameters<Mutations[K]>[1]
-  ): ReturnType<Mutations[K]>
+  commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
 } & Omit<ActionContext<IUserState, IRootState>, 'commit'>
 
 type NoAugmentedActionContext = {
@@ -22,22 +20,16 @@ type NoAugmentedActionContext = {
 } & Omit<ActionContext<IUserState, IRootState>, 'commit'>
 
 export interface IUserActions {
-  [UserActionTypes.ACTION_LOGIN](
-    { commit }: AugmentedActionContext,
-    userinfo: ILogin
-  ): void
-  [UserActionTypes.ACTION_GET_USER_INFO]({
-    commit,
-  }: AugmentedActionContext): void
+  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin): void
+  [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_LOGIN_OUT]({ commit }: AugmentedActionContext): void
+  [UserActionTypes.ACTION_USER_LIST]({ commit }: AugmentedActionContext): void
+  [UserActionTypes.ACTION_USER_DELETE]({ commit }: AugmentedActionContext, id: number): void
 }
 
 export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
-  [UserActionTypes.ACTION_LOGIN](
-    { commit }: AugmentedActionContext,
-    userinfo: ILogin
-  ) {
+  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin) {
     const { username, password } = userinfo
     username.trim()
 
@@ -51,9 +43,7 @@ export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
     })
   },
 
-  async [UserActionTypes.ACTION_GET_USER_INFO]({
-    commit,
-  }: AugmentedActionContext) {
+  async [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext) {
     const store = useStore()
     const userId = store.state.user.userinfo?.id
     await userInfoRequest(userId)
@@ -67,7 +57,15 @@ export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
       })
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async [UserActionTypes.ACTION_USER_LIST]({ commit }) {
+    const data = await userListRequest()
+    commit(UserMutationTypes.SET_USER_LIST, data)
+  },
+
+  [UserActionTypes.ACTION_USER_DELETE]({ commit }, id: number) {
+    commit(UserMutationTypes.SET_USER_DELETE, id)
+  },
+
   [UserActionTypes.ACTION_RESET_TOKEN]({ commit }) {
     removeToken()
   },

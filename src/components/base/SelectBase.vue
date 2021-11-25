@@ -37,7 +37,11 @@ const state = reactive({
 })
 
 const handleChange = (val: string) => {
-  const item = state.data.find((it: ISelectItem) => it.value === val)
+  let item = { label: '', value: '' }
+
+  if (val) {
+    item = state.data.find((it: ISelectItem) => it.value === val)
+  }
   emit('on:select', item)
 }
 
@@ -59,6 +63,7 @@ watch(
   <el-select
     :model-value="value"
     :placeholder="tip"
+    clearable
     @focus="lazyLoad"
     @change="handleChange"
   >

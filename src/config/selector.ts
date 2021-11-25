@@ -6,7 +6,7 @@ const yesNo = [
 export const SELECTOR = {
   yesNo,
 
-  auditRole: [
+  role: [
     { value: 'manage', label: '经理' },
     { value: 'financial', label: '财务' },
     { value: 'generalManager', label: '管理员' },

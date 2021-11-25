@@ -20,6 +20,14 @@ defineProps({
     type: String,
     default: '',
   },
+  rows: {
+    type: Number,
+    default: 2,
+  },
+  type: {
+    type: String,
+    default: 'text',
+  },
 })
 
 const changeInput = $event => {
@@ -31,6 +39,8 @@ const changeInput = $event => {
   <div class="input-base" :class="{ vertical: vertical }">
     <el-input
       :model-value="value"
+      :type="type"
+      :rows="rows"
       :placeholder="'请输入' + tip ? tip : label"
       @input="changeInput"
     />
