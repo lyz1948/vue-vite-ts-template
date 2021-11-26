@@ -4,11 +4,16 @@ import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
 import { useStore } from '@/store'
 import { AppActionTypes } from '@/store/modules/app/action-types'
+import { DeviceType } from '@/store/modules/app/state'
 
 const store = useStore()
 
 const isHorizonal = computed(() => {
   return store.state.setting.menuMode === 'horizontal'
+})
+
+const isMobie = computed(() => {
+  return store.state.app.device == DeviceType.Mobile
 })
 
 const toggleSidebar = () => {
@@ -22,13 +27,22 @@ const toggleSidebar = () => {
       <el-link class="menu-icon" @click="toggleSidebar">
         <icon-menu-fold class="icon" size="16" />
       </el-link>
-      <Boardcrumb />
+      <Boardcrumb v-if="!isMobie" />
     </div>
 
     <RightPane />
   </div>
 </template>
 
+<style lang="scss">
+.layout {
+  &.is-mobile {
+    .header-container {
+      flex: 1 !important;
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
 .header-container {
   display: flex;
@@ -36,6 +50,7 @@ const toggleSidebar = () => {
   border-bottom: $base-border-width-mini solid #eaebf3;
   height: $base-head-menu-height;
   padding: 0 $base-padding;
+  flex: 1;
 
   .left {
     display: flex;

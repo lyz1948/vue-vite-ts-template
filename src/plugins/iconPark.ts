@@ -61,6 +61,7 @@ export const components = [
   Bug,
   Shield,
   FolderBlock,
+  MenuFold
 ]
 
 export default (app: ReturnType<typeof createApp>) => {
