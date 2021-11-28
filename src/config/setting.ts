@@ -36,7 +36,7 @@ export const settingConfig = {
   // 模式 horizontal / vertical
   menuMode: 'vertical',
   language: 'zh-cn',
-  theme: '#43a9be',
+  theme: '#409EFF',
   size: 'medium',
   // 主题配置
   setting: false,
