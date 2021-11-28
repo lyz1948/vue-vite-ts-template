@@ -1,26 +1,39 @@
 import { settingConfig } from '@/config/setting'
 
-const { menuMode, theme, collapse, fixedHead, visibleTab, visibleLogo, visibleBreadcrumb } = settingConfig
+const { menuMode, theme, language, size, collapse, fixedHead, visibleTab, visibleLogo, visibleSidebar, visibleBreadcrumb } = settingConfig
+
+export enum DeviceType {
+  Mobile,
+  Desktop,
+}
+
 export interface ISettingState {
   setting: boolean
-  fixHead: boolean
+  fixedHead: boolean
   visibleTab: boolean
   visibleLogo: boolean
   visibleBreadcrumb: boolean
   menuMode: string
   menuCollapse: boolean
-  routerView: boolean
   theme: string
+  device: DeviceType
+  visibleSidebar: boolean
+  language: string
+  size: string
 }
 
 export const state: ISettingState = {
   setting: false, // 设置面板
-  fixHead: fixedHead, // 固定header
-  visibleTab: visibleTab, // 显示tagview
+  fixedHead, // 固定header
+  visibleTab, // 显示tagview
   visibleLogo: visibleLogo, // 显示Logo
-  visibleBreadcrumb: visibleBreadcrumb, // 显示面包屑
-  menuMode: menuMode, // 菜单模式 vertical, horizontal
+  visibleBreadcrumb, // 显示面包屑
+  menuMode, // 菜单模式 vertical, horizontal
   menuCollapse: collapse, // 当页面为左右布局时，菜单折叠状态
-  routerView: true, // 是否显示路由
+  visibleSidebar,
+  
   theme: theme, // 皮肤颜色
+  device: DeviceType.Desktop,
+  language,
+  size,
 }

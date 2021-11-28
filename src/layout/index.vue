@@ -1,22 +1,13 @@
 <script setup lang="ts">
-import { computed, onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
-import { useStore } from '@/store'
-import { DeviceType } from '@/store/modules/app/state'
+import { onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
 import Horizontal from './Horizontal/index.vue'
 import MobileMode from './MobileMode/index.vue'
 import Vertical from './Vertical/index.vue'
 import useResize from '@/utils/useResize'
+import useDevice from '@/utils/useSetting'
 
-const store = useStore()
+const { isMobile, isHorizonal } = useDevice()
 const { watchRouter, resizeMounted, addEventListenerOnResize, removeEventListenerResize } = useResize()
-
-const isMobie = computed(() => {
-  return store.state.app.device == DeviceType.Mobile
-})
-
-const isHorizonal = computed(() => {
-  return store.state.setting.menuMode === 'horizontal'
-})
 
 watchRouter()
 onBeforeMount(() => {
@@ -33,7 +24,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <MobileMode v-if="isMobie" />
+  <MobileMode v-if="isMobile" />
   <Horizontal v-else-if="isHorizonal" />
   <Vertical v-else />
 </template>

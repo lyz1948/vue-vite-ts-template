@@ -142,8 +142,7 @@ const handleCurrentChange = (pageNum: number) => {
     border-left: 3px solid $base-color-primary;
     background: $base-color-primary-light9;
     &-title {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 14px;
       margin-left: 20px;
       color: $base-color-primary;
     }

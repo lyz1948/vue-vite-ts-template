@@ -13,7 +13,7 @@ const store = useStore()
 const direction = 'ltr'
 
 const visible = computed(() => {
-  return store.state.app.sidebar.open
+  return store.state.setting.visibleSidebar
 })
 
 const isFixHeader = computed(() => {

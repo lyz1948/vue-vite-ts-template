@@ -3,7 +3,6 @@ import { computed, reactive, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { TagsActionTypes } from '@/store/modules/tagViews/action-types'
-import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { IRouter, ITagView } from '@/types'
 import { useI18n } from 'vue-i18n'
 
@@ -24,7 +23,7 @@ interface ICommand {
 
 const commandList: Array<ICommand> = [
   {
-    command: SettingActionTypes.ACTION_MENU_REFRESH,
+    command: TagsActionTypes.ACTION_MENU_REFRESH,
     text: 'refresh',
     icon: 'icon-refresh',
   },
@@ -49,14 +48,6 @@ const commandList: Array<ICommand> = [
     icon: 'icon-minus',
   },
 ]
-
-// const isActive = (route: IRouter) => {
-//   return route.path === currentRoute.path
-// }
-
-// const isAffix = (tag: ITagView) => {
-//   return tag.meta && tag.meta.affix
-// }
 
 const visitedViews = computed(() => {
   return store.state.tagViews.visitedViews

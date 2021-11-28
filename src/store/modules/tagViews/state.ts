@@ -7,9 +7,11 @@ export interface TagView extends Partial<RouteLocationNormalized> {
 export interface ITagViewsState {
   visitedViews: ITagView[]
   cacheViews: (string | undefined)[]
+  routerView: boolean
 }
 
 export const state: ITagViewsState = {
   visitedViews: [],
   cacheViews: [],
+  routerView: true, // 是否显示路由
 }

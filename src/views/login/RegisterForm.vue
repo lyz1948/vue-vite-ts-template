@@ -15,7 +15,7 @@ const form = ref({
     <el-form-item prop="name">
       <el-input v-model="form.name" :placeholder="t('register.username')">
         <template #prefix>
-          <user theme="outline" size="16" fill="#999" />
+          <icon-user theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
     </el-form-item>
@@ -66,6 +66,11 @@ const form = ref({
 </template>
 
 <style lang="scss" scoped>
+.is-mobile {
+  .login-ruleForm {
+    width: 100%;
+  }
+}
 .login-ruleForm {
   margin-top: 1rem;
   :deep(.el-input__prefix) {

@@ -3,7 +3,7 @@ import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { ISelectItem } from '@/types'
-import { modeOpts } from '@/config/setting'
+import { MenuModeEnum, modeOpts } from '@/config/setting'
 import ThemeColor from './ThemeColor.vue'
 import { useI18n } from 'vue-i18n'
 
@@ -19,20 +19,13 @@ const { t } = useI18n()
 const modeOptList = ref(modeOpts)
 
 const state = reactive({
-  fixHead: store.state.setting.fixHead,
-  visibleTab: store.state.setting.visibleTab,
   setting: store.state.setting.setting,
+  fixedHead: store.state.setting.fixedHead,
+  visibleTab: store.state.setting.visibleTab,
+  visibleLogo: store.state.setting.visibleLogo,
 })
 const visible = ref(false)
 const modeVal = ref(store.state.setting.menuMode)
-
-const fixHeadVal = computed(() => {
-  return state.fixHead
-})
-
-const visibleTabVal = computed(() => {
-  return state.visibleTab
-})
 
 const settingStatus = computed(() => {
   return store.state.setting.setting
@@ -47,7 +40,7 @@ const handleClose = () => {
 
 const changFixHead = (val: boolean) => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
-    type: 'fixHead',
+    type: 'fixedHead',
     val,
   })
 }
@@ -64,6 +57,12 @@ const changeMenuMode = ({ value }: ISelectItem) => {
     type: 'menuMode',
     val: value,
   })
+  if (value === MenuModeEnum.HORIZONTAL) {
+    store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+      type: 'visibleSidebar',
+      val: true,
+    })
+  }
 }
 
 const changeTheme = (val: string) => {
@@ -112,7 +111,7 @@ watch(
       </div>
       <div class="setting-item">
         <span class="label">{{ t('settings.fixHead') }}</span>
-        <el-switch v-model="state.fixHead" @change="changFixHead" />
+        <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
         <span class="label">{{ t('settings.tab') }}</span>

@@ -2,9 +2,11 @@
 import { computed, reactive, watch } from 'vue'
 import { useRoute, useRouter, RouteLocationMatched } from 'vue-router'
 import { compile } from 'path-to-regexp'
+import { useI18n } from 'vue-i18n'
 
 const currentRoute = useRoute()
 const router = useRouter()
+const { t } = useI18n()
 
 const state = reactive({
   breadcrumbs: [] as Array<RouteLocationMatched>,
@@ -71,10 +73,10 @@ watch(
     <el-breadcrumb separator="/">
       <el-breadcrumb-item v-for="(item, index) in getBreadcrumbs" :key="item.path">
         <span v-if="item.redirect === 'noredirect' || index === getBreadcrumbs.length - 1">
-          {{ item.meta.title }}
+          {{ t('route.' + item.meta.title) }}
         </span>
         <a v-else @click.prevent="handleLink(item)">
-          {{ item.meta.title }}
+          {{ t('route.' + item.meta.title) }}
         </a>
       </el-breadcrumb-item>
     </el-breadcrumb>

@@ -1,23 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useStore } from '@/store'
 import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
-import { DeviceType } from '@/store/modules/app/state'
+import useSetting from '@/utils/useSetting'
+import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
 const store = useStore()
-
-const isHorizonal = computed(() => {
-  return store.state.setting.menuMode === 'horizontal'
-})
-
-const isMobie = computed(() => {
-  return store.state.app.device == DeviceType.Mobile
-})
+const { isMobile, isHorizonal, isOpen } = useSetting()
 
 const toggleSidebar = () => {
-  store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, true)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'visibleSidebar',
+    val: !isOpen.value,
+  })
 }
 </script>
 
@@ -27,7 +22,7 @@ const toggleSidebar = () => {
       <el-link class="menu-icon" @click="toggleSidebar">
         <icon-menu-fold class="icon" size="16" />
       </el-link>
-      <Boardcrumb v-if="!isMobie" />
+      <Boardcrumb v-if="!isMobile" />
     </div>
 
     <RightPane />

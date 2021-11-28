@@ -1,24 +1,21 @@
+import { watch } from 'vue'
 import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
 import { DeviceType } from '@/store/modules/app/state'
-import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-const store = useStore()
-const WIDTH = 992 // refer to Bootstrap's responsive design
+import { SettingActionTypes } from '../store/modules/setting/action-types'
+
+const WIDTH = 992
 
 export default function() {
-  const device = computed(() => {
-    return store.state.app.device
-  })
-
-  const sidebar = computed(() => {
-    return store.state.app.sidebar
-  })
-
+  const store = useStore()
   const currentRoute = useRoute()
+
   const watchRouter = watch(() => currentRoute.name, () => {
-    if (store.state.app.device === DeviceType.Mobile && store.state.app.sidebar.open) {
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, false)
+    if (store.state.setting.device === DeviceType.Mobile && store.state.setting.visibleSidebar) {
+      store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+        type: 'visibleSidebar',
+        val: false,
+      })
     }
   })
 
@@ -29,16 +26,29 @@ export default function() {
 
   const resizeMounted = () => {
     if (isMobile()) {
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_DEVICE, DeviceType.Mobile)
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, true)
+      store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+        type: 'device',
+        val: DeviceType.Mobile,
+      })
+      store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+        type: 'visibleSidebar',
+        val: true,
+      })
     }
   }
 
   const resizeHandler = () => {
     if (!document.hidden) {
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_DEVICE, isMobile() ? DeviceType.Mobile : DeviceType.Desktop)
+      store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+        type: 'device',
+        val: isMobile() ? DeviceType.Mobile : DeviceType.Desktop,
+      })
+
       if (isMobile()) {
-        store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, true)
+        store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+          type: 'visibleSidebar',
+          val: true,
+        })
       }
     }
   }
@@ -51,8 +61,6 @@ export default function() {
   }
 
   return {
-    device,
-    sidebar,
     resizeMounted,
     addEventListenerOnResize,
     removeEventListenerResize,

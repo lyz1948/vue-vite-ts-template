@@ -53,15 +53,11 @@ export const components = [
   ToLeft,
   ToRight,
   Minus,
-  Wechat,
-  Alipay,
-  Github,
   Translate,
   Table,
   Bug,
   Shield,
   FolderBlock,
-  MenuFold
 ]
 
 export default (app: ReturnType<typeof createApp>) => {

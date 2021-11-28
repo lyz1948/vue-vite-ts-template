@@ -6,9 +6,10 @@ onMounted(() => {
   const { params, query } = useRoute()
 
   const { path } = params
+  console.log('path:', path)
   // /login?redirect=
   useRouter()
-    .replace({ path: '/' + path, query })
+    .replace({ path, query })
     .catch(err => {
       console.warn(err)
     })

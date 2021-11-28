@@ -11,7 +11,7 @@ const key = () => {
 }
 
 const visibleRoute = computed(() => {
-  return store.state.setting.routerView
+  return store.state.tagViews.routerView
 })
 </script>
 
