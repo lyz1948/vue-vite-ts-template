@@ -24,11 +24,11 @@ const menuTextActiveColor = computed(() => {
 })
 
 const sidebar = computed(() => {
-  return store.state.app.sidebar
+  return store.state.setting.visibleSidebar
 })
 
 const isCollapse = computed(() => {
-  return !sidebar.value.open
+  return !sidebar.value
 })
 
 const defaultActive = computed(() => {

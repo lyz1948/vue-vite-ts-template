@@ -1,6 +1,7 @@
 @use 'sass:math';
 @use 'sass:map';
-$base-color-primary: #7a72ff;
+
+$base-color-primary: #43a9be;
 $--colors: () !default;
 $--colors: map.set($--colors, 'primary', 'base', $base-color-primary);
 

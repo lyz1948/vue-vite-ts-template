@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, nextTick } from 'vue';
 import { useStore } from "@/store"
-import { AppActionTypes } from "@/store/modules/app/action-types"
+import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
 defineProps({
   color: {
@@ -21,8 +21,8 @@ const languages = reactive([
     value: 'en',
   },
 ]);
-const handleCommand = (command: any) => {
-  store.dispatch(AppActionTypes.ACTION_SET_LANGUAGE, command)
+const handleCommand = async (command: any) => {
+  await store.dispatch(SettingActionTypes.ACTION_LANGUAGE_SET, command)
   nextTick().then(() => {
     window.location.reload()
   })

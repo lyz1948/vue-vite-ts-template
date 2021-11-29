@@ -10,7 +10,7 @@ import TabViews from '../tabViews/index.vue'
 const store = useStore()
 
 const isOpen = computed(() => {
-  return store.state.app.sidebar.open
+  return store.state.setting.visibleSidebar
 })
 
 const isFixHeader = computed(() => {
@@ -67,12 +67,12 @@ const getStyle = computed(() => {
       .layout-top-bar {
         position: fixed;
         top: 0;
-        left: $base-menu-width;
         right: 0;
         z-index: $base-z-index-default;
         background-color: #fff;
       }
     }
+
     .layout-sidebar {
       width: $base-menu-width;
       border-right: 1px solid #e1e2e7;
@@ -91,6 +91,10 @@ const getStyle = computed(() => {
       }
     }
 
+    .layout-top-bar {
+      width: calc(100vw - $base-menu-width);
+    }
+
     .layout-body {
       flex: 1;
       height: 100vh;
@@ -101,15 +105,17 @@ const getStyle = computed(() => {
         background-color: $base-content-bg-color;
       }
     }
+  }
 
-    // 左右布局侧栏收起
-    &.is-collapse {
-      .layout-sidebar {
-        width: $base-unfold-width;
-      }
-      .layout-body {
-        width: calc(100vw - $base-unfold-width);
-      }
+  // 左右布局侧栏收起
+  &.is-collapse {
+
+    .layout-sidebar {
+      width: $base-unfold-width;
+    }
+    .layout-top-bar,
+    .layout-body {
+      width: calc(100vw - $base-unfold-width);
     }
   }
 }

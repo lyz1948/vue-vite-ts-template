@@ -9,8 +9,8 @@ export default defineComponent({
 const emit = defineEmits(['update:value'])
 defineProps({
   value: {
-    type: String,
-    default: '',
+    type: Boolean,
+    default: false,
   },
   label: {
     type: String,

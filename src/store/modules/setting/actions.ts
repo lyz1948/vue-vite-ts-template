@@ -17,9 +17,19 @@ export interface IActions {
     { commit }: AugmentedActionContext,
     opts: { type: string; val: any }
   ): void
+  [SettingActionTypes.ACTION_LANGUAGE_SET](
+    { commit }: AugmentedActionContext,
+    lang: string
+  ): void
 }
 
 export const actions: ActionTree<ISettingState, IRootState> & IActions = {
+  [SettingActionTypes.ACTION_LANGUAGE_SET](
+    { commit },
+    lang: string
+  ) {
+    commit(SettingMutationTypes.LANGUAGE_SET, lang)
+  },
   [SettingActionTypes.ACTION_UPDATE_SETTING](
     { commit },
     opts: { type: string; val: any }

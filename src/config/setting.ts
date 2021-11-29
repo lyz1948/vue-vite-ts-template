@@ -1,3 +1,8 @@
+export enum MenuModeEnum {
+  HORIZONTAL = 'horizontal',
+  VERTICAL = 'vertical',
+}
+
 export const modeOpts = [
   {
     value: 'vertical',
@@ -27,10 +32,12 @@ export const themeColorOpts = [
 //   theme6: { menuBgColor: '#293246', primary: '#f45555' },
 // }
 export const settingConfig = {
-  title: 'Vue3 Admin',
+  title: 'Vue3 Vite Admin',
   // 模式 horizontal / vertical
   menuMode: 'vertical',
-  theme: '#7a72ff',
+  language: 'zh-cn',
+  theme: '#409EFF',
+  size: 'medium',
   // 主题配置
   setting: false,
   // 是否固定头部
@@ -45,6 +52,8 @@ export const settingConfig = {
   visibleBreadcrumb: true,
   // 是否显示logo
   visibleLogo: true,
+  // 是否显示菜单
+  visibleSidebar: true,
   // 是否显示标签
   visibleTab: true,
   // 是否展开菜单

@@ -1,17 +1,30 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useStore } from '@/store'
+import { onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
 import Horizontal from './Horizontal/index.vue'
+import MobileMode from './MobileMode/index.vue'
 import Vertical from './Vertical/index.vue'
+import useResize from '@/utils/useResize'
+import useDevice from '@/utils/useSetting'
 
-const store = useStore()
+const { isMobile, isHorizonal } = useDevice()
+const { watchRouter, resizeMounted, addEventListenerOnResize, removeEventListenerResize } = useResize()
 
-const isHorizonal = computed(() => {
-  return store.state.setting.menuMode === 'horizontal'
+watchRouter()
+onBeforeMount(() => {
+  addEventListenerOnResize()
+})
+
+onMounted(() => {
+  resizeMounted()
+})
+
+onBeforeUnmount(() => {
+  removeEventListenerResize()
 })
 </script>
 
 <template>
-  <Horizontal v-if="isHorizonal" />
+  <MobileMode v-if="isMobile" />
+  <Horizontal v-else-if="isHorizonal" />
   <Vertical v-else />
 </template>

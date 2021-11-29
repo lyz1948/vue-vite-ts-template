@@ -1,4 +1,5 @@
 export enum AppMutationTypes {
   TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR',
+  TOGGLE_DEVICE = 'TOGGLE_DEVICE',
   SET_LANGUAGE = 'SET_LANGUAGE',
 }

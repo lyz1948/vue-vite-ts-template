@@ -1,9 +1,9 @@
 import { Directive } from 'vue'
 
 export const permission: Directive = {
-  mounted(el, binding) {
-    const { value } = binding
-    console.log('value:', value)
+  mounted(el) {
+    // const { value } = binding
+    // console.log('value:', value)
 
     const hasPermission = 1
 

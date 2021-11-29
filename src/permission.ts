@@ -18,7 +18,7 @@ router.beforeEach(
   ) => {
     NProgress.start()
     const store = useStore()
-
+    console.log(to.path)
     // 检查是否登录
     if (!store.state.user.token) {
       if (~RouteWhiteList.indexOf(to.path)) {

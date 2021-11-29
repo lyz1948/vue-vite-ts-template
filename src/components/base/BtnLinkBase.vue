@@ -28,7 +28,7 @@ const sizeMaps = {
 }
 
 const getSize = computed(() => {
-  return store.state.app.size
+  return store.state.setting.size
 })
 
 const getFontSize = computed(() => {

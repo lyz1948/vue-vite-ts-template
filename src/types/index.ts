@@ -46,6 +46,7 @@ export interface IMeta {
   name?: string
   hidden?: boolean
   affix?: boolean
+  noCache?: boolean
 }
 export interface IRouter {
   path: string
@@ -58,6 +59,7 @@ export interface IRouter {
 }
 
 export interface ITagView {
+  name: string
   meta: IMeta
   path: string
 }

@@ -8,8 +8,10 @@ export default defineComponent({
 <script setup lang="ts">
 import { computed } from 'vue'
 import { IPermission } from '@/types/auth'
+import useElement from '@/utils/useElement'
 
 const emit = defineEmits(['on:click'])
+const { confirm } = useElement()
 const props = defineProps({
   auth: {
     type: String,
@@ -39,17 +41,22 @@ const isDelete = computed(() => {
 })
 
 const handleClick = () => {
-  emit('on:click')
+  confirm().then(() => {
+    emit('on:click')
+  })
 }
 </script>
 
 <template>
   <span class="btn-link-box">
-    <el-popconfirm v-if="isDelete" :title="delTip" @confirm="handleClick">
-      <template #reference>
-        <BtnLinkBase v-permission="auth" :name="getAuthLabel" />
-      </template>
-    </el-popconfirm>
+    
+    <BtnLinkBase
+      v-if="isDelete"
+      v-permission="auth"
+      :name="getAuthLabel"
+      @click="handleClick"
+    />
+    
     <BtnLinkBase
       v-else
       v-permission="auth"

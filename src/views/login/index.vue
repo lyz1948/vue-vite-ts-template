@@ -1,35 +1,42 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, watch, onBeforeMount, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import VLogo from '@/layout/logo.vue'
 import LoginForm from './LoginForm.vue'
 import RegisterForm from './RegisterForm.vue'
 import { useI18n } from 'vue-i18n'
+import useResize from '@/utils/useResize'
+import useSetting from '@/utils/useSetting'
 
 const store = useStore()
 const router = useRouter()
 const { t } = useI18n()
+const { isMobile } = useSetting()
+const { watchRouter, addEventListenerOnResize, removeEventListenerResize } = useResize()
 const activeName = ref('first')
-const isMobile = computed(() => {
-  return false
-})
 
 const handleClick = val => {
   console.log(val)
 }
 
+watchRouter()
+
+onBeforeMount(() => {
+  addEventListenerOnResize()
+})
+
+onBeforeUnmount(() => {
+  removeEventListenerResize()
+})
+
 watch(
   () => router.currentRoute.value,
   route => {
     const redirect = ((route.query && route.query.redirect) || '/') as string
-    nextTick().then(() => {
-      setTimeout(() => {
-        if (store.state.user.token) {
-          router.push(redirect)
-        }
-      }, 500)
-    })
+    if (store.state.user.token) {
+      router.push(redirect)
+    }
   },
   { immediate: true }
 )
@@ -41,7 +48,7 @@ watch(
       <VLogo class="logo" />
     </el-header>
     <div class="login-box">
-      <div class="login-side hidden-sm-and-down" />
+      <div v-if="!isMobile" class="login-side" />
       <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
           <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -71,7 +78,7 @@ $white: #fff;
     z-index: 99;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 40px;
     color: $white;
     background: transparent;
@@ -87,9 +94,9 @@ $white: #fff;
       position: relative;
       display: flex;
       flex-direction: column;
-      width: 50vw;
-      height: 80%;
-      background-image: url('@/assets/login-bg-dark.svg');
+      width: 45vw;
+      height: 60%;
+      background-image: url('@/assets/login-bg.svg');
       background-repeat: no-repeat;
       background-position: 100%;
       background-size: auto 100%;
@@ -121,19 +128,19 @@ $white: #fff;
       justify-content: center;
       width: 50vw;
       height: 60vh;
-      .form-warp {
-        width: 500px;
-        padding: 1rem 3rem 0 3rem;
-        margin: auto;
-        background-color: $white;
-        border-radius: 8px;
-      }
       &.is-mobile {
         width: 100%;
         .form-warp {
           width: 100%;
           margin: 0 15px;
         }
+      }
+      .form-warp {
+        width: 500px;
+        padding: 1rem 3rem 0 3rem;
+        margin: auto;
+        background-color: $white;
+        border-radius: 8px;
       }
     }
   }

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useStore } from '@/store'
 import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
+import useSetting from '@/utils/useSetting'
+import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
 const store = useStore()
-
-const isHorizonal = computed(() => {
-  return store.state.setting.menuMode === 'horizontal'
-})
+const { isMobile, isHorizonal, isOpen } = useSetting()
 
 const toggleSidebar = () => {
-  store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, true)
+  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+    type: 'visibleSidebar',
+    val: !isOpen.value,
+  })
 }
 </script>
 
@@ -22,13 +22,22 @@ const toggleSidebar = () => {
       <el-link class="menu-icon" @click="toggleSidebar">
         <icon-menu-fold class="icon" size="16" />
       </el-link>
-      <Boardcrumb />
+      <Boardcrumb v-if="!isMobile" />
     </div>
 
     <RightPane />
   </div>
 </template>
 
+<style lang="scss">
+.layout {
+  &.is-mobile {
+    .header-container {
+      flex: 1 !important;
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
 .header-container {
   display: flex;
@@ -36,6 +45,7 @@ const toggleSidebar = () => {
   border-bottom: $base-border-width-mini solid #eaebf3;
   height: $base-head-menu-height;
   padding: 0 $base-padding;
+  flex: 1;
 
   .left {
     display: flex;
