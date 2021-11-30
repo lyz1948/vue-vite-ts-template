@@ -4,8 +4,8 @@ import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { ISelectItem } from '@/types'
 import { modeOpts } from '@/config/setting'
-import ThemeColor from './ThemeColor.vue'
 import { useI18n } from 'vue-i18n'
+import ThemeColor from './ThemeColor.vue'
 
 defineProps({
   direction: {
@@ -25,14 +25,6 @@ const state = reactive({
 })
 const visible = ref(false)
 const modeVal = ref(store.state.setting.menuMode)
-
-const fixHeadVal = computed(() => {
-  return state.fixHead
-})
-
-const visibleTabVal = computed(() => {
-  return state.visibleTab
-})
 
 const settingStatus = computed(() => {
   return store.state.setting.setting
