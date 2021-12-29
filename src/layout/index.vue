@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
-import Horizontal from './Horizontal/index.vue'
-import MobileMode from './MobileMode/index.vue'
-import Vertical from './Vertical/index.vue'
+import Horizontal from './horizontal/index.vue'
+import MobileMode from './mobileMode/index.vue'
+import Vertical from './vertical/index.vue'
 import useResize from '@/utils/useResize'
 import useDevice from '@/utils/useSetting'
 

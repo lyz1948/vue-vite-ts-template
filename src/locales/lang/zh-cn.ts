@@ -122,6 +122,7 @@ export default {
     confirm: '确定',
     cancel: '取消',
     search: '搜索',
-    create: '新增'
+    create: '新增',
+    back: '返回首页',
   },
 }

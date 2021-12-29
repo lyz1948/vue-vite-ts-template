@@ -5,7 +5,7 @@ import Translate from './components/Translate.vue'
 import Refresh from './components/Refresh.vue'
 import Setting from './components/Setting.vue'
 
-import SettingPane from '@/layout/setting/index.vue'
+import SettingPane from '../SettingPane/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 
 defineProps({
