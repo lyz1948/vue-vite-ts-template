@@ -2,7 +2,7 @@
 import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import { ISelectItem } from '@/types'
+// import { ISelectItem } from '@/types'
 import { MenuModeEnum, modeOpts } from '@/config/setting'
 import { useI18n } from 'vue-i18n'
 import ThemeColor from './ThemeColor.vue'
