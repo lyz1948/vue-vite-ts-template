@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import screenfull from 'screenfull'
 import useElement from '@/utils/useElement'
+import { useI18n } from 'vue-i18n'
 
 defineProps({
   icon: {
@@ -13,6 +14,7 @@ defineProps({
   },
 })
 
+const { t } = useI18n()
 const { warning } = useElement()
 const handleScreenFull = () => {
   if (!screenfull.isEnabled) {
@@ -29,7 +31,7 @@ const handleScreenFull = () => {
     <el-link>
       <component
         :is="icon"
-        title="fullscreen"
+        :title="t('settings.fullscreen')"
         theme="outline"
         size="16"
         :stroke-width="4"

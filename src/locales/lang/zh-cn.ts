@@ -66,6 +66,7 @@ export default {
     fullscreen: '全屏',
     refresh: '刷新',
     notice: '通知',
+    translate: '语言切换',
     defaultBtn: '恢复默认',
     saveBtn: '保存',
   },

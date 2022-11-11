@@ -37,10 +37,11 @@ defineProps({
     <div class="item">
       <Refresh :color="color" />
     </div>
-
+    
     <div class="item">
       <Profile />
     </div>
+
     <SettingPane />
   </div>
 </template>

@@ -7,8 +7,8 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { watch, ref, reactive } from 'vue'
-import { SELECTOR } from '@/config/selector'
 import { ISelectItem } from '@/types'
+import SELECTOR from '@/config/selector'
 
 const emit = defineEmits(['on:select'])
 const props = defineProps({
@@ -19,14 +19,6 @@ const props = defineProps({
   type: {
     type: String,
     default: 'yesNo',
-  },
-  value: {
-    type: String,
-    default: '',
-  },
-  tip: {
-    type: String,
-    default: '',
   },
 })
 
@@ -61,15 +53,14 @@ watch(
 
 <template>
   <el-select
-    :model-value="value"
-    :placeholder="tip"
     clearable
+    v-bind="$attrs"
     @focus="lazyLoad"
     @change="handleChange"
   >
     <el-option
-      v-for="(item, index) in state.tempData"
-      :key="item.value + '' + index"
+      v-for="(item) in state.tempData"
+      :key="item.value"
       :label="item.label"
       :value="item.value"
     />
