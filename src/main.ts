@@ -2,7 +2,7 @@ import { createApp, Directive } from 'vue'
 import App from './App.vue'
 
 import router from './router'
-import { store } from './store'
+import store from './store'
 import baseComponent from './components'
 import iconPark from './plugins/iconPark'
 import loadComponent from './plugins/i18n'
@@ -10,7 +10,6 @@ import * as directives from './directives'
 import './permission'
 import 'normalize.css'
 import 'element-plus/dist/index.css'
-// import './styles/element-variables.scss'
 
 const app = createApp(App)
 
@@ -21,9 +20,4 @@ Object.keys(directives).forEach(key => {
 
 loadComponent(app)
 
-app
-  .use(store)
-  .use(router)
-  .use(baseComponent)
-  .use(iconPark)
-  .mount('#app')
+app.use(store).use(router).use(baseComponent).use(iconPark).mount('#app')

@@ -114,7 +114,7 @@ const resolvePath = (routePath: string) => {
   &.i-icon {
     height: 14px !important;
     width: 14px !important;
-    margin-right: 5px !important;
+    margin-right: 15px !important;
     visibility: visible !important;
   }
 }
@@ -131,6 +131,12 @@ const resolvePath = (routePath: string) => {
         background-color: transparent !important;
       }
     }
+  }
+}
+
+.nest-menu {
+  .i-icon + span {
+    margin-left: 10px;
   }
 }
 </style>

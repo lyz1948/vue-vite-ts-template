@@ -33,7 +33,7 @@ export type Store = AppStore<Pick<IRootState, 'app'>> &
   TagViewsStore<Pick<IRootState, 'tagViews'>> &
   SettingStore<Pick<IRootState, 'setting'>>
 
-export const store = createStore({
+const store = createStore({
   plugins,
   modules: {
     app,
@@ -47,3 +47,5 @@ export const store = createStore({
 export function useStore(): Store {
   return store as Store
 }
+
+export default store

@@ -52,7 +52,7 @@ const changeTagView = (val: boolean) => {
   })
 }
 
-const changeMenuMode = ({ value }: ISelectItem) => {
+const changeMenuMode = (value: any) => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
     type: 'menuMode',
     val: value,
@@ -86,6 +86,8 @@ watch(
   },
   { immediate: true }
 )
+
+
 </script>
 
 <template>
@@ -99,7 +101,15 @@ watch(
     >
       <div class="setting-item">
         <span class="label">{{ t('settings.layout') }}</span>
-        <SelectBase v-model:value="modeVal" :list="modeOptList" @on:select="changeMenuMode" />
+        <el-select v-model="modeVal" @change="changeMenuMode">
+          <el-option
+            v-for="item in modeOptList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <!-- <SelectBase v-model="modeVal" type="layout" @on:select="changeMenuMode" /> -->
       </div>
       <div class="setting-item">
         <span class="label">{{ t('settings.theme') }}</span>
@@ -129,9 +139,10 @@ watch(
     padding: 5px 10px;
     .label {
       display: inline-block;
+      font-size: 13px;
       width: 100px;
-      margin-right: 10px;
-      text-align: right;
+      color: #72767b;
+      text-align: center;
     }
   }
   &-foot {

@@ -26,7 +26,7 @@ const handleBack = () => {
         </div>
 
         <el-button type="primary" @click="handleBack">
-          {{ t('btn.back') }}
+          {{ t('errorPages.btn') }}
         </el-button>
       </div>
       <div class="error-page-image flexcenter">

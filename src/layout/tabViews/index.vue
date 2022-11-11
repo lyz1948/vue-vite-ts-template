@@ -124,9 +124,14 @@ const handleCommand = async (command: ICommand) => {
   store.dispatch(command, view as any)
 }
 
+const isAffix = (tag: ITabView) => {
+  return tag.meta && tag.meta.affix
+}
+
 const handleShow = () => {
   console.log('show')
 }
+
 const handleHide = () => {
   console.log('hide')
 }
@@ -162,6 +167,7 @@ watch(
           v-for="tag in visitedViews"
           :key="tag.path"
           :name="tag.path"
+          :closable="!isAffix(tag)"
           class="tags-view-item"
         >
           <template #label>
