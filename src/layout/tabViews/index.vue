@@ -256,6 +256,7 @@ watch(
   padding-right: $base-padding;
   user-select: none;
   background: $base-color-white;
+  box-shadow: 0 2px 6px #eaebf3;
 
   :deep(.fold-unfold) {
     margin-right: $base-padding;

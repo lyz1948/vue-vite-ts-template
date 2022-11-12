@@ -10,7 +10,7 @@ import { computed } from 'vue-demi'
 const store = useStore()
 
 const isFixHeader = computed(() => {
-  return store.state.setting.fixHead
+  return store.state.setting.fixedHead
 })
 
 const isShowTab = computed(() => {
