@@ -177,7 +177,8 @@ watch(
                 v-if="tag.meta.icon"
                 class="menu-icon"
                 theme="outline"
-                stroke-width="3"
+                stroke-width="4"
+                size="16"
               />
               <span>
                 {{ t('route.' + tag.meta.title) }}
@@ -196,7 +197,7 @@ watch(
     >
       <template #reference>
         <span class="more" :class="{ active: visible }" style="cursor: pointer">
-          <icon-all-application theme="filled" size="18" :stroke-width="3" />
+          <icon-all-application theme="filled" size="16" :stroke-width="4" />
         </span>
       </template>
       <div
@@ -209,8 +210,8 @@ watch(
           :is="item.icon"
           class="icon"
           theme="filled"
-          size="14"
-          :stroke-width="3"
+          size="16"
+          :stroke-width="5"
         />
         <span class="command-label">{{ t('tagsView.' + item.text) }}</span>
       </div>
@@ -244,6 +245,8 @@ watch(
 }
 </style>
 <style lang="scss" scoped>
+
+// @import '@/styles/variables.scss';
 .tabs-bar-container {
   position: relative;
   box-sizing: border-box;

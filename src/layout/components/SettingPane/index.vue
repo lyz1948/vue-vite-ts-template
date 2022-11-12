@@ -136,7 +136,7 @@ watch(
   &-item {
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    margin-bottom: 32px;
     .label {
       display: inline-block;
       font-size: 13px;

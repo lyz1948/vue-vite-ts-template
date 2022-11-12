@@ -1,6 +1,19 @@
 import { settingConfig } from '@/config/setting'
 
-const { menuMode, theme, language, size, collapse, fixedHead, visibleTab, visibleLogo, visibleSidebar, visibleBreadcrumb } = settingConfig
+const {
+  menuMode,
+  theme,
+  menuColor,
+  menuActiveColor,
+  language,
+  size,
+  collapse,
+  fixedHead,
+  visibleTab,
+  visibleLogo,
+  visibleSidebar,
+  visibleBreadcrumb,
+} = settingConfig
 
 export enum DeviceType {
   Mobile,
@@ -16,6 +29,8 @@ export interface ISettingState {
   menuMode: string
   menuCollapse: boolean
   theme: string
+  menuColor: string
+  menuActiveColor: string
   device: DeviceType
   visibleSidebar: boolean
   language: string
@@ -31,8 +46,10 @@ export const state: ISettingState = {
   menuMode, // 菜单模式 vertical, horizontal
   menuCollapse: collapse, // 当页面为左右布局时，菜单折叠状态
   visibleSidebar,
-  
-  theme: theme, // 皮肤颜色
+
+  theme, // 皮肤颜色
+  menuColor,
+  menuActiveColor,
   device: DeviceType.Desktop,
   language,
   size,

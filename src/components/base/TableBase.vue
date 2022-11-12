@@ -132,18 +132,18 @@ const handleCurrentChange = (pageNum: number) => {
 
 <style lang="scss" scoped>
 .table-base {
+  padding: 0 20px;
   &-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
-    padding: 10px 0;
+    height: 40px;
+    padding: 0 20px;
     margin-bottom: 20px;
-    border-left: 3px solid $base-color-primary;
-    background: $base-color-primary-light9;
+    // background: $base-color-primary-light9;
+    border-bottom: 1px solid $base-border-color;
     &-title {
       font-size: 14px;
-      margin-left: 20px;
       color: $base-color-primary;
     }
     &-handler {

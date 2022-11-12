@@ -31,11 +31,16 @@ const getStyle = computed(() => {
   }
   return 'margin-top: 0'
 })
+
+const styleObj = computed(() => {
+  return `background: ${store.state.setting.theme}`
+})
+
 </script>
 
 <template>
   <div :class="['layout is-vertical', { 'is-collapse': !isOpen, 'is-fix-header': isFixHeader }]">
-    <div class="layout-sidebar">
+    <div class="layout-sidebar" :style="styleObj">
       <el-scrollbar>
         <VLogo v-if="isShowLogo" />
         <VSidebar />
@@ -56,7 +61,8 @@ const getStyle = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+// @import '@/styles/variables.scss';
 .layout {
   display: flex;
 
@@ -77,18 +83,6 @@ const getStyle = computed(() => {
       width: $base-menu-width;
       border-right: 1px solid #e1e2e7;
       @include scrollbar;
-
-      .el-menu {
-        .el-menu-item {
-          .i-icon {
-            margin-right: 5px;
-          }
-          &.is-active {
-            border-right: 3px solid $base-color-primary;
-            background: $base-color-primary-light9 !important;
-          }
-        }
-      }
     }
 
     .layout-top-bar {

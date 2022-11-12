@@ -176,8 +176,8 @@ watch(
   display: flex;
   > span {
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 26px;
+    height: 26px;
     margin-right: 5px;
     border-radius: 4px;
     box-sizing: border-box;
