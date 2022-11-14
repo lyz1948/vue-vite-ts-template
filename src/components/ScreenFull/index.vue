@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import screenfull from 'screenfull'
-import useElement from '@/utils/useElement'
+import useElement from '@/hooks/useElement'
 
 defineProps({
   icon: {

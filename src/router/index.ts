@@ -48,7 +48,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
           ),
         name: 'Dashboard',
         meta: {
-          title: 'dashboard',
+          title: '首页',
           icon: 'icon-home',
           affix: true,
         },

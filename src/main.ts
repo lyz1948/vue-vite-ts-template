@@ -1,5 +1,4 @@
 import { createApp, Directive } from 'vue'
-// import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -18,6 +17,7 @@ const app = createApp(App)
 Object.keys(directives).forEach(key => {
   app.directive(key, (directives as { [key: string]: Directive })[key])
 })
+
 
 app
   .use(store)

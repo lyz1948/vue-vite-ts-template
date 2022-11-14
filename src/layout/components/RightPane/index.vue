@@ -4,13 +4,12 @@ import { useStore } from '@/store/index'
 
 import Profile from './components/Profile.vue'
 import Notice from './components/Notice.vue'
-import Translate from './components/Translate.vue'
 import Refresh from './components/Refresh.vue'
 import Setting from './components/Setting.vue'
 
-import SettingPane from '../SettingPane/index.vue'
+// import SettingPane from '../SettingPane/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
-import useDevice from '@/utils/useSetting';
+import useDevice from '@/hooks/useSetting';
 
 const { isHorizonal } = useDevice()
 
@@ -30,10 +29,6 @@ const color = computed(() => isHorizonal.value ? '#fff' : store.state.setting.th
     </div>
 
     <div class="item">
-      <Translate :color="color" />
-    </div>
-
-    <div class="item">
       <Setting :color="color" />
     </div>
 
@@ -45,7 +40,7 @@ const color = computed(() => isHorizonal.value ? '#fff' : store.state.setting.th
       <Profile />
     </div>
 
-    <SettingPane />
+    <!-- <SettingPane /> -->
   </div>
 </template>
 

@@ -64,46 +64,30 @@ const activeMenu = computed(() => {
     :collapse-transition="true"
   >
     <template v-for="route in routes">
-      <template v-if="!route.meta || !route.meta.hidden">
-        <SidebarItem :key="route.path" :item="route" :base-path="route.path" />
-      </template>
+      <SidebarItem
+        v-if="!route.meta || !route.meta.hidden"
+        :key="route.path"
+        :item="route"
+        :base-path="route.path"
+      />
     </template>
   </el-menu>
 </template>
-
-<style scoped>
-.is-collapse {
-  .sidebar-menu {
-    width: $base-unfold-width;
-  }
-}
-
-/* .i-icon {
-  margin-right: 8px;
-} */
-
-:deep(.el-menu-item .i-icon),
-:deep(.el-sub-menu .i-icon) {
-  margin-right: 8px;
-}
-
-</style>
 
 <style lang="scss" scoped>
 .sidebar-menu {
   border: none;
   width: 100%;
+  z-index: $base-z-index-max;
 }
 
 .is-horizonal {
   .sidebar-menu {
     flex: 1;
-    border-bottom: 1px solid #ddd;
+    // border-bottom: 1px solid #ddd;
   }
   .el-menu--horizontal {
     border-bottom: none !important;
   }
-
- 
 }
 </style>

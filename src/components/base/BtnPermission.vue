@@ -11,15 +11,13 @@ defineProps({
     type: String,
     default: 'create',
   },
-  type: {
-    type: String,
-    default: 'create',
-  },
 })
 </script>
 
 <template>
-  <BtnBase v-permission="auth" :type="type" />
+  <el-button v-permission="auth">
+    <slot />
+  </el-button>
 </template>
 
 <style lang="scss" scoped>

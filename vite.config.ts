@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import ElementPlus from 'unplugin-element-plus/vite'
+
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
 import { ServerConf } from './src/config'
-import ElementPlus from 'unplugin-element-plus/vite'
 
 const { host, port } = ServerConf
 
@@ -14,14 +16,12 @@ const isProd = process.env.NODE_ENV === 'production'
 export default defineConfig({
   server: {
     host,
-    port
+    port,
   },
   plugins: [
     vue(),
     Components({
-      resolvers: [
-        ElementPlusResolver(),
-      ]
+      resolvers: [ElementPlusResolver()],
     }),
     ElementPlus({
       useSource: true,
@@ -34,15 +34,15 @@ export default defineConfig({
       injectCode: `
           import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
-        `
+        `,
     }),
   ],
   resolve: {
     alias: {
       views: resolve(__dirname, 'src/views'),
       styles: resolve(__dirname, 'src/styles'),
-      '@': resolve(__dirname, 'src')
-    }
+      '@': resolve(__dirname, 'src'),
+    },
   },
 
   css: {
@@ -51,7 +51,7 @@ export default defineConfig({
       scss: {
         additionalData: `@use "@/styles/index.scss" as *;`,
         // additionalData: `@use "@/styles/element-variables.scss" as *;`
-      }
-    }
-  }
+      },
+    },
+  },
 })

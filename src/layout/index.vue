@@ -3,8 +3,8 @@ import { onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
 import Horizontal from './horizontal/index.vue'
 import MobileMode from './mobileMode/index.vue'
 import Vertical from './vertical/index.vue'
-import useResize from '@/utils/useResize'
-import useDevice from '@/utils/useSetting'
+import useResize from '@/hooks/useResize'
+import useDevice from '@/hooks/useSetting'
 
 const { isMobile, isHorizonal } = useDevice()
 const { watchRouter, resizeMounted, addEventListenerOnResize, removeEventListenerResize } = useResize()

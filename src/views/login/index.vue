@@ -5,8 +5,8 @@ import { useStore } from '@/store'
 import VLogo from '@/layout/logo.vue'
 import LoginForm from './LoginForm.vue'
 import RegisterForm from './RegisterForm.vue'
-import useResize from '@/utils/useResize'
-import useSetting from '@/utils/useSetting'
+import useResize from '@/hooks/useResize'
+import useSetting from '@/hooks/useSetting'
 
 const store = useStore()
 const router = useRouter()

@@ -80,7 +80,7 @@ const resolvePath = (routePath: string) => {
     </SidebarItemLink>
   </template>
 
-  <el-sub-menu v-else :index="resolvePath(item.path)" style="background: transparent; border-bottom: none;">
+  <el-sub-menu v-else :index="resolvePath(item.path)">
     <template #title>
       <component
         :is="item.meta.icon"
@@ -103,12 +103,17 @@ const resolvePath = (routePath: string) => {
   </el-sub-menu>
 </template>
 
-<style lang="scss">
-.nest-menu {
-  .i-icon {
-    margin-right: 8px;
+<style lang="scss" scoped>
+.i-icon {
+  margin-right: 8px;
+}
+
+.is-collapse {
+  .sidebar-menu {
+    width: $base-unfold-width;
   }
 }
+
 .el-menu--collapse > .el-sub-menu > .el-sub-menu__title {
   span.i-icon {
     height: 14px !important;

@@ -91,13 +91,13 @@ watch(
   <div class="setting">
     <el-drawer
       v-model="visible"
-      :title="t('settings.title')"
+      title="设置"
       size="500px"
       :direction="direction"
       :before-close="handleClose"
     >
       <div class="setting-item">
-        <span class="label">{{ t('settings.layout') }}</span>
+        <span class="label">布局</span>
         <el-select v-model="modeVal" @change="changeMenuMode">
           <el-option
             v-for="item in modeOptList"
@@ -108,10 +108,10 @@ watch(
         </el-select>
         <!-- <SelectBase v-model="modeVal" type="layout" @on:select="changeMenuMode" /> -->
       </div>
-      <div class="setting-item">
+      <!-- <div class="setting-item">
         <span class="label">皮肤</span>
         <ThemeColor @on:change="changeTheme" />
-      </div>
+      </div> -->
       <div class="setting-item">
         <span class="label">Logo</span>
         <el-switch v-model="state.visibleLogo" @change="visibleLogo" />
@@ -121,7 +121,7 @@ watch(
         <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">是否显示Tag</span>
+        <span class="label">是否显示TagView</span>
         <el-switch v-model="state.visibleTab" @change="changeTagView" />
       </div>
     </el-drawer>
@@ -130,6 +130,7 @@ watch(
 
 <style lang="scss" scoped>
 .setting {
+  z-index: $base-z-index-max;
   &-item {
     display: flex;
     align-items: center;

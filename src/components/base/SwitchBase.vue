@@ -7,16 +7,6 @@ export default defineComponent({
 
 <script setup lang="ts">
 const emit = defineEmits(['update:value'])
-defineProps({
-  value: {
-    type: Boolean,
-    default: false,
-  },
-  label: {
-    type: String,
-    default: '',
-  },
-})
 
 const changeValue = event => {
   emit('update:value', event)
@@ -25,6 +15,6 @@ const changeValue = event => {
 
 <template>
   <div class="switch-base">
-    <el-switch :model-value="value" @change="changeValue" />
+    <el-switch :model-value="value" v-bind="$attrs" @change="changeValue" />
   </div>
 </template>

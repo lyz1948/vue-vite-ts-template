@@ -76,7 +76,7 @@ watch(() => tableData.value, (data) => {
       </template>
 
       <template #headerHandler>
-        <FormBase :inline="true">
+        <!-- <FormBase :inline="true">
           <FormItemBase label="姓名">
             <InputBase
               :value="searchVal"
@@ -84,9 +84,25 @@ watch(() => tableData.value, (data) => {
               @change="changeVal"
             />
           </FormItemBase>
-        </FormBase>
-        <BtnBase type="search" />
-        <BtnPermission @click="handleCreate" />
+        </FormBase> -->
+
+        <el-form inline>
+          <el-form-item label="姓名">
+            <InputBase
+              v-model="searchVal"
+              placeholder="搜索：角色名称"
+              @change="changeVal"
+            />
+          </el-form-item>
+          <el-form-item>
+            <BtnBase type="primary">
+              搜索
+            </BtnBase>
+            <BtnPermission type="success" @click="handleCreate">
+              创建
+            </BtnPermission>
+          </el-form-item>
+        </el-form>
       </template>
 
       <template #isEnable="scope">
@@ -94,14 +110,18 @@ watch(() => tableData.value, (data) => {
       </template>
 
       <template #role="scope">
-        <el-tag type="primary">
+        <el-tag type="info">
           {{ scope.row.role === 'admin' ? '管理员' : '游客' }}
         </el-tag>
       </template>
 
       <template #action="scope">
-        <BtnLinkPermission auth="edit" @on:click="handleUpdate(scope.row)" />
-        <BtnLinkPermission auth="delete" @on:click="handleDelete(scope.row)" />
+        <BtnLinkPermission type="success" auth="edit" @on:click="handleUpdate(scope.row)">
+          编辑
+        </BtnLinkPermission>
+        <BtnLinkPermission type="danger" auth="delete" @on:click="handleDelete(scope.row)">
+          删除
+        </BtnLinkPermission>
       </template>
     </TableBase>
   </div>

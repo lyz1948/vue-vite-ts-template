@@ -1,0 +1,12 @@
+:deep(.el-form--inline .el-form-item) {
+  margin-right: 12px;
+}
+
+:deep(.fold-unfold) {
+  margin-right: $base-padding;
+}
+
+:deep(.el-tabs__item) {
+  display: inline-flex;
+  align-items: center;
+}

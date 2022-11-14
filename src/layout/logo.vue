@@ -3,7 +3,7 @@ import { useStore } from '@/store/index'
 import { AppActionTypes } from '@/store/modules/app/action-types'
 import { settingConfig } from '@/config/setting'
 import logPng from '@/assets/logo.png'
-import useSetting from '@/utils/useSetting'
+import useSetting from '@/hooks/useSetting'
 
 const store = useStore()
 const { isOpen } = useSetting()
@@ -41,11 +41,9 @@ const toggle = () => {
   }
 }
 
-.is-verticle {
-  border-bottom: 1px solid rgba(#fff, .4);
+.is-vertical{
+  .title {
+    border-bottom: 1px solid rgba(#eaebf3, .4);
+  }
 }
-.is-horizonal {
-
-}
-
 </style>

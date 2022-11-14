@@ -7,13 +7,12 @@ const state = reactive({
   zIndex: 3000,
 })
 
-
 const { size, zIndex } = toRefs(state)
 
 </script>
 
 <template>
-  <el-config-provider :size="size" :z-index="zIndex">
+  <el-config-provider>
     <router-view />
   </el-config-provider>
 </template>

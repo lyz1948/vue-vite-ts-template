@@ -9,7 +9,7 @@ const componentRouter: RouteRecordRaw[] = [
     component: markRaw(Layout),
     redirect: '/component/table',
     meta: {
-      title: 'table',
+      title: '表格',
       icon: 'icon-remind',
     },
     children: [
@@ -21,7 +21,7 @@ const componentRouter: RouteRecordRaw[] = [
             /* webpackChunkName: "TableComponent" */ '@/views/component/table/index.vue'
           ),
         meta: {
-          title: 'table',
+          title: '表格',
           icon: 'icon-table',
         },
       },

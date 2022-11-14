@@ -6,6 +6,7 @@ import VHeader from '../header/index.vue'
 import AppMain from '../appMain/index.vue'
 import VSidebar from '../sidebar/index.vue'
 import TabViews from '../tabViews/index.vue'
+import SettingPane from '../components/SettingPane/index.vue'
 
 const store = useStore()
 
@@ -58,6 +59,7 @@ const styleObj = computed(() => {
         <el-scrollbar />
       </el-scrollbar>
     </div>
+    <SettingPane />
   </div>
 </template>
 

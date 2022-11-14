@@ -2,7 +2,7 @@
 import { useStore } from '@/store'
 import Boardcrumb from '../components/Breadcrumb/index.vue'
 import RightPane from '../components/RightPane/index.vue'
-import useSetting from '@/utils/useSetting'
+import useSetting from '@/hooks/useSetting'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 
 const store = useStore()
@@ -39,12 +39,14 @@ const toggleSidebar = () => {
 }
 </style>
 <style lang="scss" scoped>
+
 .header-container {
   flex: 1;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #eaebf3;
   padding: 0 20px;
+  z-index: $base-z-index-max;
 
   .left {
     display: flex;

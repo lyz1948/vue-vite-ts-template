@@ -3,7 +3,7 @@ import { ref, reactive } from 'vue'
 import { ISelectItem } from '@/types'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
 import FormBase from '@/components/base/FormBase.vue'
-import useElement from '@/utils/useElement'
+import useElement from '@/hooks/useElement'
 
 const visibleDialog = ref(false)
 const title = '新增角色'

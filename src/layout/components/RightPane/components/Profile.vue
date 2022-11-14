@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '@/store/index'
 import { UserActionTypes } from '@/store/modules/user/action-types'
-import useElement from '@/utils/useElement'
+import useElement from '@/hooks/useElement'
 
 type Command = 'outLogin'
 const router = useRouter()

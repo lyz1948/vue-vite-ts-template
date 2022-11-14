@@ -23,9 +23,9 @@ const handleBack = () => {
           请联系管理员，或点击下面的按钮返回首页
         </div>
 
-        <BtnBase type="back" @click="handleBack">
+        <el-button type="success" @click="handleBack">
           返回首页
-        </BtnBase>
+        </el-button>
       </div>
       <div class="error-page-image flexcenter">
         <el-image :src="errorPng" />

@@ -1,7 +1,7 @@
 import { ElMessage, ElMessageBox, ElLoading } from 'element-plus'
 
 export default function () {
-  type msgType = '' | 'success' | 'warning' | 'info' | 'error' | undefined
+  type msgType = 'success' | 'warning' | 'info' | 'error'
 
   const open = (message: string, type: msgType, showClose = false) => {
     ElMessage({

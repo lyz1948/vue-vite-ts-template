@@ -7,83 +7,80 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-// import { ElButton } from 'element-plus'
+// import { computed } from 'vue'
 
-const defaultState = {
-  search: {
-    icon: 'el-icon-search',
-    text: 'search',
-    type: 'primary',
-  },
-  create: {
-    icon: 'el-icon-plus',
-    text: 'create',
-    type: 'success',
-  },
-  save: {
-    icon: 'el-icon-check',
-    text: 'save',
-    type: 'success',
-  },
-  close: {
-    icon: 'el-icon-close',
-    text: 'close',
-    type: 'danger',
-  },
-  delete: {
-    icon: 'el-icon-delete',
-    text: 'delete',
-    type: 'danger',
-    plain: true,
-  },
-  reset: {
-    icon: 'el-icon-switch-button',
-    text: 'reset',
-    type: 'primary',
-  },
-  export: {
-    icon: 'el-icon-notbook',
-    text: 'export',
-    type: 'success',
-  },
-  back: {
-    icon: '',
-    text: 'back',
-    type: 'primary',
-  },
-}
+// const defaultState = {
+//   search: {
+//     icon: 'el-icon-search',
+//     text: '搜索',
+//     type: 'default',
+//   },
+//   create: {
+//     icon: 'el-icon-plus',
+//     text: '创建',
+//     type: 'success',
+//   },
+//   save: {
+//     icon: 'el-icon-check',
+//     text: '保存',
+//     type: 'success',
+//   },
+//   close: {
+//     icon: 'el-icon-close',
+//     text: '关闭',
+//     type: 'info',
+//   },
+//   delete: {
+//     icon: 'el-icon-delete',
+//     text: '删除',
+//     type: 'danger',
+//   },
+//   reset: {
+//     icon: 'el-icon-switch-button',
+//     text: '重置',
+//     type: 'danger',
+//   },
+//   export: {
+//     icon: 'el-icon-notbook',
+//     text: '导出',
+//     type: 'success',
+//   },
+//   back: {
+//     icon: 'info',
+//     text: '返回',
+//     type: 'default',
+//   },
+// }
 
-const props = defineProps({
-  name: {
-    type: String,
-    default: '',
-  },
-  type: {
-    type: String,
-    default: 'search',
-  },
-})
+// const props = defineProps({
+//   name: {
+//     type: String,
+//     default: '',
+//   },
+//   type: {
+//     type: String,
+//     default: 'search',
+//   },
+// })
 
-const getName = computed(() => {
-  return props.name || defaultState[props.type].text
-})
+// const getName = computed(() => {
+//   return props.name || defaultState[props.type].text
+// })
 
-const getPlain = computed(() => {
-  return defaultState[props.type].plain
-})
+// const getPlain = computed(() => {
+//   return defaultState[props.type].plain
+// })
 
-const getType = computed(() => {
-  return defaultState[props.type].type
-})
+// const getType = computed(() => {
+//   return defaultState[props.type].type
+// })
 
-const getIcon = computed(() => {
-  return defaultState[props.type].icon
-})
 </script>
 
 <template>
-  <el-button :type="getType" :icon="getIcon" :plain="getPlain">
-    {{ getName }}
+  <el-button
+    v-bind="$attrs"
+  >
+    <slot />
   </el-button>
 </template>

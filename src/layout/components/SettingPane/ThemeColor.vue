@@ -3,7 +3,7 @@ import { reactive, ref, computed, watch, getCurrentInstance } from 'vue'
 import { themeColorOpts, settingConfig } from '@/config/setting'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import useElement from '@/utils/useElement'
+import useElement from '@/hooks/useElement'
 // const version = require('element-plus/package.json').version // element-ui version from node_modules
 
 const colorOptList = ref(themeColorOpts)
@@ -176,8 +176,8 @@ watch(
   display: flex;
   > span {
     display: inline-block;
-    width: 26px;
-    height: 26px;
+    width: 40px;
+    height: 40px;
     margin-right: 5px;
     border-radius: 4px;
     box-sizing: border-box;

@@ -7,23 +7,16 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { IPermission } from '@/types/auth'
-import useElement from '@/utils/useElement'
 
 const emit = defineEmits(['on:click'])
-const { confirm } = useElement()
 const props = defineProps({
   auth: {
     type: String,
     default: 'edit',
   },
-  delTip: {
-    type: String,
-    default: '确定要删除吗?',
-  },
 })
 
-const authMaps: IPermission = {
+const authMaps = {
   detail: '详情',
   edit: '编辑',
   delete: '删除',
@@ -41,28 +34,29 @@ const isDelete = computed(() => {
 })
 
 const handleClick = () => {
-  confirm().then(() => {
-    emit('on:click')
-  })
+  emit('on:click')
 }
 </script>
 
 <template>
   <span class="btn-link-box">
-    
-    <BtnLinkBase
+    <el-link
       v-if="isDelete"
       v-permission="auth"
-      :name="getAuthLabel"
+      v-bind="$attrs"
       @click="handleClick"
-    />
+    >
+      {{ getAuthLabel }}
+    </el-link>
     
-    <BtnLinkBase
+    <el-link 
       v-else
       v-permission="auth"
-      :name="getAuthLabel"
+      v-bind="$attrs"
       @click="handleClick"
-    />
+    >
+      {{ getAuthLabel }}
+    </el-link>
   </span>
 </template>
 

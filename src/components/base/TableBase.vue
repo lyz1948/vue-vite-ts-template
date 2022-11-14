@@ -7,7 +7,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { PageDefault } from '@/config'
-import useElement from '@/utils/useElement'
+import useElement from '@/hooks/useElement'
 
 const emit = defineEmits(['update:page'])
 const { loading } = useElement()
@@ -137,10 +137,7 @@ const handleCurrentChange = (pageNum: number) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
-    padding: 0 20px;
     margin-bottom: 20px;
-    // background: $base-color-primary-light9;
     border-bottom: 1px solid $base-border-color;
     &-title {
       font-size: 14px;

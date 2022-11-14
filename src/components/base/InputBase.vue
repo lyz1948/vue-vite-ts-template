@@ -7,28 +7,6 @@ export default defineComponent({
 
 <script setup lang="ts">
 const emit = defineEmits(['update:value'])
-defineProps({
-  vertical: {
-    type: Boolean,
-    default: false,
-  },
-  value: {
-    type: String,
-    default: '',
-  },
-  tip: {
-    type: String,
-    default: '',
-  },
-  rows: {
-    type: Number,
-    default: 2,
-  },
-  type: {
-    type: String,
-    default: 'text',
-  },
-})
 
 const changeInput = $event => {
   emit('update:value', $event)
@@ -38,10 +16,7 @@ const changeInput = $event => {
 <template>
   <div class="input-base" :class="{ vertical: vertical }">
     <el-input
-      :model-value="value"
-      :type="type"
-      :rows="rows"
-      :placeholder="'请输入' + tip ? tip : label"
+      v-bind="$attrs"
       @input="changeInput"
     />
   </div>
