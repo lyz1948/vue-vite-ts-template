@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import errorPng from '@/assets/404.svg'
 
-const { t } = useI18n()
 const router = useRouter()
 
 const handleBack = () => {
@@ -16,17 +14,17 @@ const handleBack = () => {
     <div class="error-page-wrapper">
       <div class="error-page-content">
         <div class="title">
-          {{ t('errorPages.title') }}
+          抱歉!
         </div>
         <div class="desc">
-          {{ t('errorPages.404.desc') }}
+          当前页面不存在...
         </div>
         <div class="remark">
-          {{ t('errorPages.404.remark') }}
+          请检查您输入的网址是否正确，或点击下面的按钮返回首页
         </div>
 
         <BtnBase type="back" @click="handleBack">
-          {{ t('errorPages.btn') }}
+          返回首页
         </BtnBase>
       </div>
       <div class="error-page-image flexcenter">

@@ -5,13 +5,11 @@ import { useStore } from '@/store'
 import VLogo from '@/layout/logo.vue'
 import LoginForm from './LoginForm.vue'
 import RegisterForm from './RegisterForm.vue'
-import { useI18n } from 'vue-i18n'
 import useResize from '@/utils/useResize'
 import useSetting from '@/utils/useSetting'
 
 const store = useStore()
 const router = useRouter()
-const { t } = useI18n()
 const { isMobile } = useSetting()
 const { watchRouter, addEventListenerOnResize, removeEventListenerResize } = useResize()
 const activeName = ref('first')
@@ -52,10 +50,10 @@ watch(
       <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane :label="t('entry.title')" name="first">
+            <el-tab-pane label="登录" name="first">
               <LoginForm />
             </el-tab-pane>
-            <el-tab-pane :label="t('register.title')" name="second">
+            <el-tab-pane label="注册" name="second">
               <RegisterForm />
             </el-tab-pane>
           </el-tabs>

@@ -4,12 +4,10 @@ import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { TagsActionTypes } from '@/store/modules/tagViews/action-types'
 import { IRouter, ITagView } from '@/types'
-import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const router = useRouter()
 const currentRoute = useRoute()
-const { t } = useI18n()
 const visible = ref(false)
 const state = reactive({
   activeName: '',
@@ -181,7 +179,7 @@ watch(
                 size="16"
               />
               <span>
-                {{ t('route.' + tag.meta.title) }}
+                {{ tag.meta.title }}
               </span>
             </div>
           </template>
@@ -213,7 +211,7 @@ watch(
           size="16"
           :stroke-width="5"
         />
-        <span class="command-label">{{ t('tagsView.' + item.text) }}</span>
+        <span class="command-label">{{ item.text }}</span>
       </div>
     </el-popover>
   </div>

@@ -2,9 +2,7 @@
 import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-// import { ISelectItem } from '@/types'
 import { MenuModeEnum, modeOpts } from '@/config/setting'
-import { useI18n } from 'vue-i18n'
 import ThemeColor from './ThemeColor.vue'
 
 defineProps({
@@ -15,7 +13,6 @@ defineProps({
 })
 
 const store = useStore()
-const { t } = useI18n()
 const modeOptList = ref(modeOpts)
 
 const state = reactive({
@@ -112,19 +109,19 @@ watch(
         <!-- <SelectBase v-model="modeVal" type="layout" @on:select="changeMenuMode" /> -->
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.theme') }}</span>
+        <span class="label">皮肤</span>
         <ThemeColor @on:change="changeTheme" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.logo') }}</span>
+        <span class="label">Logo</span>
         <el-switch v-model="state.visibleLogo" @change="visibleLogo" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.fixedHead') }}</span>
+        <span class="label">固定头部</span>
         <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.tab') }}</span>
+        <span class="label">是否显示Tag</span>
         <el-switch v-model="state.visibleTab" @change="changeTagView" />
       </div>
     </el-drawer>

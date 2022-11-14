@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { ElConfigProvider } from 'element-plus'
-// import { getLocale } from '@/locales'
-// import { reactive, toRefs } from 'vue'
+import { reactive, toRefs } from 'vue'
 
-// const state = reactive({
-//   size: 'small',
-//   zIndex: 3000,
-// })
+const state = reactive({
+  size: 'small',
+  zIndex: 3000,
+})
 
-// const locale = getLocale()
 
-// const { size, zIndex } = toRefs(state)
+const { size, zIndex } = toRefs(state)
 
 </script>
 
 <template>
-  <el-config-provider>
+  <el-config-provider :size="size" :z-index="zIndex">
     <router-view />
   </el-config-provider>
 </template>

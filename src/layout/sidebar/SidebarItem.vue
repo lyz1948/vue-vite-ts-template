@@ -3,7 +3,6 @@ import { computed, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
-import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
   item: {
@@ -15,8 +14,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-const { t } = useI18n()
 
 const getChildrenLen = computed(() => {
   if (props.item.children) {
@@ -77,7 +74,7 @@ const resolvePath = (routePath: string) => {
           size="16"
         />
         <template #title>
-          <span v-if="getOneChild.meta.title">{{ t('route.' + getOneChild.meta.title) }}</span>
+          <span v-if="getOneChild.meta.title">{{ getOneChild.meta.title }}</span>
         </template>
       </el-menu-item>
     </SidebarItemLink>
@@ -92,7 +89,7 @@ const resolvePath = (routePath: string) => {
         stroke-width="4"
         size="16"
       />
-      <span v-if="item.meta">{{ t('route.' + item.meta.title) }}</span>
+      <span v-if="item.meta">{{ item.meta.title }}</span>
     </template>
     <template v-if="item.children">
       <sidebar-item

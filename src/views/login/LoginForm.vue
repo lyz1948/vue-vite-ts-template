@@ -5,11 +5,9 @@ import { RouteRecordRaw, useRouter } from 'vue-router'
 import { ILogin } from '@/types'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { ElForm } from 'element-plus'
-import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const router = useRouter()
-const { t } = useI18n()
 const validateForm = ref<InstanceType<typeof ElForm>>()
 
 const state = reactive({
@@ -70,7 +68,7 @@ watch(
     class="login-ruleForm"
   >
     <FormItemBase prop="username">
-      <el-input v-model="state.ruleForm.username" :placeholder="t('entry.username')">
+      <el-input v-model="state.ruleForm.username" placeholder="请输入用户名">
         <template #prefix>
           <icon-user theme="outline" size="16" fill="#999" />
         </template>
@@ -79,7 +77,7 @@ watch(
     <FormItemBase prop="password">
       <el-input
         v-model="state.ruleForm.password"
-        :placeholder="t('entry.password')"
+        placeholder="请输入密码"
         type="password"
         @keyup.enter="handleLogin"
       >
@@ -91,10 +89,10 @@ watch(
     <FormItemBase>
       <div class="login-check">
         <el-checkbox v-model="state.checkedPwd">
-          {{ t('entry.rememberPwd') }}
+          记住密码
         </el-checkbox>
         <el-button type="text">
-          {{ t('entry.forgotPwd') }}
+          忘记密码
         </el-button>
       </div>
     </FormItemBase>
@@ -107,10 +105,10 @@ watch(
         round
         @click="handleLogin"
       >
-        {{ t('entry.btn') }}
+        登录
       </el-button>
     </FormItemBase>
-    <el-divider>{{ t('entry.thirdparty') }}</el-divider>
+    <el-divider>第三方登录</el-divider>
     <FormItemBase>
       <div class="login-methods">
         <icon-wechat theme="outline" size="24" fill="#333" />

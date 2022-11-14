@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import { useI18n } from 'vue-i18n'
 
 defineProps({
   color: {
@@ -11,7 +10,6 @@ defineProps({
 })
 
 const store = useStore()
-const { t } = useI18n()
 
 const showSetting = () => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
@@ -25,7 +23,7 @@ const showSetting = () => {
   <el-link>
     <icon-setting
       class="setting"
-      :title="t('settings.title')"
+      title="设置"
       theme="outline"
       size="16"
       :stroke-width="4"

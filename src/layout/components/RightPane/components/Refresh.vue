@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useStore } from '@/store/index';
+import { useStore } from '@/store/index'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import { useI18n } from 'vue-i18n';
 
 defineProps({
   color: {
@@ -10,9 +9,7 @@ defineProps({
   }
 })
 
-
 const store = useStore()
-const { t } = useI18n()
 
 const handleRefresh = () => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
@@ -26,7 +23,7 @@ const handleRefresh = () => {
   <el-link>
     <icon-refresh
       class="refresh"
-      :title="t('settings.refresh')"
+      title="刷新"
       theme="outline"
       size="16"
       :stroke-width="4"

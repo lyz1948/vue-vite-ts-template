@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { noticeList } from '../data'
 
 defineProps({
@@ -9,7 +8,6 @@ defineProps({
     required: true,
   },
 })
-const { t } = useI18n()
 const activeName = ref('first')
 
 </script>
@@ -20,7 +18,7 @@ const activeName = ref('first')
       <el-link>
         <icon-remind
           class="remind"
-          :title="t('settings.notice')"
+          title="消息"
           theme="outline"
           size="16"
           :stroke-width="4"
@@ -31,11 +29,11 @@ const activeName = ref('first')
     <template #dropdown>
       <div class="message-box">
         <el-tabs v-model="activeName" stretch>
-          <el-tab-pane :label="t('tabs.notice')" name="first">
+          <el-tab-pane label="通知" name="first">
             <Cell :list="noticeList" />
           </el-tab-pane>
-          <el-tab-pane :label="t('tabs.message')" name="second">
-            {{ t('notice.empty') }}
+          <el-tab-pane label="消息" name="second">
+            暂无数据
           </el-tab-pane>
         </el-tabs>
       </div>

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import errorPng from '@/assets/401.svg'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
 const router = useRouter()
 
 const handleBack = () => {
@@ -16,17 +14,17 @@ const handleBack = () => {
     <div class="error-page-wrapper">
       <div class="error-page-content">
         <div class="title">
-          {{ t('errorPages.title') }}
+          抱歉!
         </div>
         <div class="desc">
-          {{ t('errorPages.401.desc') }}
+          你没有权限去该页面...
         </div>
         <div class="remark">
-          {{ t('errorPages.401.remark') }}
+          请联系管理员，或点击下面的按钮返回首页
         </div>
 
         <BtnBase type="back" @click="handleBack">
-          {{ t('errorPages.btn') }}
+          返回首页
         </BtnBase>
       </div>
       <div class="error-page-image flexcenter">

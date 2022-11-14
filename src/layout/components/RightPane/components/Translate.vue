@@ -2,7 +2,6 @@
 import { reactive, nextTick } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import { useI18n } from 'vue-i18n'
 
 defineProps({
   color: {
@@ -12,7 +11,6 @@ defineProps({
 })
 
 const store = useStore()
-const { t } = useI18n()
 const languages = reactive([
   {
     name: '简体中文',
@@ -37,7 +35,7 @@ const handleCommand = async (command: any) => {
     <el-link type="primary" class="name">
       <icon-translate
         class="translate"
-        :title="t('settings.translate')"
+        title="语言切换"
         theme="outline"
         size="16"
         :stroke-width="4"
