@@ -39,7 +39,6 @@ export default function () {
       })
         .then(resolve)
         .catch(() => {
-          console.log('cancel')
           reject()
         })
     })

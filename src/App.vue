@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { ElConfigProvider } from 'element-plus'
-// import zhCn from 'element-plus/lib/locale/lang/zh-cn'
-import { getLocale } from '@/locales'
+// import { getLocale } from '@/locales'
+// import { reactive, toRefs } from 'vue'
+
+// const state = reactive({
+//   size: 'small',
+//   zIndex: 3000,
+// })
+
+// const locale = getLocale()
+
+// const { size, zIndex } = toRefs(state)
+
 </script>
 
 <template>
-  <el-config-provider :locale="getLocale">
+  <el-config-provider>
     <router-view />
   </el-config-provider>
 </template>

@@ -61,7 +61,7 @@ export default {
     logo: 'Logo显示',
     tab: '标签显示',
     breadcurmb: '面包导航',
-    fixHead: '固定头部',
+    fixedHead: '固定头部',
     visibleTab: '显示标签页',
     fullscreen: '全屏',
     refresh: '刷新',

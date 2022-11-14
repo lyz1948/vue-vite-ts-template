@@ -10,7 +10,7 @@ defineProps({
   },
   color: {
     type: String,
-    default: '#666',
+    default: '#fff',
   },
 })
 
@@ -32,9 +32,10 @@ const handleScreenFull = () => {
       <component
         :is="icon"
         :title="t('settings.fullscreen')"
-        theme="outline"
-        size="16"
+        :fill="color"
         :stroke-width="4"
+        size="16"
+        theme="outline"
       />
     </el-link>
   </div>

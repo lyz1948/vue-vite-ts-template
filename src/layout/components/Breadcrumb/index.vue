@@ -58,7 +58,6 @@ const getBreadcrumbs = computed(() => {
 watch(
   () => currentRoute.path,
   path => {
-    console.log('path:', path)
     if (path.startsWith('/redirect/')) {
       return
     }

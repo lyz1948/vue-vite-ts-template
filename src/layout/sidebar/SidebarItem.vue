@@ -73,7 +73,8 @@ const resolvePath = (routePath: string) => {
           :is="getOneChild.meta.icon"
           v-if="getOneChild.meta.icon"
           theme="outline"
-          stroke-width="3"
+          stroke-width="4"
+          size="16"
         />
         <template #title>
           <span v-if="getOneChild.meta.title">{{ t('route.' + getOneChild.meta.title) }}</span>
@@ -82,13 +83,14 @@ const resolvePath = (routePath: string) => {
     </SidebarItemLink>
   </template>
 
-  <el-sub-menu v-else :index="resolvePath(item.path)">
+  <el-sub-menu v-else :index="resolvePath(item.path)" style="background: transparent; border-bottom: none;">
     <template #title>
       <component
         :is="item.meta.icon"
         v-if="item.meta"
         theme="outline"
-        stroke-width="3"
+        stroke-width="4"
+        size="16"
       />
       <span v-if="item.meta">{{ t('route.' + item.meta.title) }}</span>
     </template>
@@ -105,38 +107,17 @@ const resolvePath = (routePath: string) => {
 </template>
 
 <style lang="scss">
-.el-sub-menu.is-active .el-sub-menu__title {
+.nest-menu {
   .i-icon {
-    margin-right: 5px !important;
+    margin-right: 8px;
   }
 }
-.el-menu--collapse > .el-sub-menu > .el-sub-menu__title span {
-  &.i-icon {
+.el-menu--collapse > .el-sub-menu > .el-sub-menu__title {
+  span.i-icon {
     height: 14px !important;
     width: 14px !important;
     margin-right: 15px !important;
     visibility: visible !important;
-  }
-}
-
-.is-horizonal {
-  .el-menu.el-menu--horizontal {
-    border-bottom: none !important;
-    padding: 0 20px;
-  }
-  .el-menu {
-    .el-menu-item {
-      &.is-active {
-        border-right: none;
-        background-color: transparent !important;
-      }
-    }
-  }
-}
-
-.nest-menu {
-  .i-icon + span {
-    margin-left: 10px;
   }
 }
 </style>

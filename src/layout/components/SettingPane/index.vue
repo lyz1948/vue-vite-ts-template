@@ -4,8 +4,8 @@ import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 // import { ISelectItem } from '@/types'
 import { MenuModeEnum, modeOpts } from '@/config/setting'
-import ThemeColor from './ThemeColor.vue'
 import { useI18n } from 'vue-i18n'
+import ThemeColor from './ThemeColor.vue'
 
 defineProps({
   direction: {
@@ -120,7 +120,7 @@ watch(
         <el-switch v-model="state.visibleLogo" @change="visibleLogo" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.fixHead') }}</span>
+        <span class="label">{{ t('settings.fixedHead') }}</span>
         <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
@@ -136,7 +136,7 @@ watch(
   &-item {
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    margin-bottom: 32px;
     .label {
       display: inline-block;
       font-size: 13px;

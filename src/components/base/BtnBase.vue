@@ -1,3 +1,4 @@
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
@@ -8,6 +9,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+// import { ElButton } from 'element-plus'
 
 const defaultState = {
   search: {
@@ -18,33 +20,38 @@ const defaultState = {
   create: {
     icon: 'el-icon-plus',
     text: 'create',
-    type: 'primary',
+    type: 'success',
   },
   save: {
     icon: 'el-icon-check',
-    text: '保存',
+    text: 'save',
     type: 'success',
   },
   close: {
     icon: 'el-icon-close',
-    text: '关闭',
+    text: 'close',
     type: 'danger',
   },
   delete: {
     icon: 'el-icon-delete',
-    text: '删除',
+    text: 'delete',
     type: 'danger',
     plain: true,
   },
   reset: {
-    icon: 'el-icon-refresh-left',
-    text: '重置',
+    icon: 'el-icon-switch-button',
+    text: 'reset',
     type: 'primary',
   },
   export: {
-    icon: 'el-icon-takeaway-box',
-    text: '导出',
+    icon: 'el-icon-notbook',
+    text: 'export',
     type: 'success',
+  },
+  back: {
+    icon: '',
+    text: 'back',
+    type: 'primary',
   },
 }
 
