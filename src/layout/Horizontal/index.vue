@@ -5,12 +5,12 @@ import VSidebar from '../sidebar/index.vue'
 import TabViews from '../tabViews/index.vue'
 import RightPane from '../components/RightPane/index.vue'
 import { useStore } from '@/store'
-import { computed } from 'vue-demi'
+import { computed } from 'vue'
 
 const store = useStore()
 
 const isFixHeader = computed(() => {
-  return store.state.setting.fixHead
+  return store.state.setting.fixedHead
 })
 
 const isShowTab = computed(() => {
@@ -27,12 +27,16 @@ const getStyle = computed(() => {
   }
   return 'margin-top: 0'
 })
+
+const styleObj = computed(() => {
+  return `background: ${store.state.setting.theme}`
+})
 </script>
 
 <template>
   <div class="layout is-horizonal" :class="{ 'is-fix-header': isFixHeader }">
     <el-scrollbar>
-      <div class="layout-topbar">
+      <div class="layout-topbar" :style="styleObj">
         <VLogo v-if="isShowLogo" />
         <VSidebar />
         <RightPane />
@@ -64,7 +68,6 @@ const getStyle = computed(() => {
         left: 0;
         right: 0;
         z-index: $base-z-index-default;
-        background-color: #fff;
       }
       .tabs-bar-container {
         position: fixed;

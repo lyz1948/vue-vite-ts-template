@@ -68,7 +68,7 @@ export default {
     logo: 'Logo',
     tab: 'Tab View',
     breadcurmb: 'Breadcurmb',
-    fixHead: 'Fixed Header',
+    fixedHead: 'Fixed Header',
     visibleTab: 'Visible Tab',
     fullscreen: 'Fuscreen',
     refresh: 'Refresh',

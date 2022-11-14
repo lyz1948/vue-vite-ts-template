@@ -15,12 +15,16 @@ const getMenuMode = computed(() => {
   return store.state.setting.menuMode
 })
 
-const theme = computed(() => {
+const menuBgColor = computed(() => {
   return store.state.setting.theme
 })
 
+const menuTextColor = computed(() => {
+  return store.state.setting.menuColor
+})
+
 const menuTextActiveColor = computed(() => {
-  return theme.value
+  return store.state.setting.menuActiveColor
 })
 
 const sidebar = computed(() => {
@@ -54,44 +58,52 @@ const activeMenu = computed(() => {
     :active="activeMenu"
     :collapse="isCollapse"
     :default-active="defaultActive"
+    :background-color="menuBgColor"
+    :text-color="menuTextColor"
     :active-text-color="menuTextActiveColor"
     :collapse-transition="true"
   >
     <template v-for="route in routes">
       <template v-if="!route.meta || !route.meta.hidden">
-        <SidebarItem
-          :key="route.path"
-          :item="route"
-          :base-path="route.path"
-        />
+        <SidebarItem :key="route.path" :item="route" :base-path="route.path" />
       </template>
     </template>
   </el-menu>
 </template>
 
-<style lang="scss" scope>
-.is-horizonal {
-  .sidebar-menu {
-    flex: 1;
-    border-bottom: 1px solid #ddd;
-  }
-}
-</style>
-
-<style lang="scss">
+<style scoped>
 .is-collapse {
   .sidebar-menu {
     width: $base-unfold-width;
   }
 }
+
+/* .i-icon {
+  margin-right: 8px;
+} */
+
+:deep(.el-menu-item .i-icon),
+:deep(.el-sub-menu .i-icon) {
+  margin-right: 8px;
+}
+
 </style>
 
 <style lang="scss" scoped>
 .sidebar-menu {
   border: none;
   width: 100%;
+}
+
+.is-horizonal {
+  .sidebar-menu {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
   .el-menu--horizontal {
     border-bottom: none !important;
   }
+
+ 
 }
 </style>

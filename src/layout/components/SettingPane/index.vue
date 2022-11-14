@@ -2,10 +2,10 @@
 import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
-import { ISelectItem } from '@/types'
+// import { ISelectItem } from '@/types'
 import { MenuModeEnum, modeOpts } from '@/config/setting'
-import ThemeColor from './ThemeColor.vue'
 import { useI18n } from 'vue-i18n'
+import ThemeColor from './ThemeColor.vue'
 
 defineProps({
   direction: {
@@ -52,7 +52,7 @@ const changeTagView = (val: boolean) => {
   })
 }
 
-const changeMenuMode = ({ value }: ISelectItem) => {
+const changeMenuMode = (value: any) => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
     type: 'menuMode',
     val: value,
@@ -86,6 +86,8 @@ watch(
   },
   { immediate: true }
 )
+
+
 </script>
 
 <template>
@@ -99,7 +101,15 @@ watch(
     >
       <div class="setting-item">
         <span class="label">{{ t('settings.layout') }}</span>
-        <SelectBase v-model:value="modeVal" :list="modeOptList" @on:select="changeMenuMode" />
+        <el-select v-model="modeVal" @change="changeMenuMode">
+          <el-option
+            v-for="item in modeOptList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <!-- <SelectBase v-model="modeVal" type="layout" @on:select="changeMenuMode" /> -->
       </div>
       <div class="setting-item">
         <span class="label">{{ t('settings.theme') }}</span>
@@ -110,7 +120,7 @@ watch(
         <el-switch v-model="state.visibleLogo" @change="visibleLogo" />
       </div>
       <div class="setting-item">
-        <span class="label">{{ t('settings.fixHead') }}</span>
+        <span class="label">{{ t('settings.fixedHead') }}</span>
         <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
@@ -126,12 +136,13 @@ watch(
   &-item {
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    margin-bottom: 32px;
     .label {
       display: inline-block;
+      font-size: 13px;
       width: 100px;
-      margin-right: 10px;
-      text-align: right;
+      color: #72767b;
+      text-align: center;
     }
   }
   &-foot {

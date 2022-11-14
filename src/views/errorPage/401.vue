@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import errorPng from '@/assets/401.svg'
-import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -25,9 +25,9 @@ const handleBack = () => {
           {{ t('errorPages.401.remark') }}
         </div>
 
-        <el-button type="primary" @click="handleBack">
-          {{ t('btn.back') }}
-        </el-button>
+        <BtnBase type="back" @click="handleBack">
+          {{ t('errorPages.btn') }}
+        </BtnBase>
       </div>
       <div class="error-page-image flexcenter">
         <el-image :src="errorPng" />

@@ -53,7 +53,6 @@ export interface IActions {
 export const actions: ActionTree<IPermissionState, IRootState> & IActions = {
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {
     const asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
-    console.log('asyncRoutes')
 
     commit(PermissionMutationTypes.SET_ROUTER, asyncRoutes)
   },

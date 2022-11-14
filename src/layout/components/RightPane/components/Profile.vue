@@ -31,7 +31,7 @@ const handleCommand = (command: Command) => {
 
 <template>
   <div class="profile">
-    <el-avatar :size="30" :src="circleUrl" />
+    <el-avatar :size="22" :src="circleUrl" />
     <el-dropdown @command="handleCommand">
       <el-link type="primary" class="name">
         <span class="mr5">张三</span>

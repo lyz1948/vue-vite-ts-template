@@ -1,9 +1,11 @@
+import { modeOpts } from "./setting"
+
 const yesNo = [
   { value: 0, label: '否' },
   { value: 1, label: '是' },
 ]
 
-export const SELECTOR = {
+export default {
   yesNo,
 
   role: [
@@ -11,4 +13,6 @@ export const SELECTOR = {
     { value: 'financial', label: '财务' },
     { value: 'generalManager', label: '管理员' },
   ],
+
+  layout: modeOpts,
 }

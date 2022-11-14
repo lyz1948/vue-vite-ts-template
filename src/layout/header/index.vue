@@ -40,12 +40,11 @@ const toggleSidebar = () => {
 </style>
 <style lang="scss" scoped>
 .header-container {
+  flex: 1;
   display: flex;
   justify-content: space-between;
-  border-bottom: $base-border-width-mini solid #eaebf3;
-  height: $base-head-menu-height;
-  padding: 0 $base-padding;
-  flex: 1;
+  border-bottom: 1px solid #eaebf3;
+  padding: 0 20px;
 
   .left {
     display: flex;

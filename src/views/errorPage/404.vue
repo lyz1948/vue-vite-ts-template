@@ -25,9 +25,9 @@ const handleBack = () => {
           {{ t('errorPages.404.remark') }}
         </div>
 
-        <el-button type="primary" @click="handleBack">
-          {{ t('btn.back') }}
-        </el-button>
+        <BtnBase type="back" @click="handleBack">
+          {{ t('errorPages.btn') }}
+        </BtnBase>
       </div>
       <div class="error-page-image flexcenter">
         <el-image :src="errorPng" />

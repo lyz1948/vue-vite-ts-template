@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useStore } from '@/store/index'
+
 import Profile from './components/Profile.vue'
 import Notice from './components/Notice.vue'
 import Translate from './components/Translate.vue'
@@ -7,13 +10,13 @@ import Setting from './components/Setting.vue'
 
 import SettingPane from '../SettingPane/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
+import useDevice from '@/utils/useSetting';
 
-defineProps({
-  color: {
-    type: String,
-    default: '#666',
-  },
-})
+const { isHorizonal } = useDevice()
+
+const store = useStore()
+
+const color = computed(() => isHorizonal.value ? '#fff' : store.state.setting.theme)
 </script>
 
 <template>
@@ -23,7 +26,7 @@ defineProps({
     </div>
 
     <div class="item">
-      <ScreenFull />
+      <ScreenFull :color="color" />
     </div>
 
     <div class="item">
@@ -41,6 +44,7 @@ defineProps({
     <div class="item">
       <Profile />
     </div>
+
     <SettingPane />
   </div>
 </template>
@@ -48,9 +52,13 @@ defineProps({
 <style lang="scss">
 .right-pane {
   display: flex;
-  line-height: $base-head-menu-height;
+  align-items: center;
+  justify-content: center;
   .item {
-    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
     cursor: pointer;
   }
 }

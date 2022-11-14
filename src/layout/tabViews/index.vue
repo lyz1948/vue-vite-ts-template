@@ -124,9 +124,14 @@ const handleCommand = async (command: ICommand) => {
   store.dispatch(command, view as any)
 }
 
+const isAffix = (tag: ITabView) => {
+  return tag.meta && tag.meta.affix
+}
+
 const handleShow = () => {
   console.log('show')
 }
+
 const handleHide = () => {
   console.log('hide')
 }
@@ -162,6 +167,7 @@ watch(
           v-for="tag in visitedViews"
           :key="tag.path"
           :name="tag.path"
+          :closable="!isAffix(tag)"
           class="tags-view-item"
         >
           <template #label>
@@ -171,7 +177,8 @@ watch(
                 v-if="tag.meta.icon"
                 class="menu-icon"
                 theme="outline"
-                stroke-width="3"
+                stroke-width="4"
+                size="16"
               />
               <span>
                 {{ t('route.' + tag.meta.title) }}
@@ -190,7 +197,7 @@ watch(
     >
       <template #reference>
         <span class="more" :class="{ active: visible }" style="cursor: pointer">
-          <icon-all-application theme="filled" size="18" :stroke-width="3" />
+          <icon-all-application theme="filled" size="16" :stroke-width="4" />
         </span>
       </template>
       <div
@@ -203,8 +210,8 @@ watch(
           :is="item.icon"
           class="icon"
           theme="filled"
-          size="14"
-          :stroke-width="3"
+          size="16"
+          :stroke-width="5"
         />
         <span class="command-label">{{ t('tagsView.' + item.text) }}</span>
       </div>
@@ -238,6 +245,8 @@ watch(
 }
 </style>
 <style lang="scss" scoped>
+
+// @import '@/styles/variables.scss';
 .tabs-bar-container {
   position: relative;
   box-sizing: border-box;
@@ -250,6 +259,7 @@ watch(
   padding-right: $base-padding;
   user-select: none;
   background: $base-color-white;
+  box-shadow: 0 2px 6px #eaebf3;
 
   :deep(.fold-unfold) {
     margin-right: $base-padding;

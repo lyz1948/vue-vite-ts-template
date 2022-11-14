@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { reactive, nextTick } from 'vue';
-import { useStore } from "@/store"
+import { reactive, nextTick } from 'vue'
+import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
+import { useI18n } from 'vue-i18n'
 
 defineProps({
   color: {
     type: String,
     required: true,
-  }
+  },
 })
 
 const store = useStore()
+const { t } = useI18n()
 const languages = reactive([
   {
     name: '简体中文',
@@ -20,7 +22,8 @@ const languages = reactive([
     name: 'English',
     value: 'en',
   },
-]);
+])
+
 const handleCommand = async (command: any) => {
   await store.dispatch(SettingActionTypes.ACTION_LANGUAGE_SET, command)
   nextTick().then(() => {
@@ -34,7 +37,7 @@ const handleCommand = async (command: any) => {
     <el-link type="primary" class="name">
       <icon-translate
         class="translate"
-        title="translate"
+        :title="t('settings.translate')"
         theme="outline"
         size="16"
         :stroke-width="4"

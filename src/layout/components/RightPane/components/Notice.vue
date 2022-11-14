@@ -20,7 +20,7 @@ const activeName = ref('first')
       <el-link>
         <icon-remind
           class="remind"
-          title="remind"
+          :title="t('settings.notice')"
           theme="outline"
           size="16"
           :stroke-width="4"

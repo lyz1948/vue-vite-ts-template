@@ -7,6 +7,7 @@ import useSetting from '@/utils/useSetting'
 
 const store = useStore()
 const { isOpen } = useSetting()
+
 const toggle = () => {
   store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, false)
 }
@@ -14,26 +15,37 @@ const toggle = () => {
 </script>
 
 <template>
-  <div class="logo" @click="toggle">
-    <el-image class="logo-image" :src="logPng" fit="contain" />
-    <span v-if="isOpen" class="logo-text">{{ settingConfig.title }}</span>
-  </div>
+  <a class="title" @click="toggle">
+    <el-image class="logo" :src="logPng" fit="contain" />
+    <span v-if="isOpen">{{ settingConfig.title }}</span>
+  </a>
 </template>
 
 <style lang="scss" scoped>
-.logo {
+.title {
   display: flex;
   align-items: center;
-  padding: 0 10px;
   height: $base-logo-height;
+  padding: 0 12px;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    color: #7e9cff;
+  }
 
-  &-image {
+  .logo {
     width: 30px;
     height: 30px;
     padding: 5px;
   }
-  &-text {
-    font-size: 18px;
-  }
 }
+
+.is-verticle {
+  border-bottom: 1px solid rgba(#fff, .4);
+}
+.is-horizonal {
+
+}
+
 </style>
