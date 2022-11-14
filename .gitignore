@@ -6,4 +6,3 @@ dist-ssr
 .vscode
 *.lock
 yarn-*.log
-components.d.ts
