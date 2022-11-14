@@ -5,7 +5,7 @@ import VSidebar from '../sidebar/index.vue'
 import VHeader from '../header/index.vue'
 import TabViews from '../tabViews/index.vue'
 import { useStore } from '@/store'
-import { computed } from 'vue-demi'
+import { computed } from 'vue'
 import { AppActionTypes } from '@/store/modules/app/action-types'
 
 const store = useStore()
