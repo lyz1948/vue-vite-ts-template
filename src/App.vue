@@ -12,7 +12,7 @@ const { size, zIndex } = toRefs(state)
 </script>
 
 <template>
-  <el-config-provider>
+  <el-config-provider :size="size" :z-index="zIndex">
     <router-view />
   </el-config-provider>
 </template>

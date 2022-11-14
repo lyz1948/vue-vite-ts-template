@@ -3,7 +3,7 @@ import { computed, reactive, watch, ref } from 'vue'
 import { useStore } from '@/store'
 import { SettingActionTypes } from '@/store/modules/setting/action-types'
 import { MenuModeEnum, modeOpts } from '@/config/setting'
-import ThemeColor from './ThemeColor.vue'
+// import ThemeColor from './ThemeColor.vue'
 
 defineProps({
   direction: {
@@ -62,12 +62,12 @@ const changeMenuMode = (value: any) => {
   }
 }
 
-const changeTheme = (val: string) => {
-  store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
-    type: 'theme',
-    val,
-  })
-}
+// const changeTheme = (val: string) => {
+//   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
+//     type: 'theme',
+//     val,
+//   })
+// }
 
 const visibleLogo = (val: string) => {
   store.dispatch(SettingActionTypes.ACTION_UPDATE_SETTING, {
