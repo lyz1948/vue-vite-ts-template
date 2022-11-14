@@ -9,15 +9,15 @@ const form = ref({
 </script>
 
 <template>
-  <el-form ref="form" :model="form" class="login-ruleForm">
-    <el-form-item prop="name">
+  <FormBase ref="form" :model="form" class="login-ruleForm">
+    <FormItemBase prop="name">
       <el-input v-model="form.name" placeholder="手机号">
         <template #prefix>
           <icon-user theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
-    </el-form-item>
-    <el-form-item>
+    </FormItemBase>
+    <FormItemBase>
       <div class="form-code">
         <el-input v-model="form.name" placeholder="获取验证码">
           <template #prefix>
@@ -28,39 +28,39 @@ const form = ref({
           短信验证码
         </el-button>
       </div>
-    </el-form-item>
-    <el-form-item prop="password">
+    </FormItemBase>
+    <FormItemBase prop="password">
       <el-input v-model="form.password" placeholder="密码" type="password">
         <template #prefix>
           <icon-lock theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
-    </el-form-item>
-    <el-form-item prop="password">
+    </FormItemBase>
+    <FormItemBase prop="password">
       <el-input v-model="form.password" placeholder="确认密码" type="password">
         <template #prefix>
           <icon-lock theme="outline" size="16" fill="#999" />
         </template>
       </el-input>
-    </el-form-item>
-    <el-form-item>
+    </FormItemBase>
+    <FormItemBase>
       <div class="login-check">
         <el-checkbox v-model="form.checkedPwd">
           我同意xxx隐私政策
         </el-checkbox>
       </div>
-    </el-form-item>
-    <el-form-item>
+    </FormItemBase>
+    <FormItemBase>
       <el-button
-        type="primary"
+        type="success"
         size="medium"
         class="login-btn"
         round
       >
         注册
       </el-button>
-    </el-form-item>
-  </el-form>
+    </FormItemBase>
+  </FormBase>
 </template>
 
 <style lang="scss" scoped>

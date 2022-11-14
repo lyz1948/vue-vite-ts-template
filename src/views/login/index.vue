@@ -46,7 +46,7 @@ watch(
       <VLogo class="logo" />
     </el-header>
     <div class="login-box">
-      <div v-if="!isMobile" class="login-side" />
+      <!-- <div v-if="!isMobile" class="login-side" /> -->
       <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
           <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -68,6 +68,16 @@ $white: #fff;
 
 .login-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: url('@/assets/login_bg2.png') 100% no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+
   .header {
     position: absolute;
     top: 0;
@@ -82,48 +92,13 @@ $white: #fff;
     background: transparent;
   }
   .login-box {
+    flex: 1;
     display: flex;
-    width: 100%;
-    height: 100vh;
-    padding-top: 100px;
-    overflow: hidden;
-    background-color: $dark-bg-color;
-    .login-side {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      width: 45vw;
-      height: 60%;
-      background-image: url('@/assets/login-bg.svg');
-      background-repeat: no-repeat;
-      background-position: 100%;
-      background-size: auto 100%;
-      &-wrap {
-        height: 60vh;
-        margin: auto;
-        .img {
-          width: 460px;
-          margin-top: 10vh;
-        }
-        .title,
-        .desc {
-          max-width: 500px;
-          font-weight: bold;
-          color: $white;
-          letter-spacing: 1.2px;
-        }
-        .desc {
-          font-size: 28px;
-        }
-        .tip {
-          color: $white;
-        }
-      }
-    }
+    align-items: center;
+    justify-content: center;
+    
+
     .login-form {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: 50vw;
       height: 60vh;
       &.is-mobile {

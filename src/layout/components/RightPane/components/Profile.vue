@@ -31,7 +31,7 @@ const handleCommand = (command: Command) => {
   <div class="profile">
     <el-avatar :size="22" :src="circleUrl" />
     <el-dropdown @command="handleCommand">
-      <el-link type="primary" class="name">
+      <el-link type="info" class="name">
         <span class="mr5">张三</span>
         <icon-down class="icon-hover down" size="16" />
       </el-link>
@@ -51,8 +51,8 @@ const handleCommand = (command: Command) => {
 .profile {
   display: flex;
   align-items: center;
-  height: $base-head-menu-height;
-  line-height: $base-head-menu-height;
+  // height: $base-head-menu-height;
+  // line-height: $base-head-menu-height;
   .name {
     margin-left: 5px;
   }

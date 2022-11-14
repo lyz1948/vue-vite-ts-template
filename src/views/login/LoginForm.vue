@@ -98,7 +98,7 @@ watch(
     </FormItemBase>
     <FormItemBase>
       <el-button
-        type="primary"
+        type="success"
         size="medium"
         :loading="state.loading"
         class="login-btn"
@@ -127,9 +127,13 @@ watch(
     padding: 0 4px;
   }
   .login-methods {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    .i-icon {
+      cursor: pointer;
+    }
   }
   .login-btn {
     width: 100%;

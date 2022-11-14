@@ -39,6 +39,7 @@ defineExpose({
     ref="validateForm"
     :model="props.form"
     :rules="props.rules"
+    size="large"
     class="form-wrapper"
   >
     <slot />
