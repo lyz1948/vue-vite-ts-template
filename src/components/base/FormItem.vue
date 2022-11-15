@@ -1,12 +1,9 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'FormItemBase',
-})
+<script setup lang="ts" name="FormItemBase">
+
 </script>
 
 <template>
-  <el-form-item>
+  <el-form-item v-bind="$attrs">
     <slot />
   </el-form-item>
 </template>

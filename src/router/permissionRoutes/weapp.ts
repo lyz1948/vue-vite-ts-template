@@ -18,7 +18,7 @@ const weappRouter: RouteRecordRaw[] = [
         name: 'Setting',
         component: () =>
           import(
-            /* webpackChunkName: "setting" */ '@/views/product/index.vue'
+            /* webpackChunkName: "setting" */ '@/views/weapp/index.vue'
           ),
         meta: {
           title: '小程序设置',
@@ -30,7 +30,7 @@ const weappRouter: RouteRecordRaw[] = [
         name: 'WechatUser',
         component: () =>
           import(
-            /* webpackChunkName: "wechatUser" */ '@/views/product/index.vue'
+            /* webpackChunkName: "wechatUser" */ '@/views/weapp/index.vue'
           ),
         meta: {
           title: '微信用户管理',

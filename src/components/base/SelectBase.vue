@@ -1,11 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'SelectBase',
-})
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="SelectBase">
 import { watch, ref, reactive } from 'vue'
 import { ISelectItem } from '@/types'
 import SELECTOR from '@/config/selector'

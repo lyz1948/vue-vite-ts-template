@@ -1,11 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'BtnLinkPermission',
-})
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="BtnLinkPermission">
 import { computed } from 'vue'
 
 const emit = defineEmits(['on:click'])

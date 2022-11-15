@@ -1,11 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'InputBase',
-})
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="InputBase">
 const emit = defineEmits(['update:value'])
 
 const changeInput = $event => {

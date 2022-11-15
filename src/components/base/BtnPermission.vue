@@ -1,11 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'BtnPermission',
-})
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="BtnPermission">
 defineProps({
   auth: {
     type: String,

@@ -5,7 +5,7 @@ export default defineComponent({
 })
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" name="FormBase">
 import { ElForm } from 'element-plus'
 
 type ELEForm = InstanceType<typeof ElForm>
@@ -13,18 +13,6 @@ type ELEForm = InstanceType<typeof ElForm>
 export interface MyFormExpose {
   validate: ELEForm['validate']
 }
-
-const props = defineProps({
-  form: {
-    type: Object,
-    default: () => ({}),
-  },
-
-  rules: {
-    type: Object,
-    default: () => ({}),
-  },
-})
 
 const validateForm = ref<ELEForm>()
 const validate = (callback: Function) => validateForm?.value?.validate(callback)
@@ -37,11 +25,15 @@ defineExpose({
 <template>
   <el-form
     ref="validateForm"
-    :model="props.form"
-    :rules="props.rules"
-    size="large"
     class="form-wrapper"
+    v-bind="$attrs"
   >
     <slot />
   </el-form>
 </template>
+
+<style>
+.form-wrapper {
+  padding: 0 20px;
+}
+</style>

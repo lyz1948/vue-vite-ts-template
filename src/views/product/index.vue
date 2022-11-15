@@ -4,7 +4,8 @@ import { RoleColumn } from '@/config/table'
 import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { PageDefault } from '@/config'
-import FormDialog from './FormDialog.vue'
+import DialogEdit from './components/DialogEdit.vue'
+import Search from './components/Search.vue'
 
 const TABLE_TITLE = '添加员工'
 const store = useStore()
@@ -26,8 +27,8 @@ const getPageList = computed(() => {
   return state.tableData.slice((state.pageNum - 1) * state.pageSize, state.pageNum * state.pageSize)
 })
 
-const fetchData = () => {
-  store.dispatch(UserActionTypes.ACTION_USER_LIST)
+const fetchData = (params) => {
+  store.dispatch(UserActionTypes.ACTION_USER_LIST, params)
 }
 
 const handlePage = ({ pageNum, pageSize }) => {
@@ -64,7 +65,9 @@ watch(() => tableData.value, (data) => {
 
 <template>
   <div>
-    <FormDialog ref="dialogRef" />
+    <DialogEdit ref="dialogRef" />
+    <Search @on:search="fetchData" />
+
     <TableBase
       :data="getPageList"
       :columns="RoleColumn"
@@ -75,8 +78,8 @@ watch(() => tableData.value, (data) => {
         <h3>{{ TABLE_TITLE }}</h3>
       </template>
 
-      <template #headerHandler>
-        <!-- <FormBase :inline="true">
+      <template #search>
+        <FormBase :inline="true">
           <FormItemBase label="姓名">
             <InputBase
               :value="searchVal"
@@ -84,25 +87,15 @@ watch(() => tableData.value, (data) => {
               @change="changeVal"
             />
           </FormItemBase>
-        </FormBase> -->
-
-        <el-form inline>
-          <el-form-item label="姓名">
-            <InputBase
-              v-model="searchVal"
-              placeholder="搜索：角色名称"
-              @change="changeVal"
-            />
-          </el-form-item>
-          <el-form-item>
-            <BtnBase type="primary">
+          <FormItemBase>
+            <BtnBase type="primary" size="default">
               搜索
             </BtnBase>
             <BtnPermission type="success" @click="handleCreate">
               创建
             </BtnPermission>
-          </el-form-item>
-        </el-form>
+          </FormItemBase>
+        </FormBase>
       </template>
 
       <template #isEnable="scope">

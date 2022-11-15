@@ -1,11 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'BtnLinkBase',
-})
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="BtnLinkBase">
 
 </script>
 

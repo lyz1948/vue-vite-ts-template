@@ -1,11 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'TableBase',
-})
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="TableBase">
 import { PageDefault } from '@/config'
 import useElement from '@/hooks/useElement'
 
