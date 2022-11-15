@@ -8,7 +8,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
 import { ServerConf } from './src/config'
-import ElementPlus from 'unplugin-element-plus/vite'
 
 const { host, port } = ServerConf
 
@@ -27,9 +26,7 @@ export default defineConfig({
     ElementPlus({
       useSource: true,
     }),
-    ElementPlus({
-      useSource: true,
-    }),
+
     viteMockServe({
       mockPath: 'mock',
       supportTs: true,
