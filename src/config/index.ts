@@ -1,5 +1,5 @@
 const host = '0.0.0.0'
-const port = 5300
+const port = 5234
 
 export const ServerConf = {
   base: './',

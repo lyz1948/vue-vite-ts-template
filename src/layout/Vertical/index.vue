@@ -77,7 +77,7 @@ const styleObj = computed(() => {
         top: 0;
         right: 0;
         z-index: $base-z-index-default;
-        background-color: #fff;
+        // background-color: #fff;
       }
     }
 

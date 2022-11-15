@@ -24,9 +24,9 @@ export const themeColorOpts = [
 ]
 
 export const settingConfig = {
-  title: 'Vue3 Vite Admin',
+  title: '旅游商城管理系统',
   // 模式 horizontal / vertical
-  menuMode: 'horizontal',
+  menuMode: 'vertical',
   language: 'zh-cn',
   theme: '#293246',
   menuColor: '#f1f1f1',

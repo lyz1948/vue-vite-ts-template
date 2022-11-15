@@ -149,8 +149,10 @@ const handleCurrentChange = (pageNum: number) => {
     }
   }
   &-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: 20px;
-    text-align: right;
   }
 }
 </style>

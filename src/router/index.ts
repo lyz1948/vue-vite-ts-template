@@ -56,6 +56,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     ],
   },
   ...constantModules,
+  { path: '/(.*)', redirect: '/404' }
 ]
 
 const router = createRouter({

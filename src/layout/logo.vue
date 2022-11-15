@@ -27,7 +27,7 @@ const toggle = () => {
   align-items: center;
   height: $base-logo-height;
   padding: 0 12px;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
   cursor: pointer;
   &:hover {
@@ -35,8 +35,8 @@ const toggle = () => {
   }
 
   .logo {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     padding: 5px;
   }
 }

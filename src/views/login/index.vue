@@ -42,11 +42,7 @@ watch(
 
 <template>
   <div class="login-container">
-    <el-header class="header">
-      <VLogo class="logo" />
-    </el-header>
     <div class="login-box">
-      <!-- <div v-if="!isMobile" class="login-side" /> -->
       <div class="login-form" :class="{ 'is-mobile': isMobile }">
         <div class="form-warp">
           <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -74,7 +70,7 @@ $white: #fff;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background: url('@/assets/login_bg2.png') 100% no-repeat;
+  background: url('@/assets/login_bg.png') 100% no-repeat;
   background-size: 100% 100%;
   overflow: hidden;
 

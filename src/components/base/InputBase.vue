@@ -14,7 +14,7 @@ const changeInput = $event => {
 </script>
 
 <template>
-  <div class="input-base" :class="{ vertical: vertical }">
+  <div class="input-base">
     <el-input
       v-bind="$attrs"
       @input="changeInput"

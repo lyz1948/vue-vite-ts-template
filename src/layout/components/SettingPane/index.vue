@@ -106,12 +106,7 @@ watch(
             :value="item.value"
           />
         </el-select>
-        <!-- <SelectBase v-model="modeVal" type="layout" @on:select="changeMenuMode" /> -->
       </div>
-      <!-- <div class="setting-item">
-        <span class="label">皮肤</span>
-        <ThemeColor @on:change="changeTheme" />
-      </div> -->
       <div class="setting-item">
         <span class="label">Logo</span>
         <el-switch v-model="state.visibleLogo" @change="visibleLogo" />
@@ -121,7 +116,7 @@ watch(
         <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">是否显示TagView</span>
+        <span class="label">是否显示标签栏</span>
         <el-switch v-model="state.visibleTab" @change="changeTagView" />
       </div>
     </el-drawer>
@@ -138,7 +133,7 @@ watch(
     .label {
       display: inline-block;
       font-size: 13px;
-      width: 100px;
+      width: 120px;
       color: #72767b;
       text-align: center;
     }
