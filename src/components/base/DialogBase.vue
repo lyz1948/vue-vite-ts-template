@@ -12,25 +12,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  title: {
-    type: String,
-    default: '新增',
-  },
-  width: {
-    type: String,
-    default: '860px',
-  },
-  hasFoot: {
-    type: Boolean,
-    default: true,
-  },
   btnCancelText: {
     type: String,
     default: '取消',
   },
   btnConfirmText: {
     type: String,
-    default: '确定',
+    default: '确认',
   },
 })
 
@@ -46,9 +34,10 @@ const handleConfirm = () => {
 <template>
   <el-dialog
     :model-value="visible"
-    :title="title"
-    :width="width"
+    :close-on-press-escape="false"
+    :close-on-click-modal="false"
     :before-close="handleClose"
+    v-bind="$attrs"
   >
     <slot />
 

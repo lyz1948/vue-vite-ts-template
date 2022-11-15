@@ -121,7 +121,7 @@ watch(
         <el-switch v-model="state.fixedHead" @change="changFixHead" />
       </div>
       <div class="setting-item">
-        <span class="label">是否显示TagView</span>
+        <span class="label">是否显示标签栏</span>
         <el-switch v-model="state.visibleTab" @change="changeTagView" />
       </div>
     </el-drawer>

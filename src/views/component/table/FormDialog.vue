@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 import { ISelectItem } from '@/types'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
 import FormBase from '@/components/base/FormBase.vue'
@@ -17,13 +17,14 @@ const formState = () => ({
   isEnable: true,
 })
 
+const rules = {
+  name: [{ required: true, message: '名字不能为空', trigger: 'blur' }],
+  role: [{ required: true, message: '角色不能为空', trigger: 'blur' }],
+}
+
 const state = reactive({
   form: formState(),
   loading: false,
-  rules: {
-    name: [{ required: true, message: '名字不能为空', trigger: 'blur' }],
-    role: [{ required: true, message: '角色不能为空', trigger: 'blur' }],
-  },
 })
 
 const changeRole = (val: ISelectItem) => {
@@ -54,6 +55,8 @@ const handleConfirm = () => {
   })
 }
 
+const { form } = toRefs(state)
+
 defineExpose({
   show,
   edit,
@@ -69,17 +72,17 @@ defineExpose({
   >
     <FormBase
       ref="formRef"
-      :form="state.form"
-      :rules="state.rules"
+      :form="form"
+      :rules="rules"
       label-width="100px"
     >
       <FormItemBase prop="name" label="角色名称">
-        <InputBase v-model:value="state.form.name" />
+        <InputBase v-model="form.name" />
       </FormItemBase>
 
       <FormItemBase prop="role" label="审核角色">
         <SelectBase
-          v-model:value="state.form.role"
+          v-model="form.role"
           type="role"
           @on:select="changeRole"
         />
@@ -87,14 +90,14 @@ defineExpose({
 
       <FormItemBase label="备注">
         <InputBase
-          v-model:value="state.form.remark"
+          v-model="form.remark"
           :rows="4"
           type="textarea"
         />
       </FormItemBase>
 
       <FormItemBase label="启用状态">
-        <SwitchBase v-model:value="state.form.isEnable" />
+        <SwitchBase v-model="form.isEnable" />
       </FormItemBase>
     </FormBase>
   </DialogBase>
