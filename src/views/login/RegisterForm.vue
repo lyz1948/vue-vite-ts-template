@@ -53,7 +53,6 @@ const form = ref({
     <FormItemBase>
       <el-button
         type="success"
-        size="medium"
         class="login-btn"
         round
       >

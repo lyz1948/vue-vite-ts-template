@@ -99,7 +99,6 @@ watch(
     <FormItemBase>
       <el-button
         type="success"
-        size="medium"
         :loading="state.loading"
         class="login-btn"
         round
