@@ -1,7 +1,10 @@
+const host = '0.0.0.0'
+const port = 5300
+
 export const ServerConf = {
   base: './',
-  host: '0.0.0.0',
-  port: 5000,
+  host,
+  port,
 }
 
 // 白名单
@@ -17,5 +20,5 @@ export const PageDefault = {
 
 export const App = {
   baseURL:
-    process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/api',
+    process.env.NODE_ENV === 'development' ? `http://127.0.0.1:${port}/` : '/api',
 }

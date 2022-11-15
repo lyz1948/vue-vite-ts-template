@@ -1,4 +1,4 @@
-import request from '@/plugins/request' // axios 封装
+import request from '@/utils/request' // axios 封装
 import qs from 'qs'
 import httpUrl from './httpUrl' // 接口 url
 import { ILoginClient } from '@/types'

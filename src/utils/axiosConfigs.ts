@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import { App } from '@/config'
-import { errorCode, CodeKey } from '../utils/codeStatus'
+import { errorCode, CodeKey } from './codeStatus'
 const { baseURL } = App
 
 const service = axios.create({
@@ -77,7 +77,7 @@ service.interceptors.response.use(
         showClose: true,
       })
     } else {
-      const message = '请求超时或服务器异常，请检查网络或联系管理员！'
+      const message = '请求超时或服务器异常，请检查网络！'
       ElMessage({
         message,
         type: 'error',
