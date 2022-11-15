@@ -91,9 +91,9 @@ watch(
         <el-checkbox v-model="state.checkedPwd">
           记住密码
         </el-checkbox>
-        <el-button type="text">
+        <el-link type="success" :underline="false">
           忘记密码
-        </el-button>
+        </el-link>
       </div>
     </FormItemBase>
     <FormItemBase>
@@ -138,6 +138,7 @@ watch(
     width: 100%;
   }
   .login-check {
+    width: 100%;
     display: flex;
     align-content: center;
     justify-content: space-between;

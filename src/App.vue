@@ -3,7 +3,7 @@ import { ElConfigProvider } from 'element-plus'
 import { reactive, toRefs } from 'vue'
 
 const state = reactive({
-  size: 'small',
+  size: 'default',
   zIndex: 3000,
 })
 

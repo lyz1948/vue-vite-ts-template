@@ -38,10 +38,17 @@
 //   }
 // }
 
-.el-dialog {
-  .el-form-item {
-    .el-select {
-      width: 100% !important;
+.el-form {
+  &:not(.el-form--inline) {
+    .el-form-item__content > div{
+      width: 100%;
+    }
+  }
+  ::deep(.el-form--inline .el-form-item) {
+    width: calc(50% - 12px) !important;
+
+    .el-form-item__content > div{
+      width: 100%;
     }
   }
 }

@@ -149,8 +149,9 @@ const handleCurrentChange = (pageNum: number) => {
     }
   }
   &-footer {
+    display: flex;
+    justify-content: flex-end;
     margin-top: 20px;
-    text-align: right;
   }
 }
 </style>

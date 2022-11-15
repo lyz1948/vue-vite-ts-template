@@ -244,7 +244,6 @@ watch(
 </style>
 <style lang="scss" scoped>
 
-// @import '@/styles/variables.scss';
 .tabs-bar-container {
   position: relative;
   box-sizing: border-box;
@@ -256,18 +255,9 @@ watch(
   padding-left: $base-padding;
   padding-right: $base-padding;
   user-select: none;
-  background: rgba($base-color-white, .4);
   backdrop-filter: saturate(50%) blur(8px);
   z-index: $base-z-index-default;
-  // box-shadow: 0 2px 6px #eaebf3;
 
-  // :deep(.fold-unfold) {
-  //   margin-right: $base-padding;
-  // }
-  // :deep(.el-tabs__item) {
-  //   display: inline-flex;
-  //   align-items: center;
-  // }
   .item {
     display: inline-flex;
     align-items: center;

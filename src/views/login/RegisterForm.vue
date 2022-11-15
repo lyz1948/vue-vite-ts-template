@@ -90,6 +90,7 @@ const form = ref({
     justify-content: space-between;
   }
   .form-code {
+    width: 100%;
     display: flex;
     align-content: center;
     justify-content: space-between;
