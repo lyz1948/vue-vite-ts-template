@@ -46,4 +46,12 @@ const toggle = () => {
     border-bottom: 1px solid rgba(#eaebf3, .4);
   }
 }
+
+.is-verticle {
+  border-bottom: 1px solid rgba(#fff, .4);
+}
+.is-horizonal {
+
+}
+
 </style>

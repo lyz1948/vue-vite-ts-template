@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import ElementPlus from 'unplugin-element-plus/vite'
 
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -8,6 +7,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
 import { ServerConf } from './src/config'
+import ElementPlus from 'unplugin-element-plus/vite'
 
 const { host, port } = ServerConf
 
@@ -22,6 +22,9 @@ export default defineConfig({
     vue(),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    ElementPlus({
+      useSource: true,
     }),
     ElementPlus({
       useSource: true,

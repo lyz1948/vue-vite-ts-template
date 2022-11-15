@@ -80,7 +80,7 @@ const resolvePath = (routePath: string) => {
     </SidebarItemLink>
   </template>
 
-  <el-sub-menu v-else :index="resolvePath(item.path)">
+  <el-sub-menu v-else :index="resolvePath(item.path)" style="background: transparent; border-bottom: none;">
     <template #title>
       <component
         :is="item.meta.icon"
