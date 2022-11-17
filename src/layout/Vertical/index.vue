@@ -89,6 +89,7 @@ const styleObj = computed(() => {
 
     .layout-top-bar {
       width: calc(100vw - $base-menu-width);
+      backdrop-filter: saturate(50%) blur(8px);
     }
 
     .layout-body {
