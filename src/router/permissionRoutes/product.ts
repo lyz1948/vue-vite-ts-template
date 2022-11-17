@@ -26,6 +26,19 @@ const productRouter: RouteRecordRaw[] = [
         },
       },
       {
+        path: 'line-add',
+        name: 'LineAdd',
+        component: () =>
+          import(
+            /* webpackChunkName: "lineAdd" */ '@/views/product/create.vue'
+          ),
+        meta: {
+          title: '新增线路',
+          icon: 'icon-table',
+          hidden: true,
+        },
+      },
+      {
         path: 'category',
         name: 'Category',
         component: () =>

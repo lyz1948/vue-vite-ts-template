@@ -39,6 +39,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     "@typescript-eslint/no-explicit-any": ["off"],
     "@typescript-eslint/interface-name-prefix": ["off"],
+    "vue/no-mutating-props": "off",
     "vue/max-attributes-per-line": ["error", {
       "singleline": {
         "max": 3

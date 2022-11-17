@@ -1,8 +1,8 @@
 import { ActionContext, ActionTree } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
-import { IRootState } from '@/store'
+import { RootState } from '@/store'
 import { Mutations } from './mutations'
-import { IPermissionState } from './state'
+import { PermissionState } from './state'
 import { PermissionActionTypes } from './action-types'
 import { PermissionMutationTypes } from './mutation-types'
 import { permissionRoutes } from '@/router/index'
@@ -12,7 +12,7 @@ type AugmentedActionContext = {
     key: K,
     payload: Parameters<Mutations[K]>[1]
   ): ReturnType<Mutations[K]>
-} & Omit<ActionContext<IPermissionState, IRootState>, 'commit'>
+} & Omit<ActionContext<PermissionState, RootState>, 'commit'>
 
 // 校验权限
 const hasPermission = (route: RouteRecordRaw, roles: string[]) => {
@@ -50,7 +50,7 @@ export interface IActions {
   ): void
 }
 
-export const actions: ActionTree<IPermissionState, IRootState> & IActions = {
+export const actions: ActionTree<PermissionState, RootState> & IActions = {
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {
     const asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
 

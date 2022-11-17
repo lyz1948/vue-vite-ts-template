@@ -2,8 +2,8 @@
 import { ActionContext, ActionTree } from 'vuex'
 import { UserActionTypes } from './action-types'
 import { Mutations } from './mutations'
-import { IUserState } from './state'
-import { IRootState, useStore } from '@/store'
+import { UserState } from './state'
+import { RootState, useStore } from '@/store'
 import { ILogin } from '@/types'
 import { setToken } from '@/utils/cookies'
 import { UserMutationTypes } from './mutation-types'
@@ -13,11 +13,11 @@ import { resetRouter } from '@/router/index'
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
-} & Omit<ActionContext<IUserState, IRootState>, 'commit'>
+} & Omit<ActionContext<UserState, RootState>, 'commit'>
 
 type NoAugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K): ReturnType<Mutations[K]>
-} & Omit<ActionContext<IUserState, IRootState>, 'commit'>
+} & Omit<ActionContext<UserState, RootState>, 'commit'>
 
 export interface IUserActions {
   [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin): void
@@ -28,7 +28,7 @@ export interface IUserActions {
   [UserActionTypes.ACTION_USER_DELETE]({ commit }: AugmentedActionContext, id: number): void
 }
 
-export const actions: ActionTree<IUserState, IRootState> & IUserActions = {
+export const actions: ActionTree<UserState, RootState> & IUserActions = {
   [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin) {
     const { username, password } = userinfo
     username.trim()

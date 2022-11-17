@@ -4,16 +4,16 @@ import {
   CommitOptions,
   DispatchOptions,
 } from 'vuex'
-import { IRootState } from '../../index'
+import { RootState } from '../../index'
 
 import { state } from './state'
 import { actions, IActions } from './actions'
 import { mutations, Mutations } from './mutation'
-import type { ITagViewsState } from './state'
+import type { TagViewsState } from './state'
 
-export { ITagViewsState }
+export { TagViewsState }
 
-export type TagViewsStore<S = ITagViewsState> = Omit<
+export type TagViewsStore<S = TagViewsState> = Omit<
   VuexStore<S>,
   'getters' | 'commit' | 'dispatch'
 > & {
@@ -30,7 +30,7 @@ export type TagViewsStore<S = ITagViewsState> = Omit<
   ): ReturnType<IActions[K]>
 }
 
-export const store: Module<ITagViewsState, IRootState> = {
+export const store: Module<TagViewsState, RootState> = {
   state,
   actions,
   mutations,

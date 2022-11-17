@@ -1,7 +1,6 @@
 <script setup lang="ts" name="BtnLinkPermission">
 import { computed } from 'vue'
 
-const emit = defineEmits(['on:click'])
 const props = defineProps({
   auth: {
     type: String,
@@ -26,9 +25,6 @@ const isDelete = computed(() => {
   return props.auth === 'delete'
 })
 
-const handleClick = () => {
-  emit('on:click')
-}
 </script>
 
 <template>
@@ -37,7 +33,6 @@ const handleClick = () => {
       v-if="isDelete"
       v-permission="auth"
       v-bind="$attrs"
-      @click="handleClick"
     >
       {{ getAuthLabel }}
     </el-link>
@@ -46,7 +41,6 @@ const handleClick = () => {
       v-else
       v-permission="auth"
       v-bind="$attrs"
-      @click="handleClick"
     >
       {{ getAuthLabel }}
     </el-link>

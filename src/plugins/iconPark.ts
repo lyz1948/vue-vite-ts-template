@@ -27,7 +27,10 @@ import {
   Table,
   Bug,
   Shield,
+  Plus,
   FolderBlock,
+  OrderedList,
+  FormOne,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 
@@ -58,6 +61,9 @@ export const components = [
   Bug,
   Shield,
   FolderBlock,
+  Plus,
+  OrderedList,
+  FormOne,
 ]
 
 export default (app: ReturnType<typeof createApp>) => {

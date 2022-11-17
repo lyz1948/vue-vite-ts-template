@@ -20,7 +20,7 @@ export enum DeviceType {
   Desktop,
 }
 
-export interface ISettingState {
+export interface SettingState {
   setting: boolean
   fixedHead: boolean
   visibleTab: boolean
@@ -37,7 +37,7 @@ export interface ISettingState {
   size: string
 }
 
-export const state: ISettingState = {
+export const state: SettingState = {
   setting: false, // 设置面板
   fixedHead, // 固定header
   visibleTab, // 显示tagview

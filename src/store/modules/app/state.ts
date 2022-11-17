@@ -3,7 +3,7 @@ export enum DeviceType {
   Desktop,
 }
 
-export interface IAppState {
+export interface AppState {
   device: DeviceType
   sidebar: {
     open: boolean
@@ -13,7 +13,7 @@ export interface IAppState {
   size: string
 }
 
-export const state: IAppState = {
+export const state: AppState = {
   device: DeviceType.Desktop,
   sidebar: {
     open: true,

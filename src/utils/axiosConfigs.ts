@@ -1,11 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
-import { App } from '@/config'
 import { errorCode, CodeKey } from './codeStatus'
-const { baseURL } = App
 
 const service = axios.create({
-  baseURL,
+  baseURL: import.meta.env.BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
   },

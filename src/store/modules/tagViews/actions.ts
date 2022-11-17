@@ -1,5 +1,5 @@
-import { ITagViewsState } from './state'
-import { IRootState } from '@/store'
+import { TagViewsState } from './state'
+import { RootState } from '@/store'
 import { ActionTree, ActionContext } from 'vuex'
 import { TagsActionTypes } from './action-types'
 import { Mutations } from './mutation'
@@ -11,11 +11,11 @@ type AugmentedActionContext = {
     key: K,
     payload: Parameters<Mutations[K]>[1]
   ): ReturnType<Mutations[K]>
-} & Omit<ActionContext<ITagViewsState, IRootState>, 'commit'>
+} & Omit<ActionContext<TagViewsState, RootState>, 'commit'>
 
 type NoAugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K): ReturnType<Mutations[K]>
-} & Omit<ActionContext<ITagViewsState, IRootState>, 'commit'>
+} & Omit<ActionContext<TagViewsState, RootState>, 'commit'>
 
 export interface IActions {
   [TagsActionTypes.ACTION_ADD_VIEW](
@@ -65,7 +65,7 @@ export interface IActions {
   }: NoAugmentedActionContext): void
 }
 
-export const actions: ActionTree<ITagViewsState, IRootState> & IActions = {
+export const actions: ActionTree<TagViewsState, RootState> & IActions = {
   async [TagsActionTypes.ACTION_ADD_VIEW]({ commit }, view: ITagView) {
     commit(TagsMutationTypes.ADD_CACHED_VIEW, view)
     commit(TagsMutationTypes.ADD_VISITED_VIEW, view)

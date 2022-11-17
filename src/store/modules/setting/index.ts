@@ -4,16 +4,16 @@ import {
   CommitOptions,
   DispatchOptions,
 } from 'vuex'
-import { IRootState } from '@/store'
+import { RootState } from '@/store'
 
 import { state } from './state'
 import { actions, IActions } from './actions'
 import { mutations, Mutations } from './mutations'
-import type { ISettingState } from './state'
+import type { SettingState } from './state'
 
-export { ISettingState }
+export { SettingState }
 
-export type SettingStore<S = ISettingState> = Omit<
+export type SettingStore<S = SettingState> = Omit<
   VuexStore<S>,
   'getters' | 'commit' | 'dispatch'
 > & {
@@ -30,7 +30,7 @@ export type SettingStore<S = ISettingState> = Omit<
   ): ReturnType<IActions[K]>
 }
 
-export const store: Module<ISettingState, IRootState> = {
+export const store: Module<SettingState, RootState> = {
   state,
   actions,
   mutations,

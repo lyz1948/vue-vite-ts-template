@@ -1,9 +1,11 @@
-<script setup lang="ts" name="FormItemBase">
-
+<script>
+export default {
+  name: "FormItemBase"
+}
 </script>
 
 <template>
-  <el-form-item v-bind="$attrs">
+  <el-form-item>
     <slot />
   </el-form-item>
 </template>

@@ -4,16 +4,16 @@ import {
   CommitOptions,
   DispatchOptions,
 } from 'vuex'
-import type { IUserState } from './state'
-import { IRootState } from '../../index'
+import type { UserState } from './state'
+import { RootState } from '../../index'
 
 import { state } from './state'
 import { actions, IUserActions } from './actions'
 import { mutations, Mutations } from './mutations'
 
-export { IUserState }
+export { UserState }
 
-export type UserStore<S = IUserState> = Omit<
+export type UserStore<S = UserState> = Omit<
   VuexStore<S>,
   'getters' | 'commit' | 'dispatch'
 > & {
@@ -30,7 +30,7 @@ export type UserStore<S = IUserState> = Omit<
   ): ReturnType<IUserActions[K]>
 }
 
-export const store: Module<IUserState, IRootState> = {
+export const store: Module<UserState, RootState> = {
   state,
   actions,
   mutations,

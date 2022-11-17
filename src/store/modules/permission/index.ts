@@ -4,16 +4,16 @@ import {
   CommitOptions,
   DispatchOptions,
 } from 'vuex'
-import { IRootState } from '@/store'
+import { RootState } from '@/store'
 
-import type { IPermissionState } from './state'
+import type { PermissionState } from './state'
 import { state } from './state'
 import { actions, IActions } from './actions'
 import { mutations, Mutations } from './mutations'
 
-export { IPermissionState }
+export { PermissionState }
 
-export type PermissionStore<S = IPermissionState> = Omit<
+export type PermissionStore<S = PermissionState> = Omit<
   VuexStore<S>,
   'getters' | 'commit' | 'dispatch'
 > & {
@@ -33,7 +33,7 @@ export type PermissionStore<S = IPermissionState> = Omit<
   ): ReturnType<IActions[K]>
 }
 
-export const store: Module<IPermissionState, IRootState> = {
+export const store: Module<PermissionState, RootState> = {
   state,
   actions,
   mutations,

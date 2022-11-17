@@ -1,11 +1,5 @@
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  name: 'FormBase',
-})
-</script>
-
 <script setup lang="ts" name="FormBase">
+import { ref } from 'vue'
 import { ElForm } from 'element-plus'
 
 type ELEForm = InstanceType<typeof ElForm>
@@ -25,15 +19,17 @@ defineExpose({
 <template>
   <el-form
     ref="validateForm"
-    class="form-wrapper"
+    class="form-wrap"
     v-bind="$attrs"
   >
-    <slot />
+    <div class="content">
+      <slot />
+    </div>
   </el-form>
 </template>
 
 <style>
-.form-wrapper {
-  padding: 0 20px;
+.form-wrap {
+  margin-top: 20px;;
 }
 </style>
