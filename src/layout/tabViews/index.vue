@@ -219,7 +219,8 @@ watch(
 
 <style lang="scss">
 .tabs-bar-container {
-  box-shadow: 0 2px 4px #b4bccc;
+  // box-shadow: 0 2px 4px #b4bccc;
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 10%);
 }
 .tags-view-wrapper {
   flex: 1;

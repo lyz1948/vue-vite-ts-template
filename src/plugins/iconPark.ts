@@ -31,6 +31,8 @@ import {
   FolderBlock,
   OrderedList,
   FormOne,
+  Delete,
+  CheckOne,
 } from '@icon-park/vue-next'
 import '@icon-park/vue-next/styles/index.css'
 
@@ -64,6 +66,8 @@ export const components = [
   Plus,
   OrderedList,
   FormOne,
+  Delete,
+  CheckOne,
 ]
 
 export default (app: ReturnType<typeof createApp>) => {

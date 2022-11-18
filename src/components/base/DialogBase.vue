@@ -1,5 +1,5 @@
 <script setup lang="ts" name="DialogBase">
-const emit = defineEmits(['update:visible', 'update:confirm'])
+const emit = defineEmits(['on:visible', 'on:confirm'])
 const props = defineProps({
   visible: {
     type: Boolean,
@@ -16,12 +16,13 @@ const props = defineProps({
 })
 
 const handleClose = () => {
-  emit('update:visible', false)
+  emit('on:visible', false)
 }
 
 const handleConfirm = () => {
-  emit('update:confirm', props.visible)
+  emit('on:confirm', props.visible)
 }
+
 </script>
 
 <template>

@@ -29,7 +29,7 @@ const visibleRoute = computed(() => {
 
 <style lang="scss" scoped>
 .app-main {
-  // border-radius: 6px;
+  padding-bottom: 32px;
   background-color: #fff;
 }
 </style>

@@ -9,26 +9,30 @@ const props = defineProps({
 
 <template>
   <div class="mod-head">
-    <div class="title">
-      {{ props.title }}
+    <div class="mod-head-wrap">
+      <div class="title">
+        {{ props.title }}
+      </div>
+      <slot />
     </div>
-    <slot />
   </div>
 </template>
 
 <style lang="scss">
 .mod-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid $base-border-color;
-  height: 60px;
-  line-height: 60px;
   background: #fff;
   padding: 0 20px;
-
+  .mod-head-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0 12px;
+    border-bottom: 1px solid $base-border-color;
+  }
   .title {
-    margin: 20px 0;
+    color: $title-color;
+    font-size: 18px;
+    font-weight: 700;
   }
 }
 </style>

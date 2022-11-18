@@ -97,9 +97,9 @@ const styleObj = computed(() => {
       height: 100vh;
       @include scrollbar;
       .layout-main {
-        padding: 20px;
+        // padding: 20px;
         min-height: calc(100vh - $base-head-menu-height - $base-tabs-bar-height);
-        background-color: $base-content-bg-color;
+        // background-color: $base-content-bg-color;
       }
     }
   }

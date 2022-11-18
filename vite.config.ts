@@ -41,6 +41,7 @@ export default defineConfig({
     alias: {
       views: resolve(__dirname, 'src/views'),
       styles: resolve(__dirname, 'src/styles'),
+      assets: resolve(__dirname, 'src/assets'),
       '@': resolve(__dirname, 'src'),
     },
   },
