@@ -11,6 +11,7 @@ const productRouter: RouteRecordRaw[] = [
     meta: {
       title: '产品管理',
       icon: 'icon-remind',
+      orderNumber: 2,
     },
     children: [
       {
@@ -43,7 +44,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Category',
         component: () =>
           import(
-            /* webpackChunkName: "category" */ '@/views/product/index.vue'
+            /* webpackChunkName: "category" */ '@/views/product/category.vue'
           ),
         meta: {
           title: '产品分类',
@@ -55,7 +56,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Gallery',
         component: () =>
           import(
-            /* webpackChunkName: "gallery" */ '@/views/product/index.vue'
+            /* webpackChunkName: "gallery" */ '@/views/product/gallery.vue'
           ),
         meta: {
           title: '产品图片',

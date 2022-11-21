@@ -29,3 +29,13 @@ export const ProductTag = [
   { attrs: { prop: '', label: '创建时间' } },
   { attrs: { prop: 'action', label: '操作' }, slot: 'action' },
 ]
+
+// 产品图片
+export const ProductImage = [
+  { attrs: { prop: '', label: '图片类型' } },
+  { attrs: { prop: '', label: '图片数量' } },
+  { attrs: { prop: '', label: '图片大小' } },
+  { attrs: { prop: '', label: '创建人' } },
+  { attrs: { prop: '', label: '创建时间' } },
+  { attrs: { prop: 'action', label: '操作' }, slot: 'action' },
+]

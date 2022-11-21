@@ -44,10 +44,8 @@ const myArray = ref([
       </el-popover>
     </ModTitle>
 
-    <div class="content">
-      <div class="container">
-        <TripItem />
-      </div>
+    <div class="container">
+      <TripItem />
     </div>
   </div>
 </template>

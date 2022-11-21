@@ -15,4 +15,16 @@ export default {
   ],
 
   layout: modeOpts,
+
+  sale: [
+    { value: '', label: '全部' },
+    { value: '1', label: '销售中' },
+    { value: '0', label: '已停售' },
+  ],
+
+  orderSource: [
+    { value: '1', label: '自来客' },
+    { value: '2', label: '小程序' },
+    { value: '3', label: '平台' },
+  ],
 }

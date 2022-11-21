@@ -31,7 +31,7 @@ const dicData = ref([
         <ModTitle title="产品线路" />
         <TableBase :data="dicData" :columns="columns" border>
           <template #action>
-            <BtnLinkBase type="success">
+            <BtnLinkBase type="success" class="mr5">
               编辑
             </BtnLinkBase>
             <BtnLinkBase type="danger">

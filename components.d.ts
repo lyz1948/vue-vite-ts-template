@@ -68,6 +68,7 @@ declare module 'vue' {
     Tinymce: typeof import('./src/components/Tinymce/index.vue')['default']
     Title: typeof import('./src/components/Title/index.vue')['default']
     TitleLabel: typeof import('./src/components/TitleLabel/index.vue')['default']
+    UploadAvatar: typeof import('./src/components/Uploader/UploadAvatar.vue')['default']
     Uploader: typeof import('./src/components/Uploader/index.vue')['default']
   }
 }
