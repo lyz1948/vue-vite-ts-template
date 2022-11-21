@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
-import { ProductList as columns } from '@/config/productTable'
+import { SaleOrderManage as columns } from '@/config/saleTable'
 import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { PageDefault } from '@/config'
 
-const TABLE_TITLE = '添加员工'
+const TABLE_TITLE = '订单管理'
 const store = useStore()
 const emit = defineEmits(['on:edit'])
 

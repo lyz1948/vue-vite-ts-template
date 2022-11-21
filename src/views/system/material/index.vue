@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import ModTitle from '@/components/Title/index.vue'
-import ImageList from '@/components/business/imageList.vue'
+import ImageList from '@/components/business/ImageList.vue'
 import DialogMaterial from '@/components/business/DialogMaterial.vue'
 
 const menuList = [

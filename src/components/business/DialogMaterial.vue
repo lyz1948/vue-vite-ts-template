@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import ImageList from './imageList.vue'
+import ImageList from './ImageList.vue'
 
 const imageList = [
   { src: '/src/assets/cover.jpeg', name: 'abc.jpeg', check: false },

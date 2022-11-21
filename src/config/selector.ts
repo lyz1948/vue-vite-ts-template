@@ -1,4 +1,5 @@
 import { modeOpts } from "./setting"
+import { PaymentEnum, PaymentLabelEnum } from '@/enums/index'
 
 const yesNo = [
   { value: 0, label: '否' },
@@ -27,4 +28,16 @@ export default {
     { value: '2', label: '小程序' },
     { value: '3', label: '平台' },
   ],
+
+  payment: [
+    { value: PaymentEnum.GZ, label: PaymentLabelEnum.GZ },
+    { value: PaymentEnum.WX, label: PaymentLabelEnum.WX },
+    { value: PaymentEnum.ZFB, label: PaymentLabelEnum.ZFB },
+  ],
+
+  orderStatus: [
+    { value: '1', label: '挂账' },
+    { value: '2', label: '微信' },
+    { value: '3', label: '支付宝' },
+  ]
 }

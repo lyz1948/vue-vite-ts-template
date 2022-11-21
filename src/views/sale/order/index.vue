@@ -5,11 +5,9 @@ import TableList from './components/TableList.vue'
 
 <template>
   <div>
-    <div class="container">
+    <div class="content">
       <Search />
-      <div class="content">
-        <TableList />
-      </div>
+      <TableList />
     </div>
   </div>
 </template>
