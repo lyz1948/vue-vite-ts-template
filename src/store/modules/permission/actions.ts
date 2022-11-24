@@ -6,6 +6,13 @@ import { PermissionState } from './state'
 import { PermissionActionTypes } from './action-types'
 import { PermissionMutationTypes } from './mutation-types'
 import { permissionRoutes } from '@/router/index'
+import { getUserInfo } from '@/utils/cookies'
+import { useStore } from '@/store'
+
+import {
+  permissionListRequest,
+  permissionOnlyHaveRequest,
+} from '@/api/permission'
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
@@ -43,17 +50,63 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
   return result
 }
 
-export interface IActions {
+// const getRoleId = () => {
+//   let userInfo: any = null
+//   const { roleId } = getUserInfo()
+//   if (roleId) {
+//     return roleId
+//   } else {
+//     if (getUserInfo()?.startsWith('{')) {
+//       try {
+//         userInfo = JSON.parse(getUserInfo() as any)
+//       } catch(err) {
+//         console.error(err)
+//       }
+//     }
+//     return userInfo ? userInfo.roleId : ''
+//   }
+// }
+
+export interface Actions {
+  [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE](
+    { commit }: AugmentedActionContext
+  ): void
+
   [PermissionActionTypes.ACTION_SET_ROUTES](
     { commit }: AugmentedActionContext,
-    roles: string[]
+    roles: any[]
+  ): void
+  [PermissionActionTypes.ACTION_PERMISSION_LIST](
+    { commit }: AugmentedActionContext,
+    roleId: number
   ): void
 }
 
-export const actions: ActionTree<PermissionState, RootState> & IActions = {
+export const actions: ActionTree<PermissionState, RootState> & Actions = {
+  // 拥有的权限
+  async [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE](
+    { commit }
+  ) {
+
+    const roleId = getUserInfo()?.roleId
+    const res = await permissionOnlyHaveRequest(roleId)
+    const asyncRoutes = filterAsyncRoutes([], )
+
+    commit(PermissionMutationTypes.SET_AUTH_ROUTES, asyncRoutes)
+    return res
+  },
+
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {
     const asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
 
-    commit(PermissionMutationTypes.SET_ROUTER, asyncRoutes)
+    commit(PermissionMutationTypes.SET_ROUTES, asyncRoutes)
+  },
+
+  async [PermissionActionTypes.ACTION_PERMISSION_LIST](
+    { commit },
+    roleId: number
+  ) {
+    const data = await permissionListRequest(roleId)
+    commit(PermissionMutationTypes.SET_AUTH_ROUTES, (data as any).roleMenus)
   },
 }

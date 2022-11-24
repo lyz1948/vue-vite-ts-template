@@ -24,69 +24,67 @@ const handleReset = () => {
 </script>
 
 <template>
-  <div class="container">
-    <FormBase :inline="true">
-      <FormItemBase label="供应商">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="产品编号">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="产品分类">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="线路产品">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="产品天数">
-        <InputNumBase
-          v-model="params.create"
-        />
-      </FormItemBase>
-      <FormItemBase label="发团日期">
-        <DateBase
-          v-model="params.create"
-        />
-      </FormItemBase>
-      <FormItemBase label="余位数">
-        <InputNumBase
-          v-model="params.create"
-        />
-      </FormItemBase>
-      <FormItemBase label="出发城市">
-        <InputBase
-          v-model="params.city"
-        />
-      </FormItemBase>
-      <FormItemBase label="到达城市">
-        <InputBase
-          v-model="params.target"
-        />
-      </FormItemBase>
-      <FormItemBase label="报名截止">
-        <DateBase
-          v-model="params.creater"
-        />
-      </FormItemBase>
+  <FormBase :inline="true">
+    <FormItemBase label="供应商">
+      <InputBase
+        v-model="params.name"
+      />
+    </FormItemBase>
+    <FormItemBase label="产品编号">
+      <InputBase
+        v-model="params.name"
+      />
+    </FormItemBase>
+    <FormItemBase label="产品分类">
+      <InputBase
+        v-model="params.name"
+      />
+    </FormItemBase>
+    <FormItemBase label="线路产品">
+      <InputBase
+        v-model="params.name"
+      />
+    </FormItemBase>
+    <FormItemBase label="产品天数">
+      <InputNumBase
+        v-model="params.create"
+      />
+    </FormItemBase>
+    <FormItemBase label="发团日期">
+      <DateBase
+        v-model="params.create"
+      />
+    </FormItemBase>
+    <FormItemBase label="余位数">
+      <InputNumBase
+        v-model="params.create"
+      />
+    </FormItemBase>
+    <FormItemBase label="出发城市">
+      <InputBase
+        v-model="params.city"
+      />
+    </FormItemBase>
+    <FormItemBase label="到达城市">
+      <InputBase
+        v-model="params.target"
+      />
+    </FormItemBase>
+    <FormItemBase label="报名截止">
+      <DateBase
+        v-model="params.creater"
+      />
+    </FormItemBase>
 
-      <FormItemBase>
-        <BtnBase type="success" @click="handleSearch">
-          搜索
-        </BtnBase>
-        <BtnBase type="danger" @click="handleReset">
-          重置
-        </BtnBase>
-      </FormItemBase>
-    </FormBase>
-  </div>
+    <FormItemBase>
+      <BtnBase type="success" @click="handleSearch">
+        搜索
+      </BtnBase>
+      <BtnBase type="danger" @click="handleReset">
+        重置
+      </BtnBase>
+    </FormItemBase>
+  </FormBase>
 </template>
 
 <style scoped></style>

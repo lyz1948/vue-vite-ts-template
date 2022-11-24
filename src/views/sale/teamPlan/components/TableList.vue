@@ -5,9 +5,8 @@ import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { PageDefault } from '@/config'
 
-const TABLE_TITLE = '团期计划'
 const store = useStore()
-const emit = defineEmits(['on:edit'])
+const emit = defineEmits(['on:edit', 'on:join'])
 
 const state = reactive({
   tableData: [],
@@ -39,6 +38,10 @@ const handleDelete = (row: any) => {
 
 const handleUpdate = (row: any) => {
   emit('on:edit', row)
+}
+
+const handleJoin = (row: any) => {
+  emit('on:join', row)
 }
 
 onBeforeMount(() => {
@@ -73,12 +76,15 @@ watch(
     </template>
 
     <template #action="scope">
-      <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(scope.row)">
+      <BtnLinkBase type="primary" @click="handleJoin(scope.row)">
+        报名
+      </BtnLinkBase>
+      <BtnLinkBase type="success" auth="edit" @click="handleUpdate(scope.row)">
         编辑
-      </BtnLinkPermission>
-      <BtnLinkPermission type="danger" auth="delete" @click="handleDelete(scope.row)">
+      </BtnLinkBase>
+      <BtnLinkBase type="danger" auth="delete" @click="handleDelete(scope.row)">
         删除
-      </BtnLinkPermission>
+      </BtnLinkBase>
     </template>
   </TableBase>
 </template>

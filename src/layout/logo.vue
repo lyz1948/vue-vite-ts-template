@@ -41,9 +41,9 @@ const toggle = () => {
   }
 }
 
-.is-vertical{
-  .title {
-    border-bottom: 1px solid rgba(#eaebf3, .4);
-  }
-}
+// .is-vertical{
+//   .title {
+//     border-bottom: 1px solid rgba(#eaebf3, .4);
+//   }
+// }
 </style>

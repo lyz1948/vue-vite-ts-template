@@ -74,25 +74,25 @@ defineExpose({
     :title="title"
     :visible="visibleDialog"
     custom-class="dialog-join"
-    @update:visible="visibleDialog = $event"
+    @on:visible="visibleDialog = $event"
     @update:confirm="handleConfirm"
   >
     <div class="order-info">
       <div class="order-info--item">
-        <span class="text el-form-item__label">订单号</span>
-        <span class="text el-form-item__label">线路名称</span>
+        <span class="text">订单号</span>
+        <span class="text">线路名称</span>
       </div>
       <div class="order-info--item">
         <div>
-          <span>发团日期：</span>
+          <span class="label">发团日期：</span>
           <span class="text">2022-12-01</span>
         </div>
         <div>
-          <span>出发城市：</span>
+          <span class="label">出发城市：</span>
           <span class="text">上海</span>
         </div>
         <div>
-          <span>余位：</span>
+          <span class="label">余位：</span>
           <span class="text">12</span>
         </div>
       </div>
@@ -111,6 +111,7 @@ defineExpose({
           <InputBase v-model="customer.phone" />
         </FormItemBase>
       </FormBase>
+      
       <FormBase>
         <FormItemBase prop="" label="预定人数">
           <div class="booking">
@@ -153,7 +154,7 @@ defineExpose({
         :form="customer"
         :rules="customerRules"
         inline
-        label-width="60px"
+        label-width="70px"
       >
         <h3>地接信息</h3>
 
@@ -182,7 +183,11 @@ defineExpose({
     &--item {
       display: flex;
       margin-bottom: 10px;
+      .label {
+        font-weight: bold;
+      }
       .text {
+        font-weight: bold;
         margin-right: 24px;
       }
     }
@@ -201,7 +206,7 @@ defineExpose({
     &-head {
       display: flex;
       align-items: center;
-      padding: 20px;
+      padding: 0 20px;
       h3 {
         margin-right: 20px;
       }

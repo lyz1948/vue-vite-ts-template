@@ -32,8 +32,7 @@
   align-items: center;
 }
 
-@mixin inputfield {
+@mixin flexfield {
   display: flex;
   align-items: center;
-  margin-right: 10px;
 }

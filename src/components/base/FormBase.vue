@@ -30,6 +30,6 @@ defineExpose({
 
 <style>
 .form-wrap {
-  margin-top: 20px;;
+  padding-top: 20px;
 }
 </style>

@@ -1,9 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import { errorCode, CodeKey } from './codeStatus'
+// import store from '@/store'
+import { useStore } from '../store/index';
 
 const service = axios.create({
-  baseURL: import.meta.env.BASE_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
   },
@@ -26,12 +28,14 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    // // 获取 token ，并将其添加至请求头中
-    // let token = store.state.user.token
-    // if (token) {
-    //   config.headers.Authorization = token
-    //   // config.headers.Authorization = 'Bearer ' + token;
-    // }
+    const store = useStore()
+    // 获取 token ，并将其添加至请求头中
+    const token = store.state.user.token
+    console.log(token)
+    if (token) {
+      // config.headers.Authorization = token
+      config.headers.Authorization = 'Bearer ' + token;
+    }
 
     return config
   },

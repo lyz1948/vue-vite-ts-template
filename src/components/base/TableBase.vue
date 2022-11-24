@@ -1,6 +1,7 @@
 <script setup lang="ts" name="TableBase">
 import { PageDefault } from '@/config'
 import useElement from '@/hooks/useElement'
+import { useSlots } from 'vue'
 
 const emit = defineEmits(['update:page'])
 const { loading } = useElement()
@@ -66,6 +67,8 @@ const props = defineProps({
   },
 })
 
+const { title: customerTitle } = useSlots()
+
 const handleSizeChange = (pageSize: number) => {
   emit('update:page', { ...props.page, pageSize })
 }
@@ -78,17 +81,18 @@ const handleCurrentChange = (pageNum: number) => {
   }, 2000)
   emit('update:page', { ...props.page, pageNum })
 }
+
 </script>
 
 <template>
-  <div class="table-base">
-    <div class="table-base-header">
-      <div class="table-base-header-title">
+  <div class="table-base content">
+    <div v-if="customerTitle" class="table-base--header">
+      <div class="table-base--title">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
-      <div class="table-base-header-handler">
+      <div class="table-base--handler">
         <slot name="headerHandler" />
       </div>
     </div>
@@ -125,21 +129,21 @@ const handleCurrentChange = (pageNum: number) => {
 
 <style lang="scss" scoped>
 .table-base {
-  padding: 0 20px;
-  &-header {
+  // padding: 0 20px;
+  &--header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     border-bottom: 1px solid $base-border-color;
-    &-title {
-      font-size: 14px;
-      color: $base-color-primary;
-    }
-    &-handler {
-      display: flex;
-      align-items: center;
-    }
+  }
+  &--title {
+    font-size: 14px;
+    color: $base-color-primary;
+  }
+  &--handler {
+    display: flex;
+    align-items: center;
   }
   &-footer {
     display: flex;

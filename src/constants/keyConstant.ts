@@ -1,9 +1,10 @@
 class Keys {
-  static tokenKey = 'vue3-typescript-admin-token'
-  static sidebarStatusKey = 'vue3-typescript-admin-sidebarStatusKey'
-  static languageKey = 'vue3-typescript-admin-languageKey'
-  static sizeKey = 'vue3-typescript-admin-sizeKey'
-  static aseKey = 'vue3-typescript-admin-ase-key'
+  static tokenKey = 'future-mall-admin-token'
+  static sidebarStatusKey = 'future-mall-admin-sidebarStatusKey'
+  static languageKey = 'future-mall-admin-languageKey'
+  static sizeKey = 'future-mall-admin-sizeKey'
+  static aseKey = 'future-mall-admin-ase-key'
+  static userInfoKey = 'future-mall-admin-userInfo'
 }
 
 export default Keys

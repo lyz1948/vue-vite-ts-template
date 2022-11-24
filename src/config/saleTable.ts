@@ -79,3 +79,11 @@ export const TouristList = [
   { attrs: { prop: '', label: '备注', } },
   action,
 ]
+
+// 报名表
+export const SalePrice = [
+  { attrs: { prop: '', label: '价格类型', } },
+  { attrs: { prop: 'adult', label: '成人价', }, slot: 'adult' },
+  { attrs: { prop: 'children', label: '成人价', }, slot: 'children' },
+  { attrs: { prop: 'room', label: '成人价', }, slot: 'room' },
+]

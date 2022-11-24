@@ -57,14 +57,15 @@ watch(
 
 <template>
   <TableBase
+    border
     :data="getPageList"
     :columns="columns"
     :total-count="state.total"
     @update:page="handlePage"
   >
-    <template #title>
+    <!-- <template #title>
       <h3>{{ TABLE_TITLE }}</h3>
-    </template>
+    </template> -->
 
     <template #isEnable="scope">
       <TagBase :name="scope.row.isEnable" />

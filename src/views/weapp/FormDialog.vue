@@ -64,7 +64,7 @@ defineExpose({
   <DialogBase
     :title="title"
     :visible="visibleDialog"
-    @update:visible="visibleDialog = $event"
+    @on:visible="visibleDialog = $event"
     @update:confirm="handleConfirm"
   >
     <FormBase

@@ -1,3 +1,4 @@
 export enum PermissionMutationTypes {
-  SET_ROUTER = 'SET_ROUTER',
+  SET_ROUTES = 'SET_ROUTES',
+  SET_AUTH_ROUTES = 'SET_AUTH_ROUTES',
 }

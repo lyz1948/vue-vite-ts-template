@@ -2,14 +2,34 @@
 import { ActionContext, ActionTree } from 'vuex'
 import { UserActionTypes } from './action-types'
 import { Mutations } from './mutations'
-import { UserState } from './state'
+import { UserState, LoginClientState } from './state'
 import { RootState, useStore } from '@/store'
-import { ILogin } from '@/types'
-import { setToken } from '@/utils/cookies'
+import { Login } from '@/types'
+import { setToken, setUserInfo } from '@/utils/cookies'
 import { UserMutationTypes } from './mutation-types'
 import { removeToken } from '@/utils/cookies'
-import { loginRequest, userInfoRequest, userListRequest } from '@/api/user'
+import { loginRequest, logoutRequest, userInfoRequest } from '@/api/user'
 import { resetRouter } from '@/router/index'
+
+const userKeys = [
+  'id',
+  'roleId',
+  'travelAgencyId',
+  'groupId',
+  'createUserId',
+  'departmentId',
+  'departmentName',
+  'subDepartmentId',
+  'subDepartmentName',
+  'grandsonDepartmentId',
+  'grandsonDepartmentName',
+  'roleName',
+  'mobilePhone',
+  'telphone',
+  'realName',
+  'userName',
+  'TravelAgency',
+]
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
@@ -20,26 +40,39 @@ type NoAugmentedActionContext = {
 } & Omit<ActionContext<UserState, RootState>, 'commit'>
 
 export interface IUserActions {
-  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin): void
+  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: Login): void
+  [UserActionTypes.ACTION_LOGOUT]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_GET_USER_INFO]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext): void
-  [UserActionTypes.ACTION_LOGIN_OUT]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_USER_LIST]({ commit }: AugmentedActionContext): void
   [UserActionTypes.ACTION_USER_DELETE]({ commit }: AugmentedActionContext, id: number): void
 }
 
 export const actions: ActionTree<UserState, RootState> & IUserActions = {
-  [UserActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, userinfo: ILogin) {
+  loginAfter({ commit }, data) {
+    setToken(data.access_token)
+    const userData: any = {}
+      for (const key of userKeys) {
+        userData[key] = data[key]
+      }
+      setUserInfo(JSON.stringify(userData))
+
+      commit(UserMutationTypes.SET_TOKEN, data.access_token)
+  },
+
+  [UserActionTypes.ACTION_LOGIN]({ commit, dispatch }: AugmentedActionContext, userinfo: Login) {
     const { username, password } = userinfo
     username.trim()
 
-    loginRequest({
+    return loginRequest({
       username,
       password,
+      ...LoginClientState,
     }).then(data => {
-      setToken(data.accessToken)
-      commit(UserMutationTypes.SET_TOKEN, data.accessToken)
-      return data
+      dispatch('loginAfter', data)
+      // setToken(data.accessToken)
+      // commit(UserMutationTypes.SET_TOKEN, data.accessToken)
+      // return data
     })
   },
 
@@ -58,8 +91,8 @@ export const actions: ActionTree<UserState, RootState> & IUserActions = {
   },
 
   async [UserActionTypes.ACTION_USER_LIST]({ commit }) {
-    const data = await userListRequest()
-    commit(UserMutationTypes.SET_USER_LIST, data)
+    // const data = await userListRequest()
+    commit(UserMutationTypes.SET_USER_LIST, [])
   },
 
   [UserActionTypes.ACTION_USER_DELETE]({ commit }, id: number) {
@@ -70,7 +103,7 @@ export const actions: ActionTree<UserState, RootState> & IUserActions = {
     removeToken()
   },
 
-  [UserActionTypes.ACTION_LOGIN_OUT]({ commit }) {
+  [UserActionTypes.ACTION_LOGOUT]({ commit }) {
     removeToken()
     resetRouter()
     commit(UserMutationTypes.SET_TOKEN, '')

@@ -8,6 +8,7 @@ import { RouteWhiteList } from './config/index'
 import { PermissionActionTypes } from './store/modules/permission/action-types'
 import { UserActionTypes } from './store/modules/user/action-types'
 import { settingConfig } from '@/config/setting'
+
 let isFirst = true
 
 router.beforeEach(
@@ -31,12 +32,16 @@ router.beforeEach(
       } else {
         if (isFirst) {
           try {
-            isFirst = false
-            const roles = store.state.user.roles
-            store.dispatch(PermissionActionTypes.ACTION_SET_ROUTES, roles)
-            store.state.permission.dynamicRoutes.forEach(route => {
+
+            await store.dispatch(
+              PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE,
+              undefined
+            )
+            await store.state.permission.dynamicRoutes.forEach(route => {
               router.addRoute(route)
             })
+
+            isFirst = false
 
             next({ ...to, replace: true })
           } catch (err) {

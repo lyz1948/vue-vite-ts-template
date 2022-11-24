@@ -12,8 +12,8 @@ const validateForm = ref<InstanceType<typeof ElForm>>()
 
 const state = reactive({
   ruleForm: {
-    username: 'admin',
-    password: 'admin',
+    username: 'mcgl8888-2',
+    password: 'mc123456',
   },
   valid: false,
   loading: false,
@@ -32,7 +32,7 @@ const userLogin = (loginState: ILogin) => {
     .dispatch(UserActionTypes.ACTION_LOGIN, loginState)
     .then(() => {
       const routerPath: RouteRecordRaw | any = state.redirect === '/404' || state.redirect === '/401' ? '/' : state.redirect
-
+      console.log(routerPath)
       router.push({ path: routerPath }).catch(err => {
         console.error(err)
       })

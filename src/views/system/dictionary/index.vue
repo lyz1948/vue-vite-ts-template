@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, reactive, onBeforeMount, watch } from 'vue'
 import ModTitle from '@/components/Title/index.vue'
 import { DictionaryTable as columns } from '@/config/dictionaryTable'
+import { useStore } from 'vuex'
+import { DictionaryActionTypes } from '@/store/modules/system/dictionary/action-types'
+import useElement from '@/hooks/useElement'
+const store = useStore()
 
+const { success } = useElement()
 const tagList = ['产品线路', '产品标签', '海报', 'H5']
 
 const dicData = ref([
@@ -11,6 +16,64 @@ const dicData = ref([
   { name: '酒店类型', index: 2, content: '高端线路' },
   { name: '收费类型', index: 3, content: '高端线路' },
 ])
+
+const state = reactive({
+  tabIndex: 0,
+})
+
+const dictionaryData = computed(() => {
+  return store.state.dictionary.dictionaryTypeData
+})
+
+const tableData = computed(() => {
+  return store.state.dictionary.dictionaryData
+})
+
+const firstTab = computed(() => {
+  return state.tabData[state.tabIndex]
+})
+
+const getDictionaryId = computed(() => {
+  return firstTab.value?.id
+})
+
+const fetchData = () => {
+  return store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_FETCH)
+}
+
+const fetchCurrentData = async () => {
+  const id = getDictionaryId.value || firstTab.value?.id
+  await store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_FETCH, id)
+}
+
+const deleteRow = async (id: any) => {
+  const res = await store.dispatch(
+    DictionaryActionTypes.ACTION_DICTIONARY_DELETE,
+    id
+  )
+  fetchCurrentData()
+  success()
+}
+
+onBeforeMount(() => {
+  fetchData()
+})
+
+watch(
+  () => dictionaryData.value,
+  (data: IDictionaryTypeItem[]) => {
+    state.tabData = data
+    fetchCurrentData()
+  }
+)
+
+watch(
+  () => tableData.value,
+  (data: any) => {
+    state.tableData = data
+  }
+)
+
 </script>
 
 <template>
@@ -30,11 +93,11 @@ const dicData = ref([
       <div class="dictionary-body">
         <ModTitle title="产品线路" />
         <TableBase :data="dicData" :columns="columns" border>
-          <template #action>
+          <template #action="row">
             <BtnLinkBase type="success" class="mr5">
               编辑
             </BtnLinkBase>
-            <BtnLinkBase type="danger">
+            <BtnLinkBase type="danger" @click="deleteRow(row.id)">
               删除
             </BtnLinkBase>
           </template>

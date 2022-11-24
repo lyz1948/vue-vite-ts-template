@@ -39,7 +39,11 @@ $base-font-size-h2: 30px;
 $base-font-size-h1: 36px;
 
 // 颜色
+$color-red: #f45;
+$color-green: #11d86c;
+$color-blue: #6b89ee;
 $theme-color: #293246;
+
 $base-font-color: #606266;
 $base-color-6: #666666;
 $base-color-3: #333333;
@@ -51,12 +55,9 @@ $base-color-yellow: #fac858;
 $base-color-orange: #ff6700;
 $base-color-red: #ee6666;
 $base-color-gray: rgba(0, 0, 0, 0.65);
-$base-color: #f45;
-$color-red: #f45;
-$color-green: #11d86c;
-$color-blue: #6b89ee;
+
+$base-color: $color-red;
 $base-border-color: #e6ebed;
-$green-color: #11d86c;
 $title-color: #445eb9;
 
 // 边框

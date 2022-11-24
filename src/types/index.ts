@@ -1,13 +1,13 @@
 import { AxiosRequestConfig } from 'axios'
 
 /**用户登录 */
-export interface ILogin {
+export interface Login {
   username: string
   password: string
 }
 
 /** 客户端类型 */
-export interface ILoginClient {
+export interface LoginClient {
   username: string
   password: string
 }
@@ -22,17 +22,17 @@ export interface CustomSuccessData<T> {
 }
 
 /** api接口 */
-export interface IApi {
+export interface Api {
   [keys: string]: string
 }
 
-export interface IGet {
+export interface Get {
   <T>(url: string, config?: AxiosRequestConfig):
     | Promise<T>
     | Promise<CustomSuccessData<T>>
 }
 
-export interface IPost {
+export interface Post {
   <T>(
     url: string,
     params?: string | object,
@@ -40,7 +40,12 @@ export interface IPost {
   ): Promise<CustomSuccessData<T>>
 }
 
-export interface IMeta {
+export interface Page {
+  pageNum?: number
+  pageSize?: number
+}
+
+export interface Meta {
   icon: string
   title: string
   name?: string
@@ -48,26 +53,56 @@ export interface IMeta {
   affix?: boolean
   noCache?: boolean
 }
-export interface IRouter {
+export interface Router {
   path: string
   fullPath: string
   redirect?: string
   name?: string
-  meta?: IMeta
+  meta?: Meta
   component: any
-  children: IRouter[]
+  children: Router[]
 }
 
-export interface ITagView {
+export interface TagView {
   name: string
-  meta: IMeta
+  meta: Meta
   path: string
 }
 
-export interface ISelectItem {
+export interface SelectItem {
   label: string
   value: string
   [keys: string]: any
 }
 
-export type SelectProps = 'yesNo' | 'auditRole'
+export interface RoleAuthMenuAct {
+  id: number
+  label: string
+  checked: boolean
+}
+
+export interface RoleAuthMenuAct {
+  id: number
+  label: string
+  checked: boolean
+}
+
+export interface RoleAuthMenu {
+  id: number
+  label: string
+  checked: boolean // 菜单权限是否选择
+  radios: SelectItem[]
+  authArea: string
+  isNeedAuthArea: boolean // 权限范围是否显示在设置中
+  orderNumber: number
+  actions: RoleAuthMenuAct[]
+}
+
+export interface RoleAuth {
+  id: number
+  name: string
+  isRole: boolean
+  orderNumber: number
+  menus: RoleAuthMenu[]
+  subMenus: any[]
+}

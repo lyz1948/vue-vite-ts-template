@@ -8,7 +8,7 @@ import { RootState } from '@/store'
 
 import type { PermissionState } from './state'
 import { state } from './state'
-import { actions, IActions } from './actions'
+import { actions, Actions } from './actions'
 import { mutations, Mutations } from './mutations'
 
 export { PermissionState }
@@ -26,11 +26,11 @@ export type PermissionStore<S = PermissionState> = Omit<
     options?: CommitOptions
   ): ReturnType<Mutations[K]>
 } & {
-  dispatch<K extends keyof IActions>(
+  dispatch<K extends keyof Actions>(
     key: K,
-    payload: Parameters<IActions[K]>[1],
+    payload: Parameters<Actions[K]>[1],
     options?: DispatchOptions
-  ): ReturnType<IActions[K]>
+  ): ReturnType<Actions[K]>
 }
 
 export const store: Module<PermissionState, RootState> = {

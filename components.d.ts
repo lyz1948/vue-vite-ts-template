@@ -9,6 +9,7 @@ declare module 'vue' {
     BtnLinkPermission: typeof import('./src/components/base/BtnLinkPermission.vue')['default']
     BtnPermission: typeof import('./src/components/base/BtnPermission.vue')['default']
     Cell: typeof import('./src/components/Cell/index.vue')['default']
+    Chart: typeof import('./src/components/Chart/index.vue')['default']
     DateBase: typeof import('./src/components/base/DateBase.vue')['default']
     DialogBase: typeof import('./src/components/base/DialogBase.vue')['default']
     DialogMaterial: typeof import('./src/components/business/DialogMaterial.vue')['default']

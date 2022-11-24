@@ -10,3 +10,8 @@
   display: inline-flex;
   align-items: center;
 }
+
+.el-dialog__body {
+  max-height: 700px;
+  overflow-y: auto;
+}
