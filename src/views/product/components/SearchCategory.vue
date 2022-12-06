@@ -30,44 +30,9 @@ const handleReset = () => {
 <template>
   <div class="container">
     <FormBase :inline="true">
-      <FormItemBase label="产品线路">
+      <FormItemBase label="标签名">
         <InputBase
           v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="产品编号">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="产品分类">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="上架状态">
-        <InputBase
-          v-model="params.name"
-        />
-      </FormItemBase>
-      <FormItemBase label="创建时间">
-        <DateBase
-          v-model="params.create"
-        />
-      </FormItemBase>
-      <FormItemBase label="出发城市">
-        <InputBase
-          v-model="params.city"
-        />
-      </FormItemBase>
-      <FormItemBase label="到达城市">
-        <InputBase
-          v-model="params.target"
-        />
-      </FormItemBase>
-      <FormItemBase label="创建人">
-        <InputBase
-          v-model="params.creater"
         />
       </FormItemBase>
 

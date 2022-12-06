@@ -5,7 +5,6 @@ import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { PageDefault } from '@/config'
 
-const TABLE_TITLE = '添加员工'
 const store = useStore()
 const emit = defineEmits(['on:edit'])
 
@@ -62,10 +61,6 @@ watch(
     :total-count="state.total"
     @update:page="handlePage"
   >
-    <template #title>
-      <h3>{{ TABLE_TITLE }}</h3>
-    </template>
-
     <template #isEnable="scope">
       <TagBase :name="scope.row.isEnable" />
     </template>

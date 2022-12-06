@@ -6,12 +6,11 @@ import { PermissionState } from './state'
 import { PermissionActionTypes } from './action-types'
 import { PermissionMutationTypes } from './mutation-types'
 import { permissionRoutes } from '@/router/index'
-import { getUserInfo } from '@/utils/cookies'
-import { useStore } from '@/store'
+// import { getUserInfo } from '@/utils/cookies'
 
 import {
   permissionListRequest,
-  permissionOnlyHaveRequest,
+  // permissionOnlyHaveRequest,
 } from '@/api/permission'
 
 type AugmentedActionContext = {
@@ -21,34 +20,34 @@ type AugmentedActionContext = {
   ): ReturnType<Mutations[K]>
 } & Omit<ActionContext<PermissionState, RootState>, 'commit'>
 
-// 校验权限
-const hasPermission = (route: RouteRecordRaw, roles: string[]) => {
-  if (route.meta && route.meta.roles) {
-    return roles.some(() => {
-      if (route.meta?.roles !== undefined) {
-        return true
-        // return route.meta?.roles.includs(role)
-      }
-    })
-  } else {
-    return true
-  }
-}
+// // 校验权限
+// const hasPermission = (route: RouteRecordRaw, roles: string[]) => {
+//   if (route.meta && route.meta.roles) {
+//     return roles.some(() => {
+//       if (route.meta?.roles !== undefined) {
+//         return true
+//         // return route.meta?.roles.includs(role)
+//       }
+//     })
+//   } else {
+//     return true
+//   }
+// }
 
-// 过滤路由
-const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
-  const result: RouteRecordRaw[] = []
-  routes.forEach(route => {
-    const routeCopy = { ...route }
-    if (hasPermission(routeCopy, roles)) {
-      if (routeCopy.children) {
-        routeCopy.children = filterAsyncRoutes(routeCopy.children, roles)
-      }
-      result.push(routeCopy)
-    }
-  })
-  return result
-}
+// // 过滤路由
+// const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
+//   const result: RouteRecordRaw[] = []
+//   routes.forEach(route => {
+//     const routeCopy = { ...route }
+//     if (hasPermission(routeCopy, roles)) {
+//       if (routeCopy.children) {
+//         routeCopy.children = filterAsyncRoutes(routeCopy.children, roles)
+//       }
+//       result.push(routeCopy)
+//     }
+//   })
+//   return result
+// }
 
 // const getRoleId = () => {
 //   let userInfo: any = null
@@ -88,18 +87,18 @@ export const actions: ActionTree<PermissionState, RootState> & Actions = {
     { commit }
   ) {
 
-    const roleId = getUserInfo()?.roleId
-    const res = await permissionOnlyHaveRequest(roleId)
-    const asyncRoutes = filterAsyncRoutes([], )
+    // const roleId = getUserInfo()?.roleId
+    // const res = await permissionOnlyHaveRequest(roleId)
+    // const asyncRoutes = filterAsyncRoutes([], )
 
-    commit(PermissionMutationTypes.SET_AUTH_ROUTES, asyncRoutes)
-    return res
+    // commit(PermissionMutationTypes.SET_AUTH_ROUTES, asyncRoutes)
+    // return res
   },
 
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {
-    const asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
+    // const asyncRoutes = filterAsyncRoutes(permissionRoutes, roles)
 
-    commit(PermissionMutationTypes.SET_ROUTES, asyncRoutes)
+    commit(PermissionMutationTypes.SET_ROUTES, permissionRoutes)
   },
 
   async [PermissionActionTypes.ACTION_PERMISSION_LIST](

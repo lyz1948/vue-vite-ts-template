@@ -3,9 +3,9 @@ import { computed, onBeforeMount, reactive, ref, watch } from 'vue';
 import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 
-import SearchCategory from './components/SearchCategory.vue'
-import TableCategory from './components/TableCategory.vue'
-import DialogCategory from './components/DialogCategory.vue'
+import SearchTag from './components/SearchTag.vue'
+import TableTag from './components/TableTag.vue'
+import DialogTag from './components/DialogTag.vue'
 
 const store = useStore()
 const dialogRef = ref(null)
@@ -44,9 +44,9 @@ watch(() => tableData.value, (data) => {
 
 <template>
   <div>
-    <DialogCategory ref="dialogRef" />
-    <SearchCategory @on:search="fetchData" @on:create="showDialog" />
-    <TableCategory @on:edit="editItem" />
+    <DialogTag ref="dialogRef" />
+    <SearchTag @on:search="fetchData" @on:create="showDialog" />
+    <TableTag @on:edit="editItem" />
   </div>
 </template>
 

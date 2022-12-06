@@ -1,26 +1,22 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
-import { SaleOrderManage as columns } from '@/config/saleTable'
+import { ProductCategory as columns } from '@/config/productTable'
 import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { PageDefault } from '@/config'
-import { useRouter } from 'vue-router'
 
-const TABLE_TITLE = '订单管理'
 const store = useStore()
 const emit = defineEmits(['on:edit'])
-const router = useRouter()
 
 const state = reactive({
-  tableData: [{}],
+  tableData: [],
   total: 0,
   pageNum: PageDefault.pageNum,
   pageSize: PageDefault.pageSize,
 })
 
 const tableData = computed(() => {
-  // return store.state.user.userList
-  return state.tableData
+  return store.state.user.userList
 })
 
 const getPageList = computed(() => {
@@ -41,8 +37,7 @@ const handleDelete = (row: any) => {
 }
 
 const handleUpdate = (row: any) => {
-  // emit('on:edit', row)
-  router.push('')
+  emit('on:edit', row)
 }
 
 onBeforeMount(() => {
@@ -66,10 +61,6 @@ watch(
     :total-count="state.total"
     @update:page="handlePage"
   >
-    <template #title>
-      <h3>{{ TABLE_TITLE }}</h3>
-    </template>
-
     <template #isEnable="scope">
       <TagBase :name="scope.row.isEnable" />
     </template>

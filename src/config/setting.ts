@@ -20,7 +20,17 @@ export const themeColorOpts = [
   '#fb748b',
   '#6273d9',
   '#409EFF',
-  '#f5222d',
+  '#003366',
+  '#66CC66',
+  '#99CC99',
+  '#FF9999',
+  '#CC99CC',
+  '#CCFF00',
+  '#333399',
+  '#CC3399',
+  '#666699',
+  '#990066',
+  '#000000',
 ]
 
 export const settingConfig = {

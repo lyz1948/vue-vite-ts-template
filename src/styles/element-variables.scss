@@ -11,6 +11,15 @@
   align-items: center;
 }
 
+:deep(.el-dialog__header) {
+  border-bottom: 1px solid #ccc;
+  margin-right: 0 !important;
+}
+
+:deep(.el-dialog__headerbtn) {
+  top: 0;
+}
+
 .el-dialog__body {
   max-height: 700px;
   overflow-y: auto;
