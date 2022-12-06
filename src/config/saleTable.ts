@@ -28,10 +28,10 @@ export const SaleDeal = [
 
 // 订单管理
 export const SaleOrderManage = [
-  { attrs: { prop: '', label: '订单信息', } },
+  { attrs: { prop: '', label: '订单信息', }, slot: 'info' },
   { attrs: { prop: '', label: '游客人数', } },
-  { attrs: { prop: '', label: '收客', } },
-  { attrs: { prop: '', label: '交客', } },
+  { attrs: { prop: '', label: '收客', }, slot: 'detail' },
+  { attrs: { prop: '', label: '交客', }, slot: 'delivery' },
   { attrs: { prop: '', label: '其他成本', } },
   { attrs: { prop: '', label: '毛利', } },
   action

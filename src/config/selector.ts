@@ -39,5 +39,16 @@ export default {
     { value: '1', label: '挂账' },
     { value: '2', label: '微信' },
     { value: '3', label: '支付宝' },
-  ]
+  ],
+
+  telType: [
+    { value: '1', label: '客服电话' },
+    { value: '2', label: '通知电话' },
+  ],
+
+  handle: [
+    { value: '0', label: '未打款' },
+    { value: '1', label: '已打款' },
+  ],
+
 }

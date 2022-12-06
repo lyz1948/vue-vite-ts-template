@@ -28,6 +28,6 @@ defineExpose({
 
 <style>
 .form-wrap {
-  padding: 20px 20px 0;
+  padding: 20px 30px;
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, toRefs } from 'vue'
 
-import {searchState} from '../params'
+import { searchWithdrawState as searchState } from '../params'
 
 const emit = defineEmits(['on:search'])
 
@@ -25,47 +25,30 @@ const handleReset = () => {
 
 <template>
   <FormBase :inline="true">
-    <FormItemBase label="产品线路">
+    <FormItemBase label="提现人姓名">
       <InputBase
         v-model="params.name"
       />
     </FormItemBase>
-    <FormItemBase label="产品编号">
+    <FormItemBase label="提现人电话">
       <InputBase
-        v-model="params.name"
+        v-model="params.phone"
       />
     </FormItemBase>
-    <FormItemBase label="产品分类">
-      <InputBase
-        v-model="params.name"
-      />
-    </FormItemBase>
-    <FormItemBase label="上架状态">
-      <InputBase
-        v-model="params.name"
-      />
-    </FormItemBase>
-    <FormItemBase label="创建时间">
+
+    <FormItemBase label="申请时间">
       <DateBase
         v-model="params.create"
       />
     </FormItemBase>
-    <FormItemBase label="出发城市">
-      <InputBase
-        v-model="params.city"
-      />
-    </FormItemBase>
-    <FormItemBase label="到达城市">
-      <InputBase
-        v-model="params.target"
-      />
-    </FormItemBase>
-    <FormItemBase label="创建人">
-      <InputBase
-        v-model="params.creater"
-      />
-    </FormItemBase>
 
+    <FormItemBase label="处理状态">
+      <SelectBase
+        v-model="params.handleStatus"
+        type="handle"
+      />
+    </FormItemBase>
+    
     <FormItemBase>
       <BtnBase type="success" @click="handleSearch">
         搜索

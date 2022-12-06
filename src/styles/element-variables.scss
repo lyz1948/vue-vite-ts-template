@@ -20,6 +20,10 @@
   top: 0;
 }
 
+:deep(.el-form-item__label) {
+  font-weight: bold;
+}
+
 .el-dialog__body {
   max-height: 700px;
   overflow-y: auto;

@@ -1,6 +1,6 @@
 <script setup lang="ts" name="SelectBase">
 import { watch, ref, reactive } from 'vue'
-import { ISelectItem } from '@/types'
+import { SelectItem } from '@/types'
 import SELECTOR from '@/config/selector'
 
 const emit = defineEmits(['on:select'])
@@ -17,7 +17,7 @@ const props = defineProps({
 
 const isFirst = ref(true)
 const state = reactive({
-  tempData: ref<Array<ISelectItem>>([]),
+  tempData: ref<Array<SelectItem>>([]),
   data: [],
 })
 
@@ -25,7 +25,7 @@ const handleChange = (val: string) => {
   let item = { label: '', value: '' }
 
   if (val) {
-    item = state.data.find((it: ISelectItem) => it.value === val)
+    item = state.data.find((it: SelectItem) => it.value === val)
   }
   emit('on:select', item)
 }
@@ -53,9 +53,9 @@ watch(
   >
     <el-option
       v-for="(item) in state.tempData"
-      :key="item.value"
+      :key="item.value + ' '"
       :label="item.label"
-      :value="item.value"
+      :value="item.value + ' '"
     />
   </el-select>
 </template>

@@ -12,7 +12,9 @@ const emit = defineEmits(['on:edit'])
 const router = useRouter()
 
 const state = reactive({
-  tableData: [{}],
+  tableData: [{
+
+  }],
   total: 0,
   pageNum: PageDefault.pageNum,
   pageSize: PageDefault.pageSize,
@@ -66,25 +68,72 @@ watch(
     :total-count="state.total"
     @update:page="handlePage"
   >
-    <template #title>
-      <h3>{{ TABLE_TITLE }}</h3>
-    </template>
-
-    <template #isEnable="scope">
-      <TagBase :name="scope.row.isEnable" />
-    </template>
-
-    <template #role="scope">
+    <template #info="row">
       <el-tag type="info">
-        {{ scope.row.role === 'admin' ? '管理员' : '游客' }}
+        订单编号 {{ row.orderNumber }}
+        {{ row.orderDate }}
       </el-tag>
     </template>
 
-    <template #action="scope">
-      <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(scope.row)">
+    <template #detail="row">
+      <div>标题{{ row }}</div>
+      <div>
+        <span>2022-12-11 ~ 2022-12-11</span>
+        <span>成都 出发</span>
+        <span>4天</span>
+      </div>
+      <div>
+        <el-tag type="info">
+          小程序
+        </el-tag>
+      </div>
+      <div>
+        <div>
+          <span>微信支付</span>
+          <span class="price red">￥1800</span>
+        </div>
+        <div>
+          <el-dropdown>
+            <span class="el-dropdown-link">
+              支付超时
+              <el-icon class="el-icon--right">
+                <arrow-down />
+              </el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>Action 1</el-dropdown-item>
+                <el-dropdown-item>Action 2</el-dropdown-item>
+                <el-dropdown-item>Action 3</el-dropdown-item>
+                <el-dropdown-item disabled>
+                  Action 4
+                </el-dropdown-item>
+                <el-dropdown-item divided>
+                  Action 5
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
+      </div>
+    </template>
+
+    <template #delivery="row">
+      <el-button-group>
+        <el-button type="primary">
+          记账{{ row }}
+        </el-button>
+        <el-button type="primary">
+          交客
+        </el-button>
+      </el-button-group>
+    </template>
+
+    <template #action="row">
+      <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(row)">
         编辑
       </BtnLinkPermission>
-      <BtnLinkPermission type="danger" auth="delete" @click="handleDelete(scope.row)">
+      <BtnLinkPermission type="danger" auth="delete" @click="handleDelete(row)">
         删除
       </BtnLinkPermission>
     </template>
