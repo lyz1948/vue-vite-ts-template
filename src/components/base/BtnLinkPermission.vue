@@ -21,15 +21,22 @@ const getAuthLabel = computed(() => {
   return authMaps[props.auth]
 })
 
-const isDelete = computed(() => {
-  return props.auth === 'delete'
-})
+// const isDelete = computed(() => {
+//   return props.auth === 'delete'
+// })
 
 </script>
 
 <template>
   <span class="btn-link-box">
-    <el-link
+    <BtnBase
+      v-permission="auth"
+      v-bind="$attrs"
+      link
+    >
+      <slot />
+    </BtnBase>
+    <!-- <el-link
       v-if="isDelete"
       v-permission="auth"
       v-bind="$attrs"
@@ -43,7 +50,7 @@ const isDelete = computed(() => {
       v-bind="$attrs"
     >
       {{ getAuthLabel }}
-    </el-link>
+    </el-link> -->
   </span>
 </template>
 

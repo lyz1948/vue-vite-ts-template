@@ -37,7 +37,7 @@ export default defineConfig({
           setupProdMockServer();
         `,
     }),
-    svgBuilder('./src/assets/svg/'),
+    svgBuilder('./src/assets/icon/'),
   ],
   resolve: {
     alias: {

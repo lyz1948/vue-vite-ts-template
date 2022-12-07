@@ -26,10 +26,10 @@
   }
 }
 
-@mixin flexcenter {
+@mixin flexcenter($dir: center, $dir2: center) {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: $dir;
+  align-items: $dir2;
 }
 
 @mixin flexfield {

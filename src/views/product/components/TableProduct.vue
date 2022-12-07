@@ -9,7 +9,7 @@ const store = useStore()
 const emit = defineEmits(['on:edit'])
 
 const state = reactive({
-  tableData: [],
+  tableData: [{}],
   total: 0,
   pageNum: PageDefault.pageNum,
   pageSize: PageDefault.pageSize,
@@ -72,11 +72,20 @@ watch(
     </template>
 
     <template #action="scope">
-      <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(scope.row)">
+      <BtnLinkPermission type="success" @click="handleUpdate(scope.row)">
         编辑
       </BtnLinkPermission>
-      <BtnLinkPermission type="danger" auth="delete" @click="handleDelete(scope.row)">
+      <BtnLinkPermission type="primary">
+        团期
+      </BtnLinkPermission>
+      <BtnLinkPermission type="success">
+        复制
+      </BtnLinkPermission>
+      <BtnLinkPermission type="warning">
         删除
+      </BtnLinkPermission>
+      <BtnLinkPermission type="primary">
+        分享
       </BtnLinkPermission>
     </template>
   </TableBase>

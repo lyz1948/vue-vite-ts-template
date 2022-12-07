@@ -1,32 +1,34 @@
 <script setup lang="ts">
-import SvgIcon from "@/components/SvgIcon/index.vue";
-import { ref, onMounted } from "vue";
+import SvgIcon from '@/components/SvgIcon/index.vue'
+import { ref, onBeforeMount, computed } from 'vue'
 
-const iconFiles = import.meta.globEager("../../assets/icon/*.svg");
+const iconFiles = import.meta.globEager('../../assets/icon/*.svg')
 
-const icons = ref([]);
-const activeIcon = ref("");
+const icons = ref([])
+const activeIcon = ref('')
 
-const select = (val) => {
-  activeIcon.value = val;
-};
+const select = val => {
+  activeIcon.value = val
+}
 
-onMounted(() => {
+const getIconList = computed(() => icons.value)
+
+onBeforeMount(() => {
   for (const path in iconFiles) {
-    const val = path.split("/icon/")[1].split(".svg")[0];
-    icons.value.push(val);
+    const val = path.split('/icon/')[1].split('.svg')[0]
+    icons.value.push(val)
   }
-});
+})
 </script>
 
 <template>
-  <div class="svg-icon--wrap">
-    <template v-for="icon in icons" :key="icon">
+  <div class="svg-comp">
+    <template v-for="icon in getIconList" :key="icon">
       <SvgIcon
+        size="36px"
+        color="#666699"
         :name="icon"
-        size="36"
-        color="#fff"
-        :class="{'active': activeIcon == icon}"
+        :class="{ 'active': activeIcon == icon }"
         @click="select(icon)"
       />
     </template>
@@ -34,12 +36,10 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-.svg-icon--wrap {
+.svg-comp {
   .svg-icon {
-
     &.active {
-      border: 1px solid #f50;
-      color: #f50;
+      border: 2px solid #fb748b;
     }
   }
 }

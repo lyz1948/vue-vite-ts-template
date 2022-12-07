@@ -6,6 +6,7 @@ import { UserActionTypes } from '@/store/modules/user/action-types'
 import Search from './components/Search.vue'
 import TableProduct from './components/TableProduct.vue'
 import DialogEdit from './components/DialogEdit.vue'
+import DialogStock from './components/DialogStock.vue'
 
 const store = useStore()
 const dialogRef = ref(null)
@@ -39,10 +40,14 @@ watch(() => tableData.value, (data) => {
 </script>
 
 <template>
-  <div>
-    <DialogEdit ref="dialogRef" />
+  <div class="container">
     <Search @on:search="fetchData" />
-    <TableProduct @on:edit="editItem" />
+    <div class="content">
+      <TableProduct @on:edit="editItem" />
+    </div>
+    
+    <DialogEdit ref="dialogRef" />
+    <DialogStock />
   </div>
 </template>
 

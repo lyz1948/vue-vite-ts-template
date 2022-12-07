@@ -1,38 +1,39 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
-import ModTitle from '@/components/Title/index.vue'
 import Dialog from './components/DialogCategory.vue'
+import SvgIcon from '@/components/SvgIcon/index.vue';
+
 
 let idGlobal = 1
 
 const list1 = ref([
-  { name: 'dog 1', id: 1 },
-  { name: 'dog 2', id: 2 },
-  { name: 'dog 3', id: 3 },
-  { name: 'dog 4', id: 4 },
+  { name: '周边游', id: 1, icon: '标记_mark', color: '#f50' },
+  { name: '自由行', id: 2, icon: '标记_mark', color: '#f50' },
+  { name: '国内游', id: 3, icon: '标记_mark', color: '#f50' },
+  { name: '亲子游', id: 4, icon: '标记_mark', color: '#f50' },
 ])
 
 const list2 = ref([
-  { name: 'cat 5', id: 5, icon: '' },
-  { name: 'cat 6', id: 6, icon: '' },
-  { name: 'cat 7', id: 7, icon: '' },
+  { name: '高端游', id: 5, icon: '标记_mark', color: '#f50' },
+  { name: '购物团', id: 6, icon: '标记_mark', color: '#a30' },
+  { name: '经典游', id: 7, icon: '标记_mark', color: '#c21' },
 ])
 
 const controlOnStart = ref(true)
 const dialogRef = ref(null)
 
-const clone = ({ name }) => {
-  return { name, id: idGlobal++ };
+const clone = (item) => {
+  console.log(item);
+  return { ...item, id: idGlobal++ };
 }
 
 const start = ({ originalEvent }) => {
-  console.log('originalEvent:', originalEvent)
   controlOnStart.value = originalEvent.ctrlKey;
 }
 
 const log = ev => {
-  console.log(ev)
+  console.log('el', ev)
 }
 
 const showDialog = () => {
@@ -43,43 +44,69 @@ const showDialog = () => {
 
 <template>
   <div class="weapp-category">
-    <BtnBase type="primary" link @click="showDialog">
-      添加分类
-    </BtnBase>
-    <div class="weapp-category--wrap">
-      <div class="weapp-category--item">
-        <h3>当前添加分类</h3>
-        <draggable
-          class="dragArea list-group"
-          item-key="id"
-          :list="list1"
-          :group="{ name: 'people', pull: true }"
-          :clone="clone"
-          @start="start"
-        >
-          <template #item="{ element }">
-            <div class="list-group-item">
-              {{ element.name }}
-            </div>
-          </template>
-        </draggable>
+    <div class="container">
+      <div class="content">
+        <BtnBase type="primary" @click="showDialog">
+          新增自定义类目
+        </BtnBase>
+      </div>
+      <div class="weapp-category--wrap">
+        <div class="weapp-category--item">
+          <h3>当前添加分类</h3>
+          <p>
+            已选中类别目录
+            <span class="red">(最多8个)</span>
+          </p>
+          <draggable
+            class="list-group"
+            item-key="id"
+            :list="list1"
+            :group="{ name: 'cate', pull: true }"
+            :clone="clone"
+            @start="start"
+          >
+            <template #item="{ element }">
+              <div class="list-group-item">
+                <div class="icon-box" :style="{ background: element.color }">
+                  <SvgIcon :name="element.icon" size="30px" />
+                </div>
+                {{ element.name }}
+              </div>
+            </template>
+          </draggable>
+        </div>
+
+        <div class="weapp-category--item">
+          <h3>未添加分类</h3>
+          <p>
+            未选中类别目录
+          </p>
+          <draggable
+            class="list-group"
+            group="cate"
+            item-key="id"
+            :list="list2"
+            @change="log"
+          >
+            <template #item="{ element }">
+              <div class="list-group-item">
+                <div class="icon-box" :style="{ background: element.color }">
+                  <SvgIcon :name="element.icon" size="30px" />
+                </div>
+                {{ element.name }}
+              </div>
+            </template>
+          </draggable>
+        </div>
       </div>
 
-      <div class="weapp-category--item">
-        <h3>未添加分类</h3>
-        <draggable
-          class="dragArea list-group"
-          group="people"
-          item-key="id"
-          :list="list2"
-          @change="log"
-        >
-          <template #item="{ element }">
-            <div class="list-group-item">
-              {{ element.name }}
-            </div>
-          </template>
-        </draggable>
+      <div class="weapp-category--foot">
+        <BtnBase type="primary">
+          预览
+        </BtnBase>
+        <BtnBase type="success">
+          保存
+        </BtnBase>
       </div>
     </div>
     <Dialog ref="dialogRef" />
@@ -87,26 +114,48 @@ const showDialog = () => {
 </template>
 
 <style lang="scss">
+@import '@/styles/mixin.scss';
+@import '@/styles/variables.scss';
+
 .weapp-category {
   
   &--wrap {
     display: flex;
   }
   &--item {
-    flex: 0 0 50%;
+    flex: 1;
     padding: 20px;
+    color: $base-font-color;
+    @include flexcenter();
+    flex-direction: column;
+  }
+  &--foot {
+    @include flexcenter();
   }
   .list-group {
     width: 300px;
+    padding: 20px;
+    height: 600px;
+    border-radius: 8px;
+    background: #f1f1f1;
+    overflow-y: auto;
   }
 
   .list-group-item {
-    height: 40px;
-    line-height: 40px;
-    padding: 0 12px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
+    padding: 10px 12px;
+    border: 1px solid $base-border-color;
+    margin-bottom: 10px;
+    background: #fff;
     cursor: pointer;
+    @include flexcenter(flex-start);
+
+    .icon-box {
+      @include flexcenter();
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
   }
 }
 </style>
