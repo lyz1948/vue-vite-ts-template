@@ -56,7 +56,7 @@ declare module 'vue' {
     FormBase: typeof import('./src/components/base/FormBase.vue')['default']
     FormItem: typeof import('./src/components/base/FormItem.vue')['default']
     Icon: typeof import('./src/components/Icon/index.vue')['default']
-    ImageList: typeof import('./src/components/business/ImageList.vue')['default']
+    ImageList: typeof import('./src/components/business/imageList.vue')['default']
     InputBase: typeof import('./src/components/base/InputBase.vue')['default']
     InputNumBase: typeof import('./src/components/base/InputNumBase.vue')['default']
     ScreenFull: typeof import('./src/components/ScreenFull/index.vue')['default']

@@ -1,5 +1,5 @@
 import request from '@/utils/request' // axios 封装
-import httpUrl from '../httpUrl' // 接口 url
+import httpUrl from './httpUrl' // 接口 url
 import { DictionaryItem, DictionaryTypeAndSub } from '@/types/system'
 
 // 字典创建

@@ -31,7 +31,6 @@ service.interceptors.request.use(
     const store = useStore()
     // 获取 token ，并将其添加至请求头中
     const token = store.state.user.token
-    console.log(token)
     if (token) {
       // config.headers.Authorization = token
       config.headers.Authorization = 'Bearer ' + token;

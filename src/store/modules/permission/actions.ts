@@ -7,7 +7,6 @@ import { PermissionActionTypes } from './action-types'
 import { PermissionMutationTypes } from './mutation-types'
 import { permissionRoutes } from '@/router/index'
 import { getUserInfo } from '@/utils/cookies'
-import { useStore } from '@/store'
 
 import {
   permissionListRequest,
@@ -87,13 +86,13 @@ export const actions: ActionTree<PermissionState, RootState> & Actions = {
   async [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE](
     { commit }
   ) {
+			commit(PermissionMutationTypes.SET_ROUTES, permissionRoutes)
 
-    const roleId = getUserInfo()?.roleId
-    const res = await permissionOnlyHaveRequest(roleId)
-    const asyncRoutes = filterAsyncRoutes([], )
-
-    commit(PermissionMutationTypes.SET_AUTH_ROUTES, asyncRoutes)
-    return res
+			// const roleId = getUserInfo()?.roleId
+			// const res = await permissionOnlyHaveRequest(roleId)
+			// const asyncRoutes = filterAsyncRoutes([], )
+	
+			// commit(PermissionMutationTypes.SET_AUTH_ROUTES, asyncRoutes)
   },
 
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {

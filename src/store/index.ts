@@ -12,7 +12,7 @@ import { store as setting, SettingStore, SettingState } from '@/store/modules/se
 
 import { store as product, ProductStore, ProductState } from '@/store/modules/product'
 
-import { store as dictionary, DictionaryStore, DictionaryState } from '@/store/modules/system/dictionary'
+import { store as dictionary, DictionaryStore, DictionaryState } from '@/store/modules/dictionary'
 
 const debug = process.env.NODE_ENV !== 'production'
 const plugins = debug ? [createLogger()] : []
@@ -33,8 +33,8 @@ export type Store =
   PermissionStore<Pick<RootState, 'permission'>> &
   TagViewsStore<Pick<RootState, 'tagViews'>> &
   SettingStore<Pick<RootState, 'setting'>> &
-  ProductStore<Pick<ProductState, 'productList'>> &
-  DictionaryStore<Pick<DictionaryState, 'dictionary'>>
+  ProductStore<Pick<RootState, 'product'>> &
+  DictionaryStore<Pick<RootState, 'dictionary'>>
 
 const store = createStore({
   plugins,
