@@ -3,7 +3,8 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
 import FormBase from '@/components/base/FormBase.vue'
 import useElement from '@/hooks/useElement'
-import { themeColorOpts } from '@/config/setting'
+import Color from '@/components/Color/index.vue'
+
 const visibleDialog = ref(false)
 const { error, success } = useElement()
 const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
@@ -11,7 +12,7 @@ const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
 const formState = () => ({
   name: '',
   number: '',
-  color: themeColorOpts[0]
+  color: ''
 })
 
 const rules = {
@@ -22,7 +23,6 @@ const state = reactive({
   form: formState(),
   loading: false,
   isUpdate: false,
-  colorList: themeColorOpts,
   colorIndex: 0,
 })
 
@@ -45,15 +45,6 @@ const edit = (row: any) => {
   state.form = { ...row }
 }
 
-const selectColor = (color: string, index: number) => {
-  state.form.color = color
-  state.colorIndex = index || 0
-}
-
-const customColor = () => {
-  state.colorIndex = -1
-}
-
 const handleConfirm = () => {
   formRef.value?.validate().then(() => {
     success()
@@ -64,7 +55,7 @@ const handleConfirm = () => {
   })
 }
 
-const { form, colorList, colorIndex } = toRefs(state)
+const { form } = toRefs(state)
 
 defineExpose({
   show,
@@ -91,16 +82,7 @@ defineExpose({
       </FormItemBase>
 
       <FormItemBase prop="name" label="标签颜色">
-        <div class="color-wrap">
-          <span
-            v-for="(item, index) in colorList"
-            :key="item"
-            :style="'background: ' + item"
-            :class="index === colorIndex ? 'is-active' : ''"
-            @click="selectColor(item, index)"
-          />
-          <el-color-picker v-model="form.color" @change="customColor" />
-        </div>
+        <Color />
       </FormItemBase>
 
       <FormItemBase prop="number" label="序号">
@@ -111,19 +93,5 @@ defineExpose({
 </template>
 
 <style lang="scss">
-.color-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  > span {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    box-sizing: border-box;
-    cursor: pointer;
-    &.is-active {
-      border: 1px solid #ddd;
-      padding: 2px;
-    }
-  }
-}
+
 </style>

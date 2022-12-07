@@ -8,6 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'path'
 import { ServerConf } from './src/config'
+import { svgBuilder } from './src/plugins/svgBuilder'
 
 const { host, port } = ServerConf
 
@@ -36,6 +37,7 @@ export default defineConfig({
           setupProdMockServer();
         `,
     }),
+    svgBuilder('./src/assets/svg/'),
   ],
   resolve: {
     alias: {

@@ -15,6 +15,12 @@ export const formState = () => ({
   name: '',
 })
 
+export const formCateState = () => ({
+  name: '',
+  color: '',
+  icon: '',
+})
+
 // 创建行程
 export const formNewState = () => ({
   productName: '',
@@ -30,6 +36,10 @@ export const formTripState = () => ({
 export const rules = {
   productName: [{ required: true, message: '线路名称不能为空', trigger: 'blur' }],
   days: [{ required: true, message: '行程天数不能为空', trigger: 'blur' }],
+}
+
+export const rulesCate = {
+  name: [{ required: true, message: '类别名称不能为空', trigger: 'blur' }],
 }
 
 export const messageCustomer = [

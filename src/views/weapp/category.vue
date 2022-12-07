@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable'
 import ModTitle from '@/components/Title/index.vue'
+import Dialog from './components/DialogCategory.vue'
 
 let idGlobal = 1
 
@@ -13,12 +14,13 @@ const list1 = ref([
 ])
 
 const list2 = ref([
-  { name: 'cat 5', id: 5 },
-  { name: 'cat 6', id: 6 },
-  { name: 'cat 7', id: 7 },
+  { name: 'cat 5', id: 5, icon: '' },
+  { name: 'cat 6', id: 6, icon: '' },
+  { name: 'cat 7', id: 7, icon: '' },
 ])
 
 const controlOnStart = ref(true)
+const dialogRef = ref(null)
 
 const clone = ({ name }) => {
   return { name, id: idGlobal++ };
@@ -33,11 +35,17 @@ const log = ev => {
   console.log(ev)
 }
 
+const showDialog = () => {
+  dialogRef.value.show()
+}
+
 </script>
 
 <template>
   <div class="weapp-category">
-    <ModTitle title="分类设置" />
+    <BtnBase type="primary" link @click="showDialog">
+      添加分类
+    </BtnBase>
     <div class="weapp-category--wrap">
       <div class="weapp-category--item">
         <h3>当前添加分类</h3>
@@ -74,6 +82,7 @@ const log = ev => {
         </draggable>
       </div>
     </div>
+    <Dialog ref="dialogRef" />
   </div>
 </template>
 

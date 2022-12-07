@@ -27,8 +27,8 @@ const svgClass = computed(() => {
 <template>
   <svg
     :class="svgClass"
-    v-bind="$attrs"
     :style="{ 'font-size': size, color: color }"
+    v-bind="$attrs"
   >
     <use :xlink:href="iconName" />
   </svg>
@@ -40,6 +40,6 @@ const svgClass = computed(() => {
   height: 1em;
   vertical-align: middle;
   fill: currentColor;
-  margin-rigth: 5px;
+  margin-right: 5px;
 }
 </style>
