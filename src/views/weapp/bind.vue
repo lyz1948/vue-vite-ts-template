@@ -58,11 +58,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/variables.scss';
+
 .bind-setting {
   padding: 50px 0;
 
   .unbind {
     text-align: center;
+    color: $base-color-6;
     &-wrap {
       display: flex;
       justify-content: center;
@@ -75,14 +78,14 @@ export default {
       flex-direction: column;
       width: 400px;
       height: 400px;
-      border: 1px solid #999;
+      border: 1px solid $base-border-color;
       padding: 20px;
       margin-right: 20px;
 
       .text {
         margin-top: 20px;
         font-size: 15px;
-        color: #999;
+        color: $base-color-6;
       }
     }
   }
@@ -95,6 +98,7 @@ export default {
     .info {
       font-family: '微软雅黑';
       font-size: 15px;
+      color: $base-color-6;
       .label {
         display: inline-block;
         width: 100px;

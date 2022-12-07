@@ -1,13 +1,13 @@
 <script setup lang="ts" name="SwitchBase">
-const emit = defineEmits(['update:value'])
+const emit = defineEmits(['on:update'])
 
 const changeValue = event => {
-  emit('update:value', event)
+  emit('on:update', event)
 }
 </script>
 
 <template>
   <div class="switch-base">
-    <el-switch :model-value="value" v-bind="$attrs" @change="changeValue" />
+    <el-switch v-bind="$attrs" @change="changeValue" />
   </div>
 </template>

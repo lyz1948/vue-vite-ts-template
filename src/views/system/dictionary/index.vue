@@ -93,7 +93,7 @@ watch(
       <div class="dictionary-body">
         <ModTitle title="产品线路" />
         <TableBase :data="dicData" :columns="columns" border>
-          <template #action="row">
+          <template #action="{ row }">
             <BtnLinkBase type="success" class="mr5">
               编辑
             </BtnLinkBase>

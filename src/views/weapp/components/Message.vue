@@ -1,9 +1,7 @@
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SMSCustomerTpl, SMSBusinessTpl } from '@/config/weappTable'
 import { messageCustomer, messageBusiness } from '../params'
-
 
 const tableCustomer = ref(messageCustomer)
 
@@ -23,18 +21,18 @@ const tableBusiness = ref(messageBusiness)
         :show-footer="false"
         border
       >
-        <template #status="row">
+        <template #status="{ row }">
           <SwitchBase v-model="row.status" />
         </template>
       </TableBase>
-        
+
       <TableBase
         :data="tableBusiness"
         :columns="SMSBusinessTpl"
         :show-footer="false"
         border
       >
-        <template #status="row">
+        <template #status="{ row }">
           <SwitchBase v-model="row.status" />
         </template>
       </TableBase>
@@ -42,6 +40,4 @@ const tableBusiness = ref(messageBusiness)
   </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

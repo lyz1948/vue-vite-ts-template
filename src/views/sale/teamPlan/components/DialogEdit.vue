@@ -98,13 +98,13 @@ defineExpose({
     </div>
 
     <TableBase :columns="columns" :data="tableData">
-      <template #adult="row">
+      <template #adult="{ row }">
         <InputBase v-model="row.adule" />
       </template>
-      <template #children="row">
+      <template #children="{ row }">
         <InputBase v-model="row.children" />
       </template>
-      <template #room="row">
+      <template #room="{ row }">
         <InputBase v-model="row.room" />
       </template>
     </TableBase>

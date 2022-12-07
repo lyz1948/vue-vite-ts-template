@@ -68,14 +68,14 @@ watch(
     :total-count="state.total"
     @update:page="handlePage"
   >
-    <template #info="row">
+    <template #info="{ row }">
       <el-tag type="info">
         订单编号 {{ row.orderNumber }}
         {{ row.orderDate }}
       </el-tag>
     </template>
 
-    <template #detail="row">
+    <template #detail="{ row }">
       <div>标题{{ row }}</div>
       <div>
         <span>2022-12-11 ~ 2022-12-11</span>
@@ -118,7 +118,7 @@ watch(
       </div>
     </template>
 
-    <template #delivery="row">
+    <template #delivery="{ row }">
       <el-button-group>
         <el-button type="primary">
           记账{{ row }}
@@ -129,7 +129,7 @@ watch(
       </el-button-group>
     </template>
 
-    <template #action="row">
+    <template #action="{ row }">
       <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(row)">
         编辑
       </BtnLinkPermission>

@@ -16,8 +16,7 @@ const tabMenus = [
 const activeName = ref('Refund')
 const activeIndex = ref(0)
 
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
+const handleClick = (tab: TabsPaneContext) => {
   activeIndex.value = tab.index
 }
 

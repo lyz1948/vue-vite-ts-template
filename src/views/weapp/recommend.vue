@@ -22,7 +22,7 @@ const state = reactive({
       <div class="content">
         <Search />
         <TableBase :data="state.tableData" :columns="columns">
-          <template #action="row">
+          <template #action="{ row }">
             <el-checkbox v-model="row.isRecommend" label="推荐" />
             <el-checkbox v-model="row.isHot" label="热卖" />
           </template>
