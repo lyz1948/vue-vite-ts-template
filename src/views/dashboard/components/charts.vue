@@ -1,62 +1,39 @@
 <script setup lang="ts">
 import Chart from '@/components/Chart/index.vue'
-
-import { generateMonth } from '@/utils'
-
-const barData = {
-  labels: generateMonth(7),
-  datasets: [
-    {
-      label: 'My First Dataset',
-      data: [-65, -59, 80, 81, 56, 55, 40],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)',
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-}
-const lineData = {
-  labels: generateMonth(7),
-  datasets: [
-    {
-      label: 'My First Dataset',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1,
-    },
-  ],
-}
-
+import { lineData, barData, pieData } from './options'
 </script>
 
 <template>
   <div class="chart">
-    <div class="chart-wrap container">
-      <div class="chart-item">
-        <div class="inner">
-          <Chart type="bar" :data="barData" />
+    <div class="container">
+      <div class="chart-list">
+        <div class="chart-item">
+          <div class="inner" style="height: 450px">
+            <Chart :options="barData" />
+          </div>
+        </div>
+        <div class="chart-item">
+          <div class="inner" style="height: 450px">
+            <Chart :options="lineData" />
+          </div>
         </div>
       </div>
-      <div class="chart-item">
-        <div class="inner">
-          <Chart type="line" :data="lineData" />
+
+      <div class="chart-list">
+        <div class="chart-item">
+          <div class="inner">
+            <Chart :options="pieData" />
+          </div>
+        </div>
+        <div class="chart-item">
+          <div class="inner">
+            <Chart :options="pieData" />
+          </div>
+        </div>
+        <div class="chart-item">
+          <div class="inner">
+            <Chart :options="pieData" />
+          </div>
         </div>
       </div>
     </div>
@@ -65,8 +42,9 @@ const lineData = {
 
 <style lang="scss" scoped>
 .chart {
-  &-wrap {
+  &-list {
     display: flex;
+    margin-bottom: 20px;
     margin-right: -20px;
 
     .chart-item {
@@ -74,9 +52,13 @@ const lineData = {
       margin-right: 20px;
     }
     .inner {
+      height: 350px;
       padding: 20px;
-      height: 300px;
       background: #fff;
+      
+    }
+    canvas {
+      margin: 0 auto;
     }
   }
 }

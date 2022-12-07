@@ -8,7 +8,7 @@ import type { DictionaryState } from './state'
 import { RootState } from '@/store'
 
 import { state } from './state'
-import { actions, IDictionaryActions } from './actions'
+import { actions, DictionaryActions } from './actions'
 import { mutations, DictionaryMutations } from './mutations'
 
 export { DictionaryState }
@@ -26,11 +26,11 @@ export type DictionaryStore<S = DictionaryState> = Omit<
     options?: CommitOptions
   ): ReturnType<DictionaryMutations[K]>
 } & {
-  dispatch<K extends keyof IDictionaryActions>(
+  dispatch<K extends keyof DictionaryActions>(
     key: K,
-    payload: Parameters<IDictionaryActions[K]>[1],
+    payload: Parameters<DictionaryActions[K]>[1],
     options?: DispatchOptions
-  ): ReturnType<IDictionaryActions[K]>
+  ): ReturnType<DictionaryActions[K]>
 }
 
 export const store: Module<DictionaryState, RootState> = {

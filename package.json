@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "dev": "vite --mode locale",
+    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "lint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\"",

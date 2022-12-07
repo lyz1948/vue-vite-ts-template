@@ -10,10 +10,10 @@ import {
   dicDeleteRequest,
   dicListRequest,
   dicTypeListRequest,
-} from '@/api/system/dictionary'
+} from '@/api/dictionary'
 import { DictionaryItem, DictionaryTypeAndSub } from '@/types/system'
 import { DictionaryMutationTypes } from './mutation-types'
-import { dicAllRequest } from '@/api/system/dictionary'
+import { dicAllRequest } from '@/api/dictionary'
 import { formatSelect } from '@/utils/format'
 
 type AugmentedActionContext = {
@@ -29,7 +29,7 @@ type NoAugmentedActionContext = {
   ): ReturnType<DictionaryMutations[K]>
 } & Omit<ActionContext<DictionaryState, RootState>, 'commit'>
 
-export interface IDictionaryActions {
+export interface DictionaryActions {
   [DictionaryActionTypes.ACTION_DICTIONARY_FETCH](
     { commit }: AugmentedActionContext,
     id: string
@@ -51,7 +51,7 @@ export interface IDictionaryActions {
 }
 
 export const actions: ActionTree<DictionaryState, RootState> &
-  IDictionaryActions = {
+  DictionaryActions = {
   async [DictionaryActionTypes.ACTION_DICTIONARY_FETCH](
     { commit },
     id: string

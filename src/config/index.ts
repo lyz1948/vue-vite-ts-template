@@ -1,6 +1,7 @@
 const host = '0.0.0.0'
 const port = 5234
 
+// export const isDev = import.meta.env.MODE === 'development'
 export const ServerConf = {
   base: './',
   host,
@@ -19,6 +20,5 @@ export const PageDefault = {
 }
 
 export const App = {
-  baseURL:
-    process.env.NODE_ENV === 'development' ? `http://127.0.0.1:${port}/` : '/api',
+  // baseURL: isDev ? `http://127.0.0.1:${port}/` : '/api',
 }

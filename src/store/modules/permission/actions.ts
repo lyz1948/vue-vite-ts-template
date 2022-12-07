@@ -1,23 +1,18 @@
 import { ActionContext, ActionTree } from 'vuex'
-import { RouteRecordRaw } from 'vue-router'
+// import { RouteRecordRaw } from 'vue-router'
 import { RootState } from '@/store'
 import { Mutations } from './mutations'
 import { PermissionState } from './state'
 import { PermissionActionTypes } from './action-types'
 import { PermissionMutationTypes } from './mutation-types'
 import { permissionRoutes } from '@/router/index'
-// import { getUserInfo } from '@/utils/cookies'
-
 import {
   permissionListRequest,
   // permissionOnlyHaveRequest,
 } from '@/api/permission'
 
 type AugmentedActionContext = {
-  commit<K extends keyof Mutations>(
-    key: K,
-    payload: Parameters<Mutations[K]>[1]
-  ): ReturnType<Mutations[K]>
+  commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
 } & Omit<ActionContext<PermissionState, RootState>, 'commit'>
 
 // // 校验权限
@@ -67,32 +62,21 @@ type AugmentedActionContext = {
 // }
 
 export interface Actions {
-  [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE](
-    { commit }: AugmentedActionContext
-  ): void
+  [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE]({ commit }: AugmentedActionContext): void
 
-  [PermissionActionTypes.ACTION_SET_ROUTES](
-    { commit }: AugmentedActionContext,
-    roles: any[]
-  ): void
-  [PermissionActionTypes.ACTION_PERMISSION_LIST](
-    { commit }: AugmentedActionContext,
-    roleId: number
-  ): void
+  [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }: AugmentedActionContext, roles: any[]): void
+  [PermissionActionTypes.ACTION_PERMISSION_LIST]({ commit }: AugmentedActionContext, roleId: number): void
 }
 
 export const actions: ActionTree<PermissionState, RootState> & Actions = {
   // 拥有的权限
-  async [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE](
-    { commit }
-  ) {
-
+  async [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE]({ commit }) {
+    commit(PermissionMutationTypes.SET_ROUTES, permissionRoutes)
     // const roleId = getUserInfo()?.roleId
     // const res = await permissionOnlyHaveRequest(roleId)
     // const asyncRoutes = filterAsyncRoutes([], )
 
     // commit(PermissionMutationTypes.SET_AUTH_ROUTES, asyncRoutes)
-    // return res
   },
 
   [PermissionActionTypes.ACTION_SET_ROUTES]({ commit }, roles: string[]) {
@@ -101,10 +85,7 @@ export const actions: ActionTree<PermissionState, RootState> & Actions = {
     commit(PermissionMutationTypes.SET_ROUTES, permissionRoutes)
   },
 
-  async [PermissionActionTypes.ACTION_PERMISSION_LIST](
-    { commit },
-    roleId: number
-  ) {
+  async [PermissionActionTypes.ACTION_PERMISSION_LIST]({ commit }, roleId: number) {
     const data = await permissionListRequest(roleId)
     commit(PermissionMutationTypes.SET_AUTH_ROUTES, (data as any).roleMenus)
   },

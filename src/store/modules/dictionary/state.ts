@@ -1,8 +1,8 @@
-import { DictionaryTypeItem, DictionaryTypeAndSub } from '@/types/system'
+import { DictionaryTypeAndSub } from '@/types/system'
 
 export interface DictionaryState {
-  dictionaryData: DictionaryTypeItem[] | []
-  dictionaryTypeData: DictionaryTypeItem[] | []
+  dictionaryData: any[]
+  dictionaryTypeData: any[]
   dictionaryAllData: { [keys: string]: DictionaryTypeAndSub } | null
 }
 

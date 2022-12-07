@@ -1,27 +1,20 @@
 <script setup lang="ts">
-import { ref, computed, reactive, onBeforeMount, watch } from 'vue'
+import { computed, reactive, onBeforeMount, watch } from 'vue'
 import ModTitle from '@/components/Title/index.vue'
 import { DictionaryTable as columns } from '@/config/dictionaryTable'
 import { useStore } from 'vuex'
-import { DictionaryActionTypes } from '@/store/modules/system/dictionary/action-types'
+import { DictionaryActionTypes } from '@/store/modules/dictionary/action-types'
 import useElement from '@/hooks/useElement'
 const store = useStore()
 
 const { success } = useElement()
-const tagList = ['产品线路', '产品标签', '海报', 'H5']
-
-const dicData = ref([
-  { name: '线路类型', index: 0, content: '高端线路' },
-  { name: '产品类型', index: 1, content: '高端线路' },
-  { name: '酒店类型', index: 2, content: '高端线路' },
-  { name: '收费类型', index: 3, content: '高端线路' },
-])
 
 const state = reactive({
   tabIndex: 0,
+  tableData: [],
 })
 
-const dictionaryData = computed(() => {
+const dicTypeData = computed(() => {
   return store.state.dictionary.dictionaryTypeData
 })
 
@@ -30,15 +23,19 @@ const tableData = computed(() => {
 })
 
 const firstTab = computed(() => {
-  return state.tabData[state.tabIndex]
+  return state.dicTypeData[state.tabIndex]
 })
 
 const getDictionaryId = computed(() => {
   return firstTab.value?.id
 })
 
+const getDictionaryTitle = computed(() => {
+  return firstTab.value?.name
+})
+
 const fetchData = () => {
-  return store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_FETCH)
+  return store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_TYPE_FETCH)
 }
 
 const fetchCurrentData = async () => {
@@ -47,7 +44,7 @@ const fetchCurrentData = async () => {
 }
 
 const deleteRow = async (id: any) => {
-  const res = await store.dispatch(
+  await store.dispatch(
     DictionaryActionTypes.ACTION_DICTIONARY_DELETE,
     id
   )
@@ -60,8 +57,8 @@ onBeforeMount(() => {
 })
 
 watch(
-  () => dictionaryData.value,
-  (data: IDictionaryTypeItem[]) => {
+  () => dicTypeData.value,
+  (data: any[]) => {
     state.tabData = data
     fetchCurrentData()
   }
@@ -70,6 +67,7 @@ watch(
 watch(
   () => tableData.value,
   (data: any) => {
+    console.log('data:', data)
     state.tableData = data
   }
 )
@@ -82,18 +80,24 @@ watch(
     <div class="dictionary-content">
       <div class="tag-warp">
         <BtnBase
-          v-for="(item, index) in tagList"
+          v-for="(item, index) in dicTypeData"
           :key="index"
           type="success"
           class="tag-item"
         >
-          {{ item }}
+          {{ item.name }}
         </BtnBase>
       </div>
       <div class="dictionary-body">
+<<<<<<< HEAD
+        <ModTitle :title="getDictionaryTitle" />
+        <TableBase :data="tableData" :columns="columns" border>
+          <template #action="row">
+=======
         <ModTitle title="产品线路" />
         <TableBase :data="dicData" :columns="columns" border>
           <template #action="{ row }">
+>>>>>>> ac2f2bfc077e7b895e1bfb5dc38b7a90f44122c8
             <BtnLinkBase type="success" class="mr5">
               编辑
             </BtnLinkBase>

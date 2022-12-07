@@ -1,44 +1,58 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
 import { getRelativePosition } from 'chart.js/helpers'
+import { debounce } from '@/utils/index'
+import { onMounted, ref } from 'vue';
 
 const props = defineProps({
   id: {
     type: String,
-    default: () => ('vueChart' + Math.ceil(Math.random() * 100000))
+    default: () => 'vueChart' + Math.ceil(Math.random() * 100000),
   },
-  type: {
-    type: String,
-    default: 'bar',
-  },
-  data: {
+  options: {
     type: Object,
     required: true,
   },
 })
 
-setTimeout(() => {
-  const ctx = document.getElementById(props.id)
+const canvasRef = ref(null)
+const chart = ref(null)
 
-  ctx.width = ctx.parentElement.clientWidth
-  ctx.height = ctx.parentElement.clientHeight
+const initChart = () => {
+  const ctx = document.getElementById(props.id)
+  ctx.width = ctx.parentElement.offsetWidth
+  ctx.height = ctx.parentElement.offsetHeight
 
   const chart = new Chart(ctx, {
-    type: props.type,
-    data: props.data,
+    ...props.options,
     options: {
       onClick: e => {
         const canvasPosition = getRelativePosition(e, chart)
-
         // Substitute the appropriate scale IDs
         const dataX = chart.scales.x.getValueForPixel(canvasPosition.x)
         const dataY = chart.scales.y.getValueForPixel(canvasPosition.y)
       },
     },
   })
-}, 1000)
+
+  chart.value = chart
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    initChart()
+  }, 1000)
+})
+
+
+// window.addEventListener('resize', debounce(() => {
+//   const ctx = canvasRef.value
+//   // ctx.width = ctx.parentElement.offsetWidth
+//   ctx.height = ctx.parentElement.offsetHeight
+// }, 500))
+
 </script>
 
 <template>
-  <canvas :id="id" />
+  <canvas :id="id" ref="canvasRef" />
 </template>
