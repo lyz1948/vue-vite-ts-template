@@ -11,6 +11,19 @@
   align-items: center;
 }
 
+:deep(.el-dialog__header) {
+  border-bottom: 1px solid #ccc;
+  margin-right: 0 !important;
+}
+
+:deep(.el-dialog__headerbtn) {
+  top: 0;
+}
+
+:deep(.el-form-item__label) {
+  font-weight: bold;
+}
+
 .el-dialog__body {
   max-height: 700px;
   overflow-y: auto;

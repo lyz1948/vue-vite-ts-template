@@ -52,6 +52,18 @@ const productRouter: RouteRecordRaw[] = [
         },
       },
       {
+        path: 'tag',
+        name: 'Tag',
+        component: () =>
+          import(
+            /* webpackChunkName: "tag" */ '@/views/product/tag.vue'
+          ),
+        meta: {
+          title: '产品标签',
+          icon: 'icon-table',
+        },
+      },
+      {
         path: 'gallery',
         name: 'Gallery',
         component: () =>

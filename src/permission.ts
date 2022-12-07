@@ -33,9 +33,14 @@ router.beforeEach(
         if (isFirst) {
           try {
 
+            // await store.dispatch(
+            //   PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE,
+            //   undefined
+            // )
+
             await store.dispatch(
-              PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE,
-              undefined
+              PermissionActionTypes.ACTION_SET_ROUTES,
+              []
             )
             await store.state.permission.dynamicRoutes.forEach(route => {
               router.addRoute(route)

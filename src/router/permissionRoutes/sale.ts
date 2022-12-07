@@ -15,7 +15,7 @@ const weappRouter: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: 'teamOrder',
+        path: 'team-order',
         name: 'TeamOrder',
         component: () =>
           import(
@@ -27,7 +27,7 @@ const weappRouter: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'teamPlan',
+        path: 'team-plan',
         name: 'TeamPlan',
         component: () =>
           import(
@@ -40,7 +40,7 @@ const weappRouter: RouteRecordRaw[] = [
       },
 
       {
-        path: 'orderManage',
+        path: 'order-manage',
         name: 'orderManage',
         component: () =>
           import(
@@ -48,6 +48,18 @@ const weappRouter: RouteRecordRaw[] = [
           ),
         meta: {
           title: '订单管理',
+          icon: 'icon-table',
+        },
+      },
+      {
+        path: 'order-manage-detail',
+        name: 'orderManageDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "orderManageDetail" */ '@/views/sale/orderManage/detail.vue'
+          ),
+        meta: {
+          title: '订单编辑',
           icon: 'icon-table',
         },
       },

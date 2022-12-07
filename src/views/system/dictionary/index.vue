@@ -89,9 +89,15 @@ watch(
         </BtnBase>
       </div>
       <div class="dictionary-body">
+<<<<<<< HEAD
         <ModTitle :title="getDictionaryTitle" />
         <TableBase :data="tableData" :columns="columns" border>
           <template #action="row">
+=======
+        <ModTitle title="产品线路" />
+        <TableBase :data="dicData" :columns="columns" border>
+          <template #action="{ row }">
+>>>>>>> ac2f2bfc077e7b895e1bfb5dc38b7a90f44122c8
             <BtnLinkBase type="success" class="mr5">
               编辑
             </BtnLinkBase>

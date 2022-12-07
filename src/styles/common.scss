@@ -36,6 +36,10 @@
   margin-right: 5px;
 }
 
+.mt20 {
+  margin-top: 20px;
+}
+
 .blue {
   color: $color-blue;
 }
@@ -59,4 +63,8 @@
 
 .container {
   padding: 20px 0;
+}
+
+.input-base {
+  flex: 1;
 }

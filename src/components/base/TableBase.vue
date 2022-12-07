@@ -85,7 +85,7 @@ const handleCurrentChange = (pageNum: number) => {
 </script>
 
 <template>
-  <div class="table-base content">
+  <div class="table-base">
     <div v-if="customerTitle" class="table-base--header">
       <div class="table-base--title">
         <slot name="title">
@@ -96,7 +96,7 @@ const handleCurrentChange = (pageNum: number) => {
         <slot name="headerHandler" />
       </div>
     </div>
-    <el-table :highlight-current-row="highlight" :data="data">
+    <el-table :highlight-current-row="highlight" :data="data" v-bind="$attrs">
       <el-table-column v-if="showSelection" type="selection" width="55" />
       <template v-for="(item, index) in columns" :key="index">
         <el-table-column v-bind="item.attrs">

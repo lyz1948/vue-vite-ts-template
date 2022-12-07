@@ -1,21 +1,22 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
-import Banner from './components/Banner.vue'
-import Category from './components/Category.vue'
-import Recommend from './components/Recommend.vue'
+import Refund from './components/Refund.vue'
+import Active from './components/Active.vue'
+import Telephone from './components/Telephone.vue'
+import Message from './components/Message.vue'
 
 const tabMenus = [
-  { label: '轮播图设置', name: 'Banner', component: Banner },
-  { label: '类目设置', name: 'Category', component: Category },
-  { label: '热门推荐', name: 'Recommend', component: Recommend },
+  { label: '退改签规则', name: 'Refund', component: Refund },
+  { label: '活动时效', name: 'Active', component: Active },
+  { label: '电话设置', name: 'Telephone', component: Telephone },
+  { label: '短信通知设置', name: 'Message', component: Message },
 ]
 
-const activeName = ref('Banner')
+const activeName = ref('Refund')
 const activeIndex = ref(0)
 
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
+const handleClick = (tab: TabsPaneContext) => {
   activeIndex.value = tab.index
 }
 
@@ -37,11 +38,36 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   </div>
 </template>
 
-<style>
-.demo-tabs > .el-tabs__content {
-  padding: 32px;
-  color: #6b778c;
-  font-size: 32px;
-  font-weight: 600;
+<style lang="scss">
+@import '@/styles/variables.scss';
+
+.mod-wrap {
+
+}
+
+.mod-title {
+  padding: 16px 0;
+  border-bottom: 1px solid $base-border-color;
+}
+
+.mod-foot {
+  color: $base-font-color;
+  p {
+    font-size: $base-font-size-medium;
+  }
+}
+
+.field-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: $base-font-size-small;
+  color: $base-font-color;
+  margin-top: 12px;
+
+  .input-base {
+    flex: 0 0 100px;
+    margin: 0 10px;
+  }
 }
 </style>

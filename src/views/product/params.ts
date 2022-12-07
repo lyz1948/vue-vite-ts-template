@@ -4,6 +4,16 @@ export const searchState = () => ({
   create: ''
 })
 
+// export const searchCategoryState = () => ({
+//   name: '',
+//   create: ''
+// })
+
+// export const searchTagState = () => ({
+//   name: '',
+//   create: ''
+// })
+
 export const formState = () => ({
   name: '',
 })
