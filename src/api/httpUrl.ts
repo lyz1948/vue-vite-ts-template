@@ -13,6 +13,14 @@ const httpApi = {
   permissionOnlyHave: '/system/role/listRolePermissionOnlyHave',
   permissionUpdate: '/system/role/updateRoleMenu',
 
+  // 员工
+  staffList: '/system/user/page',
+  staffSelectList: '/system/user/findList',
+  staffCreate: '/system/user/saveOrUpdate',
+  staffDelete: '/system/user/del',
+  staffUpdate: '/system/user/updateInfo',
+  staffUpdatePwd: '/system/user/updatePassword',
+
   // 字典
   dicList: '/system/dictionary/list',
   dicCreate: '/system/dictionary/saveOrUpdate',
@@ -22,7 +30,7 @@ const httpApi = {
   dicSearchForCode: '/system/dictionary/listByTypeCode',
   dicListAll: '/system/dictionary/listTypeAndSub',
 
-  // 商城
+  // 商城 设置
   mallConfig: '/system/mall/config',
   mallPhoneList: '/system/mall/contact-phone-list',
   mallPhoneSet: '/system/mall/set-contact-phone',
@@ -32,6 +40,18 @@ const httpApi = {
   mallRefundSet: '/system/mall/set-refund-pro',
   mallSMSSet: '/system/mall/set-sms',
   mallSMSGet: '/system/mall/sms-config',
+
+  picTypeList: '/mall/pic/types',
+  picTypeSet: '/mall/pic/add-update-type',
+  picTypeDel: '/mall/pic/del-type',
+
+  tagList: '/mall/tag-type/list',
+  tagSet: '/mall/tag-type/add-update',
+  tagDel: '/mall/tag-type/del',
+
+  productList: '/mall/tag-type/list',
+  productSet: '/mall/tag-type/add-update',
+  productDel: '/mall/tag-type/del',
 }
 
 export default httpApi

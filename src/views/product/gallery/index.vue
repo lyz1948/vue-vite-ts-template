@@ -44,8 +44,8 @@ watch(() => tableData.value, (data) => {
 <template>
   <div>
     <SearchGallery @on:search="fetchData" @on:create="showDialog" />
-    <TableGallery @on:edit="editItem" />
-    <DialogGallery ref="dialogRef" />
+    <TableGallery @on:edit="editItem" @on:reload="fetchData" />
+    <DialogGallery ref="dialogRef" @on:reload="fetchData" />
   </div>
 </template>
 

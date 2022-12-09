@@ -27,33 +27,31 @@ export default function () {
     })
   }
 
-  const success = ({ message = '操作成功', showClose = true }: Tips): any => {
+  const success = ({ message = '操作成功', showClose = true }: Tips = {}): any => {
     showToast({ message, type: 'success', showClose })
   }
 
-  const error = ({ message = '操作失败', showClose = true }: Tips): any => {
+  const error = ({ message = '操作失败', showClose = true }: Tips = {}): any => {
     showToast({ message, type: 'error', showClose })
   }
 
-  const warning = ({ message = '这是一条警告信息', showClose = true }: Tips): any => {
+  const warning = ({ message = '这是一条警告信息', showClose = true }: Tips = {}): any => {
     showToast({ message, type: 'warning', showClose })
   }
 
-  const info = ({ message = '这是一条提示消息', showClose = true }: Tips): any => {
+  const info = ({ message = '这是一条提示消息', showClose = true }: Tips = {}): any => {
     showToast({ message, type: 'info', showClose })
   }
 
-  const confirm = ({ message = 'proxy will permanently delete the file. Continue?', title = 'Warning' }: Confirm) => {
+  const confirm = (message = '删除后将无法恢复，确定操作吗?', title = '警告') => {
     return new Promise((resolve, reject) => {
       ElMessageBox.confirm(message, title, {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         type: 'warning',
       })
-        .then(resolve)
-        .catch(() => {
-          reject()
-        })
+      .then(resolve)
+      .catch(reject)
     })
   }
 

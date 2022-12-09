@@ -39,7 +39,7 @@ defineExpose({
     :visible="visibleDialog"
     width="500px"
     @on:visible="visibleDialog = $event"
-    @update:confirm="handleConfirm"
+    @on:confirm="handleConfirm"
   >
     <el-checkbox-group v-model="checkList">
       <template v-for="(item, index) in checkListData" :key="index">

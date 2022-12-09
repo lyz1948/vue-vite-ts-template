@@ -50,7 +50,7 @@ defineExpose({
     :visible="visibleDialog"
     width="760px"
     @on:visible="visibleDialog = $event"
-    @update:confirm="handleConfirm"
+    @on:confirm="handleConfirm"
   >
     <FormBase
       ref="formRef"

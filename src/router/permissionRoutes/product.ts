@@ -80,7 +80,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Gallery',
         component: () =>
           import(
-            /* webpackChunkName: "Gallery" */ '@/views/product/gallery.vue'
+            /* webpackChunkName: "Gallery" */ '@/views/product/gallery/index.vue'
           ),
         meta: {
           title: '产品图片',

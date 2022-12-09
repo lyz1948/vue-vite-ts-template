@@ -68,6 +68,8 @@ declare module 'vue' {
     Select: typeof import('./src/components/Select/index.vue')['default']
     SelectBase: typeof import('./src/components/base/SelectBase.vue')['default']
     SelectCustomer: typeof import('./src/components/business/SelectCustomer.vue')['default']
+    SelectDataBase: typeof import('./src/components/base/SelectDataBase.vue')['default']
+    SelectStaff: typeof import('./src/components/Select/SelectStaff.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
     SvgIconList: typeof import('./src/components/SvgIcon/SvgIconList.vue')['default']
     SwitchBase: typeof import('./src/components/base/SwitchBase.vue')['default']

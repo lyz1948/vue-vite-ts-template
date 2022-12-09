@@ -12,7 +12,15 @@ import { store as setting, SettingStore, SettingState } from '@/store/modules/se
 
 import { store as product, ProductStore, ProductState } from '@/store/modules/product'
 
-import { store as dictionary, DictionaryStore, DictionaryState } from '@/store/modules/dictionary'
+import { store as dictionary, DictionaryStore, DictionaryState } from '@/store/modules/system/dictionary'
+
+import { store as source,SourceStore,SourceState } from '@/store/modules/system/source'
+
+import {
+  store as staff,
+  StaffStore,
+  StaffState,
+} from '@/store/modules/system/staff'
 
 const debug = process.env.NODE_ENV !== 'production'
 const plugins = debug ? [createLogger()] : []
@@ -23,6 +31,8 @@ export interface RootState {
   permission: PermissionState
   tagViews: TagViewsState
   setting: SettingState
+  staff: StaffState
+  source: SourceState
   product: ProductState
   dictionary: DictionaryState
 }
@@ -33,6 +43,8 @@ export type Store =
   PermissionStore<Pick<RootState, 'permission'>> &
   TagViewsStore<Pick<RootState, 'tagViews'>> &
   SettingStore<Pick<RootState, 'setting'>> &
+  StaffStore<Pick<RootState, 'staff'>> &
+  SourceStore<Pick<RootState, 'source'>> &
   ProductStore<Pick<RootState, 'product'>> &
   DictionaryStore<Pick<RootState, 'dictionary'>>
 
@@ -45,6 +57,8 @@ const store = createStore({
     tagViews,
     setting,
     product,
+    staff,
+    source,
     dictionary,
   },
 })

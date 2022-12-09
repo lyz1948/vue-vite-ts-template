@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, ref, watch } from 'vue';
 import { useStore } from '@/store'
-import { UserActionTypes } from '@/store/modules/user/action-types'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
 
 import SearchTag from './components/SearchTag.vue'
 import TableTag from './components/TableTag.vue'
@@ -16,11 +16,11 @@ const state = reactive({
 })
 
 const tableData = computed(() => {
-  return store.state.user.userList
+  return store.state.product.productTagList
 })
 
-const fetchData = (params) => {
-  store.dispatch(UserActionTypes.ACTION_USER_LIST, params)
+const fetchData = (params = {}) => {
+  return store.dispatch(ProductActionTypes.ACTION_PRODUCT_TAG_LIST, params)
 }
 
 const editItem = (item) => {

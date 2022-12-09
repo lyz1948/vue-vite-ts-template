@@ -51,7 +51,7 @@ export const ProductTag = [
 
 // 产品图片
 export const ProductImage = [
-  { attrs: { prop: '', label: '图片类型' } },
+  { attrs: { prop: 'name', label: '图片类型' } },
   { attrs: { prop: '', label: '图片数量' } },
   { attrs: { prop: '', label: '图片大小' } },
   { attrs: { prop: '', label: '创建人' } },

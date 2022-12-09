@@ -75,7 +75,7 @@ defineExpose({
     :visible="visibleDialog"
     custom-class="dialog-join"
     @on:visible="visibleDialog = $event"
-    @update:confirm="handleConfirm"
+    @on:confirm="handleConfirm"
   >
     <div class="order-info">
       <div class="order-info--item">

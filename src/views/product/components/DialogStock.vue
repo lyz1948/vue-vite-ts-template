@@ -67,7 +67,7 @@ defineExpose({
     :title="title"
     :visible="visibleDialog"
     @on:visible="visibleDialog = $event"
-    @update:confirm="handleConfirm"
+    @on:confirm="handleConfirm"
   >
     <!-- <el-tabs v-model="activeName" type="border-card">
       <el-tab-pane label="按天" name="day">
