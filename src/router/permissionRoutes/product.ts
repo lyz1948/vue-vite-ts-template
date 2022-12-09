@@ -19,10 +19,22 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Line',
         component: () =>
           import(
-            /* webpackChunkName: "line" */ '@/views/product/index.vue'
+            /* webpackChunkName: "Line" */ '@/views/product/index.vue'
           ),
         meta: {
           title: '线路管理',
+          icon: 'icon-table',
+        },
+      },
+      {
+        path: 'stock',
+        name: 'Stock',
+        component: () =>
+          import(
+            /* webpackChunkName: "Stock" */ '@/views/product/stock.vue'
+          ),
+        meta: {
+          title: '产品库存',
           icon: 'icon-table',
         },
       },
@@ -40,14 +52,14 @@ const productRouter: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'category',
-        name: 'Category',
+        path: 'cate',
+        name: 'Cate',
         component: () =>
           import(
-            /* webpackChunkName: "category" */ '@/views/product/category.vue'
+            /* webpackChunkName: "Cate" */ '@/views/product/category.vue'
           ),
         meta: {
-          title: '产品分类',
+          title: '产品类目',
           icon: 'icon-table',
         },
       },
@@ -56,7 +68,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Tag',
         component: () =>
           import(
-            /* webpackChunkName: "tag" */ '@/views/product/tag.vue'
+            /* webpackChunkName: "Tag" */ '@/views/product/tag.vue'
           ),
         meta: {
           title: '产品标签',
@@ -68,7 +80,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Gallery',
         component: () =>
           import(
-            /* webpackChunkName: "gallery" */ '@/views/product/gallery.vue'
+            /* webpackChunkName: "Gallery" */ '@/views/product/gallery.vue'
           ),
         meta: {
           title: '产品图片',

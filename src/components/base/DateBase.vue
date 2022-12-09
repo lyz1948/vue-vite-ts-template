@@ -1,8 +1,17 @@
 <script setup lang="ts" name="DateBase">
+import { computed } from "vue"
+
+
+const props = defineProps({
+  shortcuts: {
+    type: Boolean,
+    default: true,
+  }
+})
 
 const shortcuts = [
   {
-    text: '上星期',
+    text: '近一周',
     value: () => {
       const end = new Date()
       const start = new Date()
@@ -29,6 +38,10 @@ const shortcuts = [
     },
   },
 ]
+
+const hasShowShort = computed(() => {
+  return props.shortcuts ? shortcuts : []
+})
 </script>
 
 <template>
@@ -38,6 +51,6 @@ const shortcuts = [
     range-separator="至"
     start-placeholder="开始日期"
     end-placeholder="结束日期"
-    :shortcuts="shortcuts"
+    :shortcuts="hasShowShort"
   />
 </template>

@@ -1,3 +1,5 @@
+import { ActiveValid, Refund, PhoneItem } from './interface'
+
 export enum DeviceType {
   Mobile,
   Desktop,
@@ -11,6 +13,10 @@ export interface AppState {
   }
   language: string
   size: string
+  mallRefund: Refund[] | []
+  mallActive: ActiveValid | null
+  mallPhoneList: PhoneItem[] | []
+  mallConfig: any
 }
 
 export const state: AppState = {
@@ -21,4 +27,8 @@ export const state: AppState = {
   },
   language: 'zh',
   size: 'medium',
+  mallRefund: [],
+  mallActive: null,
+  mallPhoneList: [],
+  mallConfig: null,
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts" name="SelectBase">
-import { watch, ref, reactive } from 'vue'
+import { watch, ref, reactive, onBeforeMount } from 'vue'
 import { SelectItem } from '@/types'
 import SELECTOR from '@/config/selector'
 
@@ -36,6 +36,10 @@ const lazyLoad = () => {
   state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type]
 }
 
+onBeforeMount(() => {
+  state.tempData = props.list.length > 0 ? props.list : SELECTOR[props.type]
+})
+
 watch(
   () => state.tempData,
   (list: any) => {
@@ -53,9 +57,9 @@ watch(
   >
     <el-option
       v-for="(item) in state.tempData"
-      :key="item.value + ' '"
+      :key="item.value + ''"
       :label="item.label"
-      :value="item.value + ' '"
+      :value="item.value + ''"
     />
   </el-select>
 </template>

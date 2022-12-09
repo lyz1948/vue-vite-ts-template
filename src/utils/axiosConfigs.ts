@@ -29,10 +29,8 @@ const service = axios.create({
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const store = useStore()
-    // 获取 token ，并将其添加至请求头中
     const token = store.state.user.token
     if (token) {
-      // config.headers.Authorization = token
       config.headers.Authorization = 'Bearer ' + token;
     }
 
@@ -53,6 +51,7 @@ service.interceptors.response.use(
   (response: AxiosResponse) => {
     const status = response.status
     const decide = status < 200 || status >= 300
+    
     if (decide) {
       const message = errorCode(status as CodeKey)
       if (typeof response.data === 'string') {

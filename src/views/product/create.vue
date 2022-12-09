@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import ProductInfo from './components/ProductInfo.vue'
-import ProductEdit from './components/ProductEdit.vue'
+// import ProductEdit from './components/ProductEdit.vue'
 import ProductTrip from './components/ProductTrip.vue'
 import TextareaItem from './components/TextareaItem.vue'
 import SwiperItem from './components/SwiperItem.vue'
 
 const compList = [
   { name: '基础信息', id: 'JCXX', component: ProductInfo },
-  { name: '产品详情', id: 'CPXQ', component: ProductEdit },
+  // { name: '产品详情', id: 'CPXQ', component: ProductEdit },
   { name: '行程安排', id: 'XCAP', component: ProductTrip },
   { name: '费用包含', id: 'FYBH', component: TextareaItem },
   { name: '费用不含', id: 'FYBBH', component: TextareaItem },
@@ -49,7 +49,7 @@ const compList = [
 
 <style lang="scss">
 .product-create {
-  padding-right: 80px;
+  // padding-right: 80px;
   .tools {
     position: fixed;
     right: 20px;

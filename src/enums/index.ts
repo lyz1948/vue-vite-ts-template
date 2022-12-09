@@ -9,3 +9,8 @@ export enum PaymentLabelEnum {
   WX = '微信',
   ZFB = '支付宝'
 }
+
+export enum SMSType {
+  TOB = 'TOB',
+  TOC = 'TOC'
+}

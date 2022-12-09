@@ -21,35 +21,39 @@ const { form } = toRefs(state)
 <template>
   <div class="base-info">
     <ModTitle :title="props.title" />
-    <FormBase :form="form" :rules="rules" inline>
-      <FormItemBase prop="productName" label="线路产品">
-        <InputBase v-model="form.productName" />
-      </FormItemBase>
+    <div class="container">
+      <div class="content">
+        <FormBase :form="form" :rules="rules" inline>
+          <FormItemBase prop="productName" label="线路产品">
+            <InputBase v-model="form.productName" />
+          </FormItemBase>
 
-      <FormItemBase prop="days" label="行程天数">
-        <InputNumBase v-model="form.days" />
-      </FormItemBase>
+          <FormItemBase prop="days" label="行程天数">
+            <InputNumBase v-model="form.days" />
+          </FormItemBase>
 
-      <FormItemBase prop="" label="产品分类">
-        <InputNumBase v-model="form.days" />
-      </FormItemBase>
+          <FormItemBase prop="" label="产品分类">
+            <InputNumBase v-model="form.days" />
+          </FormItemBase>
 
-      <FormItemBase prop="" label="产品来源">
-        <InputNumBase v-model="form.days" />
-      </FormItemBase>
+          <FormItemBase prop="" label="产品来源">
+            <InputNumBase v-model="form.days" />
+          </FormItemBase>
 
-      <FormItemBase prop="" label="产品标签">
-        <InputNumBase v-model="form.days" />
-      </FormItemBase>
+          <FormItemBase prop="" label="产品标签">
+            <InputNumBase v-model="form.days" />
+          </FormItemBase>
 
-      <FormItemBase prop="" label="出发地">
-        <InputNumBase v-model="form.days" />
-      </FormItemBase>
+          <FormItemBase prop="" label="出发地">
+            <InputNumBase v-model="form.days" />
+          </FormItemBase>
 
-      <FormItemBase prop="" label="目的地">
-        <InputNumBase v-model="form.days" />
-      </FormItemBase>
-    </FormBase>
+          <FormItemBase prop="" label="目的地">
+            <InputNumBase v-model="form.days" />
+          </FormItemBase>
+        </FormBase>
+      </div>
+    </div>
   </div>
 </template>
 

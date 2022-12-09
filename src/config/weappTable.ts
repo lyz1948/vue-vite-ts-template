@@ -1,13 +1,13 @@
 const action = { attrs: { prop: 'action', label: '操作' }, slot: 'action' }
 
 export const SMSCustomerTpl = [
-  { attrs: { prop: 'title', label: '触发条件', width: 100 } },
+  { attrs: { prop: 'name', label: '触发条件', width: 100 } },
   { attrs: { prop: 'status', label: '发送用户', width: 100 }, slot: 'status' },
   { attrs: { prop: 'content', label: '短信内容', } },
 ]
 
 export const SMSBusinessTpl = [
-  { attrs: { prop: 'title', label: '触发条件', width: 100 } },
+  { attrs: { prop: 'name', label: '触发条件', width: 100 } },
   { attrs: { prop: 'status', label: '发送商家', width: 100 }, slot: 'status' },
   { attrs: { prop: 'content', label: '短信内容', } },
 ]

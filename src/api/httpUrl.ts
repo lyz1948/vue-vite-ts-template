@@ -21,6 +21,16 @@ const httpApi = {
   dicTypeList: '/system/dictionary/listType',
   dicSearchForCode: '/system/dictionary/listByTypeCode',
   dicListAll: '/system/dictionary/listTypeAndSub',
+
+  // 商城
+  mallConfig: '/system/mall/config',
+  mallPhoneList: '/system/mall/contact-phone-list',
+  mallPhoneSet: '/system/mall/set-contact-phone',
+  mallActive: '/system/mall/set-activity-time',
+  mallWeappIdSet: '/system/mall/set-miniApps-pra',
+  mallRefundSet: '/system/mall/set-refund-pro',
+  mallSMSSet: '/system/mall/set-sms',
+  mallSMSGet: '/system/mall/sms-config',
 }
 
 export default httpApi

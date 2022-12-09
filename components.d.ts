@@ -12,6 +12,7 @@ declare module 'vue' {
     Chart: typeof import('./src/components/Chart/index.vue')['default']
     Color: typeof import('./src/components/Color/index.vue')['default']
     DateBase: typeof import('./src/components/base/DateBase.vue')['default']
+    DatePanel: typeof import('./src/components/DatePanel/index.vue')['default']
     DialogBase: typeof import('./src/components/base/DialogBase.vue')['default']
     DialogMaterial: typeof import('./src/components/business/DialogMaterial.vue')['default']
     EditorImage: typeof import('./src/components/Tinymce/components/EditorImage.vue')['default']

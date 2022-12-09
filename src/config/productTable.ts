@@ -21,7 +21,24 @@ export const ProductCategory = [
   { attrs: { prop: '', label: '分类名称' } },
   { attrs: { prop: '', label: '排序' } },
   { attrs: { prop: '', label: '创建时间' } },
-  { attrs: { prop: 'action', label: '操作' }, slot: 'action' },
+  action,
+]
+
+// 产品库存
+export const ProductStock = [
+  { attrs: { prop: '', label: '日期' } },
+  { attrs: { prop: '', label: '成人价' } },
+  { attrs: { prop: '', label: '儿童价' } },
+  { attrs: { prop: '', label: '单房差' } },
+  { attrs: { prop: '', label: '报名截止' } },
+  { attrs: { prop: '', label: '库存' } },
+  { attrs: { prop: '', label: '确认' } },
+  { attrs: { prop: '', label: '占位' } },
+  { attrs: { prop: '', label: '余位' } },
+  { attrs: { prop: '', label: '清位时间' } },
+  { attrs: { prop: '', label: '可超售' } },
+  { attrs: { prop: '', label: '状态' } },
+  action,
 ]
 
 // 产品标签
@@ -29,7 +46,7 @@ export const ProductTag = [
   { attrs: { prop: '', label: '标签名称' } },
   { attrs: { prop: '', label: '排序' } },
   { attrs: { prop: '', label: '创建时间' } },
-  { attrs: { prop: 'action', label: '操作' }, slot: 'action' },
+  action,
 ]
 
 // 产品图片
@@ -39,5 +56,5 @@ export const ProductImage = [
   { attrs: { prop: '', label: '图片大小' } },
   { attrs: { prop: '', label: '创建人' } },
   { attrs: { prop: '', label: '创建时间' } },
-  { attrs: { prop: 'action', label: '操作' }, slot: 'action' },
+  action,
 ]

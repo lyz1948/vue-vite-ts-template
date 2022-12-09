@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
-import { ProductList as columns } from '@/config/productTable'
+import { ProductStock as columns } from '@/config/productTable'
 import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { PageDefault } from '@/config'
-import { useRouter } from 'vue-router'
 
 const store = useStore()
-// const emit = defineEmits(['on:edit'])
-const router = useRouter()
+const emit = defineEmits(['on:edit'])
 
 const state = reactive({
-  tableData: [{}],
+  tableData: [],
   total: 0,
   pageNum: PageDefault.pageNum,
   pageSize: PageDefault.pageSize,
@@ -34,13 +32,12 @@ const handlePage = ({ pageNum, pageSize }) => {
   state.pageSize = pageSize
 }
 
-// const handleDelete = (row: any) => {
-//   store.dispatch(UserActionTypes.ACTION_USER_DELETE, row.id)
-// }
+const handleDelete = (row: any) => {
+  store.dispatch(UserActionTypes.ACTION_USER_DELETE, row.id)
+}
 
-const handleEdit = (row: any) => {
-
-  router.push({ path: '/product/stock', params: row })
+const handleUpdate = (row: any) => {
+  emit('on:edit', row)
 }
 
 onBeforeMount(() => {
@@ -74,21 +71,12 @@ watch(
       </el-tag>
     </template>
 
-    <template #action="{row}">
-      <BtnLinkPermission type="success" @click="handleEdit(row)">
+    <template #action="scope">
+      <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(scope.row)">
         编辑
       </BtnLinkPermission>
-      <BtnLinkPermission type="primary">
-        团期
-      </BtnLinkPermission>
-      <BtnLinkPermission type="success">
-        复制
-      </BtnLinkPermission>
-      <BtnLinkPermission type="warning">
+      <BtnLinkPermission type="danger" auth="delete" @click="handleDelete(scope.row)">
         删除
-      </BtnLinkPermission>
-      <BtnLinkPermission type="primary">
-        分享
       </BtnLinkPermission>
     </template>
   </TableBase>

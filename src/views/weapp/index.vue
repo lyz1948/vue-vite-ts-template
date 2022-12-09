@@ -1,10 +1,13 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onBeforeMount, reactive, ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 import Refund from './components/Refund.vue'
 import Active from './components/Active.vue'
 import Telephone from './components/Telephone.vue'
 import Message from './components/Message.vue'
+
+import { useStore } from '@/store'
+import { AppActionTypes } from '@/store/modules/app/action-types'
 
 const tabMenus = [
   { label: '退改签规则', name: 'Refund', component: Refund },
@@ -13,13 +16,26 @@ const tabMenus = [
   { label: '短信通知设置', name: 'Message', component: Message },
 ]
 
+const store = useStore()
 const activeName = ref('Refund')
 const activeIndex = ref(0)
+const state = reactive({
+  data: null,
+})
+
+const fetchData = () => {
+  return store.dispatch(AppActionTypes.ACTION_MALL_CONFIG)
+}
 
 const handleClick = (tab: TabsPaneContext) => {
   activeIndex.value = tab.index
 }
 
+onBeforeMount(() => {
+  state.data = fetchData()
+
+  console.log(state.data)
+})
 </script>
 
 <template>

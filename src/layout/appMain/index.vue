@@ -1,35 +1,36 @@
 <script setup lang="ts">
-import { useStore } from '@/store'
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+// import { useStore } from '@/store'
+// import { computed } from 'vue'
+// import { useRoute } from 'vue-router'
 
-const store = useStore()
-const route = useRoute()
+// const store = useStore()
+// const route = useRoute()
 
-const key = () => {
-  return route.path
-}
+// const key = () => {
+//   return route.path
+// }
 
-const visibleRoute = computed(() => {
-  return store.state.tagViews.routerView
-})
+// const visibleRoute = computed(() => {
+//   return store.state.tagViews.routerView
+// })
 </script>
 
 <template>
   <section class="app-main">
-    <router-view v-if="visibleRoute" v-slot="{ Component }">
+    <router-view />
+    <!-- <router-view v-if="visibleRoute" v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive :key="key">
           <component :is="Component" />
         </keep-alive>
       </transition>
-    </router-view>
+    </router-view> -->
   </section>
 </template>
 
 <style lang="scss" scoped>
 .app-main {
-  padding-bottom: 32px;
+  padding: 20px 20px 32px 20px;
   background-color: #fff;
 }
 </style>

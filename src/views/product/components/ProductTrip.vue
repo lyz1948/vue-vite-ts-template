@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
-import TripItem from './TripItem.vue'
+import ProductTripItem from './ProductTripItem.vue'
 import ModTitle from '@/components/Title/index.vue'
 
 const props = defineProps({
@@ -45,7 +45,7 @@ const myArray = ref([
     </ModTitle>
 
     <div class="container">
-      <TripItem />
+      <ProductTripItem />
     </div>
   </div>
 </template>

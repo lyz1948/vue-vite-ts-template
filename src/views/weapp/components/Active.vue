@@ -1,9 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { useStore } from '@/store'
+import { AppActionTypes } from '@/store/modules/app/action-types'
 
+const store = useStore()
 const haggle = ref(0)
 const merge = ref(0)
 
+const mallConfig = computed(() => {
+  return store.state.app.mallConfig
+})
+
+const handleSave = () => {
+  store.dispatch(AppActionTypes.ACTION_MALL_ACTIVE_SET, {
+    mallHaggleTime: haggle.value || 0,
+    mallInGroupTime: merge.value || 0,
+  })
+}
+
+watch(() => mallConfig.value, data => {
+  console.log('data:', data)
+  if (!data) return
+  haggle.value = data.mallHaggleTime
+  merge.value = data.mallInGroupTime
+})
 </script>
 
 <template>
@@ -27,6 +47,12 @@ const merge = ref(0)
           <InputNumBase v-model="haggle" /> 小时
         </div>
       </div>
+    </div>
+
+    <div class="mt20">
+      <BtnBase type="success" @click="handleSave">
+        确定
+      </BtnBase>
     </div>
   </div>
 </template>

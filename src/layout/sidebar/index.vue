@@ -40,28 +40,26 @@ const defaultActive = computed(() => {
   return fullPath || '/dashboard'
 })
 
-const activeMenu = computed(() => {
-  const { path, meta } = router
-  if (meta !== null || meta !== undefined) {
-    if (meta.activeMenu) {
-      return meta.activeMenu
-    }
-  }
-  return path
-})
+// const activeMenu = computed(() => {
+//   const { path, meta } = router
+//   if (meta !== null || meta !== undefined) {
+//     if (meta.activeMenu) {
+//       return meta.activeMenu
+//     }
+//   }
+//   return path
+// })
 </script>
 
 <template>
   <el-menu
     class="sidebar-menu"
     :mode="getMenuMode"
-    :active="activeMenu"
     :collapse="isCollapse"
     :default-active="defaultActive"
     :background-color="menuBgColor"
     :text-color="menuTextColor"
     :active-text-color="menuTextActiveColor"
-    :collapse-transition="true"
   >
     <template v-for="route in routes">
       <SidebarItem

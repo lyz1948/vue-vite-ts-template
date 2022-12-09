@@ -26,8 +26,6 @@ defineExpose({
   </el-form>
 </template>
 
-<style>
-.form-wrap {
-  padding: 20px 30px;
-}
+<style scope>
+
 </style>

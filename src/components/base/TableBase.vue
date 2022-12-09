@@ -129,7 +129,6 @@ const handleCurrentChange = (pageNum: number) => {
 
 <style lang="scss" scoped>
 .table-base {
-  // padding: 0 20px;
   &--header {
     display: flex;
     justify-content: space-between;

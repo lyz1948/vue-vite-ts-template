@@ -3,7 +3,7 @@ import { ref, reactive, toRefs } from 'vue'
 import { SalePrice as columns } from '@/config/saleTable'
 
 const title = '设置库存'
-const visibleDialog = ref(true)
+const visibleDialog = ref(false)
 
 const generateWeek = () => {
   return Array.from({ length: 7 })
@@ -65,8 +65,7 @@ defineExpose({
 <template>
   <DialogBase
     :title="title"
-    :visible="true"
-    class="dialog-stock"
+    :visible="visibleDialog"
     @on:visible="visibleDialog = $event"
     @update:confirm="handleConfirm"
   >
