@@ -7,9 +7,19 @@ export const configRequest = async () => {
   return await request.get(httpUrl.mallConfig)
 }
 
-// 商城客服电话
+// 商城客服电话 列表
 export const phoneListRequest = async () => {
   return await request.get(httpUrl.mallPhoneList)
+}
+
+// 商城客服电话 设置
+export const phoneSetRequest = async (data: PhoneItem[]) => {
+  return await request.post<PhoneItem[]>(httpUrl.mallPhoneSet, data)
+}
+
+// 商城客服电话 删除
+export const phoneDelRequest = async (id: number) => {
+  return await request.post<number>(httpUrl.mallPhoneDel, { id })
 }
 
 // 短信模板获取
@@ -30,9 +40,4 @@ export const refundProcessRequest = async (data: Refund[]) => {
 // 活动时效
 export const activeRequest = async (data: ActiveValid) => {
   return await request.post<ActiveValid>(httpUrl.mallActive, data)
-}
-
-// 电话号码
-export const phoneSetRequest = async (data: PhoneItem[]) => {
-  return await request.post<PhoneItem[]>(httpUrl.mallPhoneSet, data)
 }

@@ -12,6 +12,7 @@ import {
   activeRequest,
   phoneListRequest,
   phoneSetRequest,
+  phoneDelRequest,
   smsSetRequest,
   smsGetRequest,
 } from '@/api/mall'
@@ -31,11 +32,12 @@ export interface IActions {
 
   [AppActionTypes.ACTION_MALL_CONFIG]({ commit }: AugmentedActionContext): any
   [AppActionTypes.ACTION_MALL_PHONE_LIST]({ commit }: AugmentedActionContext): any
+  [AppActionTypes.ACTION_MALL_PHONE_SET]({ commit }: AugmentedActionContext, data: PhoneItem[]): void
+  [AppActionTypes.ACTION_MALL_PHONE_DEL]({ commit }: AugmentedActionContext, id: number): void
   [AppActionTypes.ACTION_MALL_SMS_GET]({ commit }: AugmentedActionContext): void
   [AppActionTypes.ACTION_MALL_SMS_SET]({ commit }: AugmentedActionContext, data: MessageTpl): void
   [AppActionTypes.ACTION_MALL_REFUND_SET]({ commit }: AugmentedActionContext, data: Refund[]): void
   [AppActionTypes.ACTION_MALL_ACTIVE_SET]({ commit }: AugmentedActionContext, data: ActiveValid): void
-  [AppActionTypes.ACTION_MALL_PHONE_SET]({ commit }: AugmentedActionContext, data: PhoneItem[]): void
 }
 
 export const actions: ActionTree<AppState, RootState> & IActions = {
@@ -58,11 +60,21 @@ export const actions: ActionTree<AppState, RootState> & IActions = {
       return data
     })
   },
-  // 获取商城客服电话
+  // 获取商城客服电话 列表
   [AppActionTypes.ACTION_MALL_PHONE_LIST]({ commit }) {
     return phoneListRequest().then(data => {
       commit(AppMutationTypes.MALL_PHONE_SET, (data as any))
     })
+  },
+  // 设置联系电话 设置
+  [AppActionTypes.ACTION_MALL_PHONE_SET]({ commit }, data: PhoneItem[]) {
+    return phoneSetRequest(data).then(() => {
+      commit(AppMutationTypes.MALL_PHONE_SET, data)
+    })
+  },
+  // 设置联系电话 删除
+  [AppActionTypes.ACTION_MALL_PHONE_DEL]({ }, id: number) {
+    return phoneDelRequest(id)
   },
   // 设置短信模板
   [AppActionTypes.ACTION_MALL_SMS_SET]({}, data: MessageTpl) {
@@ -82,12 +94,6 @@ export const actions: ActionTree<AppState, RootState> & IActions = {
   [AppActionTypes.ACTION_MALL_ACTIVE_SET]({ commit }, data: ActiveValid) {
     return activeRequest(data).then(() => {
       commit(AppMutationTypes.MALL_ACTIVE_SET, data)
-    })
-  },
-  // 设置联系电话
-  [AppActionTypes.ACTION_MALL_PHONE_SET]({ commit }, data: PhoneItem[]) {
-    return phoneSetRequest(data).then(() => {
-      commit(AppMutationTypes.MALL_PHONE_SET, data)
     })
   },
 }

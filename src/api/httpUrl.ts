@@ -26,6 +26,7 @@ const httpApi = {
   mallConfig: '/system/mall/config',
   mallPhoneList: '/system/mall/contact-phone-list',
   mallPhoneSet: '/system/mall/set-contact-phone',
+  mallPhoneDel: '/system/mall/del-contact-phone',
   mallActive: '/system/mall/set-activity-time',
   mallWeappIdSet: '/system/mall/set-miniApps-pra',
   mallRefundSet: '/system/mall/set-refund-pro',

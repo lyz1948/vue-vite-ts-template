@@ -27,8 +27,11 @@ const add = () => {
   state.list.push({ name: '2', val: '' })
 }
 
-const minus = (index: number) => {
+const minus = (id: number, index: number) => {
   state.list.splice(index, 1)
+  store.dispatch(AppActionTypes.ACTION_MALL_PHONE_DEL, id).then(() => {
+    showToast({ message: '删除成功', type: 'success' })
+  })
 }
 
 const handleSave = () => {
@@ -88,7 +91,7 @@ watch(() => getData.value, data => {
         <div class="inner">
           <InputBase v-model="item.val" />
 
-          <el-button v-if="index > 0" plain @click="minus(index)">
+          <el-button v-if="index > 0" plain @click="minus(item.id, index)">
             <icon-minus title="minus" fill="#999" size="16" />
           </el-button>
           <el-button plain @click="add">
