@@ -10,15 +10,6 @@ import DialogTag from './components/DialogTag.vue'
 const store = useStore()
 const dialogRef = ref(null)
 
-const state = reactive({
-  tableData: [],
-  total: 0,
-})
-
-const tableData = computed(() => {
-  return store.state.product.productTagList
-})
-
 const fetchData = (params = {}) => {
   return store.dispatch(ProductActionTypes.ACTION_PRODUCT_TAG_LIST, params)
 }
@@ -35,19 +26,14 @@ onBeforeMount(() => {
   fetchData()
 })
 
-watch(() => tableData.value, (data) => {
-  if (!data || !data.length) return
-  state.tableData = data
-  state.total = data.length
-})
 </script>
 
 <template>
   <div>
     <DialogTag ref="dialogRef" />
     <SearchTag @on:search="fetchData" @on:create="showDialog" />
-    <TableTag @on:edit="editItem" />
+    <TableTag @on:edit="editItem" @on:reload="fetchData" />
   </div>
 </template>
 
-<style scoped></style>
+<style scope></style>

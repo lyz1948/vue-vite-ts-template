@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, toRefs } from 'vue'
 
-import { searchState } from '../params'
+import { searchState } from '../../params'
 
 const emit = defineEmits(['on:search', 'on:create'])
 

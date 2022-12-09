@@ -43,9 +43,9 @@ export const ProductStock = [
 
 // 产品标签
 export const ProductTag = [
-  { attrs: { prop: '', label: '标签名称' } },
-  { attrs: { prop: '', label: '排序' } },
-  { attrs: { prop: '', label: '创建时间' } },
+  { attrs: { prop: 'name', label: '标签名称' }, slot: 'name' },
+  { attrs: { prop: 'orderNumber', label: '排序' } },
+  { attrs: { prop: 'createTime', label: '创建时间' } },
   action,
 ]
 

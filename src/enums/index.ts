@@ -14,3 +14,8 @@ export enum SMSType {
   TOB = 'TOB',
   TOC = 'TOC'
 }
+
+export enum TagOrType {
+  TAG = 'TAG',
+  TYPE = 'TYPE', // 产品类别
+}

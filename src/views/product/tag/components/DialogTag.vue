@@ -4,16 +4,14 @@ import type { MyFormExpose } from '@/components/base/FormBase.vue'
 import FormBase from '@/components/base/FormBase.vue'
 import useElement from '@/hooks/useElement'
 import Color from '@/components/Color/index.vue'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
+import { useStore } from '@/store'
+import { formState } from '../params'
 
+const store = useStore()
 const visibleDialog = ref(false)
 const { error, success } = useElement()
 const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
-
-const formState = () => ({
-  name: '',
-  number: '',
-  color: ''
-})
 
 const rules = {
   name: [{ required: true, message: '标签名称不能为空', trigger: 'blur' }],
@@ -21,9 +19,7 @@ const rules = {
 
 const state = reactive({
   form: formState(),
-  loading: false,
   isUpdate: false,
-  colorIndex: 0,
 })
 
 const getTitle = computed(() => {
@@ -45,14 +41,22 @@ const edit = (row: any) => {
   state.form = { ...row }
 }
 
+const changeColor = (val: string) => {
+  state.form.color = val
+}
+
 const handleConfirm = () => {
-  formRef.value?.validate().then(() => {
-    success()
-    hide()
-  }).catch((err) => {
-    console.log('err:', err)
-    error()
-  })
+  formRef.value
+    ?.validate()
+    .then(() => {
+      store.dispatch(ProductActionTypes.ACTION_PRODUCT_TAG_SET, state.form).then(() => {
+        success()
+        hide()
+      })
+    })
+    .catch(err => {
+      error(err)
+    })
 }
 
 const { form } = toRefs(state)
@@ -73,7 +77,7 @@ defineExpose({
   >
     <FormBase
       ref="formRef"
-      :form="form"
+      :model="form"
       :rules="rules"
       label-width="100px"
     >
@@ -81,17 +85,19 @@ defineExpose({
         <InputBase v-model="form.name" />
       </FormItemBase>
 
-      <FormItemBase prop="name" label="标签颜色">
-        <Color />
+      <FormItemBase prop="color" label="标签颜色">
+        <Color :value="form.color" @on:click="changeColor" />
       </FormItemBase>
 
-      <FormItemBase prop="number" label="序号">
-        <InputNumBase v-model="form.number" />
+      <FormItemBase prop="orderNumber" label="序号">
+        <InputNumBase v-model="form.orderNumber" />
+      </FormItemBase>
+
+      <FormItemBase prop="remarks" label="备注">
+        <InputBase v-model="form.remarks" type="textarea" />
       </FormItemBase>
     </FormBase>
   </DialogBase>
 </template>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

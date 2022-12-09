@@ -19,7 +19,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Line',
         component: () =>
           import(
-            /* webpackChunkName: "Line" */ '@/views/product/index.vue'
+            /* webpackChunkName: "Line" */ '@/views/product/line/index.vue'
           ),
         meta: {
           title: '线路管理',
@@ -31,7 +31,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Stock',
         component: () =>
           import(
-            /* webpackChunkName: "Stock" */ '@/views/product/stock.vue'
+            /* webpackChunkName: "Stock" */ '@/views/product/stock/index.vue'
           ),
         meta: {
           title: '产品库存',
@@ -43,7 +43,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'LineAdd',
         component: () =>
           import(
-            /* webpackChunkName: "lineAdd" */ '@/views/product/create.vue'
+            /* webpackChunkName: "lineAdd" */ '@/views/product/create/index.vue'
           ),
         meta: {
           title: '新增线路',
@@ -56,7 +56,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Cate',
         component: () =>
           import(
-            /* webpackChunkName: "Cate" */ '@/views/product/category.vue'
+            /* webpackChunkName: "Cate" */ '@/views/product/cate/index.vue'
           ),
         meta: {
           title: '产品类目',
@@ -68,7 +68,7 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Tag',
         component: () =>
           import(
-            /* webpackChunkName: "Tag" */ '@/views/product/tag.vue'
+            /* webpackChunkName: "Tag" */ '@/views/product/tag/index.vue'
           ),
         meta: {
           title: '产品标签',

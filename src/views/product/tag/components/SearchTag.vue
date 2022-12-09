@@ -20,11 +20,6 @@ const handleAdd = () => {
   emit('on:create')
 }
 
-const handleReset = () => {
-  state.params = searchState()
-  handleSearch()
-}
-
 </script>
 
 <template>
@@ -42,9 +37,6 @@ const handleReset = () => {
         </BtnBase>
         <BtnBase type="primary" @click="handleAdd">
           新增
-        </BtnBase>
-        <BtnBase type="danger" @click="handleReset">
-          重置
         </BtnBase>
       </FormItemBase>
     </FormBase>
