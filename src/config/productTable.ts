@@ -18,9 +18,9 @@ export const ProductList = [
 
 // 产品分类
 export const ProductCategory = [
-  { attrs: { prop: '', label: '分类名称' } },
-  { attrs: { prop: '', label: '排序' } },
-  { attrs: { prop: '', label: '创建时间' } },
+  { attrs: { prop: 'name', label: '分类名称' } },
+  { attrs: { prop: 'orderNumber', label: '排序' } },
+  { attrs: { prop: 'createTime', label: '创建时间' } },
   action,
 ]
 

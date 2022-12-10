@@ -3,19 +3,15 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import type { MyFormExpose } from '@/components/base/FormBase.vue'
 import FormBase from '@/components/base/FormBase.vue'
 import useElement from '@/hooks/useElement'
+import { formState, rules } from '../params'
+import { useStore } from '@/store'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
 
+const emit = defineEmits(['on:reload'])
+const store = useStore()
 const visibleDialog = ref(false)
 const { error, success } = useElement()
 const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
-
-const formState = () => ({
-  name: '',
-  number: '',
-})
-
-const rules = {
-  name: [{ required: true, message: '分类名称不能为空', trigger: 'blur' }],
-}
 
 const state = reactive({
   form: formState(),
@@ -43,13 +39,18 @@ const edit = (row: any) => {
 }
 
 const handleConfirm = () => {
-  formRef.value?.validate().then(() => {
-    success()
-    hide()
-  }).catch((err) => {
-    console.log('err:', err)
-    error()
-  })
+  formRef.value
+    ?.validate()
+    .then(() => {
+      store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, state.form).then(() => {
+        success()
+        hide()
+        emit('on:reload')
+      })
+    })
+    .catch(() => {
+      error()
+    })
 }
 
 const { form } = toRefs(state)
@@ -70,7 +71,7 @@ defineExpose({
   >
     <FormBase
       ref="formRef"
-      :form="form"
+      :model="form"
       :rules="rules"
       label-width="100px"
     >
@@ -79,7 +80,11 @@ defineExpose({
       </FormItemBase>
 
       <FormItemBase prop="number" label="序号">
-        <InputNumBase v-model="form.number" />
+        <InputNumBase v-model="form.orderNumber" />
+      </FormItemBase>
+
+      <FormItemBase prop="remarks" label="备注">
+        <InputBase v-model="form.remarks" type="textarea" />
       </FormItemBase>
     </FormBase>
   </DialogBase>

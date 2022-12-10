@@ -96,7 +96,12 @@ const handleCurrentChange = (pageNum: number) => {
         <slot name="headerHandler" />
       </div>
     </div>
-    <el-table :highlight-current-row="highlight" :data="data" v-bind="$attrs">
+    <el-table
+      :highlight-current-row="highlight"
+      header-row-class-name="table-customer-header"
+      :data="data"
+      v-bind="$attrs"
+    >
       <el-table-column v-if="showSelection" type="selection" width="55" />
       <template v-for="(item, index) in columns" :key="index">
         <el-table-column v-bind="item.attrs">
@@ -127,14 +132,14 @@ const handleCurrentChange = (pageNum: number) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .table-base {
   &--header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 1px solid $base-border-color;
+    border-bottom: 1px solid $base-color-border;
   }
   &--title {
     font-size: 14px;
@@ -149,5 +154,9 @@ const handleCurrentChange = (pageNum: number) => {
     justify-content: flex-end;
     margin-top: 20px;
   }
+}
+.table-customer-header > th {
+  background: $base-color-table-head !important;
+  color: $base-font-color !important;
 }
 </style>

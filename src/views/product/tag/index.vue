@@ -30,9 +30,9 @@ onBeforeMount(() => {
 
 <template>
   <div>
-    <DialogTag ref="dialogRef" />
     <SearchTag @on:search="fetchData" @on:create="showDialog" />
     <TableTag @on:edit="editItem" @on:reload="fetchData" />
+    <DialogTag ref="dialogRef" @on:reload="fetchData" />
   </div>
 </template>
 

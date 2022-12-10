@@ -9,6 +9,7 @@ const changeInput = $event => {
 <template>
   <div class="input-base">
     <el-input
+      clearable
       v-bind="$attrs"
       @input="changeInput"
     />

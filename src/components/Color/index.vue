@@ -53,7 +53,7 @@ const customColor = (val) => {
     box-sizing: border-box;
     cursor: pointer;
     &.is-active {
-      border: 1px solid $base-border-color;
+      border: 1px solid $base-color-border;
       padding: 2px;
     }
   }

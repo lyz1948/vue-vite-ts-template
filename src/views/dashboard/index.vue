@@ -97,7 +97,7 @@ const orderList2 = [
         flex: 1;
         flex-direction: column;
         background: #fff;
-        border: 1px solid $base-border-color;
+        border: 1px solid $base-color-border;
         &:not(:last-child) {
           margin-right: 10px;
         }
@@ -105,7 +105,7 @@ const orderList2 = [
       &--title {
         padding: 12px 20px;
         font-size: 18px;
-        border-bottom: 1px solid $base-border-color;
+        border-bottom: 1px solid $base-color-border;
       }
       &--content {
         padding: 20px;

@@ -1,52 +1,38 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watch } from 'vue';
+import { onBeforeMount, ref } from 'vue'
 import { useStore } from '@/store'
-import { UserActionTypes } from '@/store/modules/user/action-types'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
 
 import SearchCate from './components/SearchCate.vue'
 import TableCate from './components/TableCate.vue'
 import DialogCate from './components/DialogCate.vue'
+import { TagOrType } from '@/enums'
 
 const store = useStore()
 const dialogRef = ref(null)
 
-const state = reactive({
-  tableData: [],
-  total: 0,
-})
-
-const tableData = computed(() => {
-  return store.state.user.userList
-})
-
-const fetchData = (params) => {
-  store.dispatch(UserActionTypes.ACTION_USER_LIST, params)
+const fetchData = params => {
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_LIST, { ...params, type: TagOrType.TYPE })
 }
 
-const editItem = (item) => {
+const editItem = item => {
   dialogRef.value?.edit(item)
 }
 
-const showDialog = (item) => {
+const showDialog = item => {
   dialogRef.value?.show(item)
 }
 
 onBeforeMount(() => {
   fetchData()
 })
-
-watch(() => tableData.value, (data) => {
-  if (!data || !data.length) return
-  state.tableData = data
-  state.total = data.length
-})
 </script>
 
 <template>
   <div>
-    <DialogCate ref="dialogRef" />
     <SearchCate @on:search="fetchData" @on:create="showDialog" />
-    <TableCate @on:edit="editItem" />
+    <TableCate @on:edit="editItem" @on:reload="fetchData" />
+    <DialogCate ref="dialogRef" @on:reload="fetchData" />
   </div>
 </template>
 

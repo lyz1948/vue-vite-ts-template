@@ -37,11 +37,11 @@ const handleReset = () => {
       </FormItemBase>
 
       <FormItemBase>
-        <BtnBase type="primary" @click="handleAdd">
-          新增
-        </BtnBase>
         <BtnBase type="success" @click="handleSearch">
           搜索
+        </BtnBase>
+        <BtnBase type="primary" @click="handleAdd">
+          新增
         </BtnBase>
         <BtnBase type="danger" @click="handleReset">
           重置

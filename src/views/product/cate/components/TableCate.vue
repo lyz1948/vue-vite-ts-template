@@ -1,31 +1,28 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
+import { computed, reactive } from 'vue'
 import { ProductCategory as columns } from '@/config/productTable'
 import { useStore } from '@/store'
-import { UserActionTypes } from '@/store/modules/user/action-types'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
 import { PageDefault } from '@/config'
+import useElement from '@/hooks/useElement'
 
 const store = useStore()
-const emit = defineEmits(['on:edit'])
+const emit = defineEmits(['on:edit', 'on:reload'])
+const { confirm, success }  = useElement()
 
 const state = reactive({
-  tableData: [],
   total: 0,
   pageNum: PageDefault.pageNum,
   pageSize: PageDefault.pageSize,
 })
 
 const tableData = computed(() => {
-  return store.state.user.userList
+  let list = store.state.product.productCateList || []
+  if (list && list.length) {
+    list = list.sort((a, b) => a.orderNumber - b.orderNumber)
+  }
+  return list
 })
-
-const getPageList = computed(() => {
-  return state.tableData.slice((state.pageNum - 1) * state.pageSize, state.pageNum * state.pageSize)
-})
-
-const fetchData = params => {
-  store.dispatch(UserActionTypes.ACTION_USER_LIST, params)
-}
 
 const handlePage = ({ pageNum, pageSize }) => {
   state.pageNum = pageNum
@@ -33,30 +30,24 @@ const handlePage = ({ pageNum, pageSize }) => {
 }
 
 const handleDelete = (row: any) => {
-  store.dispatch(UserActionTypes.ACTION_USER_DELETE, row.id)
+  confirm().then(() => {
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_DEL, row.id)
+    .then(() => {
+      success()
+      emit('on:reload')
+    })
+  })
 }
 
 const handleUpdate = (row: any) => {
   emit('on:edit', row)
 }
 
-onBeforeMount(() => {
-  fetchData()
-})
-
-watch(
-  () => tableData.value,
-  data => {
-    if (!data || !data.length) return
-    state.tableData = data
-    state.total = data.length
-  }
-)
 </script>
 
 <template>
   <TableBase
-    :data="getPageList"
+    :data="tableData"
     :columns="columns"
     :total-count="state.total"
     @update:page="handlePage"

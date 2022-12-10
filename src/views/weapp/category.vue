@@ -143,7 +143,7 @@ const showDialog = () => {
 
   .list-group-item {
     padding: 10px 12px;
-    border: 1px solid $base-border-color;
+    border: 1px solid $base-color-border;
     margin-bottom: 10px;
     background: #fff;
     cursor: pointer;

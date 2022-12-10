@@ -5,6 +5,7 @@ import { ProductMutationTypes } from './mutation-types'
 export type Mutations<S = ProductState> = {
   [ProductMutationTypes.PRODUCT_LIST](state: S, data: any): void
   [ProductMutationTypes.PRODUCT_TAG_LIST](state: S, data: any): void
+  [ProductMutationTypes.PRODUCT_CATE_LIST](state: S, data: any): void
 }
 
 export const mutations: MutationTree<ProductState> & Mutations = {
@@ -13,5 +14,8 @@ export const mutations: MutationTree<ProductState> & Mutations = {
   },
   [ProductMutationTypes.PRODUCT_TAG_LIST](state: ProductState, data: any) {
     state.productTagList = data
+  },
+  [ProductMutationTypes.PRODUCT_CATE_LIST](state: ProductState, data: any) {
+    state.productCateList = data
   },
 }

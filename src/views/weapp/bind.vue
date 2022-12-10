@@ -78,7 +78,7 @@ export default {
       flex-direction: column;
       width: 400px;
       height: 400px;
-      border: 1px solid $base-border-color;
+      border: 1px solid $base-color-border;
       padding: 20px;
       margin-right: 20px;
 

@@ -63,7 +63,7 @@ onBeforeMount(() => {
 
 .mod-title {
   padding: 16px 0;
-  border-bottom: 1px solid $base-border-color;
+  border-bottom: 1px solid $base-color-border;
 }
 
 .mod-foot {

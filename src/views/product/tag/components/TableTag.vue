@@ -17,7 +17,11 @@ const state = reactive({
 })
 
 const tableData = computed(() => {
-  return store.state.product.productTagList
+  let list = store.state.product.productTagList
+  if (list && list.length) {
+    list = list.sort((a, b) => a.orderNumber - b.orderNumber)
+  }
+  return list
 })
 
 const handlePage = ({ pageNum, pageSize }) => {
@@ -76,7 +80,7 @@ const handleUpdate = (row: any) => {
   display: inline-block;
   color: #fff;
   padding: 2px 10px;
-  border-radius: 6px;
+  border-radius: 3px;
   font-size: 12px;
 }
 </style>

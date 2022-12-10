@@ -8,6 +8,7 @@ import { ProductActionTypes } from '@/store/modules/product/action-types'
 import { useStore } from '@/store'
 import { formState } from '../params'
 
+const emit = defineEmits(['on:reload'])
 const store = useStore()
 const visibleDialog = ref(false)
 const { error, success } = useElement()
@@ -52,6 +53,7 @@ const handleConfirm = () => {
       store.dispatch(ProductActionTypes.ACTION_PRODUCT_TAG_SET, state.form).then(() => {
         success()
         hide()
+        emit('on:reload')
       })
     })
     .catch(err => {

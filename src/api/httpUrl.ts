@@ -49,6 +49,10 @@ const httpApi = {
   tagSet: '/mall/tag-type/add-update',
   tagDel: '/mall/tag-type/del',
 
+  cateList: '/mall/tag-type/list',
+  cateSet: '/mall/tag-type/add-update',
+  cateDel: '/mall/tag-type/del',
+
   productList: '/mall/tag-type/list',
   productSet: '/mall/tag-type/add-update',
   productDel: '/mall/tag-type/del',

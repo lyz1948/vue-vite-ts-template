@@ -9,8 +9,10 @@ import { ProductMutationTypes } from './mutation-types'
 
 import { productListRequest, productSetRequest, productDelRequest } from '@/api/product'
 import { tagListRequest, tagSetRequest, tagDelRequest } from '@/api/tag'
+import { cateListRequest, cateSetRequest, cateDelRequest } from '@/api/cate'
 import { Product, ProductSearch } from '@/types/product'
 import { Tag, TagSearch } from '@/types/tag'
+import { Cate, CateSearch } from '@/types/cate'
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
@@ -28,6 +30,10 @@ export interface IUserActions {
   [ProductActionTypes.ACTION_PRODUCT_TAG_LIST]({ commit }: AugmentedActionContext, params: TagSearch): void
   [ProductActionTypes.ACTION_PRODUCT_TAG_SET]({ commit }: AugmentedActionContext, item: Tag): void
   [ProductActionTypes.ACTION_PRODUCT_TAG_DEL]({ commit }: AugmentedActionContext, id: number): void
+
+  [ProductActionTypes.ACTION_PRODUCT_CATE_LIST]({ commit }: AugmentedActionContext, params: CateSearch): void
+  [ProductActionTypes.ACTION_PRODUCT_CATE_SET]({ commit }: AugmentedActionContext, item: Cate): void
+  [ProductActionTypes.ACTION_PRODUCT_CATE_DEL]({ commit }: AugmentedActionContext, id: number): void
 }
 
 export const actions: ActionTree<ProductState, RootState> & IUserActions = {
@@ -54,5 +60,17 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
   },
   async [ProductActionTypes.ACTION_PRODUCT_TAG_DEL]({ commit }, id: number) {
     return tagDelRequest(id)
+  },
+
+  async [ProductActionTypes.ACTION_PRODUCT_CATE_LIST]({ commit }, params: CateSearch) {
+    return cateListRequest(params).then(data => {
+      commit(ProductMutationTypes.PRODUCT_CATE_LIST, data)
+    })
+  },
+  async [ProductActionTypes.ACTION_PRODUCT_CATE_SET]({ commit }, item: Cate) {
+    return cateSetRequest(item)
+  },
+  async [ProductActionTypes.ACTION_PRODUCT_CATE_DEL]({ commit }, id: number) {
+    return cateDelRequest(id)
   },
 }

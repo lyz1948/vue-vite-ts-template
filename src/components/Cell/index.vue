@@ -56,7 +56,7 @@ defineProps({
     align-items: center;
     padding: 8px 0;
     &:not(:last-child) {
-      border-bottom: 1px solid $base-border-color;
+      border-bottom: 1px solid $base-color-border;
     }
     &-meta {
       display: flex;

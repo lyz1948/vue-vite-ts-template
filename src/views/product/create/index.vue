@@ -72,14 +72,14 @@ const compList = [
       text-decoration: none;
       text-align: center;
       &:not(:last-child) {
-        border-bottom: 1px solid $base-border-color;
+        border-bottom: 1px solid $base-color-border;
       }
     }
   }
 
   &--foot {
     padding-top: 20px;
-    border-top: 1px solid $base-border-color;
+    border-top: 1px solid $base-color-border;
     text-align: center;
   }
 }

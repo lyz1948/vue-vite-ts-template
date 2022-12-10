@@ -122,7 +122,7 @@ watch(
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      border-right: 1px solid $base-border-color;
+      border-right: 1px solid $base-color-border;
 
       .el-button {
         margin-left: 0 !important;
@@ -133,7 +133,7 @@ watch(
       margin-top: 12px;
       padding: 12px 0;
       text-align: center;
-      // border-bottom: 1px solid $base-border-color;
+      // border-bottom: 1px solid $base-color-border;
     }
 
     .dictionary-body {

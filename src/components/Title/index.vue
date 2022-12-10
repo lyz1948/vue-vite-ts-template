@@ -27,10 +27,10 @@ const props = defineProps({
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
-    border-bottom: 1px solid $base-border-color;
+    border-bottom: 1px solid $base-color-border;
   }
   .title {
-    color: $title-color;
+    color: $$base-color-title;
     font-size: 18px;
     font-weight: 700;
   }
