@@ -1,9 +1,13 @@
-import { Pic } from '@/types/source'
+import { Pic, PicType } from '@/types/source'
 
 export interface SourceState {
+  picTypeList: PicType[] | null
   picList: Pic[] | null
+  picByTypeList: object
 }
 
 export const state: SourceState = {
-  picList: [],
+  picTypeList: null,
+  picList: null,
+  picByTypeList: {},
 }

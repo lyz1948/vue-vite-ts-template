@@ -6,6 +6,8 @@ import { SourceActionTypes } from '@/store/modules/system/source/action-types'
 import { PageDefault } from '@/config'
 import { useRouter } from 'vue-router'
 import useElement from '@/hooks/useElement'
+import Upload from '@/components/Uploader/index.vue'
+import { getUploadFileName } from '@/config/upload'
 
 const store = useStore()
 const router = useRouter()
@@ -20,7 +22,7 @@ const state = reactive({
 })
 
 const tableData = computed(() => {
-  return store.state.source.picList
+  return store.state.source.picTypeList
 })
 
 const handlePage = ({ pageNum, pageSize }) => {
@@ -30,14 +32,22 @@ const handlePage = ({ pageNum, pageSize }) => {
 
 const handleDelete = (row: any) => {
   confirm().then(() => {
-    store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_DEL, row.id).then(() => {
+    store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_DEL, row.id).then(() => {
       emit('on:reload')
     })
   })
 }
 
-const handleUpload = (row: any) => {
-  console.log(row)
+const handleUpload = (id, data: any) => {
+  const { url } = data
+  if (url !== '') {
+    store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
+      path: getUploadFileName(url),
+      picTypeId: id,
+    }).then(() => {
+      emit('on:reload')
+    })
+  } 
 }
 
 const handleDetail = (row: any) => {
@@ -60,25 +70,23 @@ const handleUpdate = (row: any) => {
       <TagBase :name="row.isEnable" />
     </template>
 
-    <template #role="{ row }">
-      <el-tag type="info">
-        {{ row.role === 'admin' ? '管理员' : '游客' }}
-      </el-tag>
-    </template>
-
     <template #action="{ row }">
-      <BtnLinkPermission type="success" @click="handleUpdate(row)">
-        编辑
-      </BtnLinkPermission>
-      <BtnLinkPermission type="primary" @click="handleUpload(row)">
-        上传
-      </BtnLinkPermission>
-      <BtnLinkPermission type="info" @click="handleDetail(row)">
-        查看
-      </BtnLinkPermission>
-      <BtnLinkPermission type="danger" @click="handleDelete(row)">
-        删除
-      </BtnLinkPermission>
+      <div class="flex">
+        <BtnLinkPermission type="success" @click="handleUpdate(row)">
+          编辑
+        </BtnLinkPermission>
+        <Upload @on:success="handleUpload(row.id, $event)">
+          <BtnLinkPermission type="primary">
+            上传
+          </BtnLinkPermission>
+        </Upload>
+        <BtnLinkPermission type="info" @click="handleDetail(row)">
+          查看
+        </BtnLinkPermission>
+        <BtnLinkPermission type="danger" @click="handleDelete(row)">
+          删除
+        </BtnLinkPermission>
+      </div>
     </template>
   </TableBase>
 </template>

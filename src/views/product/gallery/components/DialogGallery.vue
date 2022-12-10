@@ -51,7 +51,7 @@ const handleConfirm = () => {
   formRef.value?.validate().then(() => {
     let { code } = state.form
     code = code.toUpperCase()
-    store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_SET, { ...state.form, code }).then(() => {
+    store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_SET, { ...state.form, code }).then(() => {
       success({ message: '保存成功' })
       hide()
       emit('on:reload')

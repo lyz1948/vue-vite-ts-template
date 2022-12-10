@@ -6,7 +6,7 @@ interface Props {
   isOperate?: boolean
   isBatch?: boolean
   list: array<any>
-  size: number
+  size?: number
 }
 
 const props = defineProps<Props>()
@@ -52,7 +52,7 @@ onMounted(() => {
             <el-checkbox v-model="item.check" size="large" type="success" />
           </div>
           <div class="img-box">
-            <img :src="item.src" :alt="item.name">
+            <img :src="item.src" alt="">
           </div>
 
           <template v-if="!props.isBatch">
@@ -66,7 +66,7 @@ onMounted(() => {
           </template>
 
           <div class="name omit">
-            {{ item.name }}
+            {{ item.name || '' }}
           </div>
         </div>
       </div>

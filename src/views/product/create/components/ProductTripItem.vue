@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { formTripState } from '../params'
-import Uploader from '@/components/Uploader/index.vue'
+import Uploader from '@/components/Uploader/UploadList.vue'
 
 const form = ref(formTripState())
 </script>

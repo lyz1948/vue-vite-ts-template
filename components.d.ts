@@ -33,6 +33,7 @@ declare module 'vue' {
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
@@ -62,6 +63,7 @@ declare module 'vue' {
     FormItem: typeof import('./src/components/base/FormItem.vue')['default']
     Icon: typeof import('./src/components/Icon/index.vue')['default']
     ImageList: typeof import('./src/components/business/ImageList.vue')['default']
+    'Index copy': typeof import('./src/components/Uploader/index copy.vue')['default']
     InputBase: typeof import('./src/components/base/InputBase.vue')['default']
     InputNumBase: typeof import('./src/components/base/InputNumBase.vue')['default']
     ScreenFull: typeof import('./src/components/ScreenFull/index.vue')['default']
@@ -80,6 +82,7 @@ declare module 'vue' {
     TitleLabel: typeof import('./src/components/TitleLabel/index.vue')['default']
     UploadAvatar: typeof import('./src/components/Uploader/UploadAvatar.vue')['default']
     Uploader: typeof import('./src/components/Uploader/index.vue')['default']
+    UploadList: typeof import('./src/components/Uploader/UploadList.vue')['default']
   }
 }
 

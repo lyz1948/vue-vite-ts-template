@@ -19,7 +19,7 @@ const tableData = computed(() => {
 })
 
 const fetchData = (params) => {
-  store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_LIST, params)
+  store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST, params)
 }
 
 const editItem = (item) => {

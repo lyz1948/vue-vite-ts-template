@@ -19,11 +19,24 @@ const productRouter: RouteRecordRaw[] = [
         name: 'Line',
         component: () =>
           import(
-            /* webpackChunkName: "Line" */ '@/views/product/line/index.vue'
+            /* webpackChunkName: "line" */ '@/views/product/line/index.vue'
           ),
         meta: {
           title: '线路管理',
           icon: 'icon-table',
+        },
+      },
+      {
+        path: 'create',
+        name: 'CreateLine',
+        component: () =>
+          import(
+            /* webpackChunkName: "createLine" */ '@/views/product/create/index.vue'
+          ),
+        meta: {
+          title: '新增线路',
+          icon: 'icon-table',
+          hidden: true,
         },
       },
       {
@@ -36,19 +49,6 @@ const productRouter: RouteRecordRaw[] = [
         meta: {
           title: '产品库存',
           icon: 'icon-table',
-        },
-      },
-      {
-        path: 'line-add',
-        name: 'LineAdd',
-        component: () =>
-          import(
-            /* webpackChunkName: "lineAdd" */ '@/views/product/create/index.vue'
-          ),
-        meta: {
-          title: '新增线路',
-          icon: 'icon-table',
-          hidden: true,
         },
       },
       {

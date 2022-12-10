@@ -8,6 +8,9 @@ const httpApi = {
   // 测试接口
   userList: '/api/user/list', // 角色列表
 
+  ossPicUrl: '/upload/url', // 获取图片地址从Oss
+  ossPicDel: '/upload/del', // 删除Oss图片
+
   // 权限
   permissionList: '/system/role/listPermission',
   permissionOnlyHave: '/system/role/listRolePermissionOnlyHave',
@@ -40,6 +43,11 @@ const httpApi = {
   mallRefundSet: '/system/mall/set-refund-pro',
   mallSMSSet: '/system/mall/set-sms',
   mallSMSGet: '/system/mall/sms-config',
+
+  picListAll: '/mall/pic/pics',
+  picList: '/mall/pic/page-pics',
+  picSet: '/mall/pic/add-update-pic',
+  picDel: '/mall/pic/del-pic',
 
   picTypeList: '/mall/pic/types',
   picTypeSet: '/mall/pic/add-update-type',

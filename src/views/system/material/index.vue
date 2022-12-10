@@ -1,40 +1,116 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
 import ModTitle from '@/components/Title/index.vue'
 import ImageList from '@/components/business/ImageList.vue'
-import DialogMaterial from '@/components/business/DialogMaterial.vue'
+import Upload from '@/components/Uploader/index.vue'
+import { SourceActionTypes } from '@/store/modules/system/source/action-types'
+import { useStore } from '@/store'
+import { getUploadFileName } from '@/config/upload'
 
-const menuList = [
-  { name: '全部', value: 'all' },
-  { name: '产品素材', value: 'product' },
-  { name: '轮播素材', value: 'swiper' },
-]
+const store = useStore()
 
-const imageList = ref([
-  { src: '/src/assets/cover.jpeg', name: 'abc.jpeg', check: false },
-  { src: '/src/assets/cover.jpeg', name: '123.jpeg', check: false },
-])
+const state = reactive({
+  curIndex: 0,
+  curTypeId: '',
+  curTabPic: [],
+})
 
-const dialogRef = ref(null)
 const isBatch = ref(false)
 const hasBatch = computed(() => isBatch.value)
 
-const getBatchType = computed(() => hasBatch.value ? 'success' : 'danger')
-const getBatchText = computed(() => hasBatch.value ? '取消操作' : '批量操作')
+const getBatchType = computed(() => (hasBatch.value ? 'success' : 'danger'))
+const getBatchText = computed(() => (hasBatch.value ? '取消操作' : '批量操作'))
 
-const handleUpload = () => {
-  dialogRef.value.show()
+// 图片分类
+const picTypeList = computed(() => {
+  return store.state.source.picTypeList
+})
+
+// 图片分类下的图片
+const picTypeImagesData = computed(() => {
+  return store.state.source.picByTypeList
+})
+
+const getCurTypeIdData = computed(() => {
+  return picTypeImagesData.value[state.curTypeId]
+})
+
+const getCurTabPics = (id) => {
+  const list = picTypeImagesData.value[id] || []
+
+  return list.map(it => {
+    return { check: false, src: it }
+  })
 }
+
+const getCurPic = computed(() => {
+  return state.curTabPic
+})
+
+const fetchPicTypeList = () => {
+  store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST)
+}
+
+const fetchPic = typeId => {
+  return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId)
+}
+
+const changeTag = tabIndex => {
+  state.curTypeId = picTypeList.value[tabIndex].id
+}
+
+const handleUpload = (data) => {
+  const { url } = data
+  console.log('url:', url)
+  // if (url !== '') {
+  //   store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
+  //     path: getUploadFileName(url),
+  //     picTypeId: state.curTypeId,
+  //   }).then(() => {
+  //     fetchPicTypeList()
+  //   })
+  // } 
+}
+
+onBeforeMount(() => {
+  if (!picTypeList.value) {
+    fetchPicTypeList()
+  }
+})
+
+watch(
+  () => picTypeList.value,
+  data => {
+    if (data && data.length) {
+      fetchPic(data[state.curIndex].id).then(() => {
+        changeTag(state.curIndex)
+      })
+    }
+  },
+  { immediate: true }
+)
+
+watch(
+  () => getCurTypeIdData.value,
+  data => {
+    if (!data) return
+    state.curTabPic = getCurTabPics(state.curTypeId)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
   <div class="material">
-    <DialogMaterial ref="dialogRef" />
+    <!-- <DialogMaterial ref="dialogRef" /> -->
     <ModTitle title="素材管理">
       <div class="tag-wrap">
-        <BtnBase type="primary" @click="handleUpload">
-          上传素材
-        </BtnBase>
+        <Upload @on:success="handleUpload">
+          <BtnBase type="primary">
+            上传素材
+          </BtnBase>
+        </Upload>
+        <span class="ml5" />
         <BtnBase :type="getBatchType" @click="isBatch = !isBatch">
           {{ getBatchText }}
         </BtnBase>
@@ -42,9 +118,10 @@ const handleUpload = () => {
     </ModTitle>
     <div class="content">
       <div class="container">
-        <el-tabs type="border-card">
-          <el-tab-pane v-for="(item, index) in menuList" :key="index" :label="item.name">
-            <ImageList :list="imageList" :is-batch="hasBatch" />
+        <el-tabs type="border-card" @tab-change="changeTag">
+          <el-tab-pane v-for="(item, index) in picTypeList" :key="index" :label="item.name">
+            <ImageList v-if="getCurPic.length" :list="getCurPic" :is-batch="hasBatch" />
+            <el-empty v-else />
           </el-tab-pane>
         </el-tabs>
       </div>

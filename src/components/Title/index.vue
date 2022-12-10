@@ -30,7 +30,7 @@ const props = defineProps({
     border-bottom: 1px solid $base-color-border;
   }
   .title {
-    color: $$base-color-title;
+    color: $base-color-title;
     font-size: 18px;
     font-weight: 700;
   }
