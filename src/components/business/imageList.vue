@@ -53,7 +53,7 @@ onMounted(() => {
   <div class="material-image">
     <div v-if="props.list && props.list.length" class="material-image--list">
       <div v-for="(item, i) in props.list" :key="i" class="material-image--item">
-        <div class="inner" @click="curIndex = i">
+        <div class="inner">
           <div v-if="props.isBatch" class="check-box" @click="item.check = !item.check">
             <el-checkbox v-model="item.check" size="large" type="success" />
           </div>
@@ -63,6 +63,7 @@ onMounted(() => {
               :preview-src-list="previewList"
               :initial-index="curIndex"
               fit="fill"
+              @click="curIndex = i"
             />
           </div>
 
@@ -110,9 +111,9 @@ onMounted(() => {
       linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 0, transparent 75%, rgba(0, 0, 0, 0.1) 0);
     background-position: 0 0, 15px 15px;
     background-size: 30px 30px;
-    transition: all .5s;
+    
     &:hover {
-      transform: translate3d(0,-4px,0);
+      // transform: translate3d(0,-4px,0);
       box-shadow: 0 9px 28px 8px rgb(0 0 0 / 5%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%);
       border-color: transparent;
     }
@@ -123,9 +124,9 @@ onMounted(() => {
       cursor: pointer;
 
       &:hover {
-        .img-box img {
-          transform: scale(110%);
-        }
+        // .img-box img {
+        //   transform: scale(110%);
+        // }
         .delete {
           background: rgba(0, 0, 0, 0.48);
           opacity: 1;
