@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, reactive, ref, watch } from 'vue'
 import ModTitle from '@/components/Title/index.vue'
 import ImageList from '@/components/business/ImageList.vue'
 import Upload from '@/components/Uploader/index.vue'
 import { SourceActionTypes } from '@/store/modules/system/source/action-types'
 import { useStore } from '@/store'
 import { getUploadFileName } from '@/config/upload'
+import { useRoute } from 'vue-router'
 
 const store = useStore()
-
+const currentRoute = useRoute()
 const state = reactive({
   loading: false,
   curIndex: 0,
   curTypeId: '',
   curTabPics: [],
+  tabName: '',
 })
 
 const isBatch = ref(false)
@@ -58,7 +60,6 @@ const changeTag = tabIndex => {
   state.curTypeId = picTypeList.value[tabIndex].id
   state.curIndex = tabIndex
 
-
   if (!picTypeImagesData.value[state.curTypeId]) {
     fetchPic(picTypeList.value[state.curIndex].id)
   } else {
@@ -84,7 +85,17 @@ const handleUpload = (data) => {
 onBeforeMount(() => {
   if (!picTypeList.value) {
     fetchPicTypeList()
-    // changeTag(state.curIndex)
+  }
+})
+
+onMounted(() => {
+  const { id } = currentRoute.query
+  const typeList = picTypeList.value
+  if (id && typeList) {
+    const fIndex = typeList.findIndex(it => it.id == id)
+    changeTag(fIndex)
+    state.curIndex = fIndex
+    state.tabName = typeList[fIndex].name
   }
 })
 
@@ -117,8 +128,13 @@ watch(
     </ModTitle>
     <div class="content">
       <div class="container">
-        <el-tabs @tab-change="changeTag">
-          <el-tab-pane v-for="(item, index) in picTypeList" :key="index" :label="item.name" />
+        <el-tabs v-model="state.tabName" @tab-change="changeTag">
+          <el-tab-pane
+            v-for="(item, index) in picTypeList"
+            :key="index"
+            :label="item.name"
+            :name="item.name"
+          />
         </el-tabs>
         <ImageList v-if="getCurPic.length" :list="getCurPic" :is-batch="hasBatch" />
       </div>
