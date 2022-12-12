@@ -40,7 +40,7 @@ onMounted(() => {
 
 <template>
   <div class="material-image">
-    <div class="material-image--list">
+    <div v-if="props.list && props.list.length" class="material-image--list">
       <div
         v-for="(item, i) in props.list"
         :key="i"
@@ -71,6 +71,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <el-empty v-else />
   </div>
 </template>
 

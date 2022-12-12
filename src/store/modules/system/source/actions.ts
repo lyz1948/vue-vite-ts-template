@@ -42,6 +42,7 @@ export const actions: ActionTree<SourceState, RootState> & SourceActions = {
   [SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST]({ commit }: AugmentedActionContext, params: PicTypeSearch) {
     return picTypeListRequest(params).then(data => {
       commit(SourcMutationTypes.SOURCE_PIC_TYPE_LIST, data)
+      return data
     })
   },
   async [SourceActionTypes.ACTION_SOURCE_PIC_TYPE_SET]({ state, commit }: AugmentedActionContext, pic: PicType) {

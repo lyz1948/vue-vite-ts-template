@@ -12,7 +12,7 @@ const store = useStore()
 const state = reactive({
   curIndex: 0,
   curTypeId: '',
-  curTabPic: [],
+  curTabPics: [],
 })
 
 const isBatch = ref(false)
@@ -31,12 +31,8 @@ const picTypeImagesData = computed(() => {
   return store.state.source.picByTypeList
 })
 
-const getCurTypeIdData = computed(() => {
-  return picTypeImagesData.value[state.curTypeId]
-})
-
 const getCurTabPics = (id) => {
-  const list = picTypeImagesData.value[id] || []
+  const list = picTypeImagesData.value[id]
 
   return list.map(it => {
     return { check: false, src: it }
@@ -44,11 +40,11 @@ const getCurTabPics = (id) => {
 }
 
 const getCurPic = computed(() => {
-  return state.curTabPic
+  return state.curTabPics
 })
 
 const fetchPicTypeList = () => {
-  store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST)
+  return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST)
 }
 
 const fetchPic = typeId => {
@@ -57,19 +53,30 @@ const fetchPic = typeId => {
 
 const changeTag = tabIndex => {
   state.curTypeId = picTypeList.value[tabIndex].id
+  state.curIndex = tabIndex
+
+
+  if (!picTypeImagesData.value[state.curTypeId]) {
+    fetchPic(picTypeList.value[state.curIndex].id)
+  }
+
+  state.curTabPics = getCurTabPics(state.curTypeId)
 }
 
 const handleUpload = (data) => {
   const { url } = data
-  console.log('url:', url)
-  // if (url !== '') {
-  //   store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
-  //     path: getUploadFileName(url),
-  //     picTypeId: state.curTypeId,
-  //   }).then(() => {
-  //     fetchPicTypeList()
-  //   })
-  // } 
+  if (url !== '') {
+    store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
+      path: getUploadFileName(url),
+      picTypeId: state.curTypeId,
+    }).then(() => {
+      fetchPicTypeList().then((data) => {
+        fetchPic(data[state.curIndex].id).then(() => {
+          state.curTabPics = getCurTabPics(state.curTypeId)
+        })
+      })
+    })
+  } 
 }
 
 onBeforeMount(() => {
@@ -83,21 +90,21 @@ watch(
   data => {
     if (data && data.length) {
       fetchPic(data[state.curIndex].id).then(() => {
-        changeTag(state.curIndex)
+        state.curTabPic = getCurTabPics(data[state.curIndex].id)
       })
     }
   },
-  { immediate: true }
 )
 
-watch(
-  () => getCurTypeIdData.value,
-  data => {
-    if (!data) return
-    state.curTabPic = getCurTabPics(state.curTypeId)
-  },
-  { immediate: true }
-)
+// watch(
+//   () => picTypeImagesData.value,
+//   data => {
+//     state.curTabPic = []
+//     if (!data) {
+//       return
+//     }
+//   },
+// )
 </script>
 
 <template>
@@ -118,12 +125,10 @@ watch(
     </ModTitle>
     <div class="content">
       <div class="container">
-        <el-tabs type="border-card" @tab-change="changeTag">
-          <el-tab-pane v-for="(item, index) in picTypeList" :key="index" :label="item.name">
-            <ImageList v-if="getCurPic.length" :list="getCurPic" :is-batch="hasBatch" />
-            <el-empty v-else />
-          </el-tab-pane>
+        <el-tabs @tab-change="changeTag">
+          <el-tab-pane v-for="(item, index) in picTypeList" :key="index" :label="item.name" />
         </el-tabs>
+        <ImageList v-if="getCurPic.length" :list="getCurPic" :is-batch="hasBatch" />
       </div>
     </div>
   </div>
