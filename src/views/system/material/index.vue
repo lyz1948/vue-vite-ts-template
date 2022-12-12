@@ -10,6 +10,7 @@ import { getUploadFileName } from '@/config/upload'
 const store = useStore()
 
 const state = reactive({
+  loading: false,
   curIndex: 0,
   curTypeId: '',
   curTabPics: [],
@@ -48,7 +49,9 @@ const fetchPicTypeList = () => {
 }
 
 const fetchPic = typeId => {
-  return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId)
+  return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId).then(() => {
+    state.curTabPics = getCurTabPics(typeId)
+  })
 }
 
 const changeTag = tabIndex => {
@@ -58,9 +61,10 @@ const changeTag = tabIndex => {
 
   if (!picTypeImagesData.value[state.curTypeId]) {
     fetchPic(picTypeList.value[state.curIndex].id)
+  } else {
+    state.curTabPics = getCurTabPics(state.curTypeId)
   }
 
-  state.curTabPics = getCurTabPics(state.curTypeId)
 }
 
 const handleUpload = (data) => {
@@ -71,9 +75,7 @@ const handleUpload = (data) => {
       picTypeId: state.curTypeId,
     }).then(() => {
       fetchPicTypeList().then((data) => {
-        fetchPic(data[state.curIndex].id).then(() => {
-          state.curTabPics = getCurTabPics(state.curTypeId)
-        })
+        fetchPic(data[state.curIndex].id)
       })
     })
   } 
@@ -82,6 +84,7 @@ const handleUpload = (data) => {
 onBeforeMount(() => {
   if (!picTypeList.value) {
     fetchPicTypeList()
+    // changeTag(state.curIndex)
   }
 })
 
@@ -89,22 +92,11 @@ watch(
   () => picTypeList.value,
   data => {
     if (data && data.length) {
-      fetchPic(data[state.curIndex].id).then(() => {
-        state.curTabPic = getCurTabPics(data[state.curIndex].id)
-      })
+      fetchPic(data[state.curIndex].id)
     }
   },
 )
 
-// watch(
-//   () => picTypeImagesData.value,
-//   data => {
-//     state.curTabPic = []
-//     if (!data) {
-//       return
-//     }
-//   },
-// )
 </script>
 
 <template>
