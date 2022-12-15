@@ -3,6 +3,7 @@ import ModTitle from '@/components/Title/index.vue'
 import { useStore } from '@/store'
 import { ref } from 'vue'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
+import { getProductKeyVal } from '../help'
 
 const store = useStore()
 const props = defineProps({
@@ -16,10 +17,10 @@ const props = defineProps({
   },
 })
 
-const innerRemarks = ref('')
+const serviceStandard = ref(getProductKeyVal('serviceStandard'))
 
 const handleChange = () => {
-  store.commit(ProductMutationTypes.PRODUCT_ITEM, { innerRemarks })
+  store.commit(ProductMutationTypes.PRODUCT_ITEM, { serviceStandard })
 }
 </script>
 <template>
@@ -28,7 +29,7 @@ const handleChange = () => {
     <div class="content">
       <div class="container">
         <InputBase
-          v-model="innerRemarks"
+          v-model="serviceStandard"
           type="textarea"
           :rows="rows"
           @change="handleChange"

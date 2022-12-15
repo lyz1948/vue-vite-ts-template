@@ -1,73 +1,107 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { formTripState } from '../params'
-import Uploader from '@/components/Uploader/UploadList.vue'
+import { computed, ref } from 'vue'
+// import { formState } from '../params'
+import { useStore } from '@/store'
+import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
+import UploadItem from './UploadItem.vue'
 
-const form = ref(formTripState())
+const props = defineProps({
+  form: {
+    type: Object,
+    required: true,
+  },
+  index: {
+    type: Number,
+    default: 1,
+  },
+})
+
+const store = useStore()
+
+const form = ref(props.form)
+
+const getProductItem = computed(() => store.state.product.productItem)
+
+const getLabel = computed(() => {
+  return `Day ${(props.index)}`
+})
+
+const handleChange = (pics: Picid[]) => {
+  store.commit(ProductMutationTypes.PRODUCT_ITEM, { bannerPics: pics })
+}
+
+const handleDelete = val => {
+  const current: Array<any> = getProductItem.value['bannerPics']
+  const pics = current.filter(it => it.picId !== val)
+  store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, { bannerPics: pics })
+}
+
+// watch(
+//   () => form.value,
+//   data => {
+//     store.commit(ProductMutationTypes.PRODUCT_ITEM, { itinerarys: data })
+//   }
+// )
 </script>
 
 <template>
-  <div class="content">
-    <FormBase>
-      <FormItemBase prop="" label="Day1">
-        <div class="flex-box">
-          <InputBase v-model="form.title" />
+  <FormBase>
+    <FormItemBase prop="" :label="getLabel">
+      <div class="flex-box">
+        <InputBase v-model="form.title" />
+      </div>
+    </FormItemBase>
+
+    <div class="form-item-box">
+      <FormItemBase prop="" label="出发地">
+        <InputBase v-model="form.startPoint" />
+      </FormItemBase>
+      <FormItemBase prop="" label="目的地">
+        <InputBase v-model="form.endPoint" />
+      </FormItemBase>
+      <FormItemBase prop="" label="住宿">
+        <InputBase v-model="form.hotelName" />
+      </FormItemBase>
+      <FormItemBase prop="" label="交通">
+        <InputBase v-model="form.traffic" />
+      </FormItemBase>
+    </div>
+
+    <div class="rest-item">
+      <FormItemBase prop="" label="用餐">
+        <div class="form-item-box">
+          <div class="check-box">
+            <el-checkbox v-model="form.breakfast">
+              早
+            </el-checkbox>
+          </div>
+          <InputBase v-model="form.breakfastDesc" />
+        </div>
+        <div class="form-item-box">
+          <div class="check-box">
+            <el-checkbox v-model="form.lunch">
+              中
+            </el-checkbox>
+          </div>
+          <InputBase v-model="form.lunchDesc" />
+        </div>
+        <div class="form-item-box">
+          <div class="check-box">
+            <el-checkbox v-model="form.dinner">
+              晚
+            </el-checkbox>
+          </div>
+          <InputBase v-model="form.dinnerDesc" />
         </div>
       </FormItemBase>
-
-      <div class="form-item-box">
-        <FormItemBase prop="" label="出发地">
-          <InputBase v-model="form.title" />
-        </FormItemBase>
-        <FormItemBase prop="" label="目的地">
-          <InputBase v-model="form.title" />
-        </FormItemBase>
-        <FormItemBase prop="" label="住宿">
-          <InputBase v-model="form.title" />
-        </FormItemBase>
-        <FormItemBase prop="" label="交通">
-          <InputBase v-model="form.title" />
-        </FormItemBase>
+    </div>
+    <FormItemBase prop="" label="行程">
+      <div class="flex-box">
+        <InputBase v-model="form.itineraryDesc" type="textarea" rows="6" />
       </div>
-
-      <div class="rest-item">
-        <FormItemBase prop="" label="用餐">
-          <div class="form-item-box">
-            <div class="check-box">
-              <el-checkbox>早</el-checkbox>
-            </div>
-            <InputBase v-model="form.title" />
-          </div>
-          <div class="form-item-box">
-            <div class="check-box">
-              <el-checkbox>中</el-checkbox>
-            </div>
-            <InputBase v-model="form.title" />
-          </div>
-          <div class="form-item-box">
-            <div class="check-box">
-              <el-checkbox>晚</el-checkbox>
-            </div>
-            <InputBase v-model="form.title" />
-          </div>
-        </FormItemBase>
-      </div>
-      <FormItemBase prop="" label="行程">
-        <div class="flex-box">
-          <InputBase v-model="form.title" type="textarea" rows="6" />
-        </div>
-      </FormItemBase>
-      <div class="pic-box">
-        <FormItemBase prop="" label="">
-          <Uploader />
-        </FormItemBase>
-        <FormItemBase prop="" label="">
-          <BtnBase>上传图片</BtnBase>
-          <BtnBase>选择图库</BtnBase>
-        </FormItemBase>
-      </div>
-    </FormBase>
-  </div>
+    </FormItemBase>
+    <UploadItem @on:change="handleChange" @on:delete="handleDelete" />
+  </FormBase>
 </template>
 
 <style lang="scss">

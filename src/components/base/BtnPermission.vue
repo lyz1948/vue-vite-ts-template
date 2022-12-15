@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <el-button v-permission="auth">
+  <el-button v-permission="auth" link>
     <slot />
   </el-button>
 </template>

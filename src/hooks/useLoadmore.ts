@@ -2,12 +2,12 @@ import { reactive, computed } from 'vue'
 import { useStore } from '@/store'
 
 // 加载更多
-export default function({ url, data: selectData, query = 'undefined' }: { url: any, data: Array<any>, query?: any }) {
+export default function({ url, data, query = {} }: { url: any, data: any, query?: any }) {
   const store = useStore()
   
   const page = reactive({
     pageNum: 1,
-    pageSize: 10,
+    pageSize: 20,
   })
 
   const fetchData = async () => {
@@ -15,18 +15,21 @@ export default function({ url, data: selectData, query = 'undefined' }: { url: a
   }
 
   const list = computed(() => {
-    return selectData.slice(0, page.pageNum * page.pageSize)
+    if (!data) return
+    const res = data.slice(0, page.pageNum * page.pageSize)
+    return res
   })
   
   const lazyLoad = () => {
-    if (!selectData || !selectData.length) {
+    if (!data || !data.length) {
       fetchData()
     }
   }
 
   const loadMoreData = () => {
-    if (selectData.length <= list.value.length) return
+    if (data.length <= list.value.length) return
     page.pageNum++
+    console.log('page.pageNum:', page.pageNum)
   }
 
   return {

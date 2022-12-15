@@ -1,14 +1,14 @@
-export interface Product {
-  name: string
-  type: string
-  color?: string
-  icon?: string
-  id?: number
-  orderNumber?: 0
-  remarks?: string
+import { Page } from './index';
+export interface Product  {
+  [keys: string]: any
 }
 
-export type ProductSearch = {
-  name?: string
-  type?: string
+export interface ProductSearch extends Page {
+  id: number
+  name: string
+  code: string
+  isEnable: boolean
+  isHot: boolean
+  isRecommend: boolean
+  travelLineId: string
 }

@@ -16,10 +16,10 @@ const props = defineProps({
   },
 })
 
-const innerRemarks = ref('')
+const feature = ref('')
 
 const handleChange = () => {
-  store.commit(ProductMutationTypes.PRODUCT_ITEM, { innerRemarks })
+  store.commit(ProductMutationTypes.PRODUCT_ITEM, { feature })
 }
 </script>
 <template>
@@ -28,7 +28,7 @@ const handleChange = () => {
     <div class="content">
       <div class="container">
         <InputBase
-          v-model="innerRemarks"
+          v-model="feature"
           type="textarea"
           :rows="rows"
           @change="handleChange"

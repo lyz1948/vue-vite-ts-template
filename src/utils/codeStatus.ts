@@ -12,6 +12,7 @@ export enum codeStatus {
   NOT_SUPPORT = 'HTTP版本不受支持(505)',
 }
 
+import { removeToken, removeUserInfo } from './cookies'
 export type CodeKey =
   | 400
   | 401
@@ -39,10 +40,20 @@ const codeKeys = {
   505: 'HTTP版本不受支持(505)',
 }
 
+const outLogin = (code: CodeKey) => {
+  if (code == 401) {
+    removeToken()
+    removeUserInfo()
+    window.location.reload()
+  }
+}
+
+
 function getValue<T extends object, U extends keyof T>(obj: T, key: U) {
   return obj[key]
 }
 
 export const errorCode = (code: CodeKey): string => {
+  outLogin(code)
   return getValue(codeKeys, code)
 }

@@ -41,12 +41,12 @@ const toggleSidebar = () => {
 <style lang="scss" scoped>
 
 .header-container {
+  position: relative;
   flex: 1;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #eaebf3;
+  border-bottom: 1px solid #dcdfe6;
   padding: 0 20px;
-  backdrop-filter: saturate(50%) blur(8px);
   height: $base-head-menu-height;
   z-index: $base-z-index-max;
 

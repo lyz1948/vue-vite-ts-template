@@ -3,6 +3,7 @@ import ModTitle from '@/components/Title/index.vue'
 import { useStore } from '@/store'
 import { ref } from 'vue'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
+import { getProductKeyVal } from '../help'
 
 const store = useStore()
 const props = defineProps({
@@ -16,7 +17,7 @@ const props = defineProps({
   },
 })
 
-const innerRemarks = ref('')
+const innerRemarks = ref(getProductKeyVal('innerRemarks'))
 
 const handleChange = () => {
   store.commit(ProductMutationTypes.PRODUCT_ITEM, { innerRemarks })

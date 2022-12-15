@@ -247,7 +247,6 @@ watch(
 }
 </style>
 <style lang="scss" scoped>
-
 .tabs-bar-container {
   position: relative;
   box-sizing: border-box;
@@ -258,8 +257,9 @@ watch(
   height: $base-tabs-bar-height;
   padding-left: $base-padding;
   padding-right: $base-padding;
-  // background: rgba($base-color-white, .4);
-  backdrop-filter: saturate(50%) blur(8px);
+  backdrop-filter: saturate(50%) blur(4px);
+  background-image: radial-gradient(transparent 1px, #fff 1px);
+  background-size: 4px 4px;
   user-select: none;
   z-index: $base-z-index-default;
 

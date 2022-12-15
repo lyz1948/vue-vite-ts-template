@@ -36,8 +36,24 @@
   margin-left: 5px;
 }
 
+.ml10 {
+  margin-left: 10px;
+}
+
+.ml20 {
+  margin-left: 20px;
+}
+
 .mr5 {
   margin-right: 5px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.mr20 {
+  margin-right: 20px;
 }
 
 .mt20 {
@@ -54,6 +70,10 @@
 
 .red {
   color: $color-red;
+}
+
+.hand {
+  cursor: pointer;
 }
 
 .split-line {

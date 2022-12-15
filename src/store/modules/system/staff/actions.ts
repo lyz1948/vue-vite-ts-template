@@ -15,6 +15,7 @@ import {
   staffSelectListRequest,
 } from '@/api/system/staff'
 import { parseDate } from '@/utils/datetime'
+import { formatSelect } from '../../../../utils/format';
 
 
 type AugmentedActionContext = {
@@ -88,7 +89,7 @@ export const actions: ActionTree<StaffState, RootState> & StaffActions = {
     commit,
   }: AugmentedActionContext) {
     const data = await staffSelectListRequest()
-    commit(StaffMutationTypes.STAFF_SELECT_DATA, data)
+    commit(StaffMutationTypes.STAFF_SELECT_DATA, formatSelect(data, 'realName'))
     return data
   },
 }

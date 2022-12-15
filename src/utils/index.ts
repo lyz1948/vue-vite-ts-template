@@ -1,3 +1,7 @@
+export const capitalize = (str, lowerRest = false) =>
+  str.slice(0, 1).toUpperCase() +
+  (lowerRest ? str.slice(1).toLowerCase() : str.slice(1))
+
 // 格式化url参数
 export const parseQuerys = (url: string, querys: any) => {
   if (typeof querys != 'object') {

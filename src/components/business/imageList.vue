@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import useElement from '@/hooks/useElement'
-import { ref, nextTick, onMounted, computed } from 'vue'
+import { ref, nextTick, onMounted, computed, onBeforeMount } from 'vue'
 
 interface Props {
   isOperate?: boolean
   isBatch?: boolean
+  isPreview?: boolean
   list: array<any>
   size?: number
 }
@@ -13,14 +14,18 @@ const props = defineProps<Props>()
 
 const { confirm } = useElement()
 
-const imageSize = ref(300)
 const curIndex = ref(0)
+// const imageSize = ref(280)
 
-const getStyle = computed(() => {
-  return `width: ${imageSize.value}px`
-})
+// const getStyle = computed(() => {
+//   const el = document.querySelector('.material-image')
+//   if (!el) return
 
-const previewList = computed(() => props.list.map(it => it.src))
+//   const width = Math.floor((el as HTMLDListElement).clientWidth / (props.size || 9))
+//   return `width: ${width}px`
+// })
+
+const previewList = computed(() => props.list.map(it => it.url))
 
 const deleteItem = item => {
   if (!props.isOperate && !props.isBatch) {
@@ -31,22 +36,22 @@ const deleteItem = item => {
   }
 }
 
-const selectItem = item => {
-  if (!props.isOperate && !props.isBatch) {
-    confirm('确定要删除吗', '警告').then(() => {
-      console.log('删除了')
-    })
-  } else {
-    item.check = !item.check
-  }
-}
+// const selectItem = item => {
+//   if (!props.isOperate && !props.isBatch) {
+//     confirm('确定要删除吗', '警告').then(() => {
+//       console.log('删除了')
+//     })
+//   } else {
+//     item.check = !item.check
+//   }
+// }
 
-onMounted(() => {
-  nextTick().then(() => {
-    const el = document.querySelector('.material-image')
-    imageSize.value = Math.floor(el.clientWidth / (props.size || 9))
-  })
-})
+// onBeforeMount(() => {
+//   nextTick().then(() => {
+//     const el = document.querySelector('.material-image')
+//     imageSize.value = Math.floor((el as HTMLDListElement).clientWidth / (props.size || 9))
+//   })
+// })
 </script>
 
 <template>
@@ -58,8 +63,10 @@ onMounted(() => {
             <el-checkbox v-model="item.check" size="large" type="success" />
           </div>
           <div class="img-box">
+            <img v-if="!isPreview" :src="item.url" alt="">
             <el-image
-              :src="item.src"
+              v-else
+              :src="item.url"
               :preview-src-list="previewList"
               :initial-index="curIndex"
               fit="fill"
@@ -92,12 +99,14 @@ onMounted(() => {
   &--list {
     display: flex;
     flex-wrap: wrap;
+    margin-left: -20px;
+    overflow-x: hidden;
   }
 
   &--item {
     @include flexcenter();
     padding: 10px;
-    margin: 0 20px 20px 0;
+    margin: 0 0 20px 20px;
     border: 1px solid #e6ebed;
     border-radius: 4px;
     background: rgb(255, 255, 255);
@@ -113,14 +122,13 @@ onMounted(() => {
     background-size: 30px 30px;
     
     &:hover {
-      // transform: translate3d(0,-4px,0);
       box-shadow: 0 9px 28px 8px rgb(0 0 0 / 5%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%);
       border-color: transparent;
     }
     .inner {
       position: relative;
-      width: 280px;
-      height: 160px;
+      width: 265px;
+      height: 140px;
       cursor: pointer;
 
       &:hover {

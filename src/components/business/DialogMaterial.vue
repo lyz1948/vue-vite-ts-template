@@ -4,6 +4,7 @@ import ImageList from '@/components/business/ImageList.vue'
 import { SourceActionTypes } from '@/store/modules/system/source/action-types'
 import { useStore } from '@/store'
 
+const emit = defineEmits(['on:choose'])
 const store = useStore()
 const isVisible = ref(false)
 const state = reactive({
@@ -11,14 +12,6 @@ const state = reactive({
   curTypeId: '',
   curTabPic: [],
 })
-
-const show = () => {
-  isVisible.value = true
-}
-
-const hide = () => {
-  isVisible.value = false
-}
 
 // 图片分类
 const picTypeList = computed(() => {
@@ -38,20 +31,33 @@ const getCurPic = computed(() => {
   return state.curTabPic
 })
 
-const getCurTabPics = () => {
-  const list = getCurTypeIdData.value || []
-
-  return list.map(it => {
-    return { check: false, src: it }
-  })
-}
-
 const fetchPicTypeList = () => {
   store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST)
 }
 
 const fetchPic = typeId => {
+  console.log('typeId:', typeId)
+
   return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId)
+}
+
+const show = () => {
+  isVisible.value = true
+  if (!picTypeList.value) {
+    fetchPicTypeList()
+  }
+}
+
+const hide = () => {
+  isVisible.value = false
+}
+
+const getCurTabPics = () => {
+  const list = getCurTypeIdData.value || []
+
+  return list.map(it => {
+    return { check: false, ...it }
+  })
 }
 
 const changeTag = tabIndex => {
@@ -62,22 +68,26 @@ const changeTag = tabIndex => {
   !getCurTypeIdData.value && fetchPic(state.curTypeId)
 }
 
-onBeforeMount(() => {
-  if (!picTypeList.value) {
-    fetchPicTypeList()
-  }
-})
+const handleConfirm = () => {
+  const checkList = getCurPic.value.filter(it => !!it.check)
+  const picIds = checkList.map(it => ({ picId: it.picId }))
+  const pics = checkList.map(it => ({ url: it.url }))
+  emit('on:choose', { pics, picIds, list: checkList })
+
+  hide()
+}
 
 watch(
   () => picTypeList.value,
   data => {
     if (data && data.length) {
+      console.log('data:', data)
+
       fetchPic(data[state.curIndex].id).then(() => {
         changeTag(state.curIndex)
       })
     }
   },
-  { immediate: true }
 )
 
 defineExpose({
@@ -93,11 +103,15 @@ defineExpose({
     width="1280px"
     @on:visible="isVisible = $event"
     @on:confirm="handleConfirm"
-    @on:cancel="hide"
   >
     <el-tabs type="border-card" @tab-change="changeTag">
       <el-tab-pane v-for="(item, index) in picTypeList" :key="index" :label="item.name">
-        <ImageList v-if="getCurPic.length" :list="getCurPic" :is-batch="hasBatch" />
+        <ImageList
+          v-if="getCurPic.length"
+          :list="getCurPic"
+          :is-batch="true"
+          :size="6"
+        />
         <el-empty v-else />
       </el-tab-pane>
     </el-tabs>
@@ -106,7 +120,7 @@ defineExpose({
 
 <style lang="scss" scoped>
 .el-dialog .material-image {
-  max-height: 600px;
+  height: 500px;
   overflow-y: auto;
 }
 </style>

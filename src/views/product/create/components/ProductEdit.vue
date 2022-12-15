@@ -3,9 +3,13 @@ import { reactive, toRefs, ref } from 'vue'
 // import { Editor } from '@tinymce/tinymce-vue'
 import TinymceEditor from '@tinymce/tinymce-vue'
 import ModTitle from '@/components/Title/index.vue'
+import { useStore } from '@/store'
+import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
+import { getProductKeyVal } from '../help'
 
 const defaultId = () => 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
 
+const store = useStore()
 const props = defineProps({
   title: {
     type: String,
@@ -14,7 +18,7 @@ const props = defineProps({
 })
 
 const state = reactive({
-  tinymceContent: '',
+  feature: getProductKeyVal('feature'),
 })
 
 const initOptions = ref({
@@ -53,7 +57,14 @@ const initOptions = ref({
   convert_urls: false,
 })
 
-const { tinymceContent } = toRefs(state)
+const { feature } = toRefs(state)
+
+const handleChange = ({ level }) => {
+  const { content } = level
+  store.commit(ProductMutationTypes.PRODUCT_ITEM, { feature: content })
+  console.log('content:', content)
+}
+
 </script>
 
 <template>
@@ -63,7 +74,12 @@ const { tinymceContent } = toRefs(state)
     <div class="content">
       <div class="container">
         <!-- 编辑详情 -->
-        <TinymceEditor :id="defaultId()" v-model:value="tinymceContent" :init="initOptions" />
+        <TinymceEditor
+          :id="defaultId()"
+          v-model:value="feature"
+          :init="initOptions"
+          @change="handleChange"
+        />
         <!-- 行程安排 -->
       </div>
     </div>

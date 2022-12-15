@@ -33,6 +33,10 @@ const httpApi = {
   dicSearchForCode: '/system/dictionary/listByTypeCode',
   dicListAll: '/system/dictionary/listTypeAndSub',
 
+  // 产品列表
+  resourceProduct: '/resource/product/pageNoAuthority',
+  resourceProductAll: '/resource/product/list',
+
   // 商城 设置
   mallConfig: '/system/mall/config',
   mallPhoneList: '/system/mall/contact-phone-list',
@@ -61,9 +65,16 @@ const httpApi = {
   cateSet: '/mall/tag-type/add-update',
   cateDel: '/mall/tag-type/del',
 
-  productList: '/mall/tag-type/list',
-  productSet: '/mall/tag-type/add-update',
-  productDel: '/mall/tag-type/del',
+  productList: '/mall/product/page-product',
+  productDetail: '/mall/product/product',
+  productSet: '/mall/product/save-update-product',
+  productDel: '/mall/product/del-product',
+
+  producStocktList: '/mall/product/list-plan',
+  producStocktSet: '/mall/product/save-update-plan',
+
+  producTagOrTypeList: '/mall/product/list-tag-type',
+  producTagOrTypeSet: '/mall/product/add-tag-type',
 }
 
 export default httpApi

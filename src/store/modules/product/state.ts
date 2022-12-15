@@ -1,13 +1,15 @@
 export interface ProductState {
-  productList: Array<any>
+  productData: any,
   productItem: any
   productTagList: Array<any>
   productCateList: Array<any>
+  productResourceAll: Array<any>
 }
 
 export const state: ProductState = {
-  productList: [],
-  productItem: null,
-  productTagList: [],
+  productData: null,
+  productItem: {},
+  productTagList: null,
   productCateList: [],
+  productResourceAll: null,
 }

@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
+import { computed, reactive, toRefs, watch } from 'vue'
 import { ProductList as columns } from '@/config/productTable'
 import { useStore } from '@/store'
-import { UserActionTypes } from '@/store/modules/user/action-types'
+// import { ProductActionTypes } from '@/store/modules/product/action-types'
 import { PageDefault } from '@/config'
 import { useRouter } from 'vue-router'
+import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
+import useElement from '@/hooks/useElement'
 
+const { confirm } = useElement()
 const store = useStore()
 // const emit = defineEmits(['on:edit'])
 const router = useRouter()
 
 const state = reactive({
-  tableData: [{}],
+  tableData: [],
   total: 0,
   pageNum: PageDefault.pageNum,
   pageSize: PageDefault.pageSize,
 })
 
-const tableData = computed(() => {
-  return store.state.user.userList
+const productData = computed(() => {
+  return store.state.product.productData
 })
 
-const getPageList = computed(() => {
-  return state.tableData.slice((state.pageNum - 1) * state.pageSize, state.pageNum * state.pageSize)
-})
-
-const fetchData = params => {
-  store.dispatch(UserActionTypes.ACTION_USER_LIST, params)
-}
+// const getPageList = computed(() => {
+//   return state.tableData.slice((state.pageNum - 1) * state.pageSize, state.pageNum * state.pageSize)
+// })
 
 const handlePage = ({ pageNum, pageSize }) => {
   state.pageNum = pageNum
@@ -39,57 +39,79 @@ const handlePage = ({ pageNum, pageSize }) => {
 // }
 
 const handleEdit = (row: any) => {
-
-  router.push({ path: '/product/stock', params: row })
+  store.commit(ProductMutationTypes.PRODUCT_ITEM, row)
+  router.push({ path: '/product/create', query: { id: row.id } })
 }
 
-onBeforeMount(() => {
-  fetchData()
-})
+const handleDelete = (id: number) => {
+  confirm().then(() => {
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_DEL, id)
+
+    state.tableData = state.tableData.filter(it => it.id !== id)
+    state.total--
+  })
+}
+
+const toggleStatus = (type: string, row: unknown) => {
+  const status = row[type]
+  row[type] = !status
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_SET, { ...row, [type]: !status })
+}
 
 watch(
-  () => tableData.value,
+  () => productData.value,
   data => {
-    if (!data || !data.length) return
-    state.tableData = data
-    state.total = data.length
+    if (!data) return
+    state.tableData = data.list
+    state.total = data.totalCount
   }
 )
+
+const { tableData, total } = toRefs(state)
 </script>
 
 <template>
   <TableBase
-    :data="getPageList"
+    :data="tableData"
     :columns="columns"
-    :total-count="state.total"
+    :total-count="total"
     @update:page="handlePage"
   >
-    <template #isEnable="scope">
-      <TagBase :name="scope.row.isEnable" />
-    </template>
-
-    <template #role="scope">
-      <el-tag type="info">
-        {{ scope.row.role === 'admin' ? '管理员' : '游客' }}
+    <template #code="{ row }">
+      <el-tag v-if="row.code" type="info">
+        {{ row.code }}
       </el-tag>
     </template>
-
-    <template #action="{row}">
-      <BtnLinkPermission type="success" @click="handleEdit(row)">
+    <template #cate="{ row }">
+      <span v-for="(item, index) in row.types" :key="index">{{ item.name }}</span>
+    </template>
+    <template #status="{ row }">
+      <span class="mr5 hand" @click="toggleStatus('isHot', row)">
+        <el-tag :type="row.isHot ? 'success' : 'info'"> 热卖 </el-tag>
+      </span>
+      <span class="mr5 hand" @click="toggleStatus('isRecommend', row)">
+        <el-tag :type="row.isRecommend ? 'success' : 'info'"> 推荐 </el-tag>
+      </span>
+    </template>
+    <template #isEnable="{ row }">
+      <SwitchBase :model-value="row.isEnable" @change="toggleStatus('isEnable', row)" />
+    </template>
+    <template #action="{ row }">
+      <BtnPermission type="success" @click="handleEdit(row)">
         编辑
-      </BtnLinkPermission>
-      <BtnLinkPermission type="primary">
+      </BtnPermission>
+      <BtnPermission type="primary">
         团期
-      </BtnLinkPermission>
-      <BtnLinkPermission type="success">
+      </BtnPermission>
+      <BtnPermission type="success">
         复制
-      </BtnLinkPermission>
-      <BtnLinkPermission type="warning">
+      </BtnPermission>
+      <BtnPermission type="warning" @click="handleDelete(row.id)">
         删除
-      </BtnLinkPermission>
-      <BtnLinkPermission type="primary">
+      </BtnPermission>
+      <BtnPermission type="primary">
         分享
-      </BtnLinkPermission>
+      </BtnPermission>
     </template>
   </TableBase>
 </template>

@@ -11,6 +11,10 @@ import { Pic, PicSearch } from '@/types/source'
 import { picTypeListRequest, picTypeSetRequest, picTypeDelRequest } from '@/api/source'
 import { picListRequest, picListAllRequest, picSetRequest, picDelRequest } from '@/api/source'
 import { ossPicDelRequest, ossPicUrlRequest } from '@/api/source'
+import useInitial from '@/hooks/useInitial'
+import { getUploadFileName } from '../../../../config/upload';
+
+const { initPicType } = useInitial()
 
 type AugmentedActionContext = {
   commit<K extends keyof StaffMutations>(
@@ -41,6 +45,9 @@ export const actions: ActionTree<SourceState, RootState> & SourceActions = {
   // 图片类型相关
   [SourceActionTypes.ACTION_SOURCE_PIC_TYPE_LIST]({ commit }: AugmentedActionContext, params: PicTypeSearch) {
     return picTypeListRequest(params).then(data => {
+      if (!data || !(data as any).length) {
+        initPicType()
+      }
       commit(SourcMutationTypes.SOURCE_PIC_TYPE_LIST, data)
       return data
     })
@@ -57,11 +64,21 @@ export const actions: ActionTree<SourceState, RootState> & SourceActions = {
     return picListAllRequest(id).then(async (data) => {
       if (!data) return
       const paths = (data as any).map(it => it.path)
+      const idRefPath = (data as any).reduce((acc, cur) => {
+        acc = { ...acc, [cur.path]: cur.id }
+        return acc
+      }, {})
       
       let formatData: any = []
       
       if (paths && paths.length) {
-        formatData = await ossPicUrlRequest(paths)
+        const urlList = await ossPicUrlRequest(paths)
+
+        formatData = urlList.map(val => {
+          const url = getUploadFileName(val)
+          const picId = idRefPath[url]
+          return { typeId: id, picId, name: url, url: val }
+        })
       }
       commit(SourcMutationTypes.SOURCE_PIC_BY_TYPE, { id, data: formatData })
     })
@@ -71,8 +88,9 @@ export const actions: ActionTree<SourceState, RootState> & SourceActions = {
       commit(SourcMutationTypes.SOURCE_PIC_LIST, data)
     })
   },
-  async [SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD]({ state, commit }: AugmentedActionContext, pic: Pic) {
-    return await picSetRequest(pic)
+  async [SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD]({ commit }: AugmentedActionContext, pic: Pic) {
+    const { path } = pic
+    return await picSetRequest({ ...pic, path: getUploadFileName(path) })
   },
   [SourceActionTypes.ACTION_SOURCE_PIC_DEL]({ commit }: AugmentedActionContext, id: number) {
     return picDelRequest(id)

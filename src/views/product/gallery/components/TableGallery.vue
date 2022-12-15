@@ -7,7 +7,7 @@ import { PageDefault } from '@/config'
 import { useRouter } from 'vue-router'
 import useElement from '@/hooks/useElement'
 import Upload from '@/components/Uploader/index.vue'
-import { getUploadFileName } from '@/config/upload'
+// import { getUploadFileName } from '@/config/upload'
 
 const store = useStore()
 const router = useRouter()
@@ -42,7 +42,7 @@ const handleUpload = (id, data: any) => {
   const { url } = data
   if (url !== '') {
     store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
-      path: getUploadFileName(url),
+      path: url,
       picTypeId: id,
     }).then(() => {
       emit('on:reload')
@@ -72,20 +72,20 @@ const handleUpdate = (row: any) => {
 
     <template #action="{ row }">
       <div class="flex">
-        <BtnLinkPermission type="success" @click="handleUpdate(row)">
+        <BtnPermission type="success" @click="handleUpdate(row)">
           编辑
-        </BtnLinkPermission>
+        </BtnPermission>
         <Upload @on:success="handleUpload(row.id, $event)">
-          <BtnLinkPermission type="primary">
+          <BtnPermission type="primary">
             上传
-          </BtnLinkPermission>
+          </BtnPermission>
         </Upload>
-        <BtnLinkPermission type="info" @click="handleDetail(row)">
+        <BtnPermission type="info" @click="handleDetail(row)">
           查看
-        </BtnLinkPermission>
-        <BtnLinkPermission type="danger" @click="handleDelete(row)">
+        </BtnPermission>
+        <BtnPermission type="danger" @click="handleDelete(row)">
           删除
-        </BtnLinkPermission>
+        </BtnPermission>
       </div>
     </template>
   </TableBase>

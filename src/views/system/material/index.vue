@@ -38,7 +38,8 @@ const getCurTabPics = (id) => {
   const list = picTypeImagesData.value[id]
 
   return list.map(it => {
-    return { check: false, src: it }
+    console.log('it:', it)
+    return { check: false, ...it }
   })
 }
 
@@ -51,21 +52,21 @@ const fetchPicTypeList = () => {
 }
 
 const fetchPic = typeId => {
+  console.log('fetchpic typeId:', typeId)
   return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId).then(() => {
     state.curTabPics = getCurTabPics(typeId)
   })
 }
 
-const changeTag = tabIndex => {
-  state.curTypeId = picTypeList.value[tabIndex].id
-  state.curIndex = tabIndex
+const changeTag = ({ index }) => {
+  state.curTypeId = picTypeList.value[index].id
+  state.curIndex = index
 
   if (!picTypeImagesData.value[state.curTypeId]) {
     fetchPic(picTypeList.value[state.curIndex].id)
   } else {
     state.curTabPics = getCurTabPics(state.curTypeId)
   }
-
 }
 
 const handleUpload = (data) => {
@@ -93,7 +94,7 @@ onMounted(() => {
   const typeList = picTypeList.value
   if (id && typeList) {
     const fIndex = typeList.findIndex(it => it.id == id)
-    changeTag(fIndex)
+    changeTag({ index: fIndex })
     state.curIndex = fIndex
     state.tabName = typeList[fIndex].name
   }
@@ -128,7 +129,7 @@ watch(
     </ModTitle>
     <div class="content">
       <div class="container">
-        <el-tabs v-model="state.tabName" @tab-change="changeTag">
+        <el-tabs v-model="state.tabName" @tab-click="changeTag">
           <el-tab-pane
             v-for="(item, index) in picTypeList"
             :key="index"

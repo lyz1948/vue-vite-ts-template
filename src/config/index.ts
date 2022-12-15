@@ -21,4 +21,5 @@ export const PageDefault = {
 
 export const App = {
   // baseURL: isDev ? `http://127.0.0.1:${port}/` : '/api',
+  systemCode: 'mall'
 }

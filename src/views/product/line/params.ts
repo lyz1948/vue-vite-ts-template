@@ -1,7 +1,14 @@
+// type Partial<T> = {
+//   [P in keyof T]?: T[P]
+// }
+
 
 export const searchState = () => ({
   name: '',
-  create: ''
+  code: '',
+  isEnable: '',
+  isRecommend: '',
+  travelLineId: '',
 })
 
 export const searchGalleryState = () => ({

@@ -51,4 +51,18 @@ export default {
     { value: '1', label: '已打款' },
   ],
 
+  wxSaleStatus: [
+    { value: '0', label: '微信上架' },
+    { value: '1', label: '微信下架' },
+  ],
+
+  // isHot: [
+  //   { value: '0', label: '非热卖' },
+  //   { value: '1', label: '热卖' },
+  // ],
+  // isRecommend: [
+  //   { value: '0', label: '非推荐产品' },
+  //   { value: '1', label: '推荐产品' },
+  // ],
+
 }

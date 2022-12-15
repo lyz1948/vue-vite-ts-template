@@ -8,6 +8,7 @@ import { RouteWhiteList } from './config/index'
 import { PermissionActionTypes } from './store/modules/permission/action-types'
 import { UserActionTypes } from './store/modules/user/action-types'
 import { settingConfig } from '@/config/setting'
+import { fetchComponentData } from '@/utils/prefetch'
 
 let isFirst = true
 
@@ -47,7 +48,7 @@ router.beforeEach(
             })
 
             isFirst = false
-
+            fetchComponentData()
             next({ ...to, replace: true })
           } catch (err) {
             store.dispatch(UserActionTypes.ACTION_RESET_TOKEN, undefined)

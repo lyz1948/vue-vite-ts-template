@@ -130,12 +130,12 @@ watch(
     </template>
 
     <template #action="{ row }">
-      <BtnLinkPermission type="success" auth="edit" @click="handleUpdate(row)">
+      <BtnPermission type="success" auth="edit" @click="handleUpdate(row)">
         编辑
-      </BtnLinkPermission>
-      <BtnLinkPermission type="danger" auth="delete" @click="handleDelete(row)">
+      </BtnPermission>
+      <BtnPermission type="danger" auth="delete" @click="handleDelete(row)">
         删除
-      </BtnLinkPermission>
+      </BtnPermission>
     </template>
   </TableBase>
 </template>
