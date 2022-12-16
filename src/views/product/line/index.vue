@@ -22,12 +22,11 @@ const editItem = item => {
 onBeforeMount(() => {
   fetchData()
 })
-
 </script>
 
 <template>
   <Search @on:search="fetchData" />
-  <TableProduct @on:edit="editItem" />
+  <TableProduct @on:edit="editItem" @on:reload="fetchData" />
 
   <DialogEdit ref="dialogRef" />
 </template>

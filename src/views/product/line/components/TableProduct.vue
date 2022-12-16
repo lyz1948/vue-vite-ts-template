@@ -9,10 +9,10 @@ import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
 import { ProductActionTypes } from '@/store/modules/product/action-types'
 import useElement from '@/hooks/useElement'
 
-const { confirm } = useElement()
 const store = useStore()
-// const emit = defineEmits(['on:edit'])
+const emit = defineEmits(['on:reload'])
 const router = useRouter()
+const { confirm, success, error } = useElement()
 
 const state = reactive({
   tableData: [],
@@ -40,12 +40,62 @@ const updateStock = (row: any) => {
   router.push({ path: '/product/stock', query: { id: row.id } })
 }
 
+const excludeKey = (data: any, keys: string[]) => {
+  keys.map(key => {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
+      delete data[key]
+    }
+  })
+  return data
+}
+
+const handleClone = (product: any) => {
+  const { itinerarys, bannerPics, tags, types } = product
+
+  const newItinerary = itinerarys.map(it => {
+    return excludeKey(it, ['id', 'productId'])
+  })
+
+  const newBanner = bannerPics.map(it => {
+    return { picId: it.id }
+  })
+
+  const newTags = tags.map(it => {
+    return { tid: it.id, type: it.type }
+  })
+
+  const newTypes = types.map(it => {
+    return { tid: it.id, type: it.type }
+  })
+
+  const newProduct = {
+    ...product,
+    plans: [],
+    itinerarys: newItinerary,
+    bannerPics: newBanner,
+    tags: newTags,
+    types: newTypes,
+    id: '',
+  }
+
+  confirm('确定要复制该产品吗？').then(() => {
+    store
+      .dispatch(ProductActionTypes.ACTION_PRODUCT_SET, newProduct)
+      .then(() => {
+        success()
+        emit('on:reload')
+      })
+      .catch(error)
+  })
+}
+
 const handleDelete = (id: number) => {
   confirm().then(() => {
     store.dispatch(ProductActionTypes.ACTION_PRODUCT_DEL, id)
 
     state.tableData = state.tableData.filter(it => it.id !== id)
     state.total--
+    success({ message: '删除成功' })
   })
 }
 
@@ -100,7 +150,7 @@ const { tableData, total } = toRefs(state)
       <BtnPermission type="primary" @click="updateStock(row)">
         团期
       </BtnPermission>
-      <BtnPermission type="success">
+      <BtnPermission type="success" @click="handleClone(row)">
         复制
       </BtnPermission>
       <BtnPermission type="warning" @click="handleDelete(row.id)">
