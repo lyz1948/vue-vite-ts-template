@@ -14,7 +14,7 @@ export const ProductList = [
   { attrs: { prop: 'isEnable', label: '启用状态' }, slot: 'isEnable'},
   // { attrs: { prop: 'remark', label: '创建人' } },
   // { attrs: { prop: 'createTime', label: '创建时间' } },
-  action
+  { attrs: { ...action.attrs, width: 280 }, slot: 'action' }
 ]
 
 // 产品分类
@@ -34,11 +34,11 @@ export const ProductStock = [
   { attrs: { prop: '', label: '报名截止' }, slot: 'enterEnd' },
   { attrs: { prop: 'planCount', label: '库存' } },
   { attrs: { prop: '', label: '确认' } },
-  { attrs: { prop: '', label: '占位' } },
+  { attrs: { prop: 'planCount', label: '占位' } },
   { attrs: { prop: 'planSurplusCount', label: '余位' } },
   { attrs: { prop: 'clearDays', label: '清位时间' }, slot: 'clearDate' },
-  { attrs: { prop: 'isExceed', label: '可超售' } },
-  { attrs: { prop: '', label: '状态' } },
+  { attrs: { prop: 'isExceed', label: '可超售' }, slot: 'isExceed' },
+  { attrs: { prop: 'saleStatus', label: '状态' }, slot: 'saleStatus' },
   action,
 ]
 

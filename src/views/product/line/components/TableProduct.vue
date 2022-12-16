@@ -156,9 +156,9 @@ const { tableData, total } = toRefs(state)
       <BtnPermission type="warning" @click="handleDelete(row.id)">
         删除
       </BtnPermission>
-      <BtnPermission type="primary">
+      <!-- <BtnPermission type="primary">
         分享
-      </BtnPermission>
+      </BtnPermission> -->
     </template>
   </TableBase>
 </template>

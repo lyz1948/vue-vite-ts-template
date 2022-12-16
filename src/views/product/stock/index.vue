@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, toRefs } from 'vue'
+import { computed, onBeforeMount, reactive, ref } from 'vue'
 import { useStore } from '@/store'
 
 import TableStock from './components/TableStock.vue'
@@ -7,6 +7,7 @@ import DialogStock from './components/DialogStock.vue'
 import { ProductActionTypes } from '@/store/modules/product/action-types'
 import { useRouter } from 'vue-router'
 import { PriceEnum } from '@/enums/priceEnum'
+import { getMonthCount, parseDate } from '@/utils/datetime'
 
 const store = useStore()
 const { currentRoute } = useRouter()
@@ -15,9 +16,9 @@ const dialogRef = ref(null)
 const state = reactive({
   tableData: [],
   total: 0,
-  date: [],
+  date: '',
   searchParams: {
-    priceType: PriceEnum.DIRECT,
+    priceType: '',
     startDate: '',
     endDate: '',
   },
@@ -51,15 +52,17 @@ const showDialog = () => {
 
 const toggle = (val: keyof PriceEnum) => {
   state.searchParams.priceType = val 
-  
   fetchData()
 }
 
-const changeDate = (val: Arran<Date | string>) => {
-  const [ startDate, endDate ] = val
-  state.date = [startDate, endDate]
-  state.searchParams.startDate = startDate
-  state.searchParams.endDate = endDate
+const changeDate = (val: Date | string) => {
+  const d = new Date(val)
+  const y = d.getFullYear()
+  const m = d.getMonth() + 1
+  const total = getMonthCount(y, m)
+  
+  state.searchParams.startDate = val
+  state.searchParams.endDate = parseDate(new Date(y, d.getMonth(), total))
   fetchData()
 }
 
@@ -84,7 +87,12 @@ onBeforeMount(() => {
     <div class="search mt20">
       <FormBase inline>
         <FormItemBase label="日期">
-          <DateBase v-model="state.date" @change="changeDate" />
+          <DateBase
+            v-model="state.date"
+            :shortcuts="false"
+            type="month"
+            @change="changeDate"
+          />
         </FormItemBase>
         <FormItemBase>
           <el-button-group>
