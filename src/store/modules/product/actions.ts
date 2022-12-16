@@ -9,11 +9,12 @@ import { ProductMutationTypes } from './mutation-types'
 
 import { productListRequest, productSetRequest, productDelRequest, productDetailRequest } from '@/api/product'
 import { productResourceAllRequest } from '@/api/product'
+import { productRelTagSetRequest, productRelTagDelRequest } from '@/api/product'
 import { productStockListRequest, productStockSetRequest } from '@/api/product'
 import { tagListRequest, tagSetRequest, tagDelRequest } from '@/api/tag'
 import { cateListRequest, cateSetRequest, cateDelRequest } from '@/api/cate'
 
-import { Product, ProductSearch, Stock, StockSearch } from '@/types/product'
+import { Product, ProductSearch, Stock, StockSearch, ProductTagRel, ProductTagRelieve } from '@/types/product'
 import { Tag, TagSearch } from '@/types/tag'
 import { Cate, CateSearch } from '@/types/cate'
 import { formatSelect } from '@/utils/format';
@@ -44,6 +45,9 @@ export interface IUserActions {
   [ProductActionTypes.ACTION_PRODUCT_CATE_LIST]({ commit }: AugmentedActionContext, params: CateSearch): void
   [ProductActionTypes.ACTION_PRODUCT_CATE_SET]({ commit }: AugmentedActionContext, item: Cate): void
   [ProductActionTypes.ACTION_PRODUCT_CATE_DEL]({ commit }: AugmentedActionContext, id: number): void
+
+  [ProductActionTypes.ACTION_PRODUCT_RELATIVE_TAG]({ commit }: AugmentedActionContext, params: ProductTagRel): void
+  [ProductActionTypes.ACTION_PRODUCT_RELIEVE_TAG]({ commit }: AugmentedActionContext, params: ProductTagRelieve): void
 }
 
 export const actions: ActionTree<ProductState, RootState> & IUserActions = {
@@ -108,5 +112,15 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
   },
   async [ProductActionTypes.ACTION_PRODUCT_CATE_DEL]({ commit }, id: number) {
     return cateDelRequest(id)
+  },
+
+  // 产品关联标签
+  async [ProductActionTypes.ACTION_PRODUCT_RELATIVE_TAG]({ commit }, params: ProductTagRel) {
+    return productRelTagSetRequest(params).then(data => {
+      commit(ProductMutationTypes.PRODUCT_CATE_LIST, formatSelect(data))
+    })
+  },
+  async [ProductActionTypes.ACTION_PRODUCT_RELIEVE_TAG]({ commit }, params: ProductTagRelieve) {
+    return productRelTagDelRequest(params)
   },
 }

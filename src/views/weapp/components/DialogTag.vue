@@ -1,30 +1,42 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { TagOrType } from '@/enums'
+import { useStore } from '@/store'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
+import { computed, ref } from 'vue'
 
 const title = '关联产品'
+const store = useStore()
 const visibleDialog = ref(false)
 const checkList = ref([])
-const checkListData = ref([
-  { label: '国内游', value: '1' },
-  { label: '国内国外游', value: '2' },
-  { label: '国内游', value: '1' },
-  { label: '国内国外游423', value: '2' },
-  { label: '国内游432惹我', value: '1' },
-  { label: '国内国外游', value: '2' },
-  { label: '国内游认为群若群', value: '1' },
-  { label: '国内国外游', value: '2' },
-])
+const productId = ref('')
 
-const show = () => {
+const tagData = computed(() => {
+  return store.state.product.productTagList
+})
+
+const show = id => {
   visibleDialog.value = true
+  productId.value = id
 }
 
 const hide = () => {
   visibleDialog.value = false
+  checkList.value = []
 }
 
 const handleConfirm = () => {
-  visibleDialog.value = false
+  console.log(checkList.value)
+
+  const tagList = checkList.value.map(id => {
+    return { productId: productId.value, tid: id, type: TagOrType.TAG }
+  })
+  const data = {
+    paras: tagList,
+    type: TagOrType.TAG,
+  }
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_RELATIVE_TAG, data).then(() => {
+    hide()
+  })
 }
 
 defineExpose({
@@ -42,8 +54,10 @@ defineExpose({
     @on:confirm="handleConfirm"
   >
     <el-checkbox-group v-model="checkList">
-      <template v-for="(item, index) in checkListData" :key="index">
-        <el-checkbox :label="item.label" />
+      <template v-for="(item, index) in tagData" :key="index">
+        <el-checkbox :label="item.id">
+          {{ item.label }}
+        </el-checkbox>
       </template>
     </el-checkbox-group>
   </DialogBase>

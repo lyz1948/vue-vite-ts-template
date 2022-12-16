@@ -23,3 +23,21 @@ export interface StockSearch {
   priceType: keyof PriceEnum,
   productId: number
 }
+
+type TagRel = {
+  tid: number
+  type: string
+  productId?: string
+}
+
+// 关联tag
+export interface ProductTagRel {
+  paras: TagRel,
+  type: string
+}
+
+// 解除tag
+export interface ProductTagRelieve {
+  ids: string[],
+  productId?: string
+}

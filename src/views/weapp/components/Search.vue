@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { searchState } from '../params'
+import SelectProductSource from '@/components/Select/SelectProductSource.vue';
 
-import {searchState} from '../params'
-
-const emit = defineEmits(['on:search'])
-
+const emit = defineEmits(['on:search', 'on:create'])
+const router = useRouter()
 const state = reactive({
   params: searchState() 
 })
@@ -16,6 +17,10 @@ const handleSearch = () => {
   emit('on:search', state.params)
 }
 
+const handleAdd = () => {
+  router.push('/product/create')
+}
+
 const handleReset = () => {
   state.params = searchState()
   handleSearch()
@@ -25,24 +30,45 @@ const handleReset = () => {
 
 <template>
   <FormBase :inline="true">
-    <FormItemBase label="产品线路">
+    <FormItemBase label="产品名称">
       <InputBase
         v-model="params.name"
       />
     </FormItemBase>
     <FormItemBase label="产品编号">
       <InputBase
-        v-model="params.name"
+        v-model="params.code"
       />
     </FormItemBase>
-    <FormItemBase label="产品分类">
+    <FormItemBase label="产品线路">
+      <SelectProductSource
+        v-model="params.travelLineId"
+      />
+    </FormItemBase>
+    <FormItemBase label="是否热卖">
+      <SelectBase
+        v-model="params.isHot"
+      />
+    </FormItemBase>
+    <FormItemBase label="是否推荐">
+      <SelectBase
+        v-model="params.isRecommend"
+      />
+    </FormItemBase>
+    <FormItemBase label="是否启用">
+      <SelectBase
+        v-model="params.isEnable"
+      />
+    </FormItemBase>
+    <!-- <FormItemBase label="产品分类">
       <InputBase
         v-model="params.name"
       />
     </FormItemBase>
     <FormItemBase label="上架状态">
-      <InputBase
+      <SelectBase
         v-model="params.name"
+        type="wxSaleStatus"
       />
     </FormItemBase>
     <FormItemBase label="创建时间">
@@ -61,14 +87,17 @@ const handleReset = () => {
       />
     </FormItemBase>
     <FormItemBase label="创建人">
-      <InputBase
+      <SelectStaff
         v-model="params.creater"
       />
-    </FormItemBase>
+    </FormItemBase> -->
 
     <FormItemBase>
       <BtnBase type="success" @click="handleSearch">
         搜索
+      </BtnBase>
+      <BtnBase type="primary" @click="handleAdd">
+        新增
       </BtnBase>
       <BtnBase type="danger" @click="handleReset">
         重置

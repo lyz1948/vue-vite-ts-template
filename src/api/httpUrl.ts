@@ -75,6 +75,7 @@ const httpApi = {
 
   producTagOrTypeList: '/mall/product/list-tag-type',
   producTagOrTypeSet: '/mall/product/add-tag-type',
+  producTagOrTypeDel: '/mall/product/del-tag',
 }
 
 export default httpApi

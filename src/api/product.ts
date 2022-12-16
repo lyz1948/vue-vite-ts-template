@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import httpUrl from './httpUrl'
-import { Product, ProductSearch, Stock } from '@/types/product'
+import { Product, ProductSearch, Stock, ProductTagRel, ProductTagRelieve } from '@/types/product'
 import { StockSearch } from '../types/product'
 
 // // 地接资源产品列表
@@ -41,4 +41,14 @@ export const productStockListRequest = async (params: StockSearch) => {
 // 产品库存设置
 export const productStockSetRequest = async (stock: Stock) => {
   return await request.post<Stock>(httpUrl.producStocktSet, stock)
+}
+
+// 产品关联标签
+export const productRelTagSetRequest = async (data: ProductTagRel) => {
+  return await request.post<ProductTagRel>(httpUrl.producTagOrTypeSet, data)
+}
+
+// 产品关联标签 解除
+export const productRelTagDelRequest = async (data: ProductTagRelieve) => {
+  return await request.post<ProductTagRelieve>(httpUrl.producTagOrTypeDel, data)
 }

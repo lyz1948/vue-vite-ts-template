@@ -3,14 +3,14 @@ const action = { attrs: { prop: 'action', label: '操作' }, slot: 'action' }
 // 线路产品
 export const ProductList = [
   { attrs: { prop: 'code', label: '产品编号', width: 300 }, slot: 'code' },
-  {
-    attrs: { prop: 'cate', label: '产品分类' }, slot: 'cate'
-  },
+  // {
+  //   attrs: { prop: 'cate', label: '产品分类' }, slot: 'cate'
+  // },
   { attrs: { prop: 'name', label: '线路名称' } },
   { attrs: { prop: 'days', label: '行程天数' } },
   { attrs: { prop: 'departureCity', label: '出发地' } },
   { attrs: { prop: 'arrivalCity', label: '目的地' } },
-  { attrs: { prop: 'status', label: '上架状态' }, slot: 'status'},
+  // { attrs: { prop: 'status', label: '上架状态' }, slot: 'status'},
   { attrs: { prop: 'isEnable', label: '启用状态' }, slot: 'isEnable'},
   // { attrs: { prop: 'remark', label: '创建人' } },
   // { attrs: { prop: 'createTime', label: '创建时间' } },
