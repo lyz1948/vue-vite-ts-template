@@ -25,22 +25,19 @@ const productData = computed(() => {
   return store.state.product.productData
 })
 
-// const getPageList = computed(() => {
-//   return state.tableData.slice((state.pageNum - 1) * state.pageSize, state.pageNum * state.pageSize)
-// })
-
 const handlePage = ({ pageNum, pageSize }) => {
   state.pageNum = pageNum
   state.pageSize = pageSize
 }
 
-// const handleDelete = (row: any) => {
-//   store.dispatch(UserActionTypes.ACTION_USER_DELETE, row.id)
-// }
-
-const handleEdit = (row: any) => {
-  store.commit(ProductMutationTypes.PRODUCT_ITEM, row)
+const updateProduct = (row: any) => {
+  store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, row)
   router.push({ path: '/product/create', query: { id: row.id } })
+}
+
+const updateStock = (row: any) => {
+  store.commit(ProductMutationTypes.PRODUCT_ITEM, row)
+  router.push({ path: '/product/stock', query: { id: row.id } })
 }
 
 const handleDelete = (id: number) => {
@@ -97,10 +94,10 @@ const { tableData, total } = toRefs(state)
       <SwitchBase :model-value="row.isEnable" @change="toggleStatus('isEnable', row)" />
     </template>
     <template #action="{ row }">
-      <BtnPermission type="success" @click="handleEdit(row)">
+      <BtnPermission type="success" @click="updateProduct(row)">
         编辑
       </BtnPermission>
-      <BtnPermission type="primary">
+      <BtnPermission type="primary" @click="updateStock(row)">
         团期
       </BtnPermission>
       <BtnPermission type="success">

@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { SourceActionTypes } from '@/store/modules/system/source/action-types'
 import { useStore } from '@/store'
 import useDefault from '@/hooks/useDefault'
 import DialogMaterial from '@/components/business/DialogMaterial.vue'
 import Upload from '@/components/Uploader/index.vue'
+import { ossPicUrlRequest } from '@/api/source'
 
 const emit = defineEmits(['on:change', 'on:delete'])
 const store = useStore()
 const { getSwiperPicTypeId } = useDefault()
+
+const props = defineProps({
+  list: {
+    type: Array,
+    default: () => ([])
+  }
+})
 
 type Picid = {
   picId: number
@@ -18,17 +26,17 @@ const dialogRef = ref(null)
 const bannerPics = ref([])
 const imageList = ref([])
 
+// const productItem = computed(() => store.state.product.productItem)
 const getImageList = computed(() => imageList.value)
 
 const handleChange = (pics: Picid[]) => {
   emit('on:change', pics)
 }
 
-const handleSelect = ({ pics, picIds, list }) => {
+const handleSelect = ({ picIds, list }) => {
   handleChange(picIds)
   bannerPics.value = [...bannerPics.value, ...picIds]
   imageList.value = list
-  // imageList.value = [...imageList.value, ...pics]
 }
 
 const deleteItem = (index) => {
@@ -61,12 +69,28 @@ const handleUpload = data => {
 const handleChoose = () => {
   dialogRef.value.show()
 }
+
+
+const getPicUrl = (paths) => {
+  if (!paths || !paths.length) return []
+  return ossPicUrlRequest(paths).then(data => {
+    return data
+  })
+}
+watch(() => props.list, imgList => {
+  if (imgList && imgList.length) {
+    const paths = imgList.map(it => it.path)
+    getPicUrl(paths).then((data) => {
+      imageList.value = data.map((url, index) => ({ uid: index, url }))
+    })
+  }
+}, { immediate: true })
 </script>
 
 <template>
   <div class="uploader-item content">
     <div class="container flex">
-      <Upload class="ml10" @on:success="handleUpload">
+      <Upload class="ml10" :img-list="getImageList" @on:success="handleUpload">
         <BtnBase>
           上传图片
         </BtnBase>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { UploadProps, UploadUserFile } from 'element-plus'
 import { uploadUrl } from '@/config/upload'
 import { useStore } from '@/store'
@@ -22,6 +22,10 @@ const props = defineProps({
     type: String,
     default: 'image/png, image/jpeg',
   },
+  imgList: {
+    type: Array,
+    default: () => ([]),
+  }
 })
 
 const emit = defineEmits(['on:success'])
@@ -61,6 +65,11 @@ const handleError: UploadProps['onError'] = error => {
     warning({ message: `上传错误，请重试` })
   }
 }
+
+watch(() => props.imgList, list => {
+  if (!list || !list.length) return
+  fileList.value = list
+})
 </script>
 
 <template>

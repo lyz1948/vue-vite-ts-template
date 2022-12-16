@@ -14,6 +14,7 @@ interface CreateState {
   departureCity: string // 出发城市
   arrivalCity: string // 到达城市
   resPId: string
+  resName: string
   travelLineId: string
   source: string
   // itinerarys: Array<any>
@@ -33,6 +34,7 @@ export const formState = (): CreateState => ({
   departureCity: '', // 出发城市
   arrivalCity: '', // 到达城市
   resPId: '', // 地接资源产品Id
+	resName: '',
   travelLineId: '', // 地接资源线路ID
 	source: '',
   days: 1,

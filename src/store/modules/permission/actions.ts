@@ -61,89 +61,89 @@ type AugmentedActionContext = {
 //   }
 // }
 
-const processPathConnector = str => {
-  if (!str) return
-  if (str.indexOf('-') < 0) return str
-  const arr = str.split('-')
+// const processPathConnector = str => {
+//   if (!str) return
+//   if (str.indexOf('-') < 0) return str
+//   const arr = str.split('-')
 
-  return `${arr[0]}${arr
-    .slice(1)
-    .map(v => capitalize(v))
-    .join('')}`
-}
+//   return `${arr[0]}${arr
+//     .slice(1)
+//     .map(v => capitalize(v))
+//     .join('')}`
+// }
 
-const viteComponents = import.meta.glob('@/views/**/*.vue')
-const getComponents = (path, subMenus) => {
-  const pathArr = path.split('/')
-  if (pathArr.length > 2) {
-    if (subMenus && subMenus.length) {
-      return { component: () => import(`@/views${processPathConnector(path)}/index`) }
-    } else {
-      return {
-        component: () => viteComponents[`../../../${processPathConnector(path)}/index.vue`]
-      }
-    }
-  } 
-  // else {
-  //   return {component: () => import('@/layout'), }
-  // }
-}
+// const viteComponents = import.meta.glob('@/views/**/*.vue')
+// const getComponents = (path, subMenus) => {
+//   const pathArr = path.split('/')
+//   if (pathArr.length > 2) {
+//     if (subMenus && subMenus.length) {
+//       return { component: () => import(`@/views${processPathConnector(path)}/index`) }
+//     } else {
+//       return {
+//         component: () => viteComponents[`../../../${processPathConnector(path)}/index.vue`]
+//       }
+//     }
+//   } 
+//   // else {
+//   //   return {component: () => import('@/layout'), }
+//   // }
+// }
 
-const filterAsyncRoutes2 = roleMenus => {
-  const getRoute = routes => {
-    const res = []
+// const filterAsyncRoutes2 = roleMenus => {
+//   const getRoute = routes => {
+//     const res = []
 
-    for (let i = 0; i < routes.length; i++) {
-      const route = routes[i]
-      const { code, path, orderNumber, authArea, checkAuth, icon, isRole, isShow, name } = route
+//     for (let i = 0; i < routes.length; i++) {
+//       const route = routes[i]
+//       const { code, path, orderNumber, authArea, checkAuth, icon, isRole, isShow, name } = route
 
-      const item = {
-        code,
-        path,
-        orderNumber,
-        authArea,
-        checkAuth,
-        isRole,
-        isShow,
-        name: code,
-        meta: { icon, title: name },
-        ...getComponents(path, route.subMenus),
-      }
+//       const item = {
+//         code,
+//         path,
+//         orderNumber,
+//         authArea,
+//         checkAuth,
+//         isRole,
+//         isShow,
+//         name: code,
+//         meta: { icon, title: name },
+//         ...getComponents(path, route.subMenus),
+//       }
 
-      if (route.subMenus && route.subMenus.length > 0) {
-        const redirect = route.subMenus[0].path
-        res.push({
-          ...item,
-          redirect,
-          children: getRoute(route.subMenus),
-        })
-      } else {
-        res.push({
-          ...item,
-          // children: [],
-        })
-      }
-    }
-    return res
-  }
+//       if (route.subMenus && route.subMenus.length > 0) {
+//         const redirect = route.subMenus[0].path
+//         res.push({
+//           ...item,
+//           redirect,
+//           children: getRoute(route.subMenus),
+//         })
+//       } else {
+//         res.push({
+//           ...item,
+//           // children: [],
+//         })
+//       }
+//     }
+//     return res
+//   }
 
-  return getRoute(roleMenus)
-}
+//   return getRoute(roleMenus)
+// }
 
-const filterMallMenu = (routes: RouteRecordRaw[]) => {
-  return routes.filter((route: any) => (route.code as string).startsWith(App.systemCode))
-}
+// const filterMallMenu = (routes: RouteRecordRaw[]) => {
+//   return routes.filter((route: any) => (route.code as string).startsWith(App.systemCode))
+// }
 
-const sortRoute = routes => {
-  if (!routes || !routes.length) return
+// const sortRoute = routes => {
+//   if (!routes || !routes.length) return
 
-  return routes.sort((a, b) => {
-    if (a.children && a.children.length) {
-      sortRoute(a.children)
-    }
-    return a.orderNumber - b.orderNumber
-  })
-}
+//   return routes.sort((a, b) => {
+//     if (a.children && a.children.length) {
+//       sortRoute(a.children)
+//     }
+//     return a.orderNumber - b.orderNumber
+//   })
+// }
 
 export interface Actions {
   [PermissionActionTypes.ACTION_PERMISSION_ONLY_HAVE]({ commit }: AugmentedActionContext): void

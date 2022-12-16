@@ -1,67 +1,100 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, toRefs, watch } from 'vue';
+import { computed, onBeforeMount, reactive, ref, toRefs } from 'vue'
 import { useStore } from '@/store'
-import { UserActionTypes } from '@/store/modules/user/action-types'
 
 import TableStock from './components/TableStock.vue'
 import DialogStock from './components/DialogStock.vue'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
+import { useRouter } from 'vue-router'
+import { PriceEnum } from '@/enums/priceEnum'
 
 const store = useStore()
+const { currentRoute } = useRouter()
 const dialogRef = ref(null)
 
 const state = reactive({
   tableData: [],
   total: 0,
-  curPriceMode: 0,
+  date: [],
+  searchParams: {
+    priceType: PriceEnum.DIRECT,
+    startDate: '',
+    endDate: '',
+  },
+  productId: '',
 })
 
-const { curPriceMode } = toRefs(state)
-
-const tableData = computed(() => {
-  return store.state.user.userList
+const productItem = computed(() => {
+  return store.state.product.productItem
 })
 
-const fetchData = (params) => {
-  store.dispatch(UserActionTypes.ACTION_USER_LIST, params)
+const isDirect = computed(() => {
+  return state.searchParams.priceType === PriceEnum.DIRECT
+})
+
+const isColleague = computed(() => {
+  return state.searchParams.priceType === PriceEnum.COLLEAGUE
+})
+
+const fetchData = (params = state.searchParams) => {
+  const { id: productId } = currentRoute.value.query
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_STOCK_LIST, { productId,...params })
 }
 
-const editItem = (item) => {
+const editItem = (item: unknown) => {
   dialogRef.value?.edit(item)
 }
 
-const showDialog = (item) => {
-  dialogRef.value?.show(item)
+const showDialog = () => {
+  dialogRef.value?.show(state.productId)
 }
 
-const toggle = index => {
-  state.curPriceMode = index
+const toggle = (val: keyof PriceEnum) => {
+  state.searchParams.priceType = val 
+  
+  fetchData()
+}
+
+const changeDate = (val: Arran<Date | string>) => {
+  const [ startDate, endDate ] = val
+  state.date = [startDate, endDate]
+  state.searchParams.startDate = startDate
+  state.searchParams.endDate = endDate
+  fetchData()
 }
 
 onBeforeMount(() => {
-  fetchData()
+  const { id: productId } = currentRoute.value.query
+  state.productId = productId
+  fetchData({ productId })
 })
 
-watch(() => tableData.value, (data) => {
-  if (!data || !data.length) return
-  state.tableData = data
-  state.total = data.length
-})
 </script>
 
 <template>
   <div>
     <div class="product-info flex">
       <el-tag type="info">
-        42141242242142
+        {{ productItem.code }}
       </el-tag>
       <div class="title ml5">
-        <h4>黄龙+九寨沟3天2晚纯玩精品</h4>
+        <h4>{{ productItem.name }}</h4>
       </div>
     </div>
-    <div class="search">
+    <div class="search mt20">
       <FormBase inline>
         <FormItemBase label="日期">
-          <DateBase :shortcuts="false" type="month" />
+          <DateBase v-model="state.date" @change="changeDate" />
+        </FormItemBase>
+        <FormItemBase>
+          <el-button-group>
+            <el-button type="primary" :disabled="isDirect" @click="toggle(PriceEnum.DIRECT)">
+              直客价
+            </el-button>
+            <el-button type="primary" :disabled="isColleague" @click="toggle(PriceEnum.COLLEAGUE)">
+              同行价
+            </el-button>
+          </el-button-group>
         </FormItemBase>
         <FormItemBase>
           <BtnBase type="success" @click="showDialog">
@@ -70,19 +103,9 @@ watch(() => tableData.value, (data) => {
         </FormItemBase>
       </FormBase>
     </div>
-    <div class="">
-      <el-button-group>
-        <el-button type="primary" :disabled="curPriceMode == 0" @click="toggle(0)">
-          直客价
-        </el-button>
-        <el-button type="primary" :disabled="curPriceMode == 1" @click="toggle(1)">
-          同行价
-        </el-button>
-      </el-button-group>
-    </div>
 
     <TableStock @on:edit="editItem" />
-    <DialogStock ref="dialogRef" />
+    <DialogStock ref="dialogRef" @on:reload="fetchData" />
   </div>
 </template>
 

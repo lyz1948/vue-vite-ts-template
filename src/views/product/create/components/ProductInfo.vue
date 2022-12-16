@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, toRefs, watch, computed } from 'vue'
-import { formState, rules } from '../params'
+import { rules } from '../params'
 import { useStore } from '@/store'
 import { TagOrType } from '@/enums'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
@@ -32,10 +32,8 @@ const selectProduct = ({ id: resPId, travelLineId }) => {
   state.form = { ...state.form, resPId, travelLineId }
 }
 
-const visibleChangeTag = (flag) => {
-  if (!flag) {
-    state.form.tags = state.tags.map(tid => ({ tid, type: TagOrType.TAG }))
-  }
+const changeTag = (tags) => {
+  state.form.tags = tags.map(tid => ({ tid, type: TagOrType.TAG }))
 }
 
 // const visibleChangeCate = (flag) => {
@@ -48,7 +46,7 @@ watch(
   () => state.form,
   form => {
     store.commit(ProductMutationTypes.PRODUCT_ITEM, form)
-    store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, { tags: state.tags })
+    store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, { tags: state.form.tags })
   },
   { deep: true }
 )
@@ -118,7 +116,7 @@ const { form, tags } = toRefs(state)
                 v-model="tags"
                 multiple
                 style="width: 100%"
-                @visible-change="visibleChangeTag"
+                @change="changeTag"
               />
             </FormItemBase>
           </div>

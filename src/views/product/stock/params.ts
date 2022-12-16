@@ -1,32 +1,39 @@
-
 export const searchState = () => ({
-  name: '',
-  create: ''
+  priceType: '',
+  productId: '',
+  startDate: '',
+  endDate: '',
 })
-
-export const searchGalleryState = () => ({
-  name: '',
-})
-
-// export const searchTagState = () => ({
-//   name: '',
-//   create: ''
-// })
 
 export const formState = () => ({
-  name: '',
-})
-
-// 创建行程
-export const formNewState = () => ({
-  productName: '',
-  days: '',
-  category: '',
-  city: '',
-})
-
-export const formTripState = () => ({
-  title: '',
+  clearDays: 0,
+  clearHours: '',
+  endDate: '',
+  isExceed: true,
+  planCount: 0,
+  planDateList: {},
+  planSurplusCount: 0,
+  prices: [
+    {
+      adultPrice: 0,
+      childPrice: 0,
+      customerTypeId: 0,
+      id: 0,
+      productId: 0,
+      productPlanId: 0,
+      roomDifference: 0,
+      type: '',
+    },
+  ],
+  productId: 0,
+  saleStatus: true,
+  signUpAdvanceDays: 0,
+  signUpAdvanceHours: '',
+  startDate: '',
+  type: 'DAY',
+  weekPlanList: [
+    'DAY'
+  ],
 })
 
 export const rules = {

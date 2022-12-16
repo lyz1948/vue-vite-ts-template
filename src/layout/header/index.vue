@@ -47,6 +47,9 @@ const toggleSidebar = () => {
   justify-content: space-between;
   border-bottom: 1px solid #dcdfe6;
   padding: 0 20px;
+  backdrop-filter: saturate(50%) blur(4px);
+  background-image: radial-gradient(transparent 1px, #fff 1px);
+  background-size: 4px 4px;
   height: $base-head-menu-height;
   z-index: $base-z-index-max;
 

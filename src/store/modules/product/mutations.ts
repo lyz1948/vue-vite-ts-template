@@ -7,6 +7,10 @@ export type Mutations<S = ProductState> = {
   [ProductMutationTypes.PRODUCT_DATA](state: S, data: any): void
   [ProductMutationTypes.PRODUCT_ITEM](state: S, data: any): void
   [ProductMutationTypes.PRODUCT_ITEM_UPDATE](state: S, data: any): void
+  
+  [ProductMutationTypes.PRODUCT_STOCK_LIST](state: S, data: any): void
+  [ProductMutationTypes.PRODUCT_STOCK_ITEM](state: S, data: any): void
+
   [ProductMutationTypes.PRODUCT_TAG_LIST](state: S, data: any): void
   [ProductMutationTypes.PRODUCT_CATE_LIST](state: S, data: any): void
 
@@ -19,6 +23,7 @@ export const mutations: MutationTree<ProductState> & Mutations = {
     state.productResourceAll = data
   },
   [ProductMutationTypes.PRODUCT_ITEM](state: ProductState, data: any) {
+    if (!data || typeof data !== 'object') return
     Object.keys(data).map(key => {
       const val = data[key] 
       if (is.arr(state.productItem[key])) {
@@ -32,6 +37,14 @@ export const mutations: MutationTree<ProductState> & Mutations = {
     Object.keys(data).map(key => {
       state.productItem[key] = data[key]
     })
+  },
+
+  [ProductMutationTypes.PRODUCT_STOCK_LIST](state: ProductState, data: any) {
+    state.productStockList = data
+  },
+
+  [ProductMutationTypes.PRODUCT_STOCK_ITEM](state: ProductState, data: any) {
+    state.productStockItem = data
   },
   // [ProductMutationTypes.PRODUCT_RESOURCE_LIST](state: ProductState, data: any) {
   //   state.productResourceList = data

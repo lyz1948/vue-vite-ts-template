@@ -2,7 +2,7 @@
 import { markRaw, computed, onBeforeMount } from 'vue'
 import { useStore } from '@/store'
 import { ProductActionTypes } from '@/store/modules/product/action-types'
-import { mockData } from './params'
+// import { mockData } from './params'
 import ProductInfo from './components/ProductInfo.vue'
 import ProductEdit from './components/ProductEdit.vue'
 import ProductTrip from './components/ProductTrip.vue'
@@ -13,8 +13,10 @@ import FriendlyTips from './components/FriendlyTips.vue'
 import ServiceStandard from './components/ServiceStandard.vue'
 import SwiperItem from './components/SwiperItem.vue'
 import { useRouter } from 'vue-router'
-const { currentRoute } = useRouter()
+import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
 
+const { currentRoute } = useRouter()
+const router = useRouter()
 const store = useStore()
 
 const compList = markRaw([
@@ -32,9 +34,9 @@ const compList = markRaw([
 const productItem = computed(() => store.state.product.productItem)
 
 const handleCreate = () => {
-  console.log(productItem.value)
   store.dispatch(ProductActionTypes.ACTION_PRODUCT_SET, productItem.value).then(() => {
-    console.log('ok')
+    router.push({ path: '/product/line' })
+    store.commit(ProductMutationTypes.PRODUCT_ITEM, {})
   })
 }
 

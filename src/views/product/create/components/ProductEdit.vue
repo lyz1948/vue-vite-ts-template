@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, toRefs, ref } from 'vue'
+import { reactive, toRefs, ref, computed, watch } from 'vue'
 // import { Editor } from '@tinymce/tinymce-vue'
 import TinymceEditor from '@tinymce/tinymce-vue'
 import ModTitle from '@/components/Title/index.vue'
@@ -20,6 +20,8 @@ const props = defineProps({
 const state = reactive({
   feature: getProductKeyVal('feature'),
 })
+
+const productItem = computed(() => store.state.product.productItem)
 
 const initOptions = ref({
   selector: `#${props.id}`,
@@ -62,9 +64,21 @@ const { feature } = toRefs(state)
 const handleChange = ({ level }) => {
   const { content } = level
   store.commit(ProductMutationTypes.PRODUCT_ITEM, { feature: content })
-  console.log('content:', content)
 }
 
+watch(
+  () => productItem.value,
+  data => {
+    setTimeout(() => {
+      if (data && data['feature']) {
+        state.feature = data['feature']
+      }
+    }, 1000)
+  },
+  {
+    immediate: true,
+  }
+)
 </script>
 
 <template>

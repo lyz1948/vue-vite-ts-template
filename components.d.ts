@@ -58,6 +58,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    ElTimeSelect: typeof import('element-plus/es')['ElTimeSelect']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FormBase: typeof import('./src/components/base/FormBase.vue')['default']
     FormItem: typeof import('./src/components/base/FormItem.vue')['default']

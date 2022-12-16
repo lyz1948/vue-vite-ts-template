@@ -9,10 +9,11 @@ import { ProductMutationTypes } from './mutation-types'
 
 import { productListRequest, productSetRequest, productDelRequest, productDetailRequest } from '@/api/product'
 import { productResourceAllRequest } from '@/api/product'
+import { productStockListRequest, productStockSetRequest } from '@/api/product'
 import { tagListRequest, tagSetRequest, tagDelRequest } from '@/api/tag'
 import { cateListRequest, cateSetRequest, cateDelRequest } from '@/api/cate'
 
-import { Product, ProductSearch } from '@/types/product'
+import { Product, ProductSearch, Stock, StockSearch } from '@/types/product'
 import { Tag, TagSearch } from '@/types/tag'
 import { Cate, CateSearch } from '@/types/cate'
 import { formatSelect } from '@/utils/format';
@@ -27,12 +28,14 @@ type NoAugmentedActionContext = {
 
 export interface IUserActions {
   [ProductActionTypes.ACTION_PRODUCT_RESOURCE_ALL]({ commit }: AugmentedActionContext): void
-  // [ProductActionTypes.ACTION_PRODUCT_RESOURCE_LIST]({ commit }: AugmentedActionContext, params: any): void
 
   [ProductActionTypes.ACTION_PRODUCT_LIST]({ commit }: AugmentedActionContext, params: ProductSearch): void
   [ProductActionTypes.ACTION_PRODUCT_SET]({ commit }: AugmentedActionContext, item: Product): void
   [ProductActionTypes.ACTION_PRODUCT_DEL]({ commit }: AugmentedActionContext, id: number): void
   [ProductActionTypes.ACTION_PRODUCT_DETAIL]({ commit }: AugmentedActionContext, id: number): void
+
+  [ProductActionTypes.ACTION_PRODUCT_STOCK_LIST]({ commit }: AugmentedActionContext, params: StockSearch): void
+  [ProductActionTypes.ACTION_PRODUCT_STOCK_SET]({ commit }: AugmentedActionContext, stock, Stock): void
 
   [ProductActionTypes.ACTION_PRODUCT_TAG_LIST]({ commit }: AugmentedActionContext, params: TagSearch): void
   [ProductActionTypes.ACTION_PRODUCT_TAG_SET]({ commit }: AugmentedActionContext, item: Tag): void
@@ -68,6 +71,20 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
     })
   },
 
+  // 库存相关
+  async [ProductActionTypes.ACTION_PRODUCT_STOCK_LIST]({ commit }, params: StockSearch) {
+    return productStockListRequest(params).then(data => {
+      commit(ProductMutationTypes.PRODUCT_STOCK_LIST, data)
+    })
+  },
+  
+  async [ProductActionTypes.ACTION_PRODUCT_STOCK_SET]({ commit }, stock: Stock) {
+    return productStockSetRequest(stock).then(data => {
+      commit(ProductMutationTypes.PRODUCT_STOCK_ITEM, data)
+    })
+  },
+
+  // 标签相关
   async [ProductActionTypes.ACTION_PRODUCT_TAG_LIST]({ commit }, params: TagSearch) {
     return tagListRequest(params).then(data => {
       commit(ProductMutationTypes.PRODUCT_TAG_LIST, formatSelect(data))
@@ -80,6 +97,7 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
     return tagDelRequest(id)
   },
 
+  // 分类相关
   async [ProductActionTypes.ACTION_PRODUCT_CATE_LIST]({ commit }, params: CateSearch) {
     return cateListRequest(params).then(data => {
       commit(ProductMutationTypes.PRODUCT_CATE_LIST, formatSelect(data))

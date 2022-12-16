@@ -27,17 +27,17 @@ export const ProductCategory = [
 
 // 产品库存
 export const ProductStock = [
-  { attrs: { prop: '', label: '日期' } },
-  { attrs: { prop: '', label: '成人价' } },
-  { attrs: { prop: '', label: '儿童价' } },
-  { attrs: { prop: '', label: '单房差' } },
-  { attrs: { prop: '', label: '报名截止' } },
-  { attrs: { prop: '', label: '库存' } },
+  { attrs: { prop: '', label: '日期' }, slot: 'date' },
+  { attrs: { prop: '', label: '成人价' }, slot: 'adult' },
+  { attrs: { prop: '', label: '儿童价' }, slot: 'child' },
+  { attrs: { prop: '', label: '单房差' }, slot: 'room' },
+  { attrs: { prop: '', label: '报名截止' }, slot: 'enterEnd' },
+  { attrs: { prop: 'planCount', label: '库存' } },
   { attrs: { prop: '', label: '确认' } },
   { attrs: { prop: '', label: '占位' } },
-  { attrs: { prop: '', label: '余位' } },
-  { attrs: { prop: '', label: '清位时间' } },
-  { attrs: { prop: '', label: '可超售' } },
+  { attrs: { prop: 'planSurplusCount', label: '余位' } },
+  { attrs: { prop: 'clearDays', label: '清位时间' }, slot: 'clearDate' },
+  { attrs: { prop: 'isExceed', label: '可超售' } },
   { attrs: { prop: '', label: '状态' } },
   action,
 ]

@@ -10,7 +10,7 @@ const getProductItem = computed(() => {
 // 获取编辑产品对应的值
 export const pickProductData = (keys: string[]) => {
   return keys.reduce((acc, key) => {
-    acc = { ...acc, [key]: getProductItem.value[key] }
+    acc = { ...acc, [key]: getProductItem.value[key] ?? '' }
     return acc
   }, {})
 }

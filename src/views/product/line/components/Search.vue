@@ -2,7 +2,6 @@
 import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { searchState } from '../params'
-import SelectStaff from '@/components/Select/SelectStaff.vue'
 import SelectProductSource from '@/components/Select/SelectProductSource.vue';
 
 const emit = defineEmits(['on:search', 'on:create'])
