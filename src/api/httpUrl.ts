@@ -68,6 +68,7 @@ const httpApi = {
   productList: '/mall/product/page-product',
   productDetail: '/mall/product/product',
   productSet: '/mall/product/save-update-product',
+  productUpdate: '/mall/product/update',
   productDel: '/mall/product/del-product',
 
   producStocktList: '/mall/product/list-plan',

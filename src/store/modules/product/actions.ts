@@ -7,7 +7,7 @@ import { ProductActionTypes } from './action-types'
 import { ProductState } from './state'
 import { ProductMutationTypes } from './mutation-types'
 
-import { productListRequest, productSetRequest, productDelRequest, productDetailRequest } from '@/api/product'
+import { productListRequest, productSetRequest, productDelRequest, productDetailRequest, productUpdateRequest } from '@/api/product'
 import { productResourceAllRequest } from '@/api/product'
 import { productRelTagSetRequest, productRelTagDelRequest } from '@/api/product'
 import { productStockListRequest, productStockSetRequest } from '@/api/product'
@@ -34,6 +34,7 @@ export interface IUserActions {
   [ProductActionTypes.ACTION_PRODUCT_SET]({ commit }: AugmentedActionContext, item: Product): void
   [ProductActionTypes.ACTION_PRODUCT_DEL]({ commit }: AugmentedActionContext, id: number): void
   [ProductActionTypes.ACTION_PRODUCT_DETAIL]({ commit }: AugmentedActionContext, id: number): void
+  [ProductActionTypes.ACTION_PRODUCT_UPDATE]({ commit }: AugmentedActionContext, params: ProductSearch): void
 
   [ProductActionTypes.ACTION_PRODUCT_STOCK_LIST]({ commit }: AugmentedActionContext, params: StockSearch): void
   [ProductActionTypes.ACTION_PRODUCT_STOCK_SET]({ commit }: AugmentedActionContext, stock, Stock): void
@@ -73,6 +74,9 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
     return productDetailRequest(id).then(data => {
       commit(ProductMutationTypes.PRODUCT_ITEM, data)
     })
+  },
+  async [ProductActionTypes.ACTION_PRODUCT_UPDATE]({ commit }, item: Product) {
+    return productUpdateRequest(item)
   },
 
   // 库存相关

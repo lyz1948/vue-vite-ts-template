@@ -1,5 +1,4 @@
-const action = { attrs: { prop: 'action', label: '操作', }, slot: 'action' }
-
+import { action } from "./table"
 // 团期交客
 export const SaleOrder = [
   { attrs: { prop: '', label: '团期', } },

@@ -1,4 +1,4 @@
-const action = { attrs: { prop: 'action', label: '操作' }, slot: 'action' }
+import { action } from "./table"
 
 export const SMSCustomerTpl = [
   { attrs: { prop: 'name', label: '触发条件', width: 100 } },

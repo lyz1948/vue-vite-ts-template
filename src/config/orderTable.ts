@@ -1,4 +1,5 @@
-const action = { attrs: { prop: 'action', label: '操作', }, slot: 'action' }
+import { action } from "./table"
+
 // 游客名单
 export const Tourist = [
   { attrs: { prop: 'name', label: '姓名', } },

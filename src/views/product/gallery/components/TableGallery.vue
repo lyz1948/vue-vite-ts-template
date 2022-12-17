@@ -7,7 +7,8 @@ import { PageDefault } from '@/config'
 import { useRouter } from 'vue-router'
 import useElement from '@/hooks/useElement'
 import Upload from '@/components/Uploader/index.vue'
-// import { getUploadFileName } from '@/config/upload'
+import { PicTypeEnum } from '@/enums/picTypeEnum'
+// import { getUploadFileName } from '@/config/upload' 
 
 const store = useStore()
 const router = useRouter()
@@ -23,6 +24,10 @@ const state = reactive({
 
 const tableData = computed(() => {
   return store.state.source.picTypeList
+})
+
+const prohibit = computed(() => {
+  return code => !Object.values(PicTypeEnum).includes(code)
 })
 
 const handlePage = ({ pageNum, pageSize }) => {
@@ -83,7 +88,7 @@ const handleUpdate = (row: any) => {
         <BtnPermission type="info" @click="handleDetail(row)">
           查看
         </BtnPermission>
-        <BtnPermission type="danger" @click="handleDelete(row)">
+        <BtnPermission v-if="prohibit(row.code)" type="danger" @click="handleDelete(row)">
           删除
         </BtnPermission>
       </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import UploadAvatar from '@/components/Uploader/UploadAvatar.vue'
 import ModTitle from '@/components/Title/index.vue'
 import { useStore } from '@/store'
@@ -8,7 +8,7 @@ import useDefault from '@/hooks/useDefault'
 import useElement from '@/hooks/useElement'
 
 const store = useStore()
-const { getSwiperPicTypeId } = useDefault()
+const { getBannerPicTypeId } = useDefault()
 const { success } = useElement()
 
 const bannerList = ref([
@@ -18,9 +18,21 @@ const bannerList = ref([
   { path: '', name: '', skipPath: '', orderNumber: 4 },
 ])
 
+// 图片分类下的图片
+const picTypeImagesData = computed(() => {
+  return store.state.source.picByTypeList
+})
+
+const bannerTypeImages = computed(() => {
+  return picTypeImagesData.value[getBannerPicTypeId()]
+})
+
+const fetchSwiperPic = () => {
+  const typeId = getBannerPicTypeId()
+  return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId)
+}
+
 const handleSuccess = (index, data: any) => {
-  console.log('index:', index)
-  console.log('data:', data)
   const { url } = data
   if (url !== '') {
     bannerList.value[index].path = url
@@ -28,21 +40,22 @@ const handleSuccess = (index, data: any) => {
 }
 
 const handleSave = () => {
-  const picTypeId = getSwiperPicTypeId()
-  const data = bannerList.value.map(it => {
-    const { name, path, orderNumber, skipPath } = it
-    const item = {
-      path,
-      skipPath,
-      picTypeId,
-      orderNumber,
-      picTypeName: name,
-      skipStatus: true,
-      skipType: '',
-    }
-    return item
-  })
-  console.log('data:', data)
+  const picTypeId = getBannerPicTypeId()
+  const data = bannerList.value
+    .filter(it => it.path !== '')
+    .map(it => {
+      const { name, path, orderNumber, skipPath } = it
+      const item = {
+        path,
+        skipPath,
+        picTypeId,
+        orderNumber,
+        picTypeName: name,
+        skipStatus: true,
+        skipType: '',
+      }
+      return item
+    })
   const pList = data.map(item => {
     return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, item)
   })
@@ -51,6 +64,24 @@ const handleSave = () => {
     success({ message: '保存成功' })
   })
 }
+
+watch(
+  () => bannerTypeImages.value,
+  data => {
+    console.log(data)
+    if (!data) {
+      fetchSwiperPic()
+    } else {
+
+      data.map((it, idx) => {
+        const cur = bannerList.value[idx]
+        bannerList.value[idx] = { ...cur, ...it }
+      })
+        console.log('bannerList.value:', bannerList.value)
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

@@ -6,7 +6,7 @@ export default function () {
   const store = useStore()
 
   const picTypeList = computed(() => {
-    return store.state.source.picTypeList
+    return store.state.source.picTypeList || []
   })
 
   const getSwiperPicTypeId = () => {
@@ -14,7 +14,13 @@ export default function () {
     return findItem?.id
   }
 
+  const getBannerPicTypeId = () => {
+    const findItem = picTypeList.value.find(it => it.code == PicTypeEnum.BANNER)
+    return findItem?.id
+  }
+
   return {
     getSwiperPicTypeId,
+    getBannerPicTypeId,
   }
 }

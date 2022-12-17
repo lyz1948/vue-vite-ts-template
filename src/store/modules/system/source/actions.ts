@@ -63,24 +63,25 @@ export const actions: ActionTree<SourceState, RootState> & SourceActions = {
   [SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE]({ commit }: AugmentedActionContext, id: number) {
     return picListAllRequest(id).then(async (data) => {
       if (!data) return
-      const paths = (data as any).map(it => it.path)
-      const idRefPath = (data as any).reduce((acc, cur) => {
-        acc = { ...acc, [cur.path]: cur.id }
-        return acc
-      }, {})
+      commit(SourcMutationTypes.SOURCE_PIC_BY_TYPE, { id, data })
+      // const paths = (data as any).map(it => it.path)
+      // const idRefPath = (data as any).reduce((acc, cur) => {
+      //   acc = { ...acc, [cur.path]: cur.id }
+      //   return acc
+      // }, {})
       
-      let formatData: any = []
+      // let formatData: any = []
       
-      if (paths && paths.length) {
-        const urlList = await ossPicUrlRequest(paths)
+      // if (paths && paths.length) {
+      //   const urlList = await ossPicUrlRequest(paths)
 
-        formatData = urlList.map(val => {
-          const url = getUploadFileName(val)
-          const picId = idRefPath[url]
-          return { typeId: id, picId, name: url, url: val }
-        })
-      }
-      commit(SourcMutationTypes.SOURCE_PIC_BY_TYPE, { id, data: formatData })
+      //   formatData = urlList.map(val => {
+      //     const url = getUploadFileName(val)
+      //     const picId = idRefPath[url]
+      //     return { typeId: id, picId, name: url, url: val }
+      //   })
+      // }
+      // commit(SourcMutationTypes.SOURCE_PIC_BY_TYPE, { id, data: formatData })
     })
   },
   [SourceActionTypes.ACTION_SOURCE_PIC_LIST]({ commit }: AugmentedActionContext, params: PicSearch) {

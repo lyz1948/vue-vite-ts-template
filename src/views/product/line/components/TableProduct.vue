@@ -102,7 +102,7 @@ const handleDelete = (id: number) => {
 const toggleStatus = (type: string, row: unknown) => {
   const status = row[type]
   row[type] = !status
-  store.dispatch(ProductActionTypes.ACTION_PRODUCT_SET, { ...row, [type]: !status })
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_UPDATE, { ...row, [type]: !status })
 }
 
 watch(

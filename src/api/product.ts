@@ -28,6 +28,11 @@ export const productSetRequest = async (tag: Product) => {
   return await request.post<Product>(httpUrl.productSet, tag)
 }
 
+// 产品更新
+export const productUpdateRequest = async (tag: Product) => {
+  return await request.post<Product>(httpUrl.productUpdate, tag)
+}
+
 // 产品删除
 export const productDelRequest = async (id: number) => {
   return await request.post<number>(httpUrl.productDel, { id })

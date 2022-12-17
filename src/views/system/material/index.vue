@@ -38,7 +38,6 @@ const getCurTabPics = (id) => {
   const list = picTypeImagesData.value[id]
 
   return list.map(it => {
-    console.log('it:', it)
     return { check: false, ...it }
   })
 }
@@ -52,7 +51,6 @@ const fetchPicTypeList = () => {
 }
 
 const fetchPic = typeId => {
-  console.log('fetchpic typeId:', typeId)
   return store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_BY_TYPE, typeId).then(() => {
     state.curTabPics = getCurTabPics(typeId)
   })

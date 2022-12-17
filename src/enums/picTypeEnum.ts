@@ -1,4 +1,5 @@
 export enum PicTypeEnum {
+  BANNER = 'BANNER',
   SWIPER = 'SWIPER',
   LINE = 'LINE',
   PRODUCT = 'PRODUCT',
@@ -6,6 +7,7 @@ export enum PicTypeEnum {
 }
 
 export enum PicTypeLabelEnum {
+  BANNER = '首页轮播',
   SWIPER = '轮播图',
   LINE = '线路图片',
   PRODUCT = '产品图片',
