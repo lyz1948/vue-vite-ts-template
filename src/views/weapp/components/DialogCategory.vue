@@ -4,8 +4,19 @@ import { themeColorOpts } from '@/config/setting'
 import { formCateState, rulesCate as rules } from '../params'
 import SvgIconList from '@/components/SvgIcon/SvgIconList.vue'
 import Color from '@/components/Color/index.vue'
+import useElement from "@/hooks/useElement"
+
+import FormBase from '@/components/base/FormBase.vue'
+import type { MyFormExpose } from '@/components/base/FormBase.vue'
+import { useStore } from "@/store"
+import { ProductActionTypes } from "@/store/modules/product/action-types"
 
 const title = '新增自定义类别'
+const store = useStore()
+const emit = defineEmits(['on:reload'])
+
+const { success, error } = useElement()
+const formRef = ref<InstanceType<typeof FormBase> & MyFormExpose>()
 const visibleDialog = ref(false)
 
 const state = reactive({
@@ -25,17 +36,27 @@ const hide = () => {
   visibleDialog.value = false
 }
 
-// const selectColor = (val, index) => {
-//   state.form.color = val
-//   state.colorIndex = index
-// }
+const selectIcon = (val) => {
+  state.form.icon = val
+}
 
-// const customColor = (val) => {
-//   state.form.color = val
-// }
+const selectColor = (val) => {
+  state.form.color = val
+}
 
 const handleConfirm = () => {
-  visibleDialog.value = false
+  formRef.value
+    ?.validate()
+    .then(() => {
+      store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, state.form).then(() => {
+        success()
+        hide()
+        emit('on:reload')
+      })
+    })
+    .catch(err => {
+      error(err)
+    })
 }
 
 defineExpose({
@@ -54,7 +75,7 @@ defineExpose({
   >
     <FormBase
       ref="formRef"
-      :form="form"
+      :model="form"
       :rules="rules"
       label-width="100px"
     >
@@ -62,8 +83,8 @@ defineExpose({
         <InputBase v-model="form.name" />
       </FormItemBase>
 
-      <FormItemBase prop="name" label="背景颜色">
-        <Color />
+      <FormItemBase prop="color" label="背景颜色">
+        <Color :value="form.color" @on:select="selectColor" />
         <!-- <div class="color-wrap">
           <span
             v-for="(item, index) in colorList"
@@ -77,7 +98,7 @@ defineExpose({
       </FormItemBase>
 
       <FormItemBase prop="number" label="类别图标">
-        <SvgIconList />
+        <SvgIconList @on:select="selectIcon" />
       </FormItemBase>
     </FormBase>
   </DialogBase>

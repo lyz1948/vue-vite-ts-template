@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import SvgIcon from '@/components/SvgIcon/index.vue'
-import { ref, onBeforeMount, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const iconFiles = import.meta.globEager('../../assets/icon/*.svg')
 
+const emit = defineEmits(['on:select'])
 const icons = ref([])
 const activeIcon = ref('')
 
 const select = val => {
   activeIcon.value = val
+  emit('on:select', val)
 }
 
 const getIconList = computed(() => icons.value)
 
-onBeforeMount(() => {
+onMounted(() => {
   for (const path in iconFiles) {
     const val = path.split('/icon/')[1].split('.svg')[0]
     icons.value.push(val)
@@ -22,15 +24,22 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="svg-comp">
+  <div v-if="getIconList.length" class="svg-comp">
     <template v-for="icon in getIconList" :key="icon">
       <SvgIcon
-        size="36px"
-        color="#666699"
         :name="icon"
+        color="#000"
+        size="24"
         :class="{ 'active': activeIcon == icon }"
         @click="select(icon)"
       />
+      <!-- <SvgIcon
+        size="36"
+        color="#666699"
+        name="地图距离_map-distance"
+        :class="{ 'active': activeIcon == icon }"
+        @click="select(icon)"
+      /> -->
     </template>
   </div>
 </template>

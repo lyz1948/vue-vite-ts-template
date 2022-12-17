@@ -1,45 +1,86 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import draggable from 'vuedraggable'
 import Dialog from './components/DialogCategory.vue'
-import SvgIcon from '@/components/SvgIcon/index.vue';
+import SvgIcon from '@/components/SvgIcon/index.vue'
+import { ProductActionTypes } from '@/store/modules/product/action-types'
+import { useStore } from '@/store'
 
-
+const store = useStore()
 let idGlobal = 1
 
-const list1 = ref([
-  { name: '周边游', id: 1, icon: '标记_mark', color: '#f50' },
-  { name: '自由行', id: 2, icon: '标记_mark', color: '#f50' },
-  { name: '国内游', id: 3, icon: '标记_mark', color: '#f50' },
-  { name: '亲子游', id: 4, icon: '标记_mark', color: '#f50' },
-])
+// const list1 = ref([
+//   { name: '周边游', id: 1, icon: '标记_mark', color: '#f50' },
+//   { name: '自由行', id: 2, icon: '标记_mark', color: '#f50' },
+//   { name: '国内游', id: 3, icon: '标记_mark', color: '#f50' },
+//   { name: '亲子游', id: 4, icon: '标记_mark', color: '#f50' },
+// ])
 
-const list2 = ref([
-  { name: '高端游', id: 5, icon: '标记_mark', color: '#f50' },
-  { name: '购物团', id: 6, icon: '标记_mark', color: '#a30' },
-  { name: '经典游', id: 7, icon: '标记_mark', color: '#c21' },
-])
+// const list2 = ref([
+//   { name: '高端游', id: 5, icon: '标记_mark', color: '#f50' },
+//   { name: '购物团', id: 6, icon: '标记_mark', color: '#a30' },
+//   { name: '经典游', id: 7, icon: '标记_mark', color: '#c21' },
+// ])
 
 const controlOnStart = ref(true)
 const dialogRef = ref(null)
+const list1 = ref([])
+const list2 = ref([])
 
-const clone = (item) => {
-  console.log(item);
-  return { ...item, id: idGlobal++ };
+const tableData = computed(() => {
+  let list = store.state.product.productCateList
+  if (list && list.length) {
+    list = list.sort((a, b) => a.orderNumber - b.orderNumber)
+  }
+  return list
+})
+
+// const list1 = computed(() => {
+//   return tableData.value.filter(it => it.isShow)
+// })
+
+// const list2 = computed({
+
+// })
+
+const fetchData = (params = {}) => {
+  return store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_LIST, params)
+}
+
+const clone = item => {
+  return { ...item, id: idGlobal++ }
 }
 
 const start = ({ originalEvent }) => {
-  controlOnStart.value = originalEvent.ctrlKey;
+  console.log('originalEvent:', originalEvent)
+  controlOnStart.value = originalEvent.ctrlKey
 }
 
 const log = ev => {
-  console.log('el', ev)
+  // 删除
+  // if (ev.added) {
+
+  // }
+  // // 添加
+  // if (ev.removed) {
+
+
+  // }
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, state.form)
+ 
 }
 
 const showDialog = () => {
   dialogRef.value.show()
 }
 
+onMounted(() => {
+  if (!tableData.value.length) {
+    fetchData()
+  }
+  list1.value = tableData.value.filter(it => it.isShow)
+  list2.value= tableData.value.filter(it => !it.isShow)
+})
 </script>
 
 <template>
@@ -68,7 +109,13 @@ const showDialog = () => {
             <template #item="{ element }">
               <div class="list-group-item">
                 <div class="icon-box" :style="{ background: element.color }">
-                  <SvgIcon :name="element.icon" size="30px" />
+                  <component
+                    :is="element.icon"
+                    fill="#000"
+                    size="20"
+                    :stroke-width="4"
+                  />
+                  <!-- <SvgIcon :name="element.icon" size="30px" /> -->
                 </div>
                 {{ element.name }}
               </div>
@@ -78,9 +125,7 @@ const showDialog = () => {
 
         <div class="weapp-category--item">
           <h3>未添加分类</h3>
-          <p>
-            未选中类别目录
-          </p>
+          <p>未选中类别目录</p>
           <draggable
             class="list-group"
             group="cate"
@@ -109,7 +154,7 @@ const showDialog = () => {
         </BtnBase>
       </div>
     </div>
-    <Dialog ref="dialogRef" />
+    <Dialog ref="dialogRef" @on:reload="fetchData" />
   </div>
 </template>
 
@@ -118,7 +163,6 @@ const showDialog = () => {
 @import '@/styles/variables.scss';
 
 .weapp-category {
-  
   &--wrap {
     display: flex;
   }

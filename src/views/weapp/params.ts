@@ -1,3 +1,4 @@
+import { TagOrType } from '../../enums/index'
 export const searchState = () => ({
   name: '',
   create: '',
@@ -18,6 +19,10 @@ export const formCateState = () => ({
   name: '',
   color: '',
   icon: '',
+  remarks: '',
+  orderNumber: 0,
+  type: TagOrType.TYPE,
+  isShow: false,
 })
 
 // 创建行程

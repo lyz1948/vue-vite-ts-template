@@ -2,7 +2,7 @@
 import { themeColorOpts } from '@/config/setting'
 import { ref } from 'vue'
 
-const emit = defineEmits(['on:click'])
+const emit = defineEmits(['on:select'])
 const props = defineProps({
   list: {
     type: Array,
@@ -18,11 +18,11 @@ const curIndex = ref('')
 
 const selectColor = (index, val) => {
   curIndex.value = index
-  emit('on:click', val)
+  emit('on:select', val)
 }
 
 const customColor = (val) => {
-  emit('on:click', val)
+  emit('on:select', val)
 }
 
 </script>

@@ -18,6 +18,7 @@ import { Product, ProductSearch, Stock, StockSearch, ProductTagRel, ProductTagRe
 import { Tag, TagSearch } from '@/types/tag'
 import { Cate, CateSearch } from '@/types/cate'
 import { formatSelect } from '@/utils/format';
+import { TagOrType } from '../../../enums/index';
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
@@ -94,7 +95,7 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
 
   // 标签相关
   async [ProductActionTypes.ACTION_PRODUCT_TAG_LIST]({ commit }, params: TagSearch) {
-    return tagListRequest(params).then(data => {
+    return tagListRequest({ ...params, type: TagOrType.TAG }).then(data => {
       commit(ProductMutationTypes.PRODUCT_TAG_LIST, formatSelect(data))
     })
   },
@@ -107,7 +108,7 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
 
   // 分类相关
   async [ProductActionTypes.ACTION_PRODUCT_CATE_LIST]({ commit }, params: CateSearch) {
-    return cateListRequest(params).then(data => {
+    return cateListRequest({ ...params, type: TagOrType.TYPE }).then(data => {
       commit(ProductMutationTypes.PRODUCT_CATE_LIST, formatSelect(data))
     })
   },
