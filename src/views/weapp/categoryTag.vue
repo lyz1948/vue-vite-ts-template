@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, computed, watch } from 'vue'
-import { ProductList as columns } from '@/config/productTable'
+import { CategoryTagRelative as columns } from '@/config/weappTable'
 import { useStore } from '@/store'
 import { ProductActionTypes } from '@/store/modules/product/action-types'
 import Search from './components/Search.vue'
@@ -21,8 +21,8 @@ const fetchData = (params: ProductSearch) => {
   store.dispatch(ProductActionTypes.ACTION_PRODUCT_LIST, params)
 }
 
-const showDialog = (id: number) => {
-  dialogRef.value?.show(id)
+const showDialog = (row: unknown) => {
+  dialogRef.value?.show(row)
 }
 
 watch(
@@ -50,6 +50,17 @@ watch(
           </el-tag>
         </template>
 
+        <template #relative="{ row }">
+          <el-tag
+            v-for="item in row.tags"
+            :key="item.id"
+            type="warning"
+            class="ml5"
+          >
+            {{ item.name }}
+          </el-tag>
+        </template>
+
         <template #isEnable="{ row }">
           <el-tag :type="row.isEnable ? 'success' : 'info'">
             {{ row.isEnable ? '上架' : '下架' }}
@@ -57,7 +68,7 @@ watch(
         </template>
 
         <template #action="{ row }">
-          <BtnBase type="primary" link @click="showDialog(row.id)">
+          <BtnBase type="primary" link @click="showDialog(row)">
             关联
           </BtnBase>
         </template>

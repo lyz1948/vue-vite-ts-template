@@ -1,42 +1,81 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ref, computed } from 'vue'
+// import { ElMessage } from 'element-plus'
 
 import type { UploadProps } from 'element-plus'
+// interface Props {
+//   url: string
+// }
+// const props = defineProps<Props>()
+import { uploadUrl } from '@/config/upload'
+import useElement from '@/hooks/useElement'
+import { useStore } from '@/store'
 
-interface Props {
-  url: string
-}
+const props = defineProps({
+  action: {
+    type: String,
+    default: uploadUrl,
+  },
+  url: {
+    type: String,
+    default: '',
+  },
+  limit: {
+    type: Number,
+    default: 9,
+  },
+  multiple: {
+    type: Boolean,
+    default: true,
+  },
+  acceptType: {
+    type: String,
+    default: 'image/png, image/jpeg',
+  },
+  imgList: {
+    type: Array,
+    default: () => ([]),
+  }
+})
 
-const props = defineProps<Props>()
 const imageUrl = ref(props.url)
+const { error } = useElement()
+const emit = defineEmits(['on:success'])
+const getToken = computed(() => {
+  const store = useStore()
+  return { Authorization: 'bearer ' + store.state.user.token }
+})
+
+const beforeUpload: UploadProps['beforeUpload'] = rawFile => {
+  if (props.acceptType.indexOf(rawFile.type) < 0) {
+    error({ message: `不支持的类型，仅支持${props.acceptType}` })
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 5) {
+    error({ message: `文件大小超出，单张图片最大5M` })
+    return false
+  }
+  return true
+}
 
 const handleAvatarSuccess: UploadProps['onSuccess'] = (
   response,
   uploadFile
 ) => {
-  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
+  imageUrl.value = URL.createObjectURL(uploadFile.raw)
+  emit('on:success', response.data)
 }
 
-const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
-  if (rawFile.type !== 'image/jpeg') {
-    ElMessage.error('Avatar picture must be JPG format!')
-    return false
-  } else if (rawFile.size / 1024 / 1024 > 2) {
-    ElMessage.error('Avatar picture size can not exceed 2MB!')
-    return false
-  }
-  return true
-}
 </script>
 
 <template>
   <el-upload
     class="avatar-uploader"
-    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+    :headers="getToken"
+    :accept="acceptType"
+    :action="action"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
-    :before-upload="beforeAvatarUpload"
+    :before-upload="beforeUpload"
   >
     <img v-if="imageUrl" :src="imageUrl" class="avatar">
     <el-icon v-else class="avatar-uploader-icon">

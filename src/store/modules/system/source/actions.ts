@@ -89,8 +89,11 @@ export const actions: ActionTree<SourceState, RootState> & SourceActions = {
     })
   },
   async [SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD]({ commit }: AugmentedActionContext, pic: Pic) {
-    const { path } = pic
-    return await picSetRequest({ ...pic, path: getUploadFileName(path) })
+    // 上传时，只需要图片名字
+    // const { path } = pic
+    console.log('pic:', pic)
+    return await picSetRequest(pic)
+    // return await picSetRequest({ ...pic, path: getUploadFileName(path) })
   },
   [SourceActionTypes.ACTION_SOURCE_PIC_DEL]({ commit }: AugmentedActionContext, id: number) {
     return picDelRequest(id)

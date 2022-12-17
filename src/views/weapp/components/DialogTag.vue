@@ -14,9 +14,13 @@ const tagData = computed(() => {
   return store.state.product.productTagList
 })
 
-const show = id => {
+const show = ({ id, tags }) => {
   visibleDialog.value = true
   productId.value = id
+
+  if (tags && tags.length) {
+    checkList.value = tags.map(it => it.id)
+  }
 }
 
 const hide = () => {
@@ -52,6 +56,7 @@ defineExpose({
     width="500px"
     @on:visible="visibleDialog = $event"
     @on:confirm="handleConfirm"
+    @on:cancel="hide"
   >
     <el-checkbox-group v-model="checkList">
       <template v-for="(item, index) in tagData" :key="index">
