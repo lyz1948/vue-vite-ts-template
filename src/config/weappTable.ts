@@ -32,5 +32,5 @@ export const CategoryTagRelative = [
   { attrs: { prop: 'arrivalCity', label: '目的地' } },
   { attrs: { prop: 'rel', label: '关联类型' }, slot: 'relative'},
   { attrs: { prop: 'isEnable', label: '启用状态' }, slot: 'isEnable'},
-  { attrs: { ...action.attrs, width: 280 }, slot: 'action' }
+  { attrs: { ...action.attrs, width: 100 }, slot: 'action' }
 ]

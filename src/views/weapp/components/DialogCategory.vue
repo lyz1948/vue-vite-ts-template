@@ -34,6 +34,7 @@ const show = () => {
 
 const hide = () => {
   visibleDialog.value = false
+  state.form = formCateState()
 }
 
 const selectIcon = (val) => {

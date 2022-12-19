@@ -1,86 +1,88 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import draggable from 'vuedraggable'
 import Dialog from './components/DialogCategory.vue'
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import { ProductActionTypes } from '@/store/modules/product/action-types'
 import { useStore } from '@/store'
+import useElement from '@/hooks/useElement'
 
+// let idGlobal = 1
 const store = useStore()
-let idGlobal = 1
-
-// const list1 = ref([
-//   { name: '周边游', id: 1, icon: '标记_mark', color: '#f50' },
-//   { name: '自由行', id: 2, icon: '标记_mark', color: '#f50' },
-//   { name: '国内游', id: 3, icon: '标记_mark', color: '#f50' },
-//   { name: '亲子游', id: 4, icon: '标记_mark', color: '#f50' },
-// ])
-
-// const list2 = ref([
-//   { name: '高端游', id: 5, icon: '标记_mark', color: '#f50' },
-//   { name: '购物团', id: 6, icon: '标记_mark', color: '#a30' },
-//   { name: '经典游', id: 7, icon: '标记_mark', color: '#c21' },
-// ])
-
+const { confirm } = useElement()
 const controlOnStart = ref(true)
 const dialogRef = ref(null)
 const list1 = ref([])
 const list2 = ref([])
 
 const tableData = computed(() => {
-  let list = store.state.product.productCateList
-  if (list && list.length) {
-    list = list.sort((a, b) => a.orderNumber - b.orderNumber)
-  }
-  return list
+  // let list = store.state.product.productCateList
+  // if (list && list.length) {
+  //   list = list.sort((a, b) => a.orderNumber - b.orderNumber)
+  // }
+  return store.state.product.productCateList
 })
-
-// const list1 = computed(() => {
-//   return tableData.value.filter(it => it.isShow)
-// })
-
-// const list2 = computed({
-
-// })
 
 const fetchData = (params = {}) => {
   return store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_LIST, params)
 }
 
-const clone = item => {
-  return { ...item, id: idGlobal++ }
-}
+// const clone = item => {
+//   return { ...item, id: idGlobal++ }
+// }
 
 const start = ({ originalEvent }) => {
-  console.log('originalEvent:', originalEvent)
   controlOnStart.value = originalEvent.ctrlKey
 }
 
-const log = ev => {
-  // 删除
-  // if (ev.added) {
+const moveLog = ev => {
+  if (ev.added) {
+    const { element } = ev.added
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, { ...element, isShow: false })
+  }
+}
 
-  // }
-  // // 添加
-  // if (ev.removed) {
+const addLog = ev => {
+  if (ev.moved) {
+    const { newIndex, element } = ev.moved
+    element.orderNumber = newIndex
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, element)
+    // const old = list1.value[oldIndex]
+    // old.orderNumber = oldIndex
+    // store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, element)
+  }
 
+  if (ev.added) {
+    const { element } = ev.added
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, { ...element, isShow: true })
+  }
+}
 
-  // }
-  store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_SET, state.form)
- 
+const handleRemove = ({ id }) => {
+  confirm().then(() => {
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_CATE_DEL, id).then(() => {
+      const fIndex = list2.value.findIndex(it => it.id === id)
+      list2.value.splice(fIndex, 1)
+    })
+  })
 }
 
 const showDialog = () => {
   dialogRef.value.show()
 }
 
-onMounted(() => {
-  if (!tableData.value.length) {
-    fetchData()
-  }
-  list1.value = tableData.value.filter(it => it.isShow)
-  list2.value= tableData.value.filter(it => !it.isShow)
-})
+watch(
+  () => tableData.value,
+  cateList => {
+    if (cateList.length) {
+      list1.value = cateList.filter(it => it.isShow)
+      list2.value = cateList.filter(it => !it.isShow)
+    } else {
+      fetchData()
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -103,21 +105,17 @@ onMounted(() => {
             item-key="id"
             :list="list1"
             :group="{ name: 'cate', pull: true }"
-            :clone="clone"
             @start="start"
+            @change="addLog"
           >
             <template #item="{ element }">
               <div class="list-group-item">
-                <div class="icon-box" :style="{ background: element.color }">
-                  <component
-                    :is="element.icon"
-                    fill="#000"
-                    size="20"
-                    :stroke-width="4"
-                  />
-                  <!-- <SvgIcon :name="element.icon" size="30px" /> -->
+                <div class="flex">
+                  <div class="icon-box" :style="{ background: element.color }">
+                    <SvgIcon :name="element.icon" size="30px" />
+                  </div>
+                  {{ element.name }}
                 </div>
-                {{ element.name }}
               </div>
             </template>
           </draggable>
@@ -131,14 +129,19 @@ onMounted(() => {
             group="cate"
             item-key="id"
             :list="list2"
-            @change="log"
+            @change="moveLog"
           >
             <template #item="{ element }">
               <div class="list-group-item">
-                <div class="icon-box" :style="{ background: element.color }">
-                  <SvgIcon :name="element.icon" size="30px" />
+                <div class="flex">
+                  <div class="icon-box" :style="{ background: element.color }">
+                    <SvgIcon :name="element.icon" size="30px" />
+                  </div>
+                  {{ element.name }}
                 </div>
-                {{ element.name }}
+                <span class="fr" @click="handleRemove(element)">
+                  <icon-delete fill="#d0d2d8" size="18" />
+                </span>
               </div>
             </template>
           </draggable>
@@ -186,12 +189,13 @@ onMounted(() => {
   }
 
   .list-group-item {
+    width: 260px;
     padding: 10px 12px;
     border: 1px solid $base-color-border;
     margin-bottom: 10px;
     background: #fff;
     cursor: pointer;
-    @include flexcenter(flex-start);
+    @include flexcenter(space-between);
 
     .icon-box {
       @include flexcenter();

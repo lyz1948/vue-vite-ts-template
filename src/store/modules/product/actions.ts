@@ -115,7 +115,7 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
   async [ProductActionTypes.ACTION_PRODUCT_CATE_SET]({ commit }, item: Cate) {
     return cateSetRequest(item)
   },
-  async [ProductActionTypes.ACTION_PRODUCT_CATE_DEL]({ commit }, id: number) {
+  async [ProductActionTypes.ACTION_PRODUCT_CATE_DEL]({ state, commit }, id: number) {
     return cateDelRequest(id)
   },
 

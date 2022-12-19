@@ -26,13 +26,14 @@ onMounted(() => {
 <template>
   <div v-if="getIconList.length" class="svg-comp">
     <template v-for="icon in getIconList" :key="icon">
-      <SvgIcon
-        :name="icon"
-        color="#000"
-        size="24"
-        :class="{ 'active': activeIcon == icon }"
-        @click="select(icon)"
-      />
+      <div class="svg-icon-box" :class="{ active: activeIcon == icon }">
+        <SvgIcon
+          :name="icon"
+          fill="#f50"
+          size="24px"
+          @click="select(icon)"
+        />
+      </div>
       <!-- <SvgIcon
         size="36"
         color="#666699"
@@ -46,9 +47,15 @@ onMounted(() => {
 
 <style lang="scss">
 .svg-comp {
-  .svg-icon {
+  display: flex;
+  flex-wrap: wrap;
+  .svg-icon-box {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px 5px 0;
+    border: 1px solid #ddd;
     &.active {
-      border: 2px solid #fb748b;
+      border: 1px solid #fb748b;
     }
   }
 }

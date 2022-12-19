@@ -13,7 +13,7 @@ export const ProductList = [
   { attrs: { prop: 'isEnable', label: '启用状态' }, slot: 'isEnable'},
   // { attrs: { prop: 'remark', label: '创建人' } },
   // { attrs: { prop: 'createTime', label: '创建时间' } },
-  { attrs: { ...action.attrs, width: 280 }, slot: 'action' }
+  action
 ]
 
 // 产品分类
