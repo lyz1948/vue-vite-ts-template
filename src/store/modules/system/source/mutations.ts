@@ -19,6 +19,7 @@ export const mutations: MutationTree<SourceState> & StaffMutations = {
   },
   [SourcMutationTypes.SOURCE_PIC_BY_TYPE](state: SourceState, res: any) {
     const { id, data } = res
+    console.log('id, data:', id, data)
     state.picByTypeList[id] = data
   },
 }

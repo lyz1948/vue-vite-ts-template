@@ -21,6 +21,13 @@ export const mutations: MutationTree<DictionaryState> & DictionaryMutations = {
   ) {
     state.dictionaryTypeData = data
   },
+  [DictionaryMutationTypes.DICTIONARY_TYPE_DATA_UPDATE](
+    state: DictionaryState,
+    data: any
+  ) {
+    const { id, list } = data
+    state.dictionaryAllData[id].agencyDictionaryList = list
+  },
   [DictionaryMutationTypes.DICTIONARY_ALL_DATA](
     state: DictionaryState,
     data: any

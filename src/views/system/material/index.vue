@@ -5,8 +5,8 @@ import ImageList from '@/components/business/ImageList.vue'
 import Upload from '@/components/Uploader/index.vue'
 import { SourceActionTypes } from '@/store/modules/system/source/action-types'
 import { useStore } from '@/store'
-import { getUploadFileName } from '@/config/upload'
 import { useRoute } from 'vue-router'
+import { SourcMutationTypes } from '@/store/modules/system/source/mutation-types'
 
 const store = useStore()
 const currentRoute = useRoute()
@@ -36,7 +36,6 @@ const picTypeImagesData = computed(() => {
 
 const getCurTabPics = (id) => {
   const list = picTypeImagesData.value[id]
-
   return list.map(it => {
     return { check: false, ...it }
   })
@@ -71,14 +70,28 @@ const handleUpload = (data) => {
   const { url } = data
   if (url !== '') {
     store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
-      path: getUploadFileName(url),
+      path: url,
       picTypeId: state.curTypeId,
     }).then(() => {
-      fetchPicTypeList().then((data) => {
-        fetchPic(data[state.curIndex].id)
+      fetchPicTypeList().then((res) => {
+        fetchPic(res[state.curIndex].id)
       })
     })
   } 
+}
+
+const handleDelete = item => {
+  const { id } = item
+
+  store.dispatch(SourceActionTypes.ACTION_SOURCE_PIC_DEL, id)
+    .then(() => {
+      const curList = getCurTabPics(state.curTypeId)
+      curList.splice(curList.findIndex(it => it.id == id), 1)
+
+      state.curTabPics = curList
+
+      store.commit(SourcMutationTypes.SOURCE_PIC_BY_TYPE, { id: state.curTypeId, data: curList })
+    })
 }
 
 onBeforeMount(() => {
@@ -95,6 +108,8 @@ onMounted(() => {
     changeTag({ index: fIndex })
     state.curIndex = fIndex
     state.tabName = typeList[fIndex].name
+  } else {
+    // changeTag({ index: state.curIndex })
   }
 })
 
@@ -135,7 +150,13 @@ watch(
             :name="item.name"
           />
         </el-tabs>
-        <ImageList v-if="getCurPic.length" :list="getCurPic" :is-batch="hasBatch" />
+        <ImageList
+          v-if="getCurPic.length"
+          :list="getCurPic"
+          :is-batch="hasBatch"
+          @on:delete="handleDelete"
+        />
+        <el-empty v-else />
       </div>
     </div>
   </div>

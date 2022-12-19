@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useElement from '@/hooks/useElement'
-import { ref, nextTick, onMounted, computed, onBeforeMount } from 'vue'
+import { ref, computed } from 'vue'
 
 interface Props {
   isOperate?: boolean
@@ -10,8 +10,8 @@ interface Props {
   size?: number
 }
 
+const emit = defineEmits(['on:delete'])
 const props = defineProps<Props>()
-
 const { confirm } = useElement()
 
 const curIndex = ref(0)
@@ -30,8 +30,7 @@ const previewList = computed(() => props.list.map(it => it.url))
 const deleteItem = item => {
   if (!props.isOperate && !props.isBatch) {
     confirm('确定要删除吗', '警告').then(() => {
-      console.log(item)
-      console.log('删除了')
+      emit('on:delete', item)
     })
   }
 }
@@ -63,10 +62,10 @@ const deleteItem = item => {
             <el-checkbox v-model="item.check" size="large" type="success" />
           </div>
           <div class="img-box">
-            <img v-if="!isPreview" :src="item.url" alt="">
+            <img v-if="!isPreview" :src="item.path" alt="">
             <el-image
               v-else
-              :src="item.url"
+              :src="item.path"
               :preview-src-list="previewList"
               :initial-index="curIndex"
               fit="fill"

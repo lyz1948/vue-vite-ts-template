@@ -70,7 +70,7 @@ export const actions: ActionTree<DictionaryState, RootState> &
     const data: Array<DictionaryTypeAndSub> = await dicAllRequest() as any
     data.forEach((item: DictionaryTypeAndSub) => {
       item.agencyDictionaryList = formatSelect(item.agencyDictionaryList)
-      res[item.code] = item
+      res[item.id] = item
     })
     commit(DictionaryMutationTypes.DICTIONARY_ALL_DATA, res)
   },

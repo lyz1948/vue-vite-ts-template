@@ -1,74 +1,105 @@
 <script setup lang="ts">
-import { computed, reactive, onBeforeMount, watch } from 'vue'
+import { computed, reactive, watch, ref } from 'vue'
 import ModTitle from '@/components/Title/index.vue'
 import { DictionaryTable as columns } from '@/config/dictionaryTable'
-import { useStore } from 'vuex'
-import { DictionaryActionTypes } from '@/store/modules/dictionary/action-types'
+import { useStore } from '@/store'
+import { DictionaryActionTypes } from '@/store/modules/system/dictionary/action-types'
+import { DictionaryMutationTypes } from '@/store/modules/system/dictionary/mutation-types'
 import useElement from '@/hooks/useElement'
+import DialogDic from './components/DialogDic.vue'
+
 const store = useStore()
-
-const { success } = useElement()
-
+const { success, confirm } = useElement()
+const dialogRef = ref(null)
 const state = reactive({
   tabIndex: 0,
+  tabData: [],
   tableData: [],
+  itemId: '',
 })
 
-const dicTypeData = computed(() => {
-  return store.state.dictionary.dictionaryTypeData
+const dicAllData = computed(() => {
+  return store.state.dictionary.dictionaryAllData
 })
 
-const tableData = computed(() => {
-  return store.state.dictionary.dictionaryData
-})
+// const dicTypeData = computed(() => {
+//   return store.state.dictionary.dictionaryTypeData
+// })
+
 
 const firstTab = computed(() => {
-  return state.dicTypeData[state.tabIndex]
+  return state.tabData[state.tabIndex]
 })
 
-const getDictionaryId = computed(() => {
-  return firstTab.value?.id
+// const getDictionaryId = computed(() => {
+//   return firstTab.value?.id
+// })
+
+const getTitle = computed(() => {
+  return firstTab.value?.title
 })
 
-const getDictionaryTitle = computed(() => {
-  return firstTab.value?.name
-})
+// const fetchTypeData = () => {
+//   return store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_TYPE_FETCH)
+// }
 
-const fetchData = () => {
-  return store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_TYPE_FETCH)
+const getDicTypeItem = (id: string) => {
+  const key = id || Object.keys(dicAllData.value)[0]
+  return dicAllData.value[key]
 }
 
-const fetchCurrentData = async () => {
-  const id = getDictionaryId.value || firstTab.value?.id
-  await store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_FETCH, id)
+// const fetchCurrentData = async (id) => {
+//   id = id || getDictionaryId.value
+//   await store.dispatch(DictionaryActionTypes.ACTION_DICTIONARY_FETCH, id)
+// }
+
+const refreshData = () => {
+  const curItem = getDicTypeItem(state.itemId)
+  store.commit(DictionaryMutationTypes.DICTIONARY_TYPE_DATA_UPDATE, { id: state.itemId, list: curItem.agencyDictionaryList })
 }
 
-const deleteRow = async (id: any) => {
-  await store.dispatch(
-    DictionaryActionTypes.ACTION_DICTIONARY_DELETE,
-    id
-  )
-  fetchCurrentData()
-  success()
+const deleteRow = (id: any) => {
+  confirm().then(() => {
+    store.dispatch(
+      DictionaryActionTypes.ACTION_DICTIONARY_DELETE,
+      id
+    )
+    const filterData = state.tableData.filter(it => it.id !== id)
+    state.tableData = filterData
+    store.commit(DictionaryMutationTypes.DICTIONARY_TYPE_DATA_UPDATE, { id: state.itemId, list: filterData })
+    
+    success()
+  })
 }
 
-onBeforeMount(() => {
-  fetchData()
-})
+const editRow = (item: any) => {
+  dialogRef.value.edit(item)
+}
+
+const change = (item: any, index: number) => {
+  const data = dicAllData.value[item.id]
+  state.tabIndex = index
+  state.itemId = item.id
+  state.tableData = data.agencyDictionaryList
+}
+
+
+// watch(
+//   () => dicTypeData.value,
+//   (data: any[]) => {
+//     state.tabData = data
+//   }
+// )
 
 watch(
-  () => dicTypeData.value,
-  (data: any[]) => {
-    state.tabData = data
-    fetchCurrentData()
-  }
-)
-
-watch(
-  () => tableData.value,
+  () => dicAllData.value,
   (data: any) => {
-    console.log('data:', data)
-    state.tableData = data
+    if (!data) return
+    const firstData = getDicTypeItem()
+    state.tableData = firstData.agencyDictionaryList
+    state.tabData = Object.keys(data).map(key => data[key])
+  }, {
+    immediate: true
   }
 )
 
@@ -80,28 +111,33 @@ watch(
     <div class="dictionary-content">
       <div class="tag-warp">
         <BtnBase
-          v-for="(item, index) in dicTypeData"
+          v-for="(item, index) in state.tabData"
           :key="index"
-          type="success"
+          :type="state.tabIndex == index ? 'danger' : 'primary'"
           class="tag-item"
+          @click="change(item, index)"
         >
           {{ item.name }}
         </BtnBase>
       </div>
       <div class="dictionary-body">
-        <ModTitle title="产品线路" />
-        <TableBase :data="dicData" :columns="columns" border>
-          <template #action="{ row }">
-            <BtnLinkBase type="success" class="mr5">
-              编辑
-            </BtnLinkBase>
-            <BtnLinkBase type="danger" @click="deleteRow(row.id)">
-              删除
-            </BtnLinkBase>
-          </template>
-        </TableBase>
+        <div class="content">
+          <ModTitle :title="getTitle" />
+          <TableBase :data="state.tableData" :columns="columns" border>
+            <template #action="{ row }">
+              <BtnBase type="success" class="mr5" @click="editRow(row)">
+                编辑
+              </BtnBase>
+              <BtnBase type="danger" @click="deleteRow(row.id)">
+                删除
+              </BtnBase>
+            </template>
+          </TableBase>
+        </div>
       </div>
     </div>
+
+    <DialogDic ref="dialogRef" @on:reload="refreshData" />
   </div>
 </template>
 
