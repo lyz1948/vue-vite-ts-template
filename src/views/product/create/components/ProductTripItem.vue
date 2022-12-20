@@ -26,7 +26,7 @@ const getLabel = computed(() => {
   return `Day ${(props.index)}`
 })
 
-const handleChange = (pics: Picid[]) => {
+const handleChange = (pics: any[]) => {
   store.commit(ProductMutationTypes.PRODUCT_ITEM, { bannerPics: pics })
 }
 
@@ -36,12 +36,6 @@ const handleDelete = val => {
   store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, { bannerPics: pics })
 }
 
-// watch(
-//   () => form.value,
-//   data => {
-//     store.commit(ProductMutationTypes.PRODUCT_ITEM, { itinerarys: data })
-//   }
-// )
 </script>
 
 <template>

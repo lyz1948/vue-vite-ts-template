@@ -26,11 +26,10 @@ const images = computed(() => {
 })
 
 const handleChange = (pics: Picid[]) => {
-  store.commit(ProductMutationTypes.PRODUCT_ITEM, { bannerPics: pics })
+  store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, { bannerPics: pics })
 }
 
 const handleDelete = val => {
-  console.log('val:', val)
   const current: Array<any> = getProductItem.value['bannerPics']
   const pics = current.filter(path => path !== val)
   store.commit(ProductMutationTypes.PRODUCT_ITEM_UPDATE, { bannerPics: pics })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Tourist from './components/TableTourist.vue'
-import OtherFee from './components/TableOtherFee.vue'
+import OtherFee from './components/TableOther.vue'
 
 </script>
 

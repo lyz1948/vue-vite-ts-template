@@ -33,7 +33,7 @@ export const mutations: MutationTree<AppState> & Mutations = {
     const { refund } = data
 
     // refund 的是字符串
-    if (typeof refund === 'string') {
+    if (typeof refund === 'string' && refund !== '') {
       state.mallRefund = JSON.parse(refund)
     }
 

@@ -15,6 +15,7 @@ import {
   phoneDelRequest,
   smsSetRequest,
   smsGetRequest,
+  weappBindRequest,
 } from '@/api/mall'
 
 type AugmentedActionContext = {
@@ -38,6 +39,7 @@ export interface IActions {
   [AppActionTypes.ACTION_MALL_SMS_SET]({ commit }: AugmentedActionContext, data: MessageTpl): void
   [AppActionTypes.ACTION_MALL_REFUND_SET]({ commit }: AugmentedActionContext, data: Refund[]): void
   [AppActionTypes.ACTION_MALL_ACTIVE_SET]({ commit }: AugmentedActionContext, data: ActiveValid): void
+  [AppActionTypes.ACTION_MALL_MINIAPP_SET]({ commit }: AugmentedActionContext, params: any): void
 }
 
 export const actions: ActionTree<AppState, RootState> & IActions = {
@@ -95,5 +97,9 @@ export const actions: ActionTree<AppState, RootState> & IActions = {
     return activeRequest(data).then(() => {
       commit(AppMutationTypes.MALL_ACTIVE_SET, data)
     })
+  },
+  // 绑定appid
+  [AppActionTypes.ACTION_MALL_MINIAPP_SET]({ }, params: any) {
+    return weappBindRequest(params)
   },
 }

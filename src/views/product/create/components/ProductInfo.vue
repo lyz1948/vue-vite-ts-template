@@ -2,7 +2,6 @@
 import { reactive, toRefs, watch, computed } from 'vue'
 import { rules } from '../params'
 import { useStore } from '@/store'
-import { TagOrType } from '@/enums'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
 import ModTitle from '@/components/Title/index.vue'
 import SelectTag from '@/components/Select/SelectTag.vue'
@@ -33,14 +32,8 @@ const selectProduct = ({ id: resPId, travelLineId }) => {
 }
 
 const changeTag = (tags) => {
-  state.form.tags = tags.map(tid => ({ tid, type: TagOrType.TAG }))
+  state.form.tags = tags
 }
-
-// const visibleChangeCate = (flag) => {
-//   if (!flag) {
-//     form.types = state.cate.map(tid => ({ tid, type: TagOrType.TYPE }))
-//   }
-// }
 
 watch(
   () => state.form,

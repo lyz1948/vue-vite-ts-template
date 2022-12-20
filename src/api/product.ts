@@ -2,6 +2,7 @@ import request from '@/utils/request'
 import httpUrl from './httpUrl'
 import { Product, ProductSearch, Stock, ProductTagRel, ProductTagRelieve } from '@/types/product'
 import { StockSearch } from '../types/product'
+import { Pic } from '@/types/source'
 
 // // 地接资源产品列表
 // export const productResourceRequest = async (params: any) => {
@@ -29,8 +30,18 @@ export const productSetRequest = async (tag: Product) => {
 }
 
 // 产品更新
-export const productUpdateRequest = async (tag: Product) => {
-  return await request.post<Product>(httpUrl.productUpdate, tag)
+export const productUpdateRequest = async (product: Product) => {
+  return await request.post<Product>(httpUrl.productUpdate, product)
+}
+
+// 产品tag添加
+export const productTagAddRequest = async (tag: Product) => {
+  return await request.post<Product>(httpUrl.productTagAdd, tag)
+}
+
+// 产品轮播图添加
+export const productPicAddRequest = async (pic: Pic) => {
+  return await request.post<Product>(httpUrl.productPicAdd, pic)
 }
 
 // 产品删除

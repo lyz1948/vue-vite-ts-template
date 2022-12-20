@@ -41,3 +41,8 @@ export const refundProcessRequest = async (data: Refund[]) => {
 export const activeRequest = async (data: ActiveValid) => {
   return await request.post<ActiveValid>(httpUrl.mallActive, data)
 }
+
+// 绑定小程序app id
+export const weappBindRequest = async (data: ActiveValid) => {
+  return await request.post<ActiveValid>(httpUrl.mallAppSet, data)
+}

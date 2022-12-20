@@ -9,6 +9,7 @@ import { ProductMutationTypes } from './mutation-types'
 
 import { productListRequest, productSetRequest, productDelRequest, productDetailRequest, productUpdateRequest } from '@/api/product'
 import { productResourceAllRequest } from '@/api/product'
+import { productPicAddRequest, productTagAddRequest } from '@/api/product'
 import { productRelTagSetRequest, productRelTagDelRequest } from '@/api/product'
 import { productStockListRequest, productStockSetRequest } from '@/api/product'
 import { tagListRequest, tagSetRequest, tagDelRequest } from '@/api/tag'
@@ -18,7 +19,8 @@ import { Product, ProductSearch, Stock, StockSearch, ProductTagRel, ProductTagRe
 import { Tag, TagSearch } from '@/types/tag'
 import { Cate, CateSearch } from '@/types/cate'
 import { formatSelect } from '@/utils/format';
-import { TagOrType } from '../../../enums/index';
+import { TagOrType } from '@/enums/index';
+import { Pic } from '@/types/source';
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
@@ -36,6 +38,9 @@ export interface IUserActions {
   [ProductActionTypes.ACTION_PRODUCT_DEL]({ commit }: AugmentedActionContext, id: number): void
   [ProductActionTypes.ACTION_PRODUCT_DETAIL]({ commit }: AugmentedActionContext, id: number): void
   [ProductActionTypes.ACTION_PRODUCT_UPDATE]({ commit }: AugmentedActionContext, params: ProductSearch): void
+
+  [ProductActionTypes.ACTION_PRODUCT_PIC_ADD]({ commit }: AugmentedActionContext, item: Pic): void
+  [ProductActionTypes.ACTION_PRODUCT_TAG_OR_TYPE_ADD]({ commit }: AugmentedActionContext, item: Tag): void
 
   [ProductActionTypes.ACTION_PRODUCT_STOCK_LIST]({ commit }: AugmentedActionContext, params: StockSearch): void
   [ProductActionTypes.ACTION_PRODUCT_STOCK_SET]({ commit }: AugmentedActionContext, stock, Stock): void
@@ -78,6 +83,12 @@ export const actions: ActionTree<ProductState, RootState> & IUserActions = {
   },
   async [ProductActionTypes.ACTION_PRODUCT_UPDATE]({ commit }, item: Product) {
     return productUpdateRequest(item)
+  },
+  async [ProductActionTypes.ACTION_PRODUCT_PIC_ADD]({ commit }, item: Pic) {
+    return productPicAddRequest(item)
+  },
+  async [ProductActionTypes.ACTION_PRODUCT_TAG_OR_TYPE_ADD]({ commit }, item: Tag) {
+    return productTagAddRequest(item)
   },
 
   // 库存相关

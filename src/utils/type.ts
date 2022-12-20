@@ -2,9 +2,11 @@ function stringContainer(str, val) {
   return str.indexOf(val) > -1
 }
 
+const toStr = Object.prototype.toString
+
 export const is = {
   arr: v => Array.isArray(v),
-  obj: v => stringContainer(v, 'Object'),
+  obj: v => toStr.call(v).includes('object'),
   svg: v => v instanceof SVGElement,
   inp: v => v instanceof HTMLInputElement,
   dom: v => v.nodeType || is.svg(v),

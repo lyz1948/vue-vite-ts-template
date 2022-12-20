@@ -47,7 +47,9 @@ const httpApi = {
   mallRefundSet: '/system/mall/set-refund-pro',
   mallSMSSet: '/system/mall/set-sms',
   mallSMSGet: '/system/mall/sms-config',
-
+  // 小程序app设置绑定
+  mallAppSet: '/system/mall/set-miniApps-pra',
+  
   picListAll: '/mall/pic/pics',
   picList: '/mall/pic/page-pics',
   picSet: '/mall/pic/add-update-pic',
@@ -68,8 +70,10 @@ const httpApi = {
   productList: '/mall/product/page-product',
   productDetail: '/mall/product/product',
   productSet: '/mall/product/save-update-product',
-  productUpdate: '/mall/product/update',
   productDel: '/mall/product/del-product',
+  productUpdate: '/mall/product/update',
+  productPicAdd: '/mall/product/add-pic',
+  productTagAdd: '/mall/product/add-tag-type',
 
   producStocktList: '/mall/product/list-plan',
   producStocktSet: '/mall/product/save-update-plan',

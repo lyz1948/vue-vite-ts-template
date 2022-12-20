@@ -1,6 +1,6 @@
 <template>
   <div class="bind-setting">
-    <div class="unbind">
+    <div v-if="!isBinding" class="unbind">
       <h3>绑定微信小程序，拓展销售渠道</h3>
       <div class="container unbind-wrap">
         <div class="unbind-item">
@@ -8,7 +8,7 @@
             <icon-link size="40" fill="#fff" />
           </div>
           <div>
-            <BtnBase type="primary">
+            <BtnBase type="primary" @click="handleBind">
               已有小程序，即刻绑定
             </BtnBase>
           </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="bind">
+    <div v-else class="bind">
       <div class="qrcode">
         <img
           src="/src/assets/cover.jpeg"
@@ -48,13 +48,46 @@
         <p><span class="label">认证状态:</span>微信认证</p>
       </div>
     </div>
+
+    <DialogBind ref="dialogRef" @on:reload="handleReload" />
   </div>
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
+import { useStore } from '@/store'
+import { computed, ref, watch } from 'vue'
+import { AppActionTypes } from '@/store/modules/app/action-types'
+import DialogBind from './components/DialogBind.vue'
 
+const store = useStore()
+const dialogRef = ref(null)
+const isBinding = ref(false)
+
+const mallConfig = computed(() => store.state.app.mallConfig)
+
+const fetchConfig = () => {
+  return store.dispatch(AppActionTypes.ACTION_MALL_CONFIG)
 }
+
+const handleReload = () => {
+  fetchConfig().then(data => {
+    if (data.miniAppsAppId && data.miniAppsAppSecret) {
+      isBinding.value = true
+    }
+  })
+}
+
+const handleBind = () => {
+  dialogRef.value.show()
+}
+
+watch(() => mallConfig.value, data => {
+  if (!data) {
+    fetchConfig()
+    return
+  }
+  isBinding.value = data.miniAppsAppId && data.miniAppsAppSecret
+}, { immediate: true })
 </script>
 
 <style lang="scss">

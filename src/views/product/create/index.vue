@@ -14,6 +14,8 @@ import ServiceStandard from './components/ServiceStandard.vue'
 import SwiperItem from './components/SwiperItem.vue'
 import { useRouter } from 'vue-router'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
+import { is } from '@/utils/type'
+import { TagOrType } from '@/enums'
 
 const { currentRoute } = useRouter()
 const router = useRouter()
@@ -33,8 +35,62 @@ const compList = markRaw([
 
 const productItem = computed(() => store.state.product.productItem)
 
+// const beforeCommit = () => {
+//   const { bannerPics, tags, plans, types } = productItem.value
+
+//   if (!bannerPics.length) {
+//     delete productItem.value.bannerPics
+//   }
+
+//   if (!tags.length) {
+//     delete productItem.value.tags
+//   }
+
+//   if (!plans.length) {
+//     delete productItem.value.plans
+//   }
+
+//   if (!types.length) {
+//     delete productItem.value.types
+//   }
+// }
+
 const handleCreate = () => {
-  store.dispatch(ProductActionTypes.ACTION_PRODUCT_SET, productItem.value).then(() => {
+  // beforeCommit()
+
+  const data = productItem.value
+  const { bannerPics, tags } = productItem.value
+
+  if (bannerPics) {
+    const newPics = bannerPics.map(it => ({ picId: it.id, productId: data.id }))
+    data.thumbnailUrl = bannerPics[0].path
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_PIC_ADD, newPics)
+  }
+
+  if (tags && tags.length) {
+    const newTags = tags.map(it => {
+      if (is.obj(it)) {
+        return it.id
+      }
+      return it
+    })
+
+    console.log(newTags)
+    const tagsId = new Set(newTags)
+    console.log('tagsId:', tagsId)
+
+    const tagsList = tagsId.map(id => ({ id, productId: data.id, type: TagOrType.TAG }))
+    console.log('tagsList:', tagsList)
+
+    console.log('new Set(newTags):', new Set(newTags))
+    store.dispatch(ProductActionTypes.ACTION_PRODUCT_TAG_OR_TYPE_ADD, tagsList)
+  }
+
+  delete data.tags
+  delete data.bannerPics
+  delete data.plans
+
+  store.dispatch(ProductActionTypes.ACTION_PRODUCT_SET, data).then(() => {
     router.push({ path: '/product/line' })
     store.commit(ProductMutationTypes.PRODUCT_ITEM, {})
   })
@@ -46,6 +102,7 @@ onBeforeMount(() => {
   if (!productItem.value.id && id) {
     store.dispatch(ProductActionTypes.ACTION_PRODUCT_DETAIL, id)
   }
+  console.log(productItem.value)
 })
 
 </script>

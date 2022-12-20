@@ -5,7 +5,7 @@ import { useStore } from '@/store'
 import useDefault from '@/hooks/useDefault'
 import DialogMaterial from '@/components/business/DialogMaterial.vue'
 import Upload from '@/components/Uploader/index.vue'
-import { ossPicUrlRequest } from '@/api/source'
+// import { ossPicUrlRequest } from '@/api/source'
 
 const emit = defineEmits(['on:change', 'on:delete'])
 const store = useStore()
@@ -23,19 +23,19 @@ type Picid = {
 }
 
 const dialogRef = ref(null)
-const bannerPics = ref([])
+// const bannerPics = ref([])
 const imageList = ref([])
 
 // const productItem = computed(() => store.state.product.productItem)
 const getImageList = computed(() => imageList.value)
 
-const handleChange = (pics: Picid[]) => {
+const handleChange = (pics: any[]) => {
   emit('on:change', pics)
 }
 
-const handleSelect = ({ picIds, list }) => {
-  handleChange(picIds)
-  bannerPics.value = [...bannerPics.value, ...picIds]
+const handleSelect = (list) => {
+  handleChange(list)
+  // bannerPics.value = [...bannerPics.value, ...list.map(it => it.path)]
   imageList.value = list
 }
 
@@ -47,21 +47,22 @@ const deleteItem = (index) => {
 const handleUpload = data => {
   const { url } = data
   if (url !== '') {
-    store
-      .dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, {
+
+    const item = {
         path: url,
         picTypeId: getSwiperPicTypeId(),
-      })
+      }
+    store
+      .dispatch(SourceActionTypes.ACTION_SOURCE_PIC_UPLOAD, item)
       .then(data => {
-        bannerPics.value.push({
-          picId: data.id,
-        })
+        console.log('data:', data)
+        // bannerPics.value.push({
+        //   picId: data.id,
+        // })
 
-        imageList.value.push({
-          url,
-        })
+        imageList.value.push({ ...item, id: data.id })
 
-        handleChange(bannerPics.value)
+        handleChange(imageList.value)
       })
   }
 }
@@ -70,20 +71,20 @@ const handleChoose = () => {
   dialogRef.value.show()
 }
 
+// const getPicUrl = (paths) => {
+//   if (!paths || !paths.length) return []
+//   return ossPicUrlRequest(paths).then(data => {
+//     return data
+//   })
+// }
 
-const getPicUrl = (paths) => {
-  if (!paths || !paths.length) return []
-  return ossPicUrlRequest(paths).then(data => {
-    return data
-  })
-}
 watch(() => props.list, imgList => {
-  if (imgList && imgList.length) {
-    const paths = imgList.map(it => it.path)
-    getPicUrl(paths).then((data) => {
-      imageList.value = data.map((url, index) => ({ uid: index, url }))
-    })
-  }
+  imageList.value = imgList
+  // if (imgList && imgList.length) {
+  //   getPicUrl(paths).then((data) => {
+  //     imageList.value = data.map((url, index) => ({ uid: index, url }))
+  //   })
+  // }
 }, { immediate: true })
 </script>
 
@@ -103,7 +104,7 @@ watch(() => props.list, imgList => {
       <template v-for="(item, index) in getImageList" :key="index">
         <div class="img-box">
           <el-image
-            :src="item.url"
+            :src="item.path"
             fit="cover"
           />
           <div class="icon-box" @click="deleteItem(index)">

@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\"",
     "lint-fix": "eslint \"src/**/*.{ts,js,vue,json}\" --fix ",

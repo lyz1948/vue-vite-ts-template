@@ -6,7 +6,6 @@ import ModTitle from '@/components/Title/index.vue'
 import { formTripState } from '../params'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
 import { useStore } from '@/store'
-import { getProductArrVal } from '../help'
 
 const store =  useStore()
 const props = defineProps({
@@ -29,11 +28,6 @@ const productItem = computed(() => {
 const getProductDays = computed(() => {
   return productItem.value?.days ?? 1
 })
-
-// const editTrip = () => {
-//   console.log('productItem.value:', productItem.value)
-//   return productItem.value['itinerarys']
-// }
 
 const generateDropList = () => {
   myArray.value = state.tripList.map((it, idx) => ({ id: idx, name: 'Day' + (idx+1) }))

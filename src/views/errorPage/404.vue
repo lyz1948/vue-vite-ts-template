@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import errorPng from '@/assets/404.svg'
+import errorPng from '@/assets/svg/404.svg'
 
 const router = useRouter()
 

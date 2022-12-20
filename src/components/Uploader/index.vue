@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import type { UploadProps, UploadUserFile } from 'element-plus'
 import { uploadUrl } from '@/config/upload'

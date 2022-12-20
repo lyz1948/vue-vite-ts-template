@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import ImageList from '@/components/business/ImageList.vue'
 import { SourceActionTypes } from '@/store/modules/system/source/action-types'
 import { useStore } from '@/store'
@@ -70,9 +70,9 @@ const changeTag = tabIndex => {
 
 const handleConfirm = () => {
   const checkList = getCurPic.value.filter(it => !!it.check)
-  const picIds = checkList.map(it => ({ picId: it.picId }))
-  const pics = checkList.map(it => ({ url: it.url }))
-  emit('on:choose', { pics, picIds, list: checkList })
+  // const picIds = checkList.map(it => ({ picId: it.id }))
+  // const pics = checkList.map(it => ({ path: it.path }))
+  emit('on:choose', checkList)
 
   hide()
 }
@@ -81,7 +81,6 @@ watch(
   () => picTypeList.value,
   data => {
     if (data && data.length) {
-      console.log('data:', data)
 
       fetchPic(data[state.curIndex].id).then(() => {
         changeTag(state.curIndex)

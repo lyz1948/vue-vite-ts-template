@@ -25,6 +25,12 @@ export const formCateState = () => ({
   isShow: false,
 })
 
+export const formWeappState = () => ({
+  appId: '',
+  appSecret: '',
+  mchId: '',
+})
+
 // 创建行程
 export const formNewState = () => ({
   productName: '',
@@ -53,6 +59,11 @@ export const rulesCate = {
 
 export const rulesPhone = {
   val: [{ required: true, message: '号码不能为空', trigger: 'blur' }],
+}
+
+export const rulesWeapp = {
+  appId: [{ required: true, message: 'appId不能为空', trigger: 'blur' }],
+  appSecret: [{ required: true, message: 'app秘钥不能为空', trigger: 'blur' }],
 }
 
 export const messageCustomer = [

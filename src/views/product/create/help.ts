@@ -24,8 +24,9 @@ export const getProductInfo = () => {
 
 // 产品标签
 export const getProductArrVal = (key: string) => {
-  const arr = getProductItem.value[key]
-  return arr && arr.length && arr.map(it => (it.name))
+  const arr = getProductItem.value[key] || []
+  return arr
+  // return arr && arr.length && arr.map(it => (it.name))
 }
 
 export const getProductKeyVal = (key: string) => {
