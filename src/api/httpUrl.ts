@@ -37,6 +37,15 @@ const httpApi = {
   resourceProduct: '/resource/product/pageNoAuthority',
   resourceProductAll: '/resource/product/list',
 
+  // 订单
+  orderList: '/order/orders',
+  orderDetail: '/order/get-order',
+  orderSet: '/order/update-order',
+  orderLogs: '/order/logs',
+  orderOtherPayList: '/order/order-pays',
+  orderOtherPaySet: '/order/add-order-pay',
+  orderOtherPayDel: '/order/del-order-pay',
+
   // 商城 设置
   mallConfig: '/system/mall/config',
   mallPhoneList: '/system/mall/contact-phone-list',

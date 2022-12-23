@@ -36,35 +36,33 @@ const getStyle = computed(() => {
 const styleObj = computed(() => {
   return `background: ${store.state.setting.theme}`
 })
-
 </script>
 
 <template>
   <div :class="['layout is-vertical', { 'is-collapse': !isOpen, 'is-fix-header': isFixHeader }]">
     <div class="layout-sidebar" :style="styleObj">
+      <VLogo v-if="isShowLogo" />
       <el-scrollbar>
-        <VLogo v-if="isShowLogo" />
         <VSidebar />
       </el-scrollbar>
     </div>
     <div class="layout-body">
-      <el-scrollbar>
-        <div class="layout-top-bar">
-          <VHeader />
-          <TabViews v-if="isShowTab" />
-        </div>
-        <div class="layout-main" :style="getStyle">
+      <div class="layout-top-bar">
+        <VHeader />
+        <TabViews v-if="isShowTab" />
+      </div>
+      <div class="layout-main" :style="getStyle">
+        <el-scrollbar>
           <AppMain />
-        </div>
-        <el-scrollbar />
-      </el-scrollbar>
+        </el-scrollbar>
+      </div>
     </div>
     <SettingPane />
   </div>
 </template>
 
 <style lang="scss" scoped>
-// @import '@/styles/variables.scss';
+@import '@/styles/variables.scss';
 .layout {
   display: flex;
 
@@ -84,7 +82,7 @@ const styleObj = computed(() => {
     .layout-sidebar {
       width: $base-menu-width;
       border-right: 1px solid #e1e2e7;
-      @include scrollbar;
+      // @include scrollbar;
     }
 
     .layout-top-bar {
@@ -94,7 +92,7 @@ const styleObj = computed(() => {
     .layout-body {
       flex: 1;
       height: 100vh;
-      @include scrollbar;
+      // @include scrollbar;
       .layout-main {
         // padding: 20px;
         min-height: calc(100vh - $base-head-menu-height - $base-tabs-bar-height);
@@ -105,7 +103,6 @@ const styleObj = computed(() => {
 
   // 左右布局侧栏收起
   &.is-collapse {
-
     .layout-sidebar {
       width: $base-unfold-width;
     }

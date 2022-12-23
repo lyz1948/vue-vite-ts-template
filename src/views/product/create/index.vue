@@ -61,7 +61,7 @@ const handleCreate = () => {
   const data = productItem.value
   const { bannerPics, tags } = productItem.value
 
-  if (bannerPics) {
+  if (bannerPics && bannerPics.length) {
     const newPics = bannerPics.map(it => ({ picId: it.id, productId: data.id }))
     data.thumbnailUrl = bannerPics[0].path
     store.dispatch(ProductActionTypes.ACTION_PRODUCT_PIC_ADD, newPics)
@@ -76,10 +76,9 @@ const handleCreate = () => {
     })
 
     console.log(newTags)
-    const tagsId = new Set(newTags)
-    console.log('tagsId:', tagsId)
+    const tagsId = [...new Set(newTags)]
 
-    const tagsList = tagsId.map(id => ({ id, productId: data.id, type: TagOrType.TAG }))
+    const tagsList = tagsId.map(id => ({ tid: id, productId: data.id, type: TagOrType.TAG }))
     console.log('tagsList:', tagsList)
 
     console.log('new Set(newTags):', new Set(newTags))
@@ -167,9 +166,12 @@ onBeforeMount(() => {
       }
     }
   }
+  &--body {
+    padding-right: 60px;
+  }
 
   &--item {
-    margin-top: 20px;
+    margin-bottom: 20px;
     border: 1px solid $base-color-border;
     box-shadow: 0 9px 28px 8px rgb(0 0 0 / 5%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%);
   }

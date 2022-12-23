@@ -28,9 +28,13 @@
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" scope>
+@import '@/styles/variables.scss';
 .app-main {
   padding: 20px 20px 32px 20px;
   background-color: #fff;
+  box-sizing: border-box;
+  height: calc(100vh - 120px);
+  @include scrollbar;
 }
 </style>

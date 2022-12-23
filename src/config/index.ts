@@ -21,5 +21,7 @@ export const PageDefault = {
 
 export const App = {
   // baseURL: isDev ? `http://127.0.0.1:${port}/` : '/api',
-  systemCode: 'mall'
+  systemCode: 'mall',
+  tinymceKey: '2j3v54sykixdq41qfoopr6mo5ehf2bai8wop41bhmiv5hj60'
 }
+

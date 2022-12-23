@@ -2,6 +2,8 @@
 import { computed, ref } from 'vue'
 // import { formState } from '../params'
 import { useStore } from '@/store'
+import tinymce from '@/components/Tinymce/index.vue'
+// import tinymce from './Tinymce.vue'
 import { ProductMutationTypes } from '@/store/modules/product/mutation-types'
 import UploadItem from './UploadItem.vue'
 
@@ -89,11 +91,7 @@ const handleDelete = val => {
         </div>
       </FormItemBase>
     </div>
-    <FormItemBase prop="" label="行程">
-      <div class="flex-box">
-        <InputBase v-model="form.itineraryDesc" type="textarea" rows="6" />
-      </div>
-    </FormItemBase>
+    <tinymce />
     <UploadItem @on:change="handleChange" @on:delete="handleDelete" />
   </FormBase>
 </template>

@@ -59,6 +59,7 @@ declare module 'vue' {
     ImageList: typeof import('./src/components/business/ImageList.vue')['default']
     InputBase: typeof import('./src/components/base/InputBase.vue')['default']
     InputNumBase: typeof import('./src/components/base/InputNumBase.vue')['default']
+    Quill: typeof import('./src/components/Quill/index.vue')['default']
     ScreenFull: typeof import('./src/components/ScreenFull/index.vue')['default']
     Select: typeof import('./src/components/Select/index.vue')['default']
     SelectBase: typeof import('./src/components/base/SelectBase.vue')['default']

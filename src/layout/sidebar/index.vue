@@ -72,11 +72,14 @@ const defaultActive = computed(() => {
   </el-menu>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" scope>
+@import '@/styles/variables.scss';
+
 .sidebar-menu {
   border: none;
   width: 100%;
   z-index: $base-z-index-max;
+  @include scrollbar;
 }
 
 .is-horizonal {
